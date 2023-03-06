@@ -8,6 +8,7 @@
     <title>Login - Digital Library Management System</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.6.3.min.js"></script>
 </head>
 
 <body class="banner">
@@ -22,14 +23,14 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about.php">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php">Login</a>
+                        <a class="nav-link active" href="login.php">Login</a>
                     </li>
                 </ul>
             </div>
@@ -61,9 +62,7 @@
             <!-- footer -->
             <?php include "inc/footer.php"; ?>
         </div>
-        <script>
 
-        </script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="bootstrap/js/bootstrap.bundle.js"></script>
 </body>
