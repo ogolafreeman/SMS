@@ -13,3 +13,29 @@
 .fnt {
   color: #fff;
 }
+
+.login {
+  max-width: 500px;
+  width: 90%;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.login h3 {
+  text-align: center;
+  font-size: 50px;
+}
+
+.n-table {
+  max-width: 800px;
+}
+
+.w-450 {
+  width: 450px;
+}
+
+.form-w {
+  max-width: 600px;
+  width: 100%;
+}

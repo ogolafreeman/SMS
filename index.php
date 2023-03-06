@@ -34,11 +34,12 @@
                 </ul>
             </div>
         </nav>
-
-        <h1 class="display-1 align-middle text-center fnt">Welcome To<br>Digital Library Management System</h1>
+        <br/><br/>
+        <!-- <h1 class="display-1 align-middle text-center fnt">Welcome To<br>Digital Library Management System</h1> -->
+        <h1 class="d-flex justify-content-center align-items-center flex-column text-center display-3 fnt">Welcome To<br>Digital Library Management System</h1>
 
         <!-- Carousel -->
-        <div class="container"><br /><br />
+        <div class="container text-center"><br /><br />
             <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -47,7 +48,7 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="Media/c1.jpg" height="706" />
+                        <img src="Media/c1.jpg" height="650" width="1280"/>
 
                         <div class="container">
                             <div class="carousel-caption text-start">
@@ -58,7 +59,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="Media/c2.jpg" height="706" />
+                        <img src="Media/c2.jpg" height="650" width="1280"/>
 
                         <div class="container">
                             <div class="carousel-caption text-start">
@@ -69,7 +70,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="Media/c4.jpg" height="706" width="1720" />
+                        <img src="Media/c4.jpg" height="650" width="1280"/>
 
                         <div class="container">
                             <div class="carousel-caption text-start">
@@ -92,13 +93,15 @@
         </div>
 
         <div class="text-center"><br /><br /><br />
-            <button class="btn btn-outline-success btn-lg">LOGIN</button>
+            <a class="btn btn-outline-success btn-lg" href="login.php">LOGIN</a>
         </div>
 
         <!-- footer -->
         <?php include "inc/footer.php"; ?>
     </div>
+    <script>
 
+    </script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="bootstrap/js/bootstrap.bundle.js"></script>
 </body>
