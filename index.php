@@ -34,7 +34,7 @@
                 </ul>
             </div>
         </nav>
-        <br/><br/>
+        <br /><br />
         <!-- <h1 class="display-1 align-middle text-center fnt">Digital Library Management System</h1> -->
         <h1 class="d-flex justify-content-center align-items-center flex-column text-center display-3 fnt">Welcome To<br>Digital Library Management System</h1>
 
@@ -48,7 +48,7 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="Media/c1.jpg" height="650" width="1280"/>
+                        <img src="Media/c1.jpg" height="650" width="1280" />
 
                         <div class="container">
                             <div class="carousel-caption text-start">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="Media/c2.jpg" height="650" width="1280"/>
+                        <img src="Media/c2.jpg" height="650" width="1280" />
 
                         <div class="container">
                             <div class="carousel-caption text-start">
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="Media/c4.jpg" height="650" width="1280"/>
+                        <img src="Media/c4.jpg" height="650" width="1280" />
 
                         <div class="container">
                             <div class="carousel-caption text-start">
