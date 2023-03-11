@@ -24,15 +24,16 @@
                     <!-- <br><br><br><br><br><br> -->
                     <div class="container">
                         <p title="About Richmond College" class="about">
-                            Richmond College is a primary and secondary school in Galle, Sri Lanka
-                            which was established as Galle High School in 1876. The founder of school
-                            was the Wesleyan Missionary George Bough. The first principal of the school
-                            was Rev. Samuel Langdon. In 1882 it was renamed Richmond College.
+                            Richmond College is a primary and secondary school in Galle, Sri Lanka which was
+                            established as Galle High School in 1876.The founder of school was the Wesleyan Missionary
+                            George Bough. The first principal of the school was Rev Samuel Langdon. In 1882, it was
+                            renamed Richmond College.
                         </p>
 
                         <div class="footer">
-                            <a href="#"><img src="Media/Facebook.png" alt="facebook icon" width="32">&nbsp;
-                                Find More About Us on Facebook</a>
+                            <a href="https://www.facebook.com/richmondcollege?mibextid=LQQJ4d" target="_blank">
+                                <img src="Media/Facebook.png" alt="facebook icon" width="32">&nbsp;
+                                Find More About Us on Facebook!</a>
                         </div>
 
                     </div>
