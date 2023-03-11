@@ -1,8 +1,7 @@
 .banner {
-  background: url("../Media/bg2.jpg");
+  background: url("../Media/bg.jpg");
   background-size: cover;
   background-attachment: fixed;
-  
 }
 
 .back-fill {
