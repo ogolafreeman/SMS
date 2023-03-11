@@ -35,7 +35,6 @@
             </div>
         </nav>
         <br /><br />
-        <!-- <h1 class="display-1 align-middle text-center fnt">Digital Library Management System</h1> -->
         <h1 class="d-flex justify-content-center align-items-center flex-column text-center display-3 fnt">Welcome to <br />Digital Library Management System</h1>
 
         <!-- Carousel -->
