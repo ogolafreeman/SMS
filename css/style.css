@@ -1,9 +1,48 @@
+/* Homepage */
+
+.header {
+	background: url(../Media/bg.jpg);
+	height: 696px;
+}
+
+.back-fill {
+	background: rgba(0, 0, 0, 0.5);
+	min-height: 100%;
+	position: relative;
+	text-align: center;
+	color: white;
+}
+
+.back-fill h1 {
+	color: #fff;
+	/* font-weight: 400; */
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.gap {
+	padding-top: 5%;
+}
+/* End of homepage */
+
+/* about us page */
+.about-us-bg {
+	background: url(../Media/bg2.jpg);
+	background-position: center;
+	background-size: cover;
+	height: 70vh;
+}
+/* end of about us */
+
+/* Login Page */
 @import url("https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@600&display=swap");
 
 * {
 	margin: 0px;
 	padding: 0px;
-	font-family: Arial, Helvetica, sans-serif;
+	/* font-family: Arial, Helvetica, sans-serif; */
 }
 
 .main-wrap {
@@ -148,3 +187,4 @@
 	color: #fff;
 	cursor: pointer;
 }
+/* End of Login */
