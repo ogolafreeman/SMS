@@ -87,6 +87,7 @@
             </div>
         </div>
     </div>
+    <?php include "inc/footer.php"; ?>
 
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="bootstrap/js/bootstrap.bundle.js"></script>

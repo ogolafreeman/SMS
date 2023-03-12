@@ -155,7 +155,7 @@
         <div class="row">
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <img src="Media/dummy.jpg" class="card-img-top" alt="Teacher 1">
+                    <img src="Media/et.jpg" class="card-img-top" alt="Teacher 1">
                     <div class="card-body">
                         <h5 class="card-title">Engineering Technology</h5><br />
                         <!-- <p class="card-text">Teacher: </p> -->
@@ -165,7 +165,7 @@
             </div>
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <img src="Media/dummy.jpg" class="card-img-top" alt="Teacher 1">
+                    <img src="Media/sft.jpg" class="card-img-top" alt="Teacher 1">
                     <div class="card-body">
                         <h5 class="card-title">Science For Technology</h5><br />
                         <!-- <p class="card-text">Some details about the teacher</p> -->
@@ -175,7 +175,7 @@
             </div>
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <img src="Media/dummy.jpg" class="card-img-top" alt="Teacher 1">
+                    <img src="Media/ict.jpg" class="card-img-top" alt="Teacher 1">
                     <div class="card-body">
                         <h5 class="card-title">Information and Communication Technology</h5>
                         <!-- <p class="card-text">Some details about the teacher</p> -->
@@ -185,9 +185,9 @@
             </div>
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <img src="Media/dummy.jpg" class="card-img-top" alt="Teacher 1">
+                    <img src="Media/english.jpg" class="card-img-top" alt="Teacher 1">
                     <div class="card-body">
-                        <h5 class="card-title">General English</h5><br />
+                        <h5 class="card-title">General English</h5>
                         <!-- <p class="card-text">Some details about the teacher</p> -->
                         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                     </div>
