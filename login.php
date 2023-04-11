@@ -1,96 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Student Management System</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/jquery-3.6.3.min.js"></script>
+
+    <title>Log in</title>
+
+    <link rel="stylesheet" href="bootstrap.css"/>
+    <link rel="stylesheet" href="style.css"/>
+
 </head>
 
 <body>
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" id='homeNav'>
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="Media/Richmond Colleg LOGO.png" width="40"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.php">About Us</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav me-right mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="login.php">Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="main-wrap">
-        <div class="box-container">
-            <div class="img-box">
-                <div class="fill">
-                    <div class="text-center inner-content"><br><br><br>
-                        <img src="Media/Richmond Colleg LOGO.png" alt="Richmond Colleg logo" class="logo"><br><br>
-                        <h2>Richmond College Student Portal Login</h2>
-                    </div>
-                    <!-- <br><br><br><br><br><br> -->
-                    <div class="container">
-                        <p title="About Richmond College" class="about">
-                            Richmond College is a primary and secondary school in Galle, Sri Lanka which was
-                            established as Galle High School in 1876.The founder of school was the Wesleyan Missionary
-                            George Bough. The first principal of the school was Rev Samuel Langdon. In 1882, it was
-                            renamed Richmond College.
-                        </p>
 
-                        <div class="footer">
-                            <a href="https://www.facebook.com/richmondcollege?mibextid=LQQJ4d" target="_blank">
-                                <img src="Media/Facebook.png" alt="facebook icon" width="32">&nbsp;
-                                Find More About Us on Facebook!</a>
+    <div class="container-fluid">
+
+        <div class="row">
+
+            
+            <section class="vh-100" style="background-color: #4471b6">
+                <div class="container py-5 h-100">
+                  <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col col-xl-10">
+                      <div class="card" style="border-radius: 1rem;">
+                        <div class="row g-0">
+                          <div class="col-md-6 col-lg-5 d-none d-md-block c1">
+                            <img src="WhatsApp Image 2023-04-10 at 18.56.40a.jpg"
+                              alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                          </div>
+                          <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
+              
+                              <form>
+              
+                                <div class="d-flex align-items-center mb-3 pb-1">
+                                  <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                                  <span class="h1 fw-bold mb-0">Login</span>
+                                </div>
+              
+                                <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+              
+                                <div class="form-outline mb-4">
+                                  <input type="email" id="form2Example17" class="form-control form-control-lg" />
+                                  <label class="form-label" for="form2Example17">Username</label>
+                                </div>
+              
+                                <div class="form-outline mb-4">
+                                  <input type="password" id="form2Example27" class="form-control form-control-lg" />
+                                  <label class="form-label" for="form2Example27">Password</label>
+                                </div>
+
+                                <div class="col-6">
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox"/>
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                      Remember Me
+                                    </label>
+                                  </div>
+                            </div>
+
+                            <br/>
+              
+                                <div class="pt-1 mb-4">
+                                  <button class="btn btn-success btn-lg btn-block" type="button">Login</button>
+                                </div>
+              
+                                <a class="small text-muted" href="#!">Forgot password?</a>
+                                <p class="mb-5 pb-lg-2 " style="color: #e95c5c;">Don't have an account? <a href="#!"
+                                    style="color: #58b4df;">Register Now</a></p>
+                                
+                              </form>
+              
+                            </div>
+                          </div>
                         </div>
-
+                      </div>
                     </div>
-
+                  </div>
                 </div>
-            </div>
-            <div class="form-box">
-                <div class="mid-container">
-                    <h1>Welcome Back</h1>
-                    <h6>Login to your account</h6>
-                    <form action="" method="post" class="form">
-                        <label for="username">Username</label><br>
-                        <input type="text" name="username" id="username" placeholder="Your Username" autocomplete="off"><br><br>
-                        <label for="password">Password</label><br>
-                        <input type="password" name="password" id="password" placeholder="Your Password" autocomplete="off"><br><br>
-                        <label for="role">Role</label><br>
-                        <select>
-                            <option value="0">-- Select who you are --</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Teacher">Teacher</option>
-                            <option value="Student">Student</option>
-                        </select>
-                        <br>
-                        <button class="login" type="submit">Login</button>
-
-                    </form>
-                </div>
-            </div>
+              </section>
         </div>
     </div>
-    <?php include "inc/footer.php"; ?>
 
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+    
 </body>
-
 </html>
