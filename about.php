@@ -46,19 +46,36 @@
         <!-- footer -->
     </div>
     <section class="container" style="padding-top: 35px;">
-        <p class="text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa similique eum veniam, dicta consectetur expedita velit blanditiis praesentium incidunt amet aspernatur aliquam suscipit voluptatem inventore pariatur omnis, ratione saepe repellendus.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa similique eum veniam, dicta consectetur expedita velit blanditiis praesentium incidunt amet aspernatur aliquam suscipit voluptatem inventore pariatur omnis, ratione saepe repellendus.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa similique eum veniam, dicta consectetur expedita velit blanditiis praesentium incidunt amet aspernatur aliquam suscipit voluptatem inventore pariatur omnis, ratione saepe repellendus.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa similique eum veniam, dicta consectetur expedita velit blanditiis praesentium incidunt amet aspernatur aliquam suscipit voluptatem inventore pariatur omnis, ratione saepe repellendus.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa similique eum veniam, dicta consectetur expedita velit blanditiis praesentium incidunt amet aspernatur aliquam suscipit voluptatem inventore pariatur omnis, ratione saepe repellendus.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa similique eum veniam, dicta consectetur expedita velit blanditiis praesentium incidunt amet aspernatur aliquam suscipit voluptatem inventore pariatur omnis, ratione saepe repellendus.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa similique eum veniam, dicta consectetur expedita velit blanditiis praesentium incidunt amet aspernatur aliquam suscipit voluptatem inventore pariatur omnis, ratione saepe repellendus.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa similique eum veniam, dicta consectetur expedita velit blanditiis praesentium incidunt amet aspernatur aliquam suscipit voluptatem inventore pariatur omnis, ratione saepe repellendus.</p>
+        <p class="text-dark">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa similique eum veniam, dicta
+            consectetur expedita velit blanditiis praesentium incidunt amet aspernatur aliquam suscipit voluptatem inventore
+            pariatur omnis, ratione saepe repellendus.Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Culpa similique eum veniam, dicta consectetur expedita velit blanditiis praesentium incidunt amet aspernatur aliquam
+            suscipit voluptatem inventore pariatur omnis, ratione saepe repellendus.Lorem ipsum, dolor sit amet consectetur
+            adipisicing elit. Culpa similique eum veniam, dicta consectetur expedita velit blanditiis praesentium incidunt amet
+            aspernatur aliquam suscipit voluptatem inventore pariatur omnis, ratione saepe repellendus.Lorem ipsum, dolor sit
+            amet consectetur adipisicing elit. Culpa similique eum veniam, dicta consectetur expedita velit blanditiis praesentium
+            incidunt amet aspernatur aliquam suscipit voluptatem inventore pariatur omnis, ratione saepe repellendus.Lorem
+            ipsum, dolor sit amet consectetur adipisicing elit. Culpa similique eum veniam, dicta consectetur expedita velit
+            blanditiis praesentium incidunt amet aspernatur aliquam suscipit voluptatem inventore pariatur omnis, ratione
+            saepe repellendus.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa similique eum veniam,
+            dicta consectetur expedita velit blanditiis praesentium incidunt amet aspernatur aliquam suscipit voluptatem
+            inventore pariatur omnis, ratione saepe repellendus.Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Culpa similique eum veniam, dicta consectetur expedita velit blanditiis praesentium incidunt amet aspernatur
+            aliquam suscipit voluptatem inventore pariatur omnis, ratione saepe repellendus.Lorem ipsum, dolor sit amet
+            consectetur adipisicing elit. Culpa similique eum veniam, dicta consectetur expedita velit blanditiis praesentium
+            incidunt amet aspernatur aliquam suscipit voluptatem inventore pariatur omnis, ratione saepe repellendus.</p>
     </section>
 
-    <section class="container gap"><br />
+    <section class="container gap">
         <h1 class="display-4 text-center" style="color:#000">Our Team</h1>
         <div class="row">
             <div class="col-sm-12 col-lg-4 p-3 d-flex justify-content-center">
                 <div class="card bg-dark" style="width: 508px">
-                    <img class="card-img-top" src="Media/developers/DasunNethsara.jpg" alt="Card image" title="Avatar Roku">
+                    <img class="card-img-top" src="Media/developers/DasunNethasara-04.jpg" alt="Card image" title="Dasun Nethsara" height="420">
                     <div class="card-body">
                         <h4 class="card-title text-center" style="color:#fff">Dasun Nethsara</h4>
                         <p class="card-text text-center" style="color:#fff">
-                            Team Leader, Software Developer, <br />Co-founder of Lycoris Cafe Developer Team
+                            Software Developer, Co-founder of Lycoris Cafe,<br />Dip. in Linux Server Administration
                         </p>
                         <div class="card-footer">
                             <div class="row">
@@ -91,11 +108,11 @@
             </div>
             <div class="col-sm-12 col-lg-4 p-3 d-flex justify-content-center">
                 <div class="card bg-dark" style="width: 508px;">
-                    <img class="card-img-top" src="Media/dummy.jpg" alt="Card image" title="Zoro" />
+                    <img class="card-img-top" src="Media/dummy.jpg" alt="Card image" title="Zoro" height="420" />
                     <div class="card-body">
                         <h4 class="card-title text-center" style="color:#fff">Thevindu Dinil Senuda</h4>
                         <p class="card-text text-center" style="color:#fff">
-                            Software Developer<br/>  Student of Java Institute<br />Director of Aurin corporation
+                            Software Developer, Student of Java Institute<br />Director of Aurin corporation
                         </p>
                         <div class="card-footer">
                             <div class="row">
@@ -129,7 +146,7 @@
 
             <div class="col-sm-12 col-lg-4 p-3 d-flex justify-content-center">
                 <div class="card bg-dark" style="width: 508px">
-                    <img class="card-img-top" src="Media/dummy.jpg" alt="Card image" title="Kazuto Kirigaya" />
+                    <img class="card-img-top" src="Media/dummy.jpg" alt="Card image" title="Kazuto Kirigaya" height="420" />
                     <div class="card-body">
                         <h4 class="card-title text-center" style="color:#fff">Hansaka</h4>
                         <p class="card-text text-center" style="color:#fff">

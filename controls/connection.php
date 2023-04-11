@@ -3,7 +3,7 @@
 $host = "127.0.0.1";
 $username   = "root";
 $password   = "";
-$dbname     = "ims-003";
+$dbname     = "sms";
 
 // Create connection
 $con = mysqli_connect($host, $username, $password, $dbname);
