@@ -1,0 +1,21 @@
+.header {
+    background: url("../Media/bg.jpg");
+    width: 100%;
+    height: 70vh;
+    background-position: center;
+    background-size: cover;
+}
+
+.back-fill {
+    background: rgba(0, 0, 0, .60);
+    height: 70vh;
+    position: relative;
+}
+
+.back-fill h1 {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

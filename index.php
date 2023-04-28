@@ -13,43 +13,48 @@
 
 <body>
 
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" id='homeNav'>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="Media/Richmond Colleg LOGO.png" width="40"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.php">About Us</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav me-right mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <!-- Header section -->
     <section class="header">
         <div class="back-fill text-center">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary" id='homeNav'>
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#"><img src="Media/Richmond Colleg LOGO.png" width="40"></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="about.php">About Us</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav me-right mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href="login.php">Login</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <h1 class="display-1">Student Management System</h1>
+
+            <h1 class="display-1" style="color: #fff;">Student Management System</h1>
         </div>
     </section>
 
     <!-- intro section -->
-    <section class="container gap">
+    <section class="container" style="margin-top: 45px;">
         <div class="row">
-            <div class="col">
-                <img src="Media/Richmond Colleg LOGO.png" alt="richmond college" width="350" height="350" class="img-fluid">
+            <div class="col-sm-12 col-lg-3" style="display: flex;
+          align-items: center;
+          flex-wrap: wrap;">
+                <img src="Media/Richmond Colleg LOGO.png" alt="richmond college" width="350" height="350" class="img-fluid rounded">
             </div>
-            <div class="col-8">
+            <div class="col-sm-12 col-lg-9">
                 <h3 class="display-6" style="font-weight: 400">Welcome To Richmond College</h3>
                 <p title="About Richmond College" class="lead">
                     Richmond College is a primary and secondary school in Galle, Sri Lanka which was
@@ -59,6 +64,7 @@
                 </p>
             </div>
         </div>
+
     </section>
 
     <section class="container" style="padding-top: 35px;">
