@@ -5,46 +5,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Media/Richmond Colleg LOGO.png" type="image/x-icon">
     <title>About US</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jquery-3.6.3.min.js"></script>
 </head>
 
-<body class="banner">
-    <div class="back-fill">
-        <!-- navbar -->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" id='homeNav'>
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img src="Media/Richmond Colleg LOGO.png" width="40"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="index.php">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="about.php">About Us</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav me-right mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.php">Login</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <section>
-            <div class="about-us-bg">
-                <h1 class="display-1 text-primary">About Us</h1>
-            </div>
-        </section>
-        <!-- footer -->
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary" id='homeNav'>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="Media/Richmond Colleg LOGO.png" width="40"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="index.php">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="about.php">About Us</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav me-right mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="login.php">Login</a>
+                </li>
+            </ul>
+        </div>
     </div>
+</nav>
+
+<body>
+
+    <section class="banner">
+        <div class="back-fill">
+            <h1 class="display-1 text-primary">About Us</h1>
+        </div>
+    </section>
     <section class="container" style="padding-top: 35px;">
         <p class="text-dark">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa similique eum veniam, dicta
             consectetur expedita velit blanditiis praesentium incidunt amet aspernatur aliquam suscipit voluptatem inventore

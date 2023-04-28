@@ -8,11 +8,15 @@ if (isset($_POST['login'])) {
         $pswd = $_POST['password'];
         $role = $_POST['role'];
 
-        $sql = "SELECT * FROM user_tbl WHERE username='$uname' AND role='$role'";
+        $sql = "SELECT * FROM user_tbl WHERE username='$uname'";
 
         $result = mysqli_query($con, $sql);
         if (mysqli_num_rows($result) > 0) {
             $data = mysqli_fetch_assoc($result);
+            $sql2 = "SELECT role FROM user_role_tbl WHERE role_id='" . $data['role_id'] . "'";
+            $result2 = mysqli_query($con, $sql2);
+            $role_data = mysqli_fetch_assoc($result2);
+            $role = $role_data['role'];
             $usrname = $data['username'];
             $pwd = $data['password'];
 
