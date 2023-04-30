@@ -21,10 +21,9 @@
                 <li>
                     <hr class="dropdown-divider" />
                 </li>
-                <li><a class="dropdown-item" href="#!">Logout</a></li>
+                <li><a class="dropdown-item" href="../../inc/logout.php">Logout</a></li>
             </ul>
         </li>
-        <a type="button" class="btn btn-outline-danger" href='../../inc/logout.php'>Logout</a>
     </ul>
 
 </nav>
