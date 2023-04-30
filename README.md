@@ -7,13 +7,13 @@ Student Management System for Richmond College Technology Section
 - Used Language/s : HTML, CSS, JavaScript (Also known as JS), SQL (MySQL)
 - Framework : Bootstrap (CSS Framework)
 - Used Pre Trained models/ APIs : -
-- Platform : Any (Windows, MacOS, Linux Destros., iOS, Android etc.)
+- Platform : Any (Windows, MacOS, Linux Distros., iOS, Android etc.)
 - Environments : [Visual Studio Code](https://code.visualstudio.com/download)
 - Servers : [XAMPP](https://www.apachefriends.org/download.html) (Also compatible with WAMP, MAMP, LAMP)
 
 > Project Details :
 - For : Richmond College Technology Section | YCS
-- Project Progress : 0%
+- Project Progress : 2%
 - Start Date : 12.03.2023
 - End Date : Pending...
 - Release Date : Pending...

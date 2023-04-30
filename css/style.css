@@ -27,3 +27,40 @@
     background-position: center;
     background-size: cover;
 }
+
+.image-company {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 60px;
+}
+
+.gradient-1 {
+
+    background: linear-gradient(to right, #30b9fd, #35adf3);
+}
+
+@media (min-width: 768px) {
+    .gradient-form {
+        height: 100vh !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+    }
+}
+
+.bg-color {
+    background-color: rgb(231, 231, 231);
+}
+
+.c1 {
+
+    background-image: url("../Media/LogIn.JPG");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 1rem 0 0 1rem;
+}

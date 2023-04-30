@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <link rel="icon" href="Company Logo.png" type="image/x-icon">
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-  <link rel="stylesheet" href="login.css">
-  <title>Login | Student Management System</title>
-  <link rel="shortcut icon" href="Media/Richmond Colleg LOGO.png" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Log in</title>
+
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+  <link rel='stylesheet' href="css/style.css">
+  <script src="js/sweetalert2.all.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="sweetalert2.min.css">
+
 </head>
 
 <body>
@@ -22,7 +29,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="index.php">Home</a>
+            <a class="nav-link" aria-current="page" href="index.php">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="about.php">About Us</a>
@@ -38,88 +45,83 @@
   </nav>
 
   <div class="container-fluid">
-    <section class="h-100 gradient-form bg-color">
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-xl-10">
-            <div class="card rounded-3 text-black">
-              <div class="row g-0">
-                <div class="col-lg-6">
-                  <div class="card-body mx-md-4">
 
-                    <div class="text-center">
+    <div class="row">
 
-                      <img class="image-company" src="Media/Richmond Colleg LOGO.png" alt="Logo Of The School">
 
-                    </div>
+      <section class="vh-100" style="background-color: #4471b6">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+              <div class="card" style="border-radius: 1rem;">
+                <div class="row g-0">
+                  <div class="col-md-6 col-lg-5 d-none d-md-block c1"></div>
+                  <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                    <div class="card-body p-4 p-lg-5 text-black">
 
-                    <form action="data/login-data.php" method="POST">
-                      <p class="mb-5">Please Login to Your Account</p>
+                      <form action="data/login-data.php" method="post">
+                        <div class="d-flex align-items-center mb-3 pb-1">
+                          <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                          <span class="h1 fw-bold mb-0">Login</span>
+                        </div>
 
-                      <?php if (isset($_GET['error'])) { ?>
-                        <!-- <div class='alert alert-danger' role='alert'>
+                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+
+                        <?php if (isset($_GET['error'])) { ?>
+                          <!-- <div class='alert alert-danger' role='alert'>
                             <//?= $_GET['error'] ?>
                           </div> -->
-                        <script>
-                          Swal.fire({
-                            icon: 'warning',
-                            title: 'Oops...',
-                            text: "<?= $_GET['error'] ?>"
-                          })
-                        </script>
-                      <?php } ?>
 
-                      <div class="form-outline mb-4">
-                        <label class="form-label">Username</label>
-                        <input type="text" class="form-control" placeholder="Username" autocomplete="off" name="username" />
-                      </div>
+                          <script>
+                            Swal.fire({
+                              icon: 'warning',
+                              title: 'Oops...',
+                              text: "<?= $_GET['error'] ?>"
+                            })
+                          </script>
+                        <?php } ?>
 
-                      <div class="form-outline mb-4">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" placeholder="Password" autocomplete="off" name="password" />
-                      </div>
+                        <div class="form-outline mb-4">
+                          <label class="form-label" for="form2Example17">Username</label>
+                          <input type="text" id="form2Example17" class="form-control form-control-lg" placeholder="John Wick" required name="username" autocomplete="off" />
+                        </div>
 
-                      <div class="form-outline mb-4">
-                        <label class="form-label">Role</label>
-                        <select class="form-select" name="role">
-                          <option value="">-- Select who you are --</option>
-                          <option value="Admin">Administrator</option>
-                          <option value="Principal">Principal</option>
-                          <option value="Section Head">Section Head</option>
-                          <option value="Teacher">Teacher</option>
-                          <option value="Student">Student</option>
-                        </select>
-                      </div>
+                        <div class="form-outline mb-4">
+                          <label class="form-label" for="form2Example27">Password</label>
+                          <input type="password" id="form2Example27" class="form-control form-control-lg" placeholder="##########" required name="password" autocomplete="off" />
+                        </div>
 
-                      <div class="text-center pt-1  pb-1 p-4">
-                        <button class="btn btn-block gradient-1 mb-3 text-bg-light col-6" type="submit" name="login">Login</button>
+                        <div class="col-6">
+
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" />
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Remember Me
+                            </label>
+                          </div>
+                        </div>
+
                         <br />
-                        <a class="text-muted" href="about.php">About Us</a>
-                      </div>
 
+                        <div class="d-grid gap-2">
+                          <button class="btn btn-success btn-lg btn-block" type="submit" name="login">Login</button>
+                        </div>
+                      </form>
 
-
-                    </form>
-
-                  </div>
-                </div>
-                <div class="col-lg-6 d-flex ">
-                  <div class="mx-lg-5">
-                    <img src="Media/LogIn.JPG" alt="" style="width: 100%; height: 100%; margin-left: 39px;border-radius: 10px; margin-right:0;">
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 
-
+  <?php include "inc/footer.php"; ?>
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <script src="bootstrap/js/bootstrap.bundle.js"></script>
-
 </body>
 
 </html>

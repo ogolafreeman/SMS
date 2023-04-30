@@ -3,12 +3,13 @@ session_start();
 require_once '../controls/connection.php';
 
 if (isset($_POST['login'])) {
-    if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['role'])) {
+    if (!empty($_POST['username']) && !empty($_POST['password'])) {
         $uname = $_POST['username'];
         $pswd = $_POST['password'];
-        $role = $_POST['role'];
+        // $role = $_POST['role'];
 
-        $sql = "SELECT * FROM user_tbl WHERE username='$uname'";
+        // $sql = "SELECT * FROM user_tbl WHERE username='$uname'";
+        $sql = "SELECT * FROM user_tbl ut INNER JOIN user_role_tbl urt ON (ut.role_id = urt.role_id) WHERE (ut.username = '$uname')";
 
         $result = mysqli_query($con, $sql);
         if (mysqli_num_rows($result) > 0) {
@@ -25,7 +26,7 @@ if (isset($_POST['login'])) {
                     $_SESSION['username'] = $usrname;
                     $_SESSION['role'] = $role;
                     if ($role == 'Admin') {
-                        header("Location: ../pages/admin-dashboard.php");
+                        header("Location: ../pages/admin/admin-dashboard.php");
                         exit;
                     } else if ($role == 'Principal') {
                         header("Location: ../pages/principal-dashboard.php");
