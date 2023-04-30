@@ -30,68 +30,18 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
             <div class="container-fluid">
                 <h1 class="mt-4">Dashboard</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Hello <?= $_SESSION['role'] ?> !</li>
+                    <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li>
                 </ol>
 
-                <div class="row">
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card mb-3 border-primary " style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <i class="fa-solid fa-graduation-cap fa-5x" style="margin-left: 5px; margin-top: 5px;"></i>
-                                    <!-- <img src="..." class="img-fluid rounded-start" alt="..."> -->
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Students</h5>
-                                        <p class="card-text">75</p>
-                                        <!-- <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card mb-3 border-success" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <i class="fa-solid fa-chalkboard-user fa-5x" style="margin-left: 5px; margin-top: 5px;"></i>
-                                    <!-- <img src="..." class="img-fluid rounded-start" alt="..."> -->
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Teachers</h5>
-                                        <p class="card-text">8</p>
-                                        <!-- <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card mb-3 border-warning" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <i class="fa-solid fa-book fa-5x" style="margin-left: 5px; margin-top: 5px;"></i>
-                                    <!-- <img src="..." class="img-fluid rounded-start" alt="..."> -->
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Subjects</h5>
-                                        <p class="card-text">5</p>
-                                        <!-- <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Your further code goes here. keep coding in this div -->
+
+
+
+
 
             </div>
 
-
-
-
+            <!-- footer -->
             <?php include '../footer.php'; ?>
         </div>
         </div>
