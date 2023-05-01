@@ -35,7 +35,7 @@ if (isset($_POST['login'])) {
                         header("Location: ../pages/section-head-dashboard.php");
                         exit;
                     } else if ($role == 'Teacher') {
-                        header("Location: ../pages/teacher-dashboard.php");
+                        header("Location: ../pages/teachers/teacher-dashboard.php");
                         exit;
                     } else {
                         header("Location: ../pages/student-dashboard.php");

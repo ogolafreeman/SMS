@@ -13,7 +13,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
         <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Add a New Teacher - Admin</title>
+        <title>Add a New Student - Admin</title>
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="../../js/jquery-3.6.3.min.js"></script>
@@ -29,7 +29,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 
             <!-- content goes here. do not remove any code -->
             <div class="container-fluid">
-                <h1 class="mt-4">Add a New Teacher</h1>
+                <h1 class="mt-4">Add a New Student</h1>
                 <ol class="breadcrumb mb-4">
                     <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
                 </ol>
@@ -39,10 +39,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     <!-- <a href="teacher.php" class="btn btn-dark">Go Back</a><br><br> -->
 
                     <?php if (isset($_GET['success'])) { ?>
-                        <!-- <div class='alert alert-danger' role='alert'>
-                            <//?= $_GET['error'] ?>
-                          </div> -->
-
                         <script>
                             Swal.fire({
                                 icon: 'success',
@@ -53,10 +49,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     <?php } ?>
 
                     <?php if (isset($_GET['error'])) { ?>
-                        <!-- <div class='alert alert-danger' role='alert'>
-                            <//?= $_GET['error'] ?>
-                          </div> -->
-
                         <script>
                             Swal.fire({
                                 icon: 'warning',
@@ -70,28 +62,46 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                         <h3>Fill all the Data</h3>
                         <hr>
                         <div class="mb-3">
-                            <label class="form-label">First Name</label>
-                            <input type="text" name="fname" class="form-control" autocomplete="off" required>
+                            <label class="form-label">Admission No.</label>
+                            <input type="text" name="admission_no" class="form-control" autocomplete="off" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Last Name</label>
-                            <input type="text" name="lname" class="form-control" autocomplete="off" required>
+                            <label class="form-label">Full Name</label>
+                            <input type="text" name="full_name" class="form-control" autocomplete="off" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">NIC</label>
-                            <input type="text" name="nic" class="form-control" autocomplete="off" required>
+                            <label class="form-label">Name with Initials</label>
+                            <input type="text" name="name_with_init" class="form-control" autocomplete="off" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <div class="form-floating">
+                                <textarea class="form-control" id="floatingTextarea2" style="height: 100px" required name='address'></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone - Home</label>
+                            <input type="text" name="phone1" class="form-control" autocomplete="off" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone - Mobile</label>
+                            <input type="text" name="phone2" class="form-control" autocomplete="off" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Date of Birth</label>
                             <input type="date" name="dob" class="form-control" autocomplete="off" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Teacher Number</label>
-                            <input type="text" name="t_no" class="form-control" autocomplete="off" required>
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" autocomplete="off" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Appointment Date</label>
                             <input type="date" name="app_date" class="form-control" autocomplete="off" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Date of Admission</label>
+                            <input type="date" name="d_o_admission" class="form-control" autocomplete="off" required>
                         </div>
                         <!-- <div class="mb-3">
                             <label class="form-label">Passowrd</label>
@@ -100,29 +110,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                                 <button class="btn btn-secondary" id="gBTN">Random</button>
                             </div>
                         </div> -->
-                        <div class="mb-3">
-                            <label class="form-label">RC Appointment Date</label>
-                            <input type="date" name="rc_app_date" class="form-control" autocomplete="off" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" autocomplete="off" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Appointed Subject</label>
-                            <!-- <input type="text" name="email" class="form-control" autocomplete="off"> -->
-                            <select name="app_subject" class="form-select" required>
-                                <option>Subject 1</option>
-                                <option>Subject 2</option>
-                                <option>Subject 3</option>
-                                <option>Subject 4</option>
-                                <option>Subject 5</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Section ID</label>
-                            <input type="text" name="sec_id" class="form-control" autocomplete="off" required>
-                        </div>
 
                         <button type="submit" class="btn btn-primary" name="add">Add</button>
                     </form>
@@ -131,9 +118,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 
                 <script src="../bootstrap/js/bootstrap.bundle.js"></script>
 
-            <!-- footer -->
-            <?php include '../footer.php'; ?>
-        </div>
+                <!-- footer -->
+                <?php include '../footer.php'; ?>
+            </div>
         </div>
 
         <!-- content goes here -->

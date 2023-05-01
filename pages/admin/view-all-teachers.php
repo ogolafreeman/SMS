@@ -1,6 +1,10 @@
 <?php
 session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
+
+    include '../../data/teacher-operations.php';
+    $teachers = getAllTeachers();
+    // print_r($teachers);
 ?>
 
     <!DOCTYPE html>
@@ -14,9 +18,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>All Teachers - Admin</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="../../js/jquery-3.6.3.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
 
     <body class="sb-nav-fixed">
@@ -33,10 +38,80 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
                 </ol>
 
+                <?php if (isset($_GET['success'])) { ?>
+                    <!-- <div class='alert alert-danger' role='alert'>
+                            <//?= $_GET['error'] ?>
+                          </div> -->
+
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Done',
+                            text: "<?= $_GET['success'] ?>"
+                        })
+                    </script>
+                <?php } ?>
+
+                <?php if (isset($_GET['error'])) { ?>
+                    <!-- <div class='alert alert-danger' role='alert'>
+                            <//?= $_GET['error'] ?>
+                          </div> -->
+
+                    <script>
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: "<?= $_GET['error'] ?>"
+                        })
+                    </script>
+                <?php } ?>
+
                 <!-- Your further code goes here. keep coding in this div -->
+                <?php if ($teachers) { ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">NIC</th>
+                                <th scope="col">DOB</th>
+                                <th scope="col">Teacher No.</th>
+                                <th scope="col">Appointment Date</th>
+                                <th scope="col">RC Appointment Date</th>
+                                <!-- <th scope="col">Email</th> -->
+                                <th scope="col">Appointed Subject</th>
+                                <th scope="col">Section ID</th>
+                                <th scope="col">Operations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($teachers as $teacher) { ?>
+                                <tr>
+                                    <th scope="row"><?php echo $teacher[0]; ?></th>
+                                    <td><?php echo $teacher[1]; ?></td>
+                                    <td><?php echo $teacher[2]; ?></td>
+                                    <td><?php echo $teacher[3]; ?></td>
+                                    <td><?php echo $teacher[4]; ?></td>
+                                    <td><?php echo $teacher[5]; ?></td>
+                                    <td><?php echo $teacher[6]; ?></td>
+                                    <td><?php echo $teacher[7]; ?></td>
+                                    <!-- <td><?php echo $teacher[8]; ?></td> -->
+                                    <td><?php echo $teacher[9]; ?></td>
+                                    <td><?php echo $teacher[10]; ?></td>
+                                    <td>
+                                        <a class="btn btn-warning" name="edit" href="edit_teacher.php?id=<?= $teacher[0] ?>">Edit</a>
+                                        <a class="btn btn-danger" name="delete" href="delete_teacher.php?id=<?= $teacher[0] ?>">Delete</a>
+                                    </td>
+                                </tr>
 
+                            <?php } ?>
 
+                        </tbody>
+                    </table>
 
+                <?php } ?>
 
 
             </div>
@@ -49,11 +124,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
         <!-- content goes here -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="../assets/demo/chart-area-demo.js"></script>
-        <script src="../assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="../js/datatables-simple-demo.js"></script>
     </body>
 
     </html>
