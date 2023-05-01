@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2023 at 08:08 AM
+-- Generation Time: May 01, 2023 at 04:12 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -125,7 +125,7 @@ CREATE TABLE `guardian_tbl` (
 --
 
 CREATE TABLE `section_tbl` (
-  `sec_id` varchar(255) NOT NULL,
+  `sec_id` varchar(5) NOT NULL,
   `sec_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -212,11 +212,23 @@ CREATE TABLE `teacher_tbl` (
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `nic` varchar(255) NOT NULL,
+  `dob` varchar(10) NOT NULL,
   `teacher_no` varchar(255) NOT NULL,
   `app_date` date NOT NULL,
   `rc_app_date` date NOT NULL,
-  `email` varchar(255) NOT NULL
+  `email` varchar(255) NOT NULL,
+  `app_subject` varchar(100) NOT NULL,
+  `sec_id` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `teacher_tbl`
+--
+
+INSERT INTO `teacher_tbl` (`teacher_id`, `first_name`, `last_name`, `nic`, `dob`, `teacher_no`, `app_date`, `rc_app_date`, `email`, `app_subject`, `sec_id`) VALUES
+(2, 'Dasun', 'Nethsara', '123456789', '2004-08-19', 'T-02', '2022-01-01', '2023-05-26', 'hehe@host.lk', 'Subject 2', 'TECH'),
+(8, 'Naveen', 'Balasooriya', '789456123', '2004-04-08', 'T-07', '2015-12-02', '2019-02-10', 'gg@gmail.com', 'Subject 4', 'TECH'),
+(9, 'Lasith', 'Randil', '456789123', '2004-11-15', 'T-09', '2023-05-09', '2023-05-25', 't@host.com', 'Subject 5', 'TECH');
 
 -- --------------------------------------------------------
 
@@ -261,7 +273,10 @@ CREATE TABLE `user_tbl` (
 --
 
 INSERT INTO `user_tbl` (`user_id`, `username`, `password`, `role_id`, `admission_no`, `nic`, `status`) VALUES
-(1, 'admin', '$2y$10$vp.zGwQNHDpjfewb3B1eHOBClW2ZshRnZOSQouQhky52vAO6uzglO', 1, '', '123456789', 1);
+(1, 'admin', '$2y$10$vp.zGwQNHDpjfewb3B1eHOBClW2ZshRnZOSQouQhky52vAO6uzglO', 1, '', '123456789', 1),
+(3, 'teacher', '$2y$10$qSN1EAOrm7nK.aihSSVzEuYfFm3Fofg39Yfw7hQWUrRDF9Iq.9r7m', 4, '', '123456789', 1),
+(9, 'teacher', '$2y$10$7g9rAWQVVg1ZfnJqrB3KPeXtCRQKIWkouUrh8/WAN6ofsZjNs0giK', 4, '', '789456123', 1),
+(10, 'teacher', '$2y$10$sUuiv17j4m3mxig8bPeC.uiartBSn.eXV3wSoOlZ2ctz4ss0bDX3m', 4, '', '456789123', 1);
 
 --
 -- Indexes for dumped tables
@@ -363,8 +378,7 @@ ALTER TABLE `user_role_tbl`
 -- Indexes for table `user_tbl`
 --
 ALTER TABLE `user_tbl`
-  ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `role_id` (`role_id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -440,7 +454,7 @@ ALTER TABLE `teacher_subject_tbl`
 -- AUTO_INCREMENT for table `teacher_tbl`
 --
 ALTER TABLE `teacher_tbl`
-  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user_role_tbl`
@@ -452,7 +466,7 @@ ALTER TABLE `user_role_tbl`
 -- AUTO_INCREMENT for table `user_tbl`
 --
 ALTER TABLE `user_tbl`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -469,12 +483,6 @@ ALTER TABLE `student_class_tbl`
 --
 ALTER TABLE `teacher_class_tbl`
   ADD CONSTRAINT `teacher_class_tbl_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_tbl` (`teacher_id`);
-
---
--- Constraints for table `user_tbl`
---
-ALTER TABLE `user_tbl`
-  ADD CONSTRAINT `user_tbl_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_role_tbl` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
