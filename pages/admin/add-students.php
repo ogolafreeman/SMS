@@ -39,26 +39,32 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     <!-- <a href="teacher.php" class="btn btn-dark">Go Back</a><br><br> -->
 
                     <?php if (isset($_GET['success'])) { ?>
-                        <script>
+                        <div class='alert alert-success' role='alert'>
+                            <?= $_GET['success'] ?>
+                        </div>
+                        <!-- <script>
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Done',
                                 text: "<?= $_GET['success'] ?>"
                             })
-                        </script>
+                        </script> -->
                     <?php } ?>
 
                     <?php if (isset($_GET['error'])) { ?>
-                        <script>
+                        <div class='alert alert-danger' role='alert'>
+                            <?= $_GET['error'] ?>
+                        </div>
+                        <!-- <script>
                             Swal.fire({
                                 icon: 'warning',
                                 title: 'Oops...',
                                 text: "<?= $_GET['error'] ?>"
                             })
-                        </script>
+                        </script> -->
                     <?php } ?>
 
-                    <form action="../../data/add-teacher-data.php" method="post" class="shadow p-3  mt-5 form-w">
+                    <form action="../../data/add-student-data.php" method="post" class="shadow p-3  mt-5 form-w">
                         <h3>Fill all the Data</h3>
                         <hr>
                         <div class="mb-3">
@@ -93,11 +99,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" autocomplete="off" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Appointment Date</label>
-                            <input type="date" name="app_date" class="form-control" autocomplete="off" required>
+                            <input type="email" name="email" class="form-control" autocomplete="off">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Date of Admission</label>

@@ -9,7 +9,8 @@ if (isset($_POST['login'])) {
         // $role = $_POST['role'];
 
         // $sql = "SELECT * FROM user_tbl WHERE username='$uname'";
-        $sql = "SELECT * FROM user_tbl ut INNER JOIN user_role_tbl urt ON (ut.role_id = urt.role_id) WHERE (ut.username = '$uname')";
+        $sql = "SELECT * FROM user_tbl ut INNER JOIN user_role_tbl urt ON 
+        (ut.role_id = urt.role_id) WHERE (ut.username = '$uname')";
 
         $result = mysqli_query($con, $sql);
         if (mysqli_num_rows($result) > 0) {

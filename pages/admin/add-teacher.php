@@ -39,31 +39,31 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     <!-- <a href="teacher.php" class="btn btn-dark">Go Back</a><br><br> -->
 
                     <?php if (isset($_GET['success'])) { ?>
-                        <!-- <div class='alert alert-danger' role='alert'>
-                            <//?= $_GET['error'] ?>
-                          </div> -->
+                        <div class='alert alert-success' role='alert'>
+                            <?= $_GET['success'] ?>
+                        </div>
 
-                        <script>
+                        <!-- <script>
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Done',
                                 text: "<?= $_GET['success'] ?>"
                             })
-                        </script>
+                        </script> -->
                     <?php } ?>
 
                     <?php if (isset($_GET['error'])) { ?>
-                        <!-- <div class='alert alert-danger' role='alert'>
-                            <//?= $_GET['error'] ?>
-                          </div> -->
+                        <div class='alert alert-danger' role='alert'>
+                            </ /?=$_GET['error'] ?>
+                        </div>
 
-                        <script>
+                        <!-- <script>
                             Swal.fire({
                                 icon: 'warning',
                                 title: 'Oops...',
                                 text: "<?= $_GET['error'] ?>"
                             })
-                        </script>
+                        </script> -->
                     <?php } ?>
 
                     <form action="../../data/add-teacher-data.php" method="post" class="shadow p-3  mt-5 form-w">
@@ -131,9 +131,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 
                 <script src="../bootstrap/js/bootstrap.bundle.js"></script>
 
-            <!-- footer -->
-            <?php include '../footer.php'; ?>
-        </div>
+                <!-- footer -->
+                <?php include '../footer.php'; ?>
+            </div>
         </div>
 
         <!-- content goes here -->

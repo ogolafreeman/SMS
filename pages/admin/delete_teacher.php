@@ -5,7 +5,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] == 'Admin') {
         include '../../controls/connection.php';
-        include '../../data/teacher-operations.php';
+        include '../../data/admin_operations.php';
 
         $id = $_GET['id'];
         if (removeTeacher($id, $con)) {

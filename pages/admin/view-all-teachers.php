@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 
-    include '../../data/teacher-operations.php';
+    include '../../data/admin_operations.php';
     $teachers = getAllTeachers();
     // print_r($teachers);
 ?>
@@ -39,31 +39,31 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                 </ol>
 
                 <?php if (isset($_GET['success'])) { ?>
-                    <!-- <div class='alert alert-danger' role='alert'>
-                            <//?= $_GET['error'] ?>
-                          </div> -->
+                    <div class='alert alert-success' role='alert'>
+                        <?= $_GET['success'] ?>
+                    </div>
 
-                    <script>
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Done',
-                            text: "<?= $_GET['success'] ?>"
-                        })
-                    </script>
+                    <!-- <script>
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Done',
+                                text: "<?= $_GET['success'] ?>"
+                            })
+                        </script> -->
                 <?php } ?>
 
                 <?php if (isset($_GET['error'])) { ?>
-                    <!-- <div class='alert alert-danger' role='alert'>
-                            <//?= $_GET['error'] ?>
-                          </div> -->
+                    <div class='alert alert-danger' role='alert'>
+                        </ /?=$_GET['error'] ?>
+                    </div>
 
-                    <script>
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Oops...',
-                            text: "<?= $_GET['error'] ?>"
-                        })
-                    </script>
+                    <!-- <script>
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Oops...',
+                                text: "<?= $_GET['error'] ?>"
+                            })
+                        </script> -->
                 <?php } ?>
 
                 <!-- Your further code goes here. keep coding in this div -->
