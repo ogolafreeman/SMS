@@ -9,7 +9,7 @@
                         Dashboard
                     </a>
                     <!-- <div class="sb-sidenav-menu-heading">Interface</div> -->
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
+                    <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-people-roof"></i></div>
                         Principal
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -33,7 +33,7 @@
                             <a class="nav-link" href="#">Option 2</a>
                             <a class="nav-link" href="#">Option 3</a>
                         </nav>
-                    </div>
+                    </div> -->
 
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
@@ -42,10 +42,8 @@
                     </a>
                     <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">View All</a>
-                            <a class="nav-link" href="#">Option 1</a>
-                            <a class="nav-link" href="#">Option 2</a>
-                            <a class="nav-link" href="#">Option 3</a>
+                            <a class="nav-link" href="add-teacher.php">Add a Teacher</a>
+                            <a class="nav-link" href="view-all-teachers.php">View All</a>
                         </nav>
                     </div>
 
@@ -56,23 +54,38 @@
                     </a>
                     <div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="#">Add a Student</a>
                             <a class="nav-link" href="#">View All</a>
-                            <a class="nav-link" href="#">Option 1</a>
-                            <a class="nav-link" href="#">Option 2</a>
-                            <a class="nav-link" href="#">Option 3</a>
                         </nav>
                     </div>
 
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts5" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fa fa-cubes"></i></div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Grades and Classes
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
-                    <div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">Option 1</a>
-                            <a class="nav-link" href="#">Option 2</a>
-                            <a class="nav-link" href="#">Option 3</a>
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                Grades
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="#">Add Grades</a>
+                                    <a class="nav-link" href="#">View All</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                Classes
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="#">Add Classes</a>
+                                    <a class="nav-link" href="#">View All</a>
+                                </nav>
+                            </div>
                         </nav>
                     </div>
 
@@ -83,9 +96,8 @@
                     </a>
                     <div class="collapse" id="collapseLayouts6" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">Option 1</a>
-                            <a class="nav-link" href="#">Option 2</a>
-                            <a class="nav-link" href="#">Option 3</a>
+                            <a class="nav-link" href="#">Add New Subject</a>
+                            <a class="nav-link" href="#">Assign to Grades</a>
                         </nav>
                     </div>
 
@@ -96,9 +108,7 @@
                     </a>
                     <div class="collapse" id="collapseLayouts7" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">Option 1</a>
-                            <a class="nav-link" href="#">Option 2</a>
-                            <a class="nav-link" href="#">Option 3</a>
+                            <a class="nav-link" href="#">View</a>
                         </nav>
                     </div>
 

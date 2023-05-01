@@ -10,10 +10,10 @@
 
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
   <link rel='stylesheet' href="css/style.css">
-  <script src="js/sweetalert2.all.min.js"></script>
+  <!-- <script src="js/sweetalert2.all.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="sweetalert2.min.js"></script>
-  <link rel="stylesheet" href="sweetalert2.min.css">
+  <!-- <script src="sweetalert2.min.js"></script> -->
+  <!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
 
 </head>
 
