@@ -4,7 +4,7 @@ require '../../controls/connection.php';
 function getAllTeachers()
 {
     require '../../controls/connection.php';
-    $sql = "SELECT * FROM teacher_tbl";
+    $sql = "SELECT * FROM teacher_tbl WHERE status='1'";
     $result = mysqli_query($con, $sql);
     if (mysqli_num_rows($result) >= 1) {
         $teachers = mysqli_fetch_all($result);
@@ -17,7 +17,7 @@ function getAllTeachers()
 // Delete selected teacher
 function removeTeacher($id, $con)
 {
-    $sql = "DELETE FROM teacher_tbl WHERE teacher_id='$id'";
+    $sql = "UPDATE teacher_tbl SET status='0' WHERE teacher_id='$id'";
     if (mysqli_query($con, $sql)) {
         return 1;
     } else {
@@ -55,7 +55,7 @@ function getAllStudents()
 // Delete selected student
 function removeStudent($id, $con)
 {
-    $sql = "DELETE FROM teacher_tbl WHERE teacher_id='$id'";
+    $sql = "UPDATE student_tbl SET status='0' WHERE std_id='$id'";
     if (mysqli_query($con, $sql)) {
         return 1;
     } else {

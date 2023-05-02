@@ -43,31 +43,31 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     <!-- <a href="teacher.php" class="btn btn-dark">Go Back</a><br><br> -->
 
                     <?php if (isset($_GET['success'])) { ?>
-                        <div class='alert alert-success' role='alert'>
+                        <!-- <div class='alert alert-success' role='alert'>
                             <?= $_GET['success'] ?>
-                        </div>
+                        </div> -->
 
-                        <!-- <script>
+                        <script>
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Done',
                                 text: "<?= $_GET['success'] ?>"
                             })
-                        </script> -->
+                        </script>
                     <?php } ?>
 
                     <?php if (isset($_GET['error'])) { ?>
-                        <div class='alert alert-danger' role='alert'>
+                        <!-- <div class='alert alert-danger' role='alert'>
                             <?= $_GET['error'] ?>
-                        </div>
+                        </div> -->
 
-                        <!-- <script>
+                        <script>
                             Swal.fire({
                                 icon: 'warning',
                                 title: 'Oops...',
                                 text: "<?= $_GET['error'] ?>"
                             })
-                        </script> -->
+                        </script>
                     <?php } ?>
 
                     <form action="../../data/update-student-data.php?id=<?= $student['std_id'] ?>" method="post" class="shadow p-3  mt-5 form-w">
@@ -151,7 +151,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                         <button type="submit" class="btn btn-warning" name="update">Update</button>
                     </form>
 
-                    <form action="../../data/update-student-data.php?id=<?= $student['std_id'] ?>" method="post" class="shadow p-3  mt-5 form-w">
+                    <form action="../../data/update-student-data.php?admission_no=<?= $student['admission_no'] ?>" method="post" class="shadow p-3  mt-5 form-w">
                         <h3>Change Password</h3>
                         <hr>
                         <div class="mb-3">

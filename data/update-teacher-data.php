@@ -19,11 +19,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                 app_date='$app_date', rc_app_date='$rc_app_date', email='$email', app_subject='$app_subject', sec_id='$sec_id' WHERE teacher_id='$id'";
         if (mysqli_query($con, $sql)) {
             $sm = "Successfully updated!";
-            header("Location: ../pages/admin/edit_teacher.php?success=$sm");
+            header("Location: ../pages/admin/view-all-teachers.php?success=$sm");
             exit;
         } else {
             $em = "Unknown error occurred";
-            header("Location: ../pages/admin/edit_teacher.php?error=$em");
+            header("Location: ../pages/admin/view-all-teachers.php?error=$em");
             exit;
         }
     }
@@ -44,17 +44,17 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     $sql2 = "UPDATE user_tbl SET password='" . password_hash($new_pwd, PASSWORD_DEFAULT) . "' WHERE nic='$nic'";
                     if (mysqli_query($con, $sql2)) {
                         $sm = "The password has been changed successfully!";
-                        header("Location: ../pages/admin/edit_teacher.php?success=$sm");
+                        header("Location: ../pages/admin/view-all-teachers.php?success=$sm");
                         exit;
                     }
                 } else {
                     $em = "Enter the New Password Correctly!";
-                    header("Location: ../pages/admin/edit_teacher.php?error=$em");
+                    header("Location: ../pages/admin/view-all-teachers.php?error=$em");
                     exit;
                 }
             } else {
                 $em = "Incorrect Admin Passowrd";
-                header("Location: ../pages/admin/edit_teacher.php?error=$em");
+                header("Location: ../pages/admin/view-all-teachers.php?error=$em");
                 exit;
             }
         }

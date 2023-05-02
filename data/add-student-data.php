@@ -26,10 +26,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     '$dob', '$email', '$d_o_admission', '$current_date', '1')";
 
             if (mysqli_query($con, $sql2)) {
-                $sql3 = "INSERT INTO user_tbl (username, password, role_id, admission_no, nic, status) 
-                         VALUES ('$admission_no', '" . password_hash($admission_no, PASSWORD_DEFAULT) . "', '5', '$admission_no', '', '1')";
+                $sql3 = "INSERT INTO user_tbl (username, password, role_id, admission_no) 
+                         VALUES ('$admission_no', '" . password_hash($admission_no, PASSWORD_DEFAULT) . "', '5', '$admission_no')";
                 if (mysqli_query($con, $sql3)) {
-                    $sm = "As a new student, <b>$name_with_init</b> has been successfully registered!";
+                    $sm = "As a new student, $name_with_init has been successfully registered!";
                     header("Location: ../pages/admin/add-students.php?success=$sm");
                     exit;
                 } else {

@@ -39,31 +39,31 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                 </ol>
 
                 <?php if (isset($_GET['success'])) { ?>
-                    <div class='alert alert-success' role='alert'>
+                    <!-- <div class='alert alert-success' role='alert'>
                         <?= $_GET['success'] ?>
-                    </div>
+                    </div> -->
 
-                    <!-- <script>
+                    <script>
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Done',
                                 text: "<?= $_GET['success'] ?>"
                             })
-                        </script> -->
+                        </script>
                 <?php } ?>
 
                 <?php if (isset($_GET['error'])) { ?>
-                    <div class='alert alert-danger' role='alert'>
+                    <!-- <div class='alert alert-danger' role='alert'>
                         </ /?=$_GET['error'] ?>
-                    </div>
+                    </div> -->
 
-                    <!-- <script>
+                    <script>
                             Swal.fire({
                                 icon: 'warning',
                                 title: 'Oops...',
                                 text: "<?= $_GET['error'] ?>"
                             })
-                        </script> -->
+                        </script>
                 <?php } ?>
 
                 <!-- Your further code goes here. keep coding in this div -->

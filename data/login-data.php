@@ -39,7 +39,7 @@ if (isset($_POST['login'])) {
                         header("Location: ../pages/teachers/teacher-dashboard.php");
                         exit;
                     } else {
-                        header("Location: ../pages/student-dashboard.php");
+                        header("Location: ../pages/students/student-dashboard.php");
                         exit;
                     }
                 } else {

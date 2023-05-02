@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2023 at 04:40 AM
+-- Generation Time: May 02, 2023 at 10:50 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -165,6 +165,15 @@ CREATE TABLE `student_tbl` (
   `status` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `student_tbl`
+--
+
+INSERT INTO `student_tbl` (`std_id`, `admission_no`, `full_name`, `name_with_initials`, `address`, `phone_no_1`, `phone_no_2`, `dob`, `email`, `d_o_admission`, `date_added`, `date_updated`, `status`) VALUES
+(1, '13736', 'Anthony Edward Stark', 'A. E. Stark', '10880, Malibu Point, California, USA', '123123123', '123123123', '1990-12-27', 'tonystark@ironman.com', '2012-04-12', '2023-05-02', '2023-05-02', 1),
+(5, '13737', 'Steven Grant Rogers', 'S. G. Rogers', 'New Jersey, USA', '456456456', '456456456', '1920-04-27', 'captainamerica@avengers.com', '2012-04-27', '2023-05-02', '2023-05-02', 1),
+(6, '13738', 'Stephen Strange', 'S. Strange', 'Bleaker Street, New York, USA', '789789789', '789789789', '1989-11-28', 'drstrange@avengers.com', '2018-05-24', '2023-05-02', '2023-05-02', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -227,9 +236,11 @@ CREATE TABLE `teacher_tbl` (
 --
 
 INSERT INTO `teacher_tbl` (`teacher_id`, `first_name`, `last_name`, `nic`, `dob`, `teacher_no`, `app_date`, `rc_app_date`, `email`, `app_subject`, `sec_id`, `status`) VALUES
-(2, 'Dasun', 'Nethsara', '123456789', '2004-08-19', 'T-02', '2022-01-01', '2023-05-26', 'hehe@host.lk', 'Subject 2', 'TECH', 0),
-(8, 'Naveen', 'Balasooriya', '789456123', '2004-04-08', 'T-07', '2015-12-02', '2019-02-10', 'gg@gmail.com', 'Subject 4', 'TECH', 0),
-(9, 'Lasith', 'Randil', '456789123', '2004-11-15', 'T-09', '2023-05-09', '2023-05-25', 't@host.com', 'Subject 5', 'TECH', 0);
+(2, 'Dasun', 'Nethsara', '123456789', '2004-08-19', 'T-02', '2022-01-01', '2023-05-26', 'hehe@host.lk', 'Subject 2', 'TECH', 1),
+(8, 'Naveen', 'Balasooriya', '789456123', '2004-04-08', 'T-03', '2015-12-02', '2019-02-10', 'gg@gmail.com', 'Subject 4', 'TECH', 1),
+(9, 'Lasith', 'Randil', '456789124', '2004-11-15', 'T-04', '2023-05-09', '2023-05-25', 't@host.com', 'Subject 5', 'TECH', 1),
+(10, 'kiiiiiii', 'isvluvhnujil', '456123788', '2023-05-09', 'T-05', '2023-05-14', '2023-05-17', 'hg@host.com', 'Subject 1', 'TECH', 1),
+(11, 'Dhananjya', 'Lakshan', '11111111', '1990-05-04', 'T-06', '2014-07-05', '2020-11-21', 'djcgh@host.com', 'Subject 1', 'Maths', 1);
 
 -- --------------------------------------------------------
 
@@ -264,20 +275,24 @@ CREATE TABLE `user_tbl` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role_id` int(1) NOT NULL,
-  `admission_no` varchar(6) NOT NULL,
-  `nic` varchar(255) NOT NULL,
-  `status` tinyint(4) NOT NULL
+  `admission_no` varchar(6) DEFAULT NULL,
+  `nic` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user_tbl`
 --
 
-INSERT INTO `user_tbl` (`user_id`, `username`, `password`, `role_id`, `admission_no`, `nic`, `status`) VALUES
-(1, 'admin', '$2y$10$vp.zGwQNHDpjfewb3B1eHOBClW2ZshRnZOSQouQhky52vAO6uzglO', 1, '', '123456789', 1),
-(3, 'teacher', '$2y$10$qSN1EAOrm7nK.aihSSVzEuYfFm3Fofg39Yfw7hQWUrRDF9Iq.9r7m', 4, '', '123456789', 1),
-(9, 'teacher', '$2y$10$7g9rAWQVVg1ZfnJqrB3KPeXtCRQKIWkouUrh8/WAN6ofsZjNs0giK', 4, '', '789456123', 1),
-(10, 'teacher', '$2y$10$sUuiv17j4m3mxig8bPeC.uiartBSn.eXV3wSoOlZ2ctz4ss0bDX3m', 4, '', '456789123', 1);
+INSERT INTO `user_tbl` (`user_id`, `username`, `password`, `role_id`, `admission_no`, `nic`) VALUES
+(1, 'admin', '$2y$10$vp.zGwQNHDpjfewb3B1eHOBClW2ZshRnZOSQouQhky52vAO6uzglO', 1, 'NULL', '123456789'),
+(3, '123456788', '$2y$10$qSN1EAOrm7nK.aihSSVzEuYfFm3Fofg39Yfw7hQWUrRDF9Iq.9r7m', 4, 'NULL', '123456789'),
+(9, '789456123', '$2y$10$7g9rAWQVVg1ZfnJqrB3KPeXtCRQKIWkouUrh8/WAN6ofsZjNs0giK', 4, 'NULL', '789456123'),
+(10, '456789124', '$2y$10$lz9QJOOja4ZAhew8t.AjDu/oF1ptd8tT63eVMzkavIhhJmmzcurAK', 4, 'NULL', '456789124'),
+(11, '456123789', '$2y$10$p0EVNlQmuyL1zWIq5muIQe7ZE6bLHKExSUxjx4rSOb4jhjMU0EG56', 4, 'NULL', '456123788'),
+(15, '13736', '$2y$10$XBTqxLNKLkcfL72yXcF6tOhIGT2A6y6L6Uf2OOGuLwKLNoPOl6ekS', 5, '13736', NULL),
+(16, '13737', '$2y$10$Os8hHXEJk6Ze1e0BU9bLp.rqyptQd.9/f.cXFuV505AG7.gqTYcdC', 5, '13737', NULL),
+(17, '13738', '$2y$10$cDs940Vbi.0JgcsftPmLCemWfamVFJboS.gysNBO1Kk.dVfma/XgO', 5, '13738', NULL),
+(18, '11111111', '$2y$10$Aet1JSYoxY7HESJo.ruea.O5mO1kyhEWedRTBXkZ0oGQ6LA8CIYsW', 4, '', '11111111');
 
 --
 -- Indexes for dumped tables
@@ -472,7 +487,7 @@ ALTER TABLE `student_class_tbl`
 -- AUTO_INCREMENT for table `student_tbl`
 --
 ALTER TABLE `student_tbl`
-  MODIFY `std_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `std_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `subject_tbl`
@@ -490,7 +505,7 @@ ALTER TABLE `teacher_class_tbl`
 -- AUTO_INCREMENT for table `teacher_tbl`
 --
 ALTER TABLE `teacher_tbl`
-  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user_role_tbl`
@@ -502,7 +517,7 @@ ALTER TABLE `user_role_tbl`
 -- AUTO_INCREMENT for table `user_tbl`
 --
 ALTER TABLE `user_tbl`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
