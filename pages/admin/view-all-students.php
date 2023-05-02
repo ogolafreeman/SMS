@@ -100,8 +100,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                                     <td><?php echo $student[10]; ?></td>
                                     <!-- <td><?php echo $student[10]; ?></td> -->
                                     <td>
-                                        <a class="btn btn-warning" name="edit">Edit</a>
-                                        <a class="btn btn-danger" name="delete">Delete</a>
+                                        <a class="btn btn-warning" name="edit" href="edit-students.php?id=<?= $student[0] ?>">Edit</a>
+                                        <a class="btn btn-danger" name="delete" href="delete-student.php?id=<?= $student[0] ?>">Delete</a>
                                     </td>
                                 </tr>
 

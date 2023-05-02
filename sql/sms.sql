@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2023 at 04:12 PM
+-- Generation Time: May 02, 2023 at 04:40 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -73,7 +73,7 @@ CREATE TABLE `grade_class_tbl` (
   `grade_id` int(10) NOT NULL,
   `class_id` int(10) NOT NULL,
   `year` varchar(255) NOT NULL,
-  `teacher_id` varchar(255) NOT NULL
+  `teacher_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -84,7 +84,7 @@ CREATE TABLE `grade_class_tbl` (
 
 CREATE TABLE `grade_subject_tbl` (
   `id` int(10) NOT NULL,
-  `sec_id` varchar(255) NOT NULL,
+  `sec_id` int(5) NOT NULL,
   `year` varchar(255) NOT NULL,
   `sub_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -99,7 +99,7 @@ CREATE TABLE `grade_tbl` (
   `grade_id` int(10) NOT NULL,
   `grade_name` varchar(255) NOT NULL,
   `grade_head` varchar(255) NOT NULL,
-  `teacher_id` varchar(255) NOT NULL
+  `teacher_id` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -125,7 +125,7 @@ CREATE TABLE `guardian_tbl` (
 --
 
 CREATE TABLE `section_tbl` (
-  `sec_id` varchar(5) NOT NULL,
+  `sec_id` int(5) NOT NULL,
   `sec_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -151,8 +151,8 @@ CREATE TABLE `student_class_tbl` (
 
 CREATE TABLE `student_tbl` (
   `std_id` int(10) NOT NULL,
-  `admission_no` varchar(255) NOT NULL,
-  `full-name` varchar(255) NOT NULL,
+  `admission_no` varchar(6) NOT NULL,
+  `full_name` varchar(255) NOT NULL,
   `name_with_initials` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `phone_no_1` varchar(255) NOT NULL,
@@ -218,17 +218,18 @@ CREATE TABLE `teacher_tbl` (
   `rc_app_date` date NOT NULL,
   `email` varchar(255) NOT NULL,
   `app_subject` varchar(100) NOT NULL,
-  `sec_id` varchar(5) NOT NULL
+  `sec_id` varchar(5) NOT NULL,
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `teacher_tbl`
 --
 
-INSERT INTO `teacher_tbl` (`teacher_id`, `first_name`, `last_name`, `nic`, `dob`, `teacher_no`, `app_date`, `rc_app_date`, `email`, `app_subject`, `sec_id`) VALUES
-(2, 'Dasun', 'Nethsara', '123456789', '2004-08-19', 'T-02', '2022-01-01', '2023-05-26', 'hehe@host.lk', 'Subject 2', 'TECH'),
-(8, 'Naveen', 'Balasooriya', '789456123', '2004-04-08', 'T-07', '2015-12-02', '2019-02-10', 'gg@gmail.com', 'Subject 4', 'TECH'),
-(9, 'Lasith', 'Randil', '456789123', '2004-11-15', 'T-09', '2023-05-09', '2023-05-25', 't@host.com', 'Subject 5', 'TECH');
+INSERT INTO `teacher_tbl` (`teacher_id`, `first_name`, `last_name`, `nic`, `dob`, `teacher_no`, `app_date`, `rc_app_date`, `email`, `app_subject`, `sec_id`, `status`) VALUES
+(2, 'Dasun', 'Nethsara', '123456789', '2004-08-19', 'T-02', '2022-01-01', '2023-05-26', 'hehe@host.lk', 'Subject 2', 'TECH', 0),
+(8, 'Naveen', 'Balasooriya', '789456123', '2004-04-08', 'T-07', '2015-12-02', '2019-02-10', 'gg@gmail.com', 'Subject 4', 'TECH', 0),
+(9, 'Lasith', 'Randil', '456789123', '2004-11-15', 'T-09', '2023-05-09', '2023-05-25', 't@host.com', 'Subject 5', 'TECH', 0);
 
 -- --------------------------------------------------------
 
@@ -263,7 +264,7 @@ CREATE TABLE `user_tbl` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role_id` int(1) NOT NULL,
-  `admission_no` varchar(255) NOT NULL,
+  `admission_no` varchar(6) NOT NULL,
   `nic` varchar(255) NOT NULL,
   `status` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -286,99 +287,128 @@ INSERT INTO `user_tbl` (`user_id`, `username`, `password`, `role_id`, `admission
 -- Indexes for table `1-11_marks_tbl`
 --
 ALTER TABLE `1-11_marks_tbl`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `std_id` (`std_id`),
+  ADD KEY `sub_id` (`sub_id`);
 
 --
 -- Indexes for table `al_marks_tbl`
 --
 ALTER TABLE `al_marks_tbl`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `std_id` (`std_id`),
+  ADD KEY `sub_id` (`sub_id`);
 
 --
 -- Indexes for table `class_tbl`
 --
 ALTER TABLE `class_tbl`
-  ADD PRIMARY KEY (`class_id`);
+  ADD PRIMARY KEY (`class_id`),
+  ADD KEY `class_id` (`class_id`);
 
 --
 -- Indexes for table `grade_class_tbl`
 --
 ALTER TABLE `grade_class_tbl`
-  ADD PRIMARY KEY (`grade_class_id`);
+  ADD PRIMARY KEY (`grade_class_id`),
+  ADD KEY `grade_class_id` (`grade_class_id`),
+  ADD KEY `grade_id` (`grade_id`),
+  ADD KEY `class_id` (`class_id`),
+  ADD KEY `teacher_id` (`teacher_id`);
 
 --
 -- Indexes for table `grade_subject_tbl`
 --
 ALTER TABLE `grade_subject_tbl`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sec_id` (`sec_id`),
+  ADD KEY `sub_id` (`sub_id`);
 
 --
 -- Indexes for table `grade_tbl`
 --
 ALTER TABLE `grade_tbl`
-  ADD PRIMARY KEY (`grade_id`);
+  ADD PRIMARY KEY (`grade_id`),
+  ADD KEY `grade_id` (`grade_id`),
+  ADD KEY `teacher_id` (`teacher_id`);
 
 --
 -- Indexes for table `guardian_tbl`
 --
 ALTER TABLE `guardian_tbl`
-  ADD PRIMARY KEY (`guardian_id`);
+  ADD PRIMARY KEY (`guardian_id`),
+  ADD KEY `std_id` (`std_id`);
 
 --
 -- Indexes for table `section_tbl`
 --
 ALTER TABLE `section_tbl`
-  ADD PRIMARY KEY (`sec_id`);
+  ADD PRIMARY KEY (`sec_id`),
+  ADD KEY `sec_id` (`sec_id`);
 
 --
 -- Indexes for table `student_class_tbl`
 --
 ALTER TABLE `student_class_tbl`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `grade_class_id` (`grade_class_id`);
+  ADD KEY `std_id` (`std_id`),
+  ADD KEY `grade_class_id` (`grade_class_id`),
+  ADD KEY `sec_id` (`sec_id`);
 
 --
 -- Indexes for table `student_tbl`
 --
 ALTER TABLE `student_tbl`
-  ADD PRIMARY KEY (`std_id`);
+  ADD PRIMARY KEY (`std_id`),
+  ADD KEY `std_id` (`std_id`),
+  ADD KEY `admission_no` (`admission_no`);
 
 --
 -- Indexes for table `subject_tbl`
 --
 ALTER TABLE `subject_tbl`
-  ADD PRIMARY KEY (`sub_id`);
+  ADD PRIMARY KEY (`sub_id`),
+  ADD KEY `sub_id` (`sub_id`);
 
 --
 -- Indexes for table `teacher_class_tbl`
 --
 ALTER TABLE `teacher_class_tbl`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `teacher_id` (`teacher_id`);
+  ADD KEY `teacher_id` (`teacher_id`),
+  ADD KEY `grade_class_id` (`grade_class_id`);
 
 --
 -- Indexes for table `teacher_subject_tbl`
 --
 ALTER TABLE `teacher_subject_tbl`
-  ADD PRIMARY KEY (`teacher_id`);
+  ADD KEY `teacher_id` (`teacher_id`),
+  ADD KEY `sub_id` (`sub_id`);
 
 --
 -- Indexes for table `teacher_tbl`
 --
 ALTER TABLE `teacher_tbl`
-  ADD PRIMARY KEY (`teacher_id`);
+  ADD PRIMARY KEY (`teacher_id`),
+  ADD KEY `teacher_id` (`teacher_id`),
+  ADD KEY `sec_id` (`sec_id`),
+  ADD KEY `nic` (`nic`);
 
 --
 -- Indexes for table `user_role_tbl`
 --
 ALTER TABLE `user_role_tbl`
-  ADD PRIMARY KEY (`role_id`);
+  ADD PRIMARY KEY (`role_id`),
+  ADD KEY `role_id` (`role_id`);
 
 --
 -- Indexes for table `user_tbl`
 --
 ALTER TABLE `user_tbl`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `role_id` (`role_id`),
+  ADD KEY `admission_no` (`admission_no`),
+  ADD KEY `nic` (`nic`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -421,6 +451,18 @@ ALTER TABLE `grade_tbl`
   MODIFY `grade_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `guardian_tbl`
+--
+ALTER TABLE `guardian_tbl`
+  MODIFY `guardian_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `section_tbl`
+--
+ALTER TABLE `section_tbl`
+  MODIFY `sec_id` int(5) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `student_class_tbl`
 --
 ALTER TABLE `student_class_tbl`
@@ -445,12 +487,6 @@ ALTER TABLE `teacher_class_tbl`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `teacher_subject_tbl`
---
-ALTER TABLE `teacher_subject_tbl`
-  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `teacher_tbl`
 --
 ALTER TABLE `teacher_tbl`
@@ -473,16 +509,74 @@ ALTER TABLE `user_tbl`
 --
 
 --
+-- Constraints for table `1-11_marks_tbl`
+--
+ALTER TABLE `1-11_marks_tbl`
+  ADD CONSTRAINT `1-11_marks_tbl_ibfk_1` FOREIGN KEY (`std_id`) REFERENCES `student_tbl` (`std_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `1-11_marks_tbl_ibfk_2` FOREIGN KEY (`sub_id`) REFERENCES `subject_tbl` (`sub_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `al_marks_tbl`
+--
+ALTER TABLE `al_marks_tbl`
+  ADD CONSTRAINT `al_marks_tbl_ibfk_1` FOREIGN KEY (`std_id`) REFERENCES `student_tbl` (`std_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `al_marks_tbl_ibfk_2` FOREIGN KEY (`sub_id`) REFERENCES `subject_tbl` (`sub_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `grade_class_tbl`
+--
+ALTER TABLE `grade_class_tbl`
+  ADD CONSTRAINT `grade_class_tbl_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `class_tbl` (`class_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `grade_class_tbl_ibfk_2` FOREIGN KEY (`grade_id`) REFERENCES `grade_tbl` (`grade_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `grade_class_tbl_ibfk_3` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_tbl` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `grade_subject_tbl`
+--
+ALTER TABLE `grade_subject_tbl`
+  ADD CONSTRAINT `grade_subject_tbl_ibfk_1` FOREIGN KEY (`sub_id`) REFERENCES `subject_tbl` (`sub_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `grade_subject_tbl_ibfk_2` FOREIGN KEY (`sec_id`) REFERENCES `section_tbl` (`sec_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `grade_tbl`
+--
+ALTER TABLE `grade_tbl`
+  ADD CONSTRAINT `grade_tbl_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_tbl` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `guardian_tbl`
+--
+ALTER TABLE `guardian_tbl`
+  ADD CONSTRAINT `guardian_tbl_ibfk_1` FOREIGN KEY (`std_id`) REFERENCES `student_tbl` (`std_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `student_class_tbl`
 --
 ALTER TABLE `student_class_tbl`
-  ADD CONSTRAINT `student_class_tbl_ibfk_1` FOREIGN KEY (`grade_class_id`) REFERENCES `grade_class_tbl` (`grade_class_id`);
+  ADD CONSTRAINT `student_class_tbl_ibfk_1` FOREIGN KEY (`std_id`) REFERENCES `student_tbl` (`std_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `student_class_tbl_ibfk_2` FOREIGN KEY (`grade_class_id`) REFERENCES `grade_class_tbl` (`grade_class_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `student_class_tbl_ibfk_3` FOREIGN KEY (`sec_id`) REFERENCES `section_tbl` (`sec_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `teacher_class_tbl`
 --
 ALTER TABLE `teacher_class_tbl`
-  ADD CONSTRAINT `teacher_class_tbl_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_tbl` (`teacher_id`);
+  ADD CONSTRAINT `teacher_class_tbl_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_tbl` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `teacher_class_tbl_ibfk_2` FOREIGN KEY (`grade_class_id`) REFERENCES `grade_class_tbl` (`grade_class_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `teacher_subject_tbl`
+--
+ALTER TABLE `teacher_subject_tbl`
+  ADD CONSTRAINT `teacher_subject_tbl_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_tbl` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `teacher_subject_tbl_ibfk_2` FOREIGN KEY (`sub_id`) REFERENCES `subject_tbl` (`sub_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_tbl`
+--
+ALTER TABLE `user_tbl`
+  ADD CONSTRAINT `user_tbl_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_role_tbl` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_tbl_ibfk_2` FOREIGN KEY (`nic`) REFERENCES `teacher_tbl` (`nic`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

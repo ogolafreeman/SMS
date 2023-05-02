@@ -67,7 +67,7 @@ function removeStudent($id, $con)
 // get the selected student data for updating
 function getStudentById($id, $con)
 {
-    $sql = "SELECT * FROM teacher_tbl WHERE teacher_id='$id'";
+    $sql = "SELECT * FROM student_tbl WHERE std_id='$id'";
     $result = mysqli_query($con, $sql);
     if (mysqli_num_rows($result) == 1) {
         $teacher_data = mysqli_fetch_assoc($result);

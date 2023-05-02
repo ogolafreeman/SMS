@@ -14,7 +14,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
         $email = $_POST['email'];
         $d_o_admission = $_POST['d_o_admission'];
 
-        $current_date = date("Y-m-d");
+        $current_date = date("Y-m-d"); // for date_added
 
         $sql1 = "SELECT * FROM student_tbl st INNER JOIN user_tbl ut ON 
         (st.admission_no = ut.admission_no) WHERE (st.admission_no = '$admission_no')";
