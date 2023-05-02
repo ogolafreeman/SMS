@@ -3,10 +3,23 @@ session_start();
 require_once '../controls/connection.php';
 
 if (isset($_POST['login'])) {
-    if (!empty($_POST['username']) && !empty($_POST['password'])) {
+      if(preg_match('/^[a-zA-Z]+$/', $_POST['username'])) {
         $uname = $_POST['username'];
-        $pswd = $_POST['password'];
-        // $role = $_POST['role'];
+      } else {
+        $em = "Special Characters including white spaces are not alowed!";
+        header("Location: ../login.php?error=$em");
+        exit;
+      }
+
+      if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['password'])) { // check if the password contains at least one number
+            $em = "Password must contain only numbers and letters!";
+            header("Location: ../login.php?error=$em");
+            exit;
+      } else {
+            $pswd = $_POST['password'];
+      }
+
+    if (!empty($uname) && !empty($pswd)) {
 
         // $sql = "SELECT * FROM user_tbl WHERE username='$uname'";
         $sql = "SELECT * FROM user_tbl ut INNER JOIN user_role_tbl urt ON 
