@@ -1,5 +1,12 @@
 <?php
 
+/*
+** PLEAE README THIS WHEN YOU ARE CHANGING THE HOSTNAME
+
+* go to data/admin-data.php file. then change the host name of them too.
+*/
+
+
 $host = "127.0.0.1";
 $username   = "root";
 $password   = "";

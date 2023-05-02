@@ -41,7 +41,7 @@
 
     <section class="banner">
         <div class="back-fill">
-            <h1 class="display-1 text-primary">About Us</h1>
+            <h1 class="display-1" style="color:#fff;">About Us</h1>
         </div>
     </section>
     <section class="container" style="padding-top: 35px;">
