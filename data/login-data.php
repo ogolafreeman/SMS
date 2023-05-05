@@ -11,7 +11,7 @@ if (isset($_POST['login'])) {
         exit;
       }
 
-      if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['password'])) { // check if the password contains at least one number
+      if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['password'])) {
             $em = "Password must contain only numbers and letters!";
             header("Location: ../login.php?error=$em");
             exit;

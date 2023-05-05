@@ -8,33 +8,6 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard
                     </a>
-                    <!-- <div class="sb-sidenav-menu-heading">Interface</div> -->
-                    <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-people-roof"></i></div>
-                        Principal
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">Option 1</a>
-                            <a class="nav-link" href="#">Option 2</a>
-                            <a class="nav-link" href="#">Option 3</a>
-                        </nav>
-                    </div>
-
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
-                        Section Head
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">Option 1</a>
-                            <a class="nav-link" href="#">Option 2</a>
-                            <a class="nav-link" href="#">Option 3</a>
-                        </nav>
-                    </div> -->
-
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
                         Teachers
@@ -72,7 +45,7 @@
                             </a>
                             <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">Add Grades</a>
+                                    <a class="nav-link" href="add-grades.php">Add Grades</a>
                                     <a class="nav-link" href="#">View All</a>
                                 </nav>
                             </div>
@@ -82,7 +55,7 @@
                             </a>
                             <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">Add Classes</a>
+                                    <a class="nav-link" href="add-class.php">Add Classes</a>
                                     <a class="nav-link" href="#">View All</a>
                                 </nav>
                             </div>
@@ -96,7 +69,7 @@
                     </a>
                     <div class="collapse" id="collapseLayouts6" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">Add New Subject</a>
+                            <a class="nav-link" href="add-subject.php">Add New Subject</a>
                             <a class="nav-link" href="#">Assign to Grades</a>
                         </nav>
                     </div>

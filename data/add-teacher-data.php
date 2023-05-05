@@ -4,9 +4,27 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 
     require_once '../controls/connection.php';
     if (isset($_POST['add'])) {
-        $fname = $_POST['fname'];
-        $lname = $_POST['lname'];
-        $nic = $_POST['nic'];
+
+        if(preg_match('/^[a-zA-Z]+$/', $_POST['fname']) && preg_match('/^[a-zA-Z]+$/', $_POST['lname'])) {
+            $fname = $_POST['fname'];
+            $lname = $_POST['lname'];
+        } else {
+            $em = "White Spaces and Special Characters are not allowed";
+            header("Location: ../pages/admin/add-teacher.php?error=$em");
+            exit;
+        }
+
+        if((strlen($_POST['nic']) <= 12 && strlen($_POST['nic']) >= 9) && !preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['nic'])) {
+            $nic = $_POST['nic'];
+        } else {
+            $em = "Enter a Valid NIC Number!";
+            header("Location: ../pages/admin/add-teacher.php?error=$em");
+            exit;
+        }
+
+        // $fname = $_POST['fname'];
+        // $lname = $_POST['lname'];
+        // $nic = $_POST['nic'];
         $dob = $_POST['dob'];
         $t_no = $_POST['t_no'];
         $app_date = $_POST['app_date'];

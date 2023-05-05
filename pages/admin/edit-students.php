@@ -75,7 +75,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                         <hr>
                         <div class="mb-3">
                             <label class="form-label">Admission No.</label>
-                            <input type="text" name="admission_no" class="form-control" autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($student['admission_no'])) {
+                            <input type="text" readonly name="admission_no" class="form-control" autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($student['admission_no'])) {
                                                                                                                                 echo $student['admission_no'];
                                                                                                                             } else {
                                                                                                                                 echo "";
