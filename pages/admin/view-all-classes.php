@@ -13,7 +13,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
         <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Add Classes - Admin</title>
+        <title>All Classes - Admin</title>
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="../../js/jquery-3.6.3.min.js"></script>
@@ -30,7 +30,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
             <!-- content goes here. do not remove any code -->
 
             	<div class="container-fluid">
-                	<h1 class="mt-4">Add New Class</h1>
+                	<h1 class="mt-4">All Classes</h1>
 	                <ol class="breadcrumb mb-4">
 	                    <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
 	                </ol>

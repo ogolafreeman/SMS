@@ -16,11 +16,26 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">Settings</a></li>
-                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <span class="dropdown-item" title="User">
+                    <?php
+                        require '../../controls/connection.php';
+                        if($_SESSION['role'] == 'Teacher') {
+                            $sql1 = "SELECT first_name, last_name FROM teacher_tbl WHERE nic='".$_SESSION['username']."'";
+                            $result1 = mysqli_query($con, $sql1);
+                            $data = mysqli_fetch_assoc($result1);
+                            echo $data['first_name'] ." ". $data['last_name'];
+                        } else if ($_SESSION['role'] == 'Student') {
+                            $sql1 = "SELECT name_with_initials FROM student_tbl WHERE admission_no='".$_SESSION['username']."'";
+                            $result1 = mysqli_query($con, $sql1);
+                            $data = mysqli_fetch_assoc($result1);
+                            echo $data['name_with_initials'];
+                        }
+                    ?>
+                </span>
                 <li>
                     <hr class="dropdown-divider" />
                 </li>
+                <li><a class="dropdown-item" href="#!">Settings</a></li>
                 <li><a class="dropdown-item" href="../../inc/logout.php">Logout</a></li>
             </ul>
         </li>

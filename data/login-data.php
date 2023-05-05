@@ -3,7 +3,7 @@ session_start();
 require_once '../controls/connection.php';
 
 if (isset($_POST['login'])) {
-      if(preg_match('/^[a-zA-Z]+$/', $_POST['username'])) {
+      if(!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['username'])) {
         $uname = $_POST['username'];
       } else {
         $em = "Special Characters including white spaces are not alowed!";
