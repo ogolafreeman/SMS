@@ -29,6 +29,8 @@
                             $result1 = mysqli_query($con, $sql1);
                             $data = mysqli_fetch_assoc($result1);
                             echo $data['name_with_initials'];
+                        } else if($_SESSION['role'] == 'Admin') {
+                            echo strtoupper($_SESSION['username']);
                         }
                     ?>
                 </span>

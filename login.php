@@ -83,7 +83,7 @@
 
                         <div class="form-outline mb-4">
                           <label class="form-label" for="form2Example17">Username</label>
-                          <input type="text" id="form2Example17" class="form-control form-control-lg" placeholder="John Wick" required name="username" autocomplete="off" />
+                          <input type="text" id="form2Example17" class="form-control form-control-lg" placeholder="JohnWick" required name="username" autocomplete="off" />
                         </div>
 
                         <div class="form-outline mb-4">
@@ -93,12 +93,12 @@
 
                         <div class="col-6">
 
-                          <div class="form-check">
+                          <!-- <div class="form-check">
                             <input class="form-check-input" type="checkbox" />
                             <label class="form-check-label" for="flexCheckDefault">
                               Remember Me
                             </label>
-                          </div>
+                          </div> -->
                         </div>
 
                         <br />
