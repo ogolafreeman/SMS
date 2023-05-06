@@ -91,3 +91,19 @@ function getAllGrades()
     }
 }
 
+// get all the grades
+function getAllClasses()
+{
+    require '../../controls/connection.php';
+    $currentYear = date("Y");
+    $currentYear1 = date("Y")+1;
+    $sql = "SELECT * FROM grade_class_tbl";
+    $result = mysqli_query($con, $sql);
+    if (mysqli_num_rows($result) >= 1) {
+        $classes = mysqli_fetch_all($result);
+        return $classes;
+    } else {
+        return 0;
+    }
+}
+

@@ -76,7 +76,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                         </div><br/>
                     </form>
 
-                    <?php //if ($grades) { ?>
                         <table class="table">
                           <thead>
                             <tr>
@@ -91,7 +90,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                             
                           </tbody>
                         </table>
-                    <?php //} ?>
 
                 </div>
 

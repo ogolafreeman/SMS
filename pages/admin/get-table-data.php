@@ -18,7 +18,7 @@
 	    		echo "<tr>
 			    	<td>". $grade[0]."</td>
 			    	<td>". $g ."</td>
-			    	<td>  </td>
+			    	<td> - </td>
 			    	<td>". $y ."</td>
 			    	<td>". $data['first_name'] ." ". $data['last_name'] ."</td>
 		    	</tr>";
