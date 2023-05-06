@@ -69,13 +69,16 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     <form action="../../data/add-classes-data.php" method="post" class="shadow p-3  mt-5 form-w">
                         <!-- <h3>Fill all the Data</h3> -->
                         <!-- <hr> -->
+
                         <div class="mb-3">
                             <label class="form-label">Grade</label>
                             <select name="grade" class="form-select gradeSelect" required>
                                 <!-- <option value="">-- Select Grade --</option> -->
                                 <?php
                                     include '../../controls/connection.php';
-                                    $sql = "SELECT * FROM grade_tbl";
+                                    $currentYear = date("Y");
+                                    $currentYear1 = date("Y")+1;
+                                    $sql = "SELECT * FROM grade_tbl WHERE grade_name LIKE '%$currentYear%' OR grade_name LIKE '%$currentYear1%'";
                                     $result = mysqli_query($con, $sql);
                                     while ($ri = mysqli_fetch_assoc($result)) {
                                 ?>

@@ -121,9 +121,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     </form>
                 </div></div><br />
 
-
-                <!-- <script src="../bootstrap/js/bootstrap.bundle.js"></script> -->
-
                 <!-- footer -->
                 <?php include '../footer.php'; ?>
             </div>
