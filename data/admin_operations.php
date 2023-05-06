@@ -76,3 +76,18 @@ function getStudentById($id, $con)
         return 0;
     }
 }
+
+// get all the grades
+function getAllGrades()
+{
+    require '../../controls/connection.php';
+    $sql = "SELECT * FROM grade_tbl";
+    $result = mysqli_query($con, $sql);
+    if (mysqli_num_rows($result) >= 1) {
+        $students = mysqli_fetch_all($result);
+        return $students;
+    } else {
+        return 0;
+    }
+}
+

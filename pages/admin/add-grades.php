@@ -16,7 +16,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
         <title>Add Grades - Admin</title>
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <script src="../../js/jquery-3.6.3.min.js"></script>
+        <!-- <script src="../../js/jquery-3.6.3.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
 
@@ -71,38 +72,46 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                         <!-- <hr> -->
                         <div class="mb-3">
                             <label class="form-label">Grade</label>
-                            <select name="grade" class="form-select" required>
-                                <option>Subject 1</option>
-                                <option>Subject 2</option>
+                            <select name="grade" class="form-select gradeSelect" required>
                                 <?php
-                                    include '../../controls/connection.php';
-                                    $sql = "SELECT DISTINCT * FROM grade_tbl";
-                                    $result = mysqli_query($con, $sql);
-                                    while ($ri = mysqli_fetch_assoc($result)) {
+                                    for($i = 1; $i <= 13; $i++) {
+                                        echo "<option value='$i'>Grade $i</option>";
+                                    }
                                 ?>
-                                    <option value="<?php echo $ri['first_name'] . " " . $ri['last_name'];?>"><?php echo $ri['first_name'] . " " . $ri['last_name']; ?>
-                                    </option>
-                                <?php } ?>
                             </select>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Year</label>
-                            <select name="year" class="form-select" required>
-                                <option value="<?=date("Y") ?>"><?=date("Y") ?></option>
+                            <select name="year" class="form-select yearSelect" required>
+                                <!-- <option value="<?=date("Y") ?>"><?=date("Y") ?></option> -->
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Grade Head</label>
-                            <select name="grade_head" class="form-select" required>
+                        <div class="mb-3 section">
+                            <label class="form-label">Section</label>
+                            <select name="section" class="form-select" required>
                                 <?php
                                     include '../../controls/connection.php';
-                                    $sql = "SELECT DISTINCT * FROM teacher_tbl";
+                                    $sql = "SELECT * FROM section_tbl";
                                     $result = mysqli_query($con, $sql);
                                     while ($ri = mysqli_fetch_assoc($result)) {
                                 ?>
-                                    <option value="<?php echo $ri['first_name'] . " " . $ri['last_name'];?>"><?php echo $ri['first_name'] . " " . $ri['last_name']; ?>
+                                    <option value="<?php echo $ri['sec_name'];?>"><?php echo $ri['sec_name'];?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Grade Head</label>
+                            <select name="teacher" class="form-select" required>
+                                <?php
+                                    include '../../controls/connection.php';
+                                    $sql = "SELECT * FROM teacher_tbl";
+                                    $result = mysqli_query($con, $sql);
+                                    while ($ri = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <option value="<?php echo $ri['teacher_id'];?>"><?php echo $ri['first_name'] . " " . $ri['last_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -110,19 +119,34 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 
                         <button type="submit" class="btn btn-primary" name="add">Add</button>
                     </form>
-                </div><br />
+                </div></div><br />
 
 
-                <script src="../bootstrap/js/bootstrap.bundle.js"></script>
+                <!-- <script src="../bootstrap/js/bootstrap.bundle.js"></script> -->
 
                 <!-- footer -->
                 <?php include '../footer.php'; ?>
             </div>
         </div>
 
-        <!-- content goes here -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function() {
+                $(".section").hide();
+                $("select.gradeSelect").change(function(){
+                    var selected = $(this).children("option:selected").val();
+                    if(Number(selected) <= 11) {
+                        $(".section").hide();
+                        $("select.yearSelect").html("<option value='<?=date('Y') ?>'><?=date('Y') ?></option>");
+                    } else if(Number(selected) <= 13 && Number(selected) >= 12) {
+                        $(".section").show();
+                        $("select.yearSelect").html("<option value='<?=date('Y') ?>'><?=date('Y') ?> A/L</option> <option value='<?=date('Y')+1 ?>'><?=date('Y')+1 ?> A/L</option>");
+                    }
+                });
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../js/scripts.js"></script>
+
     </body>
 
     </html>

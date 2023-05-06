@@ -66,9 +66,68 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                         </script>
                     <?php } ?>
 
+                    <form action="../../data/add-classes-data.php" method="post" class="shadow p-3  mt-5 form-w">
+                        <!-- <h3>Fill all the Data</h3> -->
+                        <!-- <hr> -->
+                        <div class="mb-3">
+                            <label class="form-label">Grade</label>
+                            <select name="grade" class="form-select gradeSelect" required>
+                                <!-- <option value="">-- Select Grade --</option> -->
+                                <?php
+                                    include '../../controls/connection.php';
+                                    $sql = "SELECT * FROM grade_tbl";
+                                    $result = mysqli_query($con, $sql);
+                                    while ($ri = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <option value="<?php echo $ri['grade_name'];?>"><?php echo $ri['grade_name'];?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Class Name</label>
+                            <div class="input-group mb-3">
+                              <span class="input-group-text txt" id="basic-addon1" name="class1"></span>
+                              <input type="text" class="form-control" placeholder="Class" aria-label="Username" aria-describedby="basic-addon1" name="class2" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Class Teacher</label>
+                            <select name="teacher" class="form-select" required>
+                                <?php
+                                    include '../../controls/connection.php';
+                                    $sql = "SELECT * FROM teacher_tbl";
+                                    $result = mysqli_query($con, $sql);
+                                    while ($ri = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <option value="<?php echo $ri['teacher_id'];?>"><?php echo $ri['first_name'] . " " . $ri['last_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" name="add">Add</button>
+                    </form>
+
                 </div>
 
             	</div>
+
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $("select.gradeSelect").change(function() {
+                            var selected = $(this).children("option:selected").val();
+                            var grd = selected.split(" ");
+                            if(Number(grd[1]) <= 11) {
+                                $("span.txt").text(grd[1] + " - ");
+                            } else {
+                                $("span.txt").text(grd[1] + " " + grd[2] + " - ");
+                            }
+                        });
+                    });
+                </script>
 
 
                 <script src="../bootstrap/js/bootstrap.bundle.js"></script>

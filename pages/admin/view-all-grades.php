@@ -66,9 +66,57 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                         </script>
                     <?php } ?>
 
+                    <form method="post" class="p-3 mt-5 form-w">
+                        <div class="mb-3 section">
+                            <label class="form-label">Select a Section</label>
+                            <select name="section" class="form-select sec" required>
+                                <option value="1">Grade 6 - 11</option>
+                                <option value="2">Grade 12 - 13</option>
+                            </select>
+                        </div><br/>
+                    </form>
+
+                    <?php //if ($grades) { ?>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Grade</th>
+                              <th scope="col">Section</th>
+                              <th scope="col">Year</th>
+                              <th scope="col">Teacher</th>
+                            </tr>
+                          </thead>
+                          <tbody id="t">
+                            
+                          </tbody>
+                        </table>
+                    <?php //} ?>
+
                 </div>
 
             	</div>
+
+                <script>
+                    $(document).ready(function() {
+                        $("select.sec").change(function() {
+                            //var selected = $(this).children("option:selected").val();
+                                $.ajax({
+                                  url: "get-table-data.php",
+                                  type: "POST",
+                                  data: {
+                                    choice: $("select.sec").children("option:selected").val(),
+                                  },
+                                  success: function(data) {
+                                    $("#t").html(data);
+                                  },
+                                  error: function(jqXHR, textStatus, errorThrown) {
+                                    console.log("Error: " + textStatus + " - " + errorThrown);
+                                  }
+                                });      
+                        });
+                    });
+                </script>
 
 
                 <script src="../bootstrap/js/bootstrap.bundle.js"></script>
@@ -78,7 +126,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
         </div>
 
         <!-- content goes here -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../js/scripts.js"></script>
     </body>
     </html>
