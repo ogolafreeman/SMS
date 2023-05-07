@@ -107,3 +107,14 @@ function getAllClasses()
     }
 }
 
+function getAllSubjects() {
+    require '../../controls/connection.php';
+    $sql = "SELECT * FROM subject_tbl";
+    $result = mysqli_query($con, $sql);
+    if (mysqli_num_rows($result) >= 1) {
+        $subjects = mysqli_fetch_all($result);
+        return $subjects;
+    } else {
+        return 0;
+    }
+}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2023 at 09:44 AM
+-- Generation Time: May 07, 2023 at 05:29 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -62,15 +62,6 @@ CREATE TABLE `class_tbl` (
   `class_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `class_tbl`
---
-
-INSERT INTO `class_tbl` (`class_id`, `class_name`) VALUES
-(2, '12 ET - 2'),
-(8, '12 ET - 1'),
-(9, '10 - D');
-
 -- --------------------------------------------------------
 
 --
@@ -81,18 +72,9 @@ CREATE TABLE `grade_class_tbl` (
   `grade_class_id` int(10) NOT NULL,
   `grade_id` int(10) NOT NULL,
   `class_id` int(10) NOT NULL,
-  `year` varchar(255) NOT NULL,
+  `year` varchar(4) NOT NULL,
   `teacher_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `grade_class_tbl`
---
-
-INSERT INTO `grade_class_tbl` (`grade_class_id`, `grade_id`, `class_id`, `year`, `teacher_id`) VALUES
-(2, 2, 2, ' 2023', 2),
-(4, 2, 8, ' 2023', 8),
-(5, 3, 9, ' 2023', 11);
 
 -- --------------------------------------------------------
 
@@ -103,7 +85,7 @@ INSERT INTO `grade_class_tbl` (`grade_class_id`, `grade_id`, `class_id`, `year`,
 CREATE TABLE `grade_subject_tbl` (
   `id` int(10) NOT NULL,
   `sec_id` int(5) NOT NULL,
-  `year` varchar(255) NOT NULL,
+  `year` varchar(4) NOT NULL,
   `sub_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -118,16 +100,6 @@ CREATE TABLE `grade_tbl` (
   `grade_name` varchar(255) NOT NULL,
   `teacher_id` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `grade_tbl`
---
-
-INSERT INTO `grade_tbl` (`grade_id`, `grade_name`, `teacher_id`) VALUES
-(2, 'Grade 12 ET - 2023', 2),
-(3, 'Grade 10 - 2023', 8),
-(4, 'Grade 13 ET - 2023', 2),
-(5, 'Grade 12 ET - 2024', 2);
 
 -- --------------------------------------------------------
 
@@ -484,13 +456,13 @@ ALTER TABLE `al_marks_tbl`
 -- AUTO_INCREMENT for table `class_tbl`
 --
 ALTER TABLE `class_tbl`
-  MODIFY `class_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `class_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `grade_class_tbl`
 --
 ALTER TABLE `grade_class_tbl`
-  MODIFY `grade_class_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `grade_class_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `grade_subject_tbl`
@@ -502,7 +474,7 @@ ALTER TABLE `grade_subject_tbl`
 -- AUTO_INCREMENT for table `grade_tbl`
 --
 ALTER TABLE `grade_tbl`
-  MODIFY `grade_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `grade_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `guardian_tbl`

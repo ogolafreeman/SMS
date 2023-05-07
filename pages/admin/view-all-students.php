@@ -110,7 +110,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                         </tbody>
                     </table>
 
-                <?php } ?>
+                <?php } else { ?>
+                        <div class="alert alert-info" role="alert">
+                          Empty!
+                        </div>
+                    <?php } ?>
 
 
             </div>

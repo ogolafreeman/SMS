@@ -30,7 +30,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
             <!-- content goes here. do not remove any code -->
 
             	<div class="container-fluid">
-                	<h1 class="mt-4">Assign Subjects to Classes</h1>
+                	<h1 class="mt-4">Assign Subjects to Grades</h1>
 	                <ol class="breadcrumb mb-4">
 	                    <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
 	                </ol>

@@ -42,7 +42,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     <div class="col-md-3">
                       <div class="card-counter primary">
                         <!-- <i class="fa fa-code-fork"></i> -->
-                        <i style="opacity: 0.4;" class="fa-solid fa-school fs-1"></i>
+                        <i style="opacity: 0.4;" class="fa-solid fa-school fa-4x"></i>
                         <span class="count-numbers"><?=getFullNumOfClasses() ?></span>
                         <span class="count-name">Classes</span>
                       </div>
@@ -50,7 +50,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     <div class="col-md-3">
                       <div class="card-counter danger">
                         <!-- <i class="fa fa-ticket fs-1"></i> -->
-                        <i style="opacity: 0.4;" class="fa-solid fa-chalkboard-user fs-1"></i>
+                        <i style="opacity: 0.4;" class="fa-solid fa-chalkboard-user fa-4x"></i>
                         <span class="count-numbers"><?=getFullNumOfTeachers() ?></span>
                         <span class="count-name">Teachers</span>
                       </div>
@@ -59,7 +59,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     <div class="col-md-3">
                       <div class="card-counter success">
                         <!-- <i class="fa fa-database  fs-1"></i> -->
-                        <i style="opacity: 0.4;" class="fa-solid fa-graduation-cap fs-1"></i>
+                        <i style="opacity: 0.4;" class="fa-solid fa-graduation-cap fa-4x"></i>
                         <span class="count-numbers"><?=getFullNumOfStudents() ?></span>
                         <span class="count-name">Students</span>
                       </div>
@@ -67,7 +67,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 
                     <div class="col-md-3">
                       <div class="card-counter info">
-                        <i style="opacity: 0.4;" class="fa fa-users  fs-1"></i>
+                        <i style="opacity: 0.4;" class="fa fa-users  fa-4x"></i>
                         <span class="count-numbers"><?=getFullNumOfUsers() ?></span>
                         <span class="count-name">Users</span>
                       </div>
