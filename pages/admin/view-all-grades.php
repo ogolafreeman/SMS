@@ -1,6 +1,8 @@
 <?php
 session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
+    include '../../data/admin_operations.php';
+    $grades = getAllGrades();
 ?>
 
     <!DOCTYPE html>
@@ -66,36 +68,34 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         </script>
                     <?php } ?>
 
-                    <form method="post" class="p-3 mt-5 form-w">
-                        <div class="mb-3 section">
-                            <label class="form-label">Select a Section</label>
-                            <select name="section" class="form-select sec" required>
-                                <option value="1">Grade 6 - 11</option>
-                                <option value="2">Grade 12 - 13</option>
-                            </select>
-                        </div><br />
-                    </form>
-
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Grade</th>
-                                <th scope="col">Section</th>
-                                <th scope="col">Year</th>
-                                <th scope="col">Teacher</th>
+                                <th scope="col">Grade Head</th>
                             </tr>
                         </thead>
-                        <tbody id="t">
-
-                        </tbody>
+                        <?php
+                        include '../../controls/connection.php';
+                        foreach ($grades as $grade) {
+                            $sql = "SELECT first_name, last_name FROM teacher_tbl WHERE teacher_id='$grade[2]'";
+                            $result = mysqli_query($con, $sql);
+                            $teacher = mysqli_fetch_assoc($result);
+                        ?>
+                            <tbody>
+                                <th scope="row"><?php echo $grade[0]; ?></th>
+                                <td><?php echo $grade[1]; ?></td>
+                                <td><?php echo $teacher['first_name'] . " " . $teacher['last_name']; ?></td>
+                            </tbody>
+                        <?php } ?>
                     </table>
 
                 </div>
 
             </div>
 
-            <script>
+            <!-- <script>
                 $(document).ready(function() {
                     $("select.sec").change(function() {
                         //var selected = $(this).children("option:selected").val();
@@ -114,7 +114,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         });
                     });
                 });
-            </script>
+            </script> -->
 
 
             <script src="../bootstrap/js/bootstrap.bundle.js"></script>

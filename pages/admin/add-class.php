@@ -78,11 +78,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 include '../../controls/connection.php';
                                 $currentYear = date("Y");
                                 $currentYear1 = date("Y") + 1;
-                                $sql = "SELECT * FROM grade_tbl WHERE grade_name LIKE '%$currentYear%' OR grade_name LIKE '%$currentYear1%'";
+                                $sql = "SELECT * FROM grade_tbl";
                                 $result = mysqli_query($con, $sql);
                                 while ($ri = mysqli_fetch_assoc($result)) {
                                 ?>
-                                    <option value="<?php echo $ri['grade_name']; ?>"><?php echo $ri['grade_name']; ?>
+                                    <option value="<?php echo $ri['grade_id']; ?>"><?php echo "Grade " . $ri['grade_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
