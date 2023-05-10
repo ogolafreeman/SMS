@@ -88,26 +88,18 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             </select>
                         </div>
 
-                        <!-- <div class="mb-3">
-                            <label class="form-label">Section</label>
-                            <select name="section" class="form-select gradeSelect" required>
-                                <?php
-                                include '../../controls/connection.php';
-                                $sql = "SELECT * FROM section_tbl";
-                                $result = mysqli_query($con, $sql);
-                                while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <option value="<?php echo $ri['sec_id']; ?>"><?php echo $ri['sec_name']; ?>
-                                    </option>
-                                <?php } ?>
+                        <div class="mb-3">
+                            <label class="form-label">Year</label>
+                            <select name="year" class="form-select year" required>
+
                             </select>
-                        </div> -->
+                        </div>
 
                         <div class="mb-3">
                             <label class="form-label">Class Name</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text txt" id="basic-addon1" name="class1"></span>
-                                <input type="text" class="form-control" placeholder="Class name" aria-label="Username" aria-describedby="basic-addon1" name="class2" required>
+                                <input type="text" class="form-control" placeholder="Class name" aria-label="Username" aria-describedby="basic-addon1" name="class_name" required>
                             </div>
                         </div>
 
@@ -135,9 +127,19 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
             <script type="text/javascript">
                 $(document).ready(function() {
+                    var year = <?php echo date("Y"); ?>;
+                    $("select.year").html("<option value='" + year + "'>" + year + "</option>");
                     $("select.gradeSelect").change(function() {
                         var selected = $(this).children("option:selected").val();
                         $("span.txt").text("Grade " + selected + " -");
+                        if (Number(selected) <= 11) {
+                            var year = <?php echo date("Y"); ?>;
+                            $("select.year").html("<option value='" + year + "'>" + year + "</option>");
+                        } else {
+                            var year1 = <?php echo date("Y"); ?>;
+                            var year2 = <?php echo date("Y") + 1; ?>;
+                            $("select.year").html("<option value='" + year1 + "'>" + year1 + "</option> <option value='" + year2 + "'>" + year2 + "</option>");
+                        }
                     });
                 });
             </script>
