@@ -98,7 +98,7 @@
             </div>
             <div class="sb-sidenav-footer">
                 <div class="small">Logged in as:</div>
-                <b><?= $_SESSION['role'] ?></b>
+                <b><?= $_SESSION['admin_role'] ?></b>
             </div>
         </nav>
     </div>

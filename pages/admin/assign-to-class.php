@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 ?>
 
     <!DOCTYPE html>
@@ -29,13 +29,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 
             <!-- content goes here. do not remove any code -->
 
-            	<div class="container-fluid">
-                	<h1 class="mt-4">Assign Subjects to Grades</h1>
-	                <ol class="breadcrumb mb-4">
-	                    <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
-	                </ol>
+            <div class="container-fluid">
+                <h1 class="mt-4">Assign Subjects to Grades</h1>
+                <ol class="breadcrumb mb-4">
+                    <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
+                </ol>
 
-	                <div class="container mt-5">
+                <div class="container mt-5">
                     <!-- <a href="teacher.php" class="btn btn-dark">Go Back</a><br><br> -->
 
                     <?php if (isset($_GET['success'])) { ?>
@@ -74,15 +74,15 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                             <select name="grade" class="form-select" required>
                                 <!-- <option value="">-- Select Grade --</option> -->
                                 <?php
-                                    include '../../controls/connection.php';
-                                    $currentYear = date("Y");
-                                    $currentYear1 = date("Y")+1;
-                                    $sql = "SELECT * FROM grade_tbl WHERE grade_name LIKE '%$currentYear%' OR grade_name LIKE '%$currentYear1%'";
-                                    $result = mysqli_query($con, $sql);
-                                    // explode(" ", explode("-", $ri['grade_name'])[0])[1];
-                                    while ($ri = mysqli_fetch_assoc($result)) {
+                                include '../../controls/connection.php';
+                                $currentYear = date("Y");
+                                $currentYear1 = date("Y") + 1;
+                                $sql = "SELECT DISTINCT * FROM grade_tbl";
+                                $result = mysqli_query($con, $sql);
+                                // explode(" ", explode("-", $ri['grade_name'])[0])[1];
+                                while ($ri = mysqli_fetch_assoc($result)) {
                                 ?>
-                                    <option value="<?php echo $ri['grade_name']?>"><?php echo $ri['grade_name'];?>
+                                    <option value="<?php echo explode("-", $ri['grade_name'])[0]; ?>"><?php echo explode("-", $ri['grade_name'])[0]; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -93,68 +93,49 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                             <label class="form-label">Section</label>
                             <select name="section" class="form-select">
                                 <?php
-                                    include '../../controls/connection.php';
-                                    $sql = "SELECT * FROM section_tbl";
-                                    $result = mysqli_query($con, $sql);
-                                    while ($ri = mysqli_fetch_assoc($result)) {
+                                include '../../controls/connection.php';
+                                $sql = "SELECT * FROM section_tbl";
+                                $result = mysqli_query($con, $sql);
+                                while ($ri = mysqli_fetch_assoc($result)) {
                                 ?>
-                                    <option value="<?php echo $ri['sec_id'];?>"><?php echo $ri['sec_name'];?>
+                                    <option value="<?php echo $ri['sec_id']; ?>"><?php echo $ri['sec_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Subjects</label><br/>
+                            <label class="form-label">Subjects</label><br />
                             <?php
-                                 include '../../controls/connection.php';
-                                 $sql2 = "SELECT * FROM subject_tbl";
-                                 $result2 = mysqli_query($con, $sql2);
-                                 // Loop through subjects and create checkboxes
-                                 while ($row = mysqli_fetch_assoc($result2)) {
-                                   echo '<input type="checkbox" name="subject[]" value="' . $row['sub_id'] . '"> ' . $row['sub_name'] . '<br>';
-                                 }
+                            include '../../controls/connection.php';
+                            $sql2 = "SELECT * FROM subject_tbl";
+                            $result2 = mysqli_query($con, $sql2);
+                            // Loop through subjects and create checkboxes
+                            while ($row = mysqli_fetch_assoc($result2)) {
+                                echo '<input type="checkbox" name="subject[]" value="' . $row['sub_id'] . '"> ' . $row['sub_name'] . '<br>';
+                            }
                             ?>
                         </div>
-                        
+
 
                         <button type="submit" class="btn btn-primary" name="add">Add</button>
                     </form>
 
                 </div>
 
-            	</div>
-
-
-                <!-- <script>
-                    $(document).ready(function() {
-                        $(".section").hide();
-                        $("select.gradeSelect").change(function(){
-                            var selected = $(this).children("option:selected").val();
-                            var ar = selected.split("-")[0];
-                            var gr = ar.split(" ")[1];
-                            console.log(gr);
-                            if(Number(gr) <= 11) {
-                                $(".section").hide();
-                                $("select.yearSelect").html("<option value='<?=date('Y') ?>'><?=date('Y') ?></option>");
-                            } else if(Number(gr) <= 13 && Number(gr) >= 12) {
-                                $(".section").show();
-                                $("select.yearSelect").html("<option value='<?=date('Y') ?>'><?=date('Y') ?> A/L</option> <option value='<?=date('Y')+1 ?>'><?=date('Y')+1 ?> A/L</option>");
-                            }
-                        });
-                    });
-                </script> -->
-
-                <script src="../bootstrap/js/bootstrap.bundle.js"></script>
-                <!-- footer -->
-                <?php include '../footer.php'; ?>
             </div>
+
+            <script src="../bootstrap/js/bootstrap.bundle.js"></script>
+            <!-- footer -->
+            <?php include '../footer.php'; ?>
+        </div>
         </div>
 
         <!-- content goes here -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script>
     </body>
+
     </html>
 
 <?php } else {

@@ -3,21 +3,21 @@ session_start();
 require_once '../controls/connection.php';
 
 if (isset($_POST['login'])) {
-      if(!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['username'])) {
+    if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['username'])) {
         $uname = $_POST['username'];
-      } else {
+    } else {
         $em = "Special Characters including white spaces are not alowed!";
         header("Location: ../login.php?error=$em");
         exit;
-      }
+    }
 
-      if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['password'])) {
-            $em = "Password must contain only numbers and letters!";
-            header("Location: ../login.php?error=$em");
-            exit;
-      } else {
-            $pswd = $_POST['password'];
-      }
+    if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['password'])) {
+        $em = "Password must contain only numbers and letters!";
+        header("Location: ../login.php?error=$em");
+        exit;
+    } else {
+        $pswd = $_POST['password'];
+    }
 
     if (!empty($uname) && !empty($pswd)) {
 
@@ -38,20 +38,25 @@ if (isset($_POST['login'])) {
             if ($usrname == $uname) {
                 if (password_verify($pswd, $pwd)) {
                     $_SESSION['username'] = $usrname;
-                    $_SESSION['role'] = $role;
+                    //$_SESSION['role'] = $role;
                     if ($role == 'Admin') {
+                        $_SESSION['admin_role'] = $role;
                         header("Location: ../pages/admin/admin-dashboard.php");
                         exit;
                     } else if ($role == 'Principal') {
+                        $_SESSION['principal_role'] = $role;
                         header("Location: ../pages/principal-dashboard.php");
                         exit;
                     } else if ($role == 'Section Head') {
+                        $_SESSION['secHead_role'] = $role;
                         header("Location: ../pages/section-head-dashboard.php");
                         exit;
                     } else if ($role == 'Teacher') {
+                        $_SESSION['teacher_role'] = $role;
                         header("Location: ../pages/teachers/teacher-dashboard.php");
                         exit;
                     } else {
+                        $_SESSION['student_role'] = $role;
                         header("Location: ../pages/students/student-dashboard.php");
                         exit;
                     }

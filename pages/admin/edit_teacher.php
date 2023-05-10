@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
     include '../../data/admin_operations.php';
     include '../../controls/connection.php';
     $id = $_GET['id'];

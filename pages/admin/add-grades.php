@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 ?>
 
     <!DOCTYPE html>
@@ -74,44 +74,23 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                             <label class="form-label">Grade</label>
                             <select name="grade" class="form-select gradeSelect" required>
                                 <?php
-                                    for($i = 1; $i <= 13; $i++) {
-                                        echo "<option value='$i'>Grade $i</option>";
-                                    }
+                                for ($i = 1; $i <= 13; $i++) {
+                                    echo "<option value='$i'>Grade $i</option>";
+                                }
                                 ?>
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Year</label>
-                            <select name="year" class="form-select yearSelect" required>
-                                <!-- <option value="<?=date("Y") ?>"><?=date("Y") ?></option> -->
-                            </select>
-                        </div>
-
-                        <div class="mb-3 section">
-                            <label class="form-label">Section</label>
-                            <select name="section" class="form-select" required>
-                                <?php
-                                    include '../../controls/connection.php';
-                                    $sql = "SELECT * FROM section_tbl";
-                                    $result = mysqli_query($con, $sql);
-                                    while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <option value="<?php echo $ri['sec_name'];?>"><?php echo $ri['sec_name'];?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                        </div>
                         <div class="mb-3">
                             <label class="form-label">Grade Head</label>
                             <select name="teacher" class="form-select" required>
                                 <?php
-                                    include '../../controls/connection.php';
-                                    $sql = "SELECT * FROM teacher_tbl";
-                                    $result = mysqli_query($con, $sql);
-                                    while ($ri = mysqli_fetch_assoc($result)) {
+                                include '../../controls/connection.php';
+                                $sql = "SELECT * FROM teacher_tbl";
+                                $result = mysqli_query($con, $sql);
+                                while ($ri = mysqli_fetch_assoc($result)) {
                                 ?>
-                                    <option value="<?php echo $ri['teacher_id'];?>"><?php echo $ri['first_name'] . " " . $ri['last_name']; ?>
+                                    <option value="<?php echo $ri['teacher_id']; ?>"><?php echo $ri['first_name'] . " " . $ri['last_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -119,28 +98,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 
                         <button type="submit" class="btn btn-primary" name="add">Add</button>
                     </form>
-                </div></div><br />
+                </div>
+            </div><br />
 
-                <!-- footer -->
-                <?php include '../footer.php'; ?>
-            </div>
+            <!-- footer -->
+            <?php include '../footer.php'; ?>
         </div>
-
-        <script>
-            $(document).ready(function() {
-                $(".section").hide();
-                $("select.gradeSelect").change(function(){
-                    var selected = $(this).children("option:selected").val();
-                    if(Number(selected) <= 11) {
-                        $(".section").hide();
-                        $("select.yearSelect").html("<option value='<?=date('Y') ?>'><?=date('Y') ?></option>");
-                    } else if(Number(selected) <= 13 && Number(selected) >= 12) {
-                        $(".section").show();
-                        $("select.yearSelect").html("<option value='<?=date('Y') ?>'><?=date('Y') ?> A/L</option> <option value='<?=date('Y')+1 ?>'><?=date('Y')+1 ?> A/L</option>");
-                    }
-                });
-            });
-        </script>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../js/scripts.js"></script>
 

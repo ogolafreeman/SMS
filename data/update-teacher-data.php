@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
     require_once '../controls/connection.php';
     if (isset($_POST['update'])) {
         $id = $_GET['id'];

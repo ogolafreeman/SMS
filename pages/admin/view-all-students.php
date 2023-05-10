@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
     include '../../data/admin_operations.php';
     $students = getAllStudents();
@@ -44,12 +44,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     </div> -->
 
                     <script>
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Done',
-                                text: "<?= $_GET['success'] ?>"
-                            })
-                        </script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Done',
+                            text: "<?= $_GET['success'] ?>"
+                        })
+                    </script>
                 <?php } ?>
 
                 <?php if (isset($_GET['error'])) { ?>
@@ -58,12 +58,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     </div> -->
 
                     <script>
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Oops...',
-                                text: "<?= $_GET['error'] ?>"
-                            })
-                        </script>
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: "<?= $_GET['error'] ?>"
+                        })
+                    </script>
                 <?php } ?>
 
                 <!-- Your further code goes here. keep coding in this div -->
@@ -111,10 +111,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                     </table>
 
                 <?php } else { ?>
-                        <div class="alert alert-info" role="alert">
-                          Empty!
-                        </div>
-                    <?php } ?>
+                    <div class="alert alert-info" role="alert">
+                        Empty!
+                    </div>
+                <?php } ?>
 
 
             </div>

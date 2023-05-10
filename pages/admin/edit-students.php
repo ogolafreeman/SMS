@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
     include '../../data/admin_operations.php';
     include '../../controls/connection.php';
     $id = $_GET['id'];
@@ -76,10 +76,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                         <div class="mb-3">
                             <label class="form-label">Admission No.</label>
                             <input type="text" readonly name="admission_no" class="form-control" autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($student['admission_no'])) {
-                                                                                                                                echo $student['admission_no'];
-                                                                                                                            } else {
-                                                                                                                                echo "";
-                                                                                                                            } ?>">
+                                                                                                                                        echo $student['admission_no'];
+                                                                                                                                    } else {
+                                                                                                                                        echo "";
+                                                                                                                                    } ?>">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Full Name</label>

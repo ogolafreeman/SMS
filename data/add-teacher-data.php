@@ -1,11 +1,11 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
     require_once '../controls/connection.php';
     if (isset($_POST['add'])) {
 
-        if(preg_match('/^[a-zA-Z]+$/', $_POST['fname']) && preg_match('/^[a-zA-Z]+$/', $_POST['lname'])) {
+        if (preg_match('/^[a-zA-Z]+$/', $_POST['fname']) && preg_match('/^[a-zA-Z]+$/', $_POST['lname'])) {
             $fname = $_POST['fname'];
             $lname = $_POST['lname'];
         } else {
@@ -14,7 +14,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
             exit;
         }
 
-        if((strlen($_POST['nic']) <= 12 && strlen($_POST['nic']) >= 9) && !preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['nic'])) {
+        if ((strlen($_POST['nic']) <= 12 && strlen($_POST['nic']) >= 9) && !preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST['nic'])) {
             $nic = $_POST['nic'];
         } else {
             $em = "Enter a Valid NIC Number!";

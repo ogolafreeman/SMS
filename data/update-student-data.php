@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
     require_once '../controls/connection.php';
     if (isset($_POST['update'])) {
         $id = $_GET['id'];
@@ -30,7 +30,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
         }
     }
 
-    if(isset($_POST['change_pwd'])) {
+    if (isset($_POST['change_pwd'])) {
         $admin_pwd = $_POST['admin_pwd'];
         $new_pwd = $_POST['new_pwd'];
         $c_new_pwd = $_POST['c_new_pwd'];
@@ -61,9 +61,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
             }
         }
     }
-
-    
-
 } else {
     header("Location:../../login.php");
     exit;

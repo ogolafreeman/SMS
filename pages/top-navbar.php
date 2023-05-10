@@ -18,20 +18,38 @@
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <span class="dropdown-item" title="User">
                     <?php
-                        require '../../controls/connection.php';
-                        if($_SESSION['role'] == 'Teacher') {
-                            $sql1 = "SELECT first_name, last_name FROM teacher_tbl WHERE nic='".$_SESSION['username']."'";
-                            $result1 = mysqli_query($con, $sql1);
-                            $data = mysqli_fetch_assoc($result1);
-                            echo $data['first_name'] ." ". $data['last_name'];
-                        } else if ($_SESSION['role'] == 'Student') {
-                            $sql1 = "SELECT name_with_initials FROM student_tbl WHERE admission_no='".$_SESSION['username']."'";
-                            $result1 = mysqli_query($con, $sql1);
-                            $data = mysqli_fetch_assoc($result1);
-                            echo $data['name_with_initials'];
-                        } else if($_SESSION['role'] == 'Admin') {
-                            echo strtoupper($_SESSION['username']);
+                    require '../../controls/connection.php';
+                    $sql1 = "SELECT role_id FROM user_tbl WHERE username='" . $_SESSION['username'] . "'";
+                    $result1 = mysqli_query($con, $sql1);
+                    if (mysqli_num_rows($result1) <= 1) {
+                        $data = mysqli_fetch_assoc($result1);
+                        $role_id = $data['role_id'];
+
+                        $sql2 = "SELECT role FROM user_role_tbl WHERE role_id='$role_id'";
+                        $result2 = mysqli_query($con, $sql2);
+                        $d = mysqli_fetch_assoc($result2);
+                        $role = $d['role'];
+
+                        if ($role == "Admin") {
+                            echo "Admin";
+                        } elseif ($role == "Principal") {
+                            echo "Principal";
+                        } elseif ($role == "Section Head") {
+                            echo "Section Head";
+                        } elseif ($role == "Teacher") {
+                            $sql3 = "SELECT first_name, last_name FROM teacher_tbl WHERE nic='" . $_SESSION['username'] . "'";
+                            $result3 = mysqli_query($con, $sql3);
+                            $d = mysqli_fetch_assoc($result3);
+                            echo $d['first_name'] . " " . $d['last_name'];
+                        } else {
+                            $sql3 = "SELECT name_with_initials FROM student_tbl WHERE admission_no='" . $_SESSION['username'] . "'";
+                            $result3 = mysqli_query($con, $sql3);
+                            $d = mysqli_fetch_assoc($result3);
+                            echo $d['name_with_initials'];
                         }
+                    } else {
+                        echo "User";
+                    }
                     ?>
                 </span>
                 <li>

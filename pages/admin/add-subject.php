@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 	include '../../data/admin_operations.php';
 	$subjects = getAllSubjects();
 ?>
@@ -89,7 +89,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 
 				<!-- Show the subjects in the database -->
 
-				<br/><h1 class="mt-4">Registered Subjects</h1>
+				<br />
+				<h1 class="mt-4">Registered Subjects</h1>
 
 				<div class="container mt-5">
 					<?php if ($subjects) { ?>
@@ -113,7 +114,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 						</table>
 					<?php } else { ?>
 						<div class="alert alert-info" role="alert">
-						  Empty!
+							Empty!
 						</div>
 					<?php } ?>
 				</div>
@@ -122,11 +123,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 			</div><br />
 
 
-				<script src="../bootstrap/js/bootstrap.bundle.js"></script>
+			<script src="../bootstrap/js/bootstrap.bundle.js"></script>
 
-				<!-- footer -->
-				<?php include '../footer.php'; ?>
-			</div>
+			<!-- footer -->
+			<?php include '../footer.php'; ?>
+		</div>
 		</div>
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

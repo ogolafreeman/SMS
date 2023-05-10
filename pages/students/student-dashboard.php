@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
 ?>
 
     <!DOCTYPE html>
@@ -13,7 +13,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
         <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - Admin</title>
+        <title>Dashboard - Student Portal</title>
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="../../css/style.css">
@@ -33,15 +33,16 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
             <div class="container-fluid">
                 <h1 class="mt-4">Dashboard</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item">Welcome back, 
-                    <b>
-                    	<?php
-                    		$sql1 = "SELECT name_with_initials FROM student_tbl WHERE admission_no='".$_SESSION['username']."'";
+                    <li class="breadcrumb-item">Welcome back,
+                        <b>
+                            <?php
+                            $sql1 = "SELECT name_with_initials FROM student_tbl WHERE admission_no='" . $_SESSION['username'] . "'";
                             $result1 = mysqli_query($con, $sql1);
                             $data = mysqli_fetch_assoc($result1);
                             echo $data['name_with_initials'];
-                    	?>
-                    </b> !</li>
+                            ?>
+                        </b> !
+                    </li>
                 </ol>
 
                 <!-- Your further code goes here. keep coding in this div -->

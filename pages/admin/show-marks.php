@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 ?>
 
     <!DOCTYPE html>
@@ -29,13 +29,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 
             <!-- content goes here. do not remove any code -->
 
-            	<div class="container-fluid">
-                	<h1 class="mt-4">Exam Marks</h1>
-	                <ol class="breadcrumb mb-4">
-	                    <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
-	                </ol>
+            <div class="container-fluid">
+                <h1 class="mt-4">Exam Marks</h1>
+                <ol class="breadcrumb mb-4">
+                    <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
+                </ol>
 
-	                <div class="container mt-5">
+                <div class="container mt-5">
                     <!-- <a href="teacher.php" class="btn btn-dark">Go Back</a><br><br> -->
 
                     <?php if (isset($_GET['success'])) { ?>
@@ -68,19 +68,20 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 
                 </div>
 
-            	</div>
-
-
-                <script src="../bootstrap/js/bootstrap.bundle.js"></script>
-                <!-- footer -->
-                <?php include '../footer.php'; ?>
             </div>
+
+
+            <script src="../bootstrap/js/bootstrap.bundle.js"></script>
+            <!-- footer -->
+            <?php include '../footer.php'; ?>
+        </div>
         </div>
 
         <!-- content goes here -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script>
     </body>
+
     </html>
 
 <?php } else {

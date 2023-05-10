@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 ?>
 
     <!DOCTYPE html>
@@ -29,13 +29,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
 
             <!-- content goes here. do not remove any code -->
 
-            	<div class="container-fluid">
-                	<h1 class="mt-4">All Classes</h1>
-	                <ol class="breadcrumb mb-4">
-	                    <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
-	                </ol>
+            <div class="container-fluid">
+                <h1 class="mt-4">All Classes</h1>
+                <ol class="breadcrumb mb-4">
+                    <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
+                </ol>
 
-	                <div class="container mt-5">
+                <div class="container mt-5">
                     <!-- <a href="teacher.php" class="btn btn-dark">Go Back</a><br><br> -->
 
                     <?php if (isset($_GET['success'])) { ?>
@@ -73,62 +73,65 @@ if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                                 <option value="1">Grade 6 - 11</option>
                                 <option value="2">Grade 12 - 13</option>
                             </select>
-                        </div><br/>
+                        </div><br />
                     </form>
 
-                    <?php //if ($grades) { ?>
-                        <table class="table">
-                          <thead>
+                    <?php //if ($grades) { 
+                    ?>
+                    <table class="table">
+                        <thead>
                             <tr>
-                              <!-- <th scope="col">#</th> -->
-                              <th scope="col">Grade</th>
-                              <th scope="col">Section</th>
-                              <th scope="col">Class</th>
-                              <th scope="col">Year</th>
-                              <th scope="col">Teacher</th>
+                                <!-- <th scope="col">#</th> -->
+                                <th scope="col">Grade</th>
+                                <th scope="col">Section</th>
+                                <th scope="col">Class</th>
+                                <th scope="col">Year</th>
+                                <th scope="col">Teacher</th>
                             </tr>
-                          </thead>
-                          <tbody id="t">
-                            
-                          </tbody>
-                        </table>
-                    <?php //} ?>
+                        </thead>
+                        <tbody id="t">
+
+                        </tbody>
+                    </table>
+                    <?php //} 
+                    ?>
 
                 </div>
 
-            	</div>
+            </div>
 
-                <script>
-                    $(document).ready(function() {
-                        $("select.sec").change(function() {
-                            //var selected = $(this).children("option:selected").val();
-                                $.ajax({
-                                  url: "get-table-data2.php",
-                                  type: "POST",
-                                  data: {
-                                    choice: $("select.sec").children("option:selected").val(),
-                                  },
-                                  success: function(data) {
-                                    $("#t").html(data);
-                                  },
-                                  error: function(jqXHR, textStatus, errorThrown) {
-                                    console.log("Error: " + textStatus + " - " + errorThrown);
-                                  }
-                                });      
+            <script>
+                $(document).ready(function() {
+                    $("select.sec").change(function() {
+                        //var selected = $(this).children("option:selected").val();
+                        $.ajax({
+                            url: "get-table-data2.php",
+                            type: "POST",
+                            data: {
+                                choice: $("select.sec").children("option:selected").val(),
+                            },
+                            success: function(data) {
+                                $("#t").html(data);
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.log("Error: " + textStatus + " - " + errorThrown);
+                            }
                         });
                     });
-                </script>
+                });
+            </script>
 
-                <script src="../bootstrap/js/bootstrap.bundle.js"></script>
-                <!-- footer -->
-                <?php include '../footer.php'; ?>
-            </div>
+            <script src="../bootstrap/js/bootstrap.bundle.js"></script>
+            <!-- footer -->
+            <?php include '../footer.php'; ?>
+        </div>
         </div>
 
         <!-- content goes here -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script>
     </body>
+
     </html>
 
 <?php } else {
