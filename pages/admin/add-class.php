@@ -32,7 +32,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
             <div class="container-fluid">
                 <h1 class="mt-4">Add New Class</h1>
                 <ol class="breadcrumb mb-4">
-                    <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
+                    <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['admin_role'] ?> </b> !</li> -->
                 </ol>
 
                 <div class="container mt-5">
@@ -82,17 +82,32 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 $result = mysqli_query($con, $sql);
                                 while ($ri = mysqli_fetch_assoc($result)) {
                                 ?>
-                                    <option value="<?php echo $ri['grade_id']; ?>"><?php echo "Grade " . $ri['grade_name']; ?>
+                                    <option value="<?php echo $ri['grade_name']; ?>"><?php echo "Grade " . $ri['grade_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
                         </div>
 
+                        <!-- <div class="mb-3">
+                            <label class="form-label">Section</label>
+                            <select name="section" class="form-select gradeSelect" required>
+                                <?php
+                                include '../../controls/connection.php';
+                                $sql = "SELECT * FROM section_tbl";
+                                $result = mysqli_query($con, $sql);
+                                while ($ri = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <option value="<?php echo $ri['sec_id']; ?>"><?php echo $ri['sec_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div> -->
+
                         <div class="mb-3">
                             <label class="form-label">Class Name</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text txt" id="basic-addon1" name="class1"></span>
-                                <input type="text" class="form-control" placeholder="Class" aria-label="Username" aria-describedby="basic-addon1" name="class2" required>
+                                <input type="text" class="form-control" placeholder="Class name" aria-label="Username" aria-describedby="basic-addon1" name="class2" required>
                             </div>
                         </div>
 
@@ -122,12 +137,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                 $(document).ready(function() {
                     $("select.gradeSelect").change(function() {
                         var selected = $(this).children("option:selected").val();
-                        var grd = selected.split(" ");
-                        if (Number(grd[1]) <= 11) {
-                            $("span.txt").text(grd[1] + " - ");
-                        } else {
-                            $("span.txt").text(grd[1] + " " + grd[2] + " - ");
-                        }
+                        $("span.txt").text("Grade " + selected + " -");
                     });
                 });
             </script>
