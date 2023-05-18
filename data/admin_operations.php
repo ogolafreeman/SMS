@@ -1,6 +1,6 @@
 <?php
 require '../../controls/connection.php';
-// Get all the teachers
+// Get all the teacherss
 function getAllTeachers()
 {
     require '../../controls/connection.php';
@@ -96,7 +96,7 @@ function getAllClasses()
 {
     require '../../controls/connection.php';
     $currentYear = date("Y");
-    $currentYear1 = date("Y")+1;
+    $currentYear1 = date("Y") + 1;
     $sql = "SELECT * FROM grade_class_tbl";
     $result = mysqli_query($con, $sql);
     if (mysqli_num_rows($result) >= 1) {
@@ -107,7 +107,8 @@ function getAllClasses()
     }
 }
 
-function getAllSubjects() {
+function getAllSubjects()
+{
     require '../../controls/connection.php';
     $sql = "SELECT * FROM subject_tbl";
     $result = mysqli_query($con, $sql);
@@ -117,4 +118,9 @@ function getAllSubjects() {
     } else {
         return 0;
     }
+}
+
+function getSubjectsByID($con, $grade_id, $section_id)
+{
+    //
 }

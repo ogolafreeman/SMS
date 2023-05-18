@@ -3,34 +3,44 @@ session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
 	require_once '../controls/connection.php';
-	if(isset($_POST['add'])) {
-		$sec_id = $_POST['section'];
+	if (isset($_POST['add'])) {
+		$stream_id = $_POST['stream'];
 		$subjects = $_POST['subject'];
+		$grade = $_POST['grade'];
+		$year = date("Y");
 
-		$arr = explode(" ", $_POST['grade']);
-		if($arr[1] <= 11) {
-			$grade = $arr[1];
+
+		$sql2 = "SELECT grade_id FROM grade_tbl WHERE grade_name='$grade'";
+		$result2 = mysqli_query($con, $sql2);
+		if (mysqli_num_rows($result2) == 1) {
+			$d = mysqli_fetch_assoc($result2);
+			$grade_id = $d['grade_id'];
 		} else {
-			$grade = $arr[1] . " " . $arr[2];
+			$em = "No record in grade table!";
+			header("Location: ../pages/admin/assign-to-class.php?error=$em");
+			exit;
 		}
 
-		foreach($subjects as $subject) {
-			$sql = "SELECT * FROM grade_subject_tbl WHERE sub_id='$subject' AND sec_id='$sec_id'";
+		foreach ($subjects as $subject) {
+			$sql = "SELECT * FROM grade_subject_tbl WHERE (stream_id='$stream_id' AND grade_id='$grade_id') AND sub_id='$subject'";
 			$result = mysqli_query($con, $sql);
-			if(mysqli_num_rows($result) < 1) {
-				$sql2 = "SELECT id FROM grade_tbl WHERE grade_name LIKE '%$grade%'";
-				
-
+			if (mysqli_num_rows($result) < 1) {
+				$sql3 = "INSERT INTO grade_subject_tbl (grade_id, stream_id, year, sub_id) VALUES ('$grade_id', '$stream_id', '$year', '$subject')";
+				$result3 = mysqli_query($con, $sql3);
+			} else {
+				$em = "Data already exist!";
+				header("Location: ../pages/admin/assign-to-class.php?error=$em");
+				exit;
 			}
 		}
-		
 
-		
+		if ($result3) {
+			$sm = "Selected subjects are successfully assigned!";
+			header("Location: ../pages/admin/assign-to-class.php?success=$sm");
+			exit;
+		}
 	}
-
 } else {
 	header("Location:../../login.php");
 	exit;
 }
-
-?>

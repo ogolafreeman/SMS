@@ -32,7 +32,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 					$class_name = $_POST['class_name'];
 					$sql1 = "SELECT * FROM class_tbl WHERE class_name='$class_name'";
 					$result1 = mysqli_query($con, $sql1);
-					if (mysqli_num_rows($result1) < 1) {
+					if (mysqli_num_rows($result1) < 0) {
 						$sql = "INSERT INTO class_tbl (class_name) VALUES ('$class_name')";
 						if (mysqli_query($con, $sql)) {
 							$sql5 = "INSERT INTO grade_class_tbl (grade_id, class_id, year, teacher_id) VALUES ('$grade_id', '$class_id', '$year', '$class_teacher_id')";
@@ -46,6 +46,18 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 								header("Location: ../pages/admin/add-class.php?error=$em");
 								exit;
 							}
+						} else {
+							// raise an error -> unknown error
+							$em = "Unknown error occurred";
+							header("Location: ../pages/admin/add-class.php?error=$em");
+							exit;
+						}
+					} else {
+						$sql5 = "INSERT INTO grade_class_tbl (grade_id, class_id, year, teacher_id) VALUES ('$grade_id', '$class_id', '$year', '$class_teacher_id')";
+						if (mysqli_query($con, $sql5)) {
+							$sm = "New class $grade - $class_name added successfully!";
+							header("Location: ../pages/admin/add-class.php?success=$sm");
+							exit;
 						} else {
 							// raise an error -> unknown error
 							$em = "Unknown error occurred";
@@ -72,11 +84,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 					if (mysqli_num_rows($result1) < 1) {
 						$sql = "INSERT INTO class_tbl (class_name) VALUES ('$class_name')";
 						if (mysqli_query($con, $sql)) {
-							$sql3 = "SELECT class_id FROM class_tbl WHERE class_name='$class_name'";
-							$result3 = mysqli_query($con, $sql3);
-							if (mysqli_num_rows($result3) == 1) {
-								$d2 = mysqli_fetch_assoc($result3);
-								$class_id = $d2['class_id'];
+							$sql6 = "SELECT class_id FROM class_tbl WHERE class_name='$class_name'";
+							$result6 = mysqli_query($con, $sql6);
+							if (mysqli_num_rows($result6) == 1) {
+								$d = mysqli_fetch_assoc($result6);
+								$class_id = $d['class_id'];
 
 								$sql5 = "INSERT INTO grade_class_tbl (grade_id, class_id, year, teacher_id) VALUES ('$grade_id', '$class_id', '$year', '$class_teacher_id')";
 								if (mysqli_query($con, $sql5)) {
@@ -89,10 +101,39 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 									header("Location: ../pages/admin/add-class.php?error=$em");
 									exit;
 								}
+							} else {
+								// raise an error -> unknown error
+								$em = "No record in class table";
+								header("Location: ../pages/admin/add-class.php?error=$em");
+								exit;
 							}
 						} else {
 							// raise an error -> unknown error
 							$em = "Unknown error occurred";
+							header("Location: ../pages/admin/add-class.php?error=$em");
+							exit;
+						}
+					} else {
+						$sql6 = "SELECT class_id FROM class_tbl WHERE class_name='$class_name'";
+						$result6 = mysqli_query($con, $sql6);
+						if (mysqli_num_rows($result6) == 1) {
+							$d = mysqli_fetch_assoc($result6);
+							$class_id = $d['class_id'];
+
+							$sql5 = "INSERT INTO grade_class_tbl (grade_id, class_id, year, teacher_id) VALUES ('$grade_id', '$class_id', '$year', '$class_teacher_id')";
+							if (mysqli_query($con, $sql5)) {
+								$sm = "New class $grade - $class_name added successfully!";
+								header("Location: ../pages/admin/add-class.php?success=$sm");
+								exit;
+							} else {
+								// raise an error -> unknown error
+								$em = "Unknown error occurred";
+								header("Location: ../pages/admin/add-class.php?error=$em");
+								exit;
+							}
+						} else {
+							// raise an error -> unknown error
+							$em = "No record in class table";
 							header("Location: ../pages/admin/add-class.php?error=$em");
 							exit;
 						}
@@ -106,7 +147,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 			}
 		} else {
 			// raise an error -> no record
-			$em = "No record in class table";
+			$em = "No record in grade table";
 			header("Location: ../pages/admin/add-class.php?error=$em");
 			exit;
 		}

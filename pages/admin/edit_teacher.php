@@ -39,8 +39,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                 </ol>
 
                 <!-- Your further code goes here. keep coding in this div -->
-                <div class="container mt-5">
-                    <!-- <a href="teacher.php" class="btn btn-dark">Go Back</a><br><br> -->
+                <div class="container mt-3">
+                    <a class='btn btn-primary' href='view-all-teachers.php'>Go Back</a>
 
                     <?php if (isset($_GET['success'])) { ?>
                         <!-- <div class='alert alert-success' role='alert'>
@@ -70,7 +70,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         </script>
                     <?php } ?>
 
-                    <form action="../../data/update-teacher-data.php?id=<?= $teacher['teacher_id'] ?>" method="post" class="shadow p-3  mt-5 form-w">
+                    <form action="../../data/update-teacher-data.php?id=<?= $teacher['teacher_id'] ?>" method="post" class="shadow p-3  mt-3 form-w">
                         <h3>Teacher's Info</h3>
                         <hr>
                         <div class="mb-3">

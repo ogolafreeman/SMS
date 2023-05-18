@@ -34,7 +34,7 @@
 
 
 
-    				/* now its time to check the grade and return each class details via XMLHTTP request to ajax */
+    				/* check the grade and return each class details via XMLHTTP request to ajax */
     				if($_POST['choice'] == 1)  {
     					if($grade_name <= 11) {
     						// return grade 6 -11 data
@@ -73,4 +73,3 @@
     		// raise an error -> no record in grade_tbl
     	}
     }
-?>

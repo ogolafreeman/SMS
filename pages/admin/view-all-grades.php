@@ -68,6 +68,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         </script>
                     <?php } ?>
 
+                <?php if($grades) { ?>
                     <table class="table">
                         <thead>
                             <tr>
@@ -90,6 +91,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             </tbody>
                         <?php } ?>
                     </table>
+                <?php } else { ?>
+                    <div class="alert alert-info" role="alert">
+                        Empty!
+                    </div>
+                <?php } ?>
 
                 </div>
 

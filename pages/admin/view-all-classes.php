@@ -35,7 +35,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
             <div class="container-fluid">
                 <h1 class="mt-4">All Classes</h1>
                 <ol class="breadcrumb mb-4">
-                    <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
+                    <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['admin_role'] ?> </b> !</li> -->
                 </ol>
 
                 <div class="container mt-5">
@@ -51,9 +51,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         </div><br />
                     </form>
 
-                    <?php //if ($classes) {
-
-                    ?>
+                    <?php if ($classes) { ?>
                     <table class="table">
                         <thead>
                             <tr>
@@ -116,7 +114,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             ?>
                         </tbody>
                     </table>
-                    <?php //} ?>
+                    <?php } else { ?>
+                    <div class="alert alert-info" role="alert">
+                        Empty!
+                    </div>
+                <?php } ?>
 
                 </div>
 
@@ -142,14 +144,14 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                 });
             </script>
 
-            <script src="../bootstrap/js/bootstrap.bundle.js"></script>
+            <script src="../../bootstrap/js/bootstrap.bundle.js"></script>
             <!-- footer -->
             <?php include '../footer.php'; ?>
         </div>
         </div>
 
         <!-- content goes here -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> -->
         <script src="../js/scripts.js"></script>
     </body>
 

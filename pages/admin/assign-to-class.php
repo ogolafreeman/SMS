@@ -28,12 +28,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         <div id="layoutSidenav_content">
 
             <!-- content goes here. do not remove any code -->
-
             <div class="container-fluid">
-                <h1 class="mt-4">Assign Subjects to Grades</h1>
-                <ol class="breadcrumb mb-4">
-                    <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
-                </ol>
+                <h1 class="mt-4">Assign Subjects to Classes</h1>
+                <!-- <ol class="breadcrumb mb-4"></ol> -->
+
 
                 <div class="container mt-5">
                     <!-- <a href="teacher.php" class="btn btn-dark">Go Back</a><br><br> -->
@@ -42,7 +40,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         <!-- <div class='alert alert-success' role='alert'>
                             <?= $_GET['success'] ?>
                         </div> -->
-
                         <script>
                             Swal.fire({
                                 icon: 'success',
@@ -54,9 +51,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
                     <?php if (isset($_GET['error'])) { ?>
                         <!-- <div class='alert alert-danger' role='alert'>
-                            </ /?=$_GET['error'] ?>
+                            <?= $_GET['error'] ?>
                         </div> -->
-
                         <script>
                             Swal.fire({
                                 icon: 'warning',
@@ -67,73 +63,156 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                     <?php } ?>
 
                     <form action="../../data/assign-to-class-data.php" method="post" class="shadow p-3  mt-5 form-w">
-                        <!-- <h3>Fill all the Data</h3> -->
-                        <!-- <hr> -->
+
                         <div class="mb-3">
                             <label class="form-label">Grade</label>
-                            <select name="grade" class="form-select" required>
+                            <select name="grade" class="form-select gradeSelect" required>
                                 <!-- <option value="">-- Select Grade --</option> -->
                                 <?php
                                 include '../../controls/connection.php';
-                                $currentYear = date("Y");
-                                $currentYear1 = date("Y") + 1;
-                                $sql = "SELECT DISTINCT * FROM grade_tbl";
-                                $result = mysqli_query($con, $sql);
-                                // explode(" ", explode("-", $ri['grade_name'])[0])[1];
-                                while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <option value="<?php echo explode("-", $ri['grade_name'])[0]; ?>"><?php echo explode("-", $ri['grade_name'])[0]; ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                        </div>
-
-
-                        <div class="mb-3 section">
-                            <label class="form-label">Section</label>
-                            <select name="section" class="form-select">
-                                <?php
-                                include '../../controls/connection.php';
-                                $sql = "SELECT * FROM section_tbl";
+                                $sql = "SELECT * FROM grade_tbl";
                                 $result = mysqli_query($con, $sql);
                                 while ($ri = mysqli_fetch_assoc($result)) {
                                 ?>
-                                    <option value="<?php echo $ri['sec_id']; ?>"><?php echo $ri['sec_name']; ?>
+                                    <option value="<?php echo $ri['grade_name']; ?>"><?php echo "Grade " . $ri['grade_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Subjects</label><br />
-                            <?php
-                            include '../../controls/connection.php';
-                            $sql2 = "SELECT * FROM subject_tbl";
-                            $result2 = mysqli_query($con, $sql2);
-                            // Loop through subjects and create checkboxes
-                            while ($row = mysqli_fetch_assoc($result2)) {
-                                echo '<input type="checkbox" name="subject[]" value="' . $row['sub_id'] . '"> ' . $row['sub_name'] . '<br>';
-                            }
-                            ?>
+                            <label class="form-label">Stream</label>
+                            <select name="stream" class="form-select sectionSelect" required>
+                                <!-- <option value="">-- Select Grade --</option> -->
+                                <?php
+                                include '../../controls/connection.php';
+                                $sql = "SELECT * FROM al_subject_stream_tbl";
+                                $result = mysqli_query($con, $sql);
+                                while ($ri = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <option value="<?php echo $ri['stream_id']; ?>"><?php echo $ri['stream_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
                         </div>
 
-
+                        <div class="mb-3">
+                            <label class="form-label">Subjects</label>
+                            <div class="subs"></div>
+                        </div>
                         <button type="submit" class="btn btn-primary" name="add">Add</button>
+
                     </form>
+
+                    <br />
+                    <h1 class="mt-4">Assigned Subjects</h1>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <!-- <th scope="col">#</th> -->
+                                <th scope="col">Grade</th>
+                                <th scope="col">Section</th>
+                                <th scope="col">Assigned Subjects</th>
+                                <th scope="col">Operations</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableData">
+                            <?php
+                            $sub_arr = array();
+                            $sql1 = "SELECT DISTINCT grade_id, stream_id FROM grade_subject_tbl";
+                            $result1 = mysqli_query($con, $sql1);
+                            while ($row = mysqli_fetch_assoc($result1)) {
+                                $grade_id = $row['grade_id'];
+                                $stream_id = $row['stream_id'];
+                                $sql4 = "SELECT grade_name FROM grade_tbl WHERE grade_id='$grade_id'";
+                                $result4 = mysqli_query($con, $sql4);
+                                $row4 = mysqli_fetch_assoc($result4);
+
+                                $sql5 = "SELECT stream_name FROM al_subject_stream_tbl WHERE stream_id='$stream_id'";
+                                $result5 = mysqli_query($con, $sql5);
+                                $row5 = mysqli_fetch_assoc($result5);
+
+                            ?>
+                                <tr>
+                                    <td><?php echo $row4['grade_name']; ?></td>
+                                    <td><?php echo $row5['stream_name']; ?></td>
+
+                                    <?php
+                                    $sql2 = "SELECT sub_id FROM grade_subject_tbl WHERE grade_id='" . $row['grade_id'] . "' AND stream_id='" . $row['stream_id'] . "'";
+                                    $result2 = mysqli_query($con, $sql2);
+                                    while ($row2 = mysqli_fetch_assoc($result2)) {
+                                        array_push($sub_arr, $row2['sub_id']);
+                                    }
+
+                                    ?>
+                                    <td>
+                                        <?php foreach ($sub_arr as $sub) {
+                                            $sql3 = "SELECT sub_name FROM subject_tbl WHERE sub_id='$sub'";
+                                            $result3 = mysqli_query($con, $sql3);
+                                            $row3 = mysqli_fetch_assoc($result3);
+                                            echo "&#x2022;&nbsp;&nbsp;" . $row3['sub_name'] . "<br/>";
+                                        }
+                                        $sub_arr = array_diff($sub_arr, $sub_arr);
+                                        ?>
+                                    </td>
+                                    <td><a class='btn btn-warning' name='edit' href='change-subjects.php?grade_id=<?= $grade_id ?>&stream_id=<?= $stream_id ?>'>Change</a></td>
+                                </tr>
+                            <?php } ?>
+
+                        </tbody>
+                    </table>
 
                 </div>
 
+
             </div>
 
-            <script src="../bootstrap/js/bootstrap.bundle.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $("select.sectionSelect").change(function() {
+                        $.ajax({
+                            url: "filter-subjects.php",
+                            type: "POST",
+                            data: {
+                                choice: $("select.sectionSelect").children("option:selected").val(),
+                            },
+                            success: function(data) {
+                                $(".subs").html(data);
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.log("Error: " + textStatus + " - " + errorThrown);
+                            }
+                        });
+                    });
+
+                    $("select.gradeSelect").change(function() {
+                        $.ajax({
+                            url: "filter-assigned-subjects.php",
+                            type: "POST",
+                            data: {
+                                grade: $("select.gradeSelect").children("option:selected").val(),
+                            },
+                            success: function(data) {
+                                $("#tableData").html(data);
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.log("Error: " + textStatus + " - " + errorThrown);
+                            }
+                        });
+                    });
+                });
+            </script>
+
             <!-- footer -->
             <?php include '../footer.php'; ?>
         </div>
         </div>
 
         <!-- content goes here -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> -->
         <script src="../js/scripts.js"></script>
+        <script src="../../bootstrap/js/bootstrap.bundle.js"></script>
     </body>
 
     </html>
