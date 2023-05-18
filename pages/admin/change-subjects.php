@@ -69,7 +69,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 						</script>
 					<?php } ?>
 
-					<form action="../../data/change-subject-data.php" method="post" class="shadow p-3  mt-4 form-w">
+					<form action="../../data/change-subject-data.php?grade_id=<?= $grade_id ?>&stream_id=<?= $stream_id ?>" method="post" class="shadow p-3  mt-4 form-w">
 
 						<div class="mb-3">
 							<label class="form-label">Grade</label>
