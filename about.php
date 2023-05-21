@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jquery-3.6.3.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <!-- navbar -->
@@ -184,7 +185,48 @@
         </div>
     </section>
 
-    <?php include "inc/footer.php"; ?>
+    <!-- <?php include "inc/footer.php"; ?> -->
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+        <div class="footer-top">
+
+            <div class="container">
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <a href="https://richmondcollege.lk" class="scrollto footer-logo"><img src="Media/Richmond Colleg LOGO.png" alt=""></a>
+                        <!-- <a href="#header" class="scrollto footer-logo"><img src="Media/Logo Tech (2).png" alt="" style="margin-left: 10px;"></a> -->
+                        <h3>Richmond College Technology Society</h3>
+                        <p>Richmond College is a school with both primary and secondary sections located in Galle, Sri Lanka.
+                            Today, Richmond
+                            College is one of the best schools in Sri Lanka. Richmond College, now in its second century, has been
+                            shaped by many
+                            people.</p>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="http://www.richmondcollege.lk/" class="website" title='Official Website of Richmond College'><i class="fa fa-globe" aria-hidden="true"></i></a>
+                    <a href="#" class="facebook" title='Official Facebook Page of Richmond College Technology Society'><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+                    <a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    <!-- <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                    <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                    <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> -->
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container footer-bottom clearfix">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Richmond College</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <b><a href="http://www.tech.richmondcollege.lk">RCTS</a></b>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="bootstrap/js/bootstrap.bundle.js"></script>
 </body>

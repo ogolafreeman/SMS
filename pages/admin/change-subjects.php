@@ -5,6 +5,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 	include '../../controls/connection.php';
 	$grade_id = $_GET['grade_id'];
 	$stream_id = $_GET['stream_id'];
+	$year = $_GET['year'];
 ?>
 
 	<!DOCTYPE html>
@@ -69,7 +70,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 						</script>
 					<?php } ?>
 
-					<form action="../../data/change-subject-data.php?grade_id=<?= $grade_id ?>&stream_id=<?= $stream_id ?>" method="post" class="shadow p-3  mt-4 form-w">
+					<form action="../../data/change-subject-data.php?grade_id=<?= $grade_id ?>&stream_id=<?= $stream_id ?>&year=<?= $year ?>" method="post" class="shadow p-3  mt-4 form-w">
 
 						<div class="mb-3">
 							<label class="form-label">Grade</label>
@@ -80,6 +81,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 							$ri = mysqli_fetch_assoc($result)
 							?>
 							<input type="text" name="grade" class="form-control" value="<?= "Grade " . $ri['grade_name'] ?>" required readonly>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Year</label>
+							<input type="text" name="year" class="form-control" value="<?= $year ?>" required readonly>
 						</div>
 						<div class="mb-3">
 							<label class="form-label">Stream</label>
@@ -103,7 +108,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 									$sub_id = $data['sub_id'];
 
 									// to get the assigned subjects from the db
-									$sql3 = "SELECT sub_id FROM grade_subject_tbl WHERE grade_id='$grade_id' AND sub_id='$sub_id'";
+									$sql3 = "SELECT sub_id FROM grade_subject_tbl WHERE grade_id='$grade_id' AND sub_id='$sub_id' AND year='$year'";
 									$result3 = mysqli_query($con, $sql3);
 									$d = mysqli_fetch_assoc($result3);
 									if (mysqli_num_rows($result3) > 0) {

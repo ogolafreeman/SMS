@@ -1,119 +1,255 @@
 .header {
-    background: url("../Media/hero.jpg");
-    width: 100%;
-    height: 70vh;
-    background-position: center;
-    background-size: cover;
+  background: url("../Media/hero.jpg");
+  width: 100%;
+  height: 70vh;
+  background-position: center;
+  background-size: cover;
 }
 
 .back-fill {
-    background: rgba(0, 0, 0, .60);
-    height: 70vh;
-    position: relative;
+  background: rgba(0, 0, 0, .60);
+  height: 70vh;
+  position: relative;
 }
 
 .back-fill h1 {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .banner {
-    background: url("../Media/bg2.jpg");
-    width: 100%;
-    height: 70vh;
-    background-position: center;
-    background-size: cover;
+  background: url("../Media/bg2.jpg");
+  width: 100%;
+  height: 70vh;
+  background-position: center;
+  background-size: cover;
 }
 
 .image-company {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 60px;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 60px;
 }
 
 .gradient-1 {
 
-    background: linear-gradient(to right, #30b9fd, #35adf3);
+  background: linear-gradient(to right, #30b9fd, #35adf3);
 }
 
 @media (min-width: 768px) {
-    .gradient-form {
-        height: 100vh !important;
-    }
+  .gradient-form {
+    height: 100vh !important;
+  }
 }
 
 @media (min-width: 769px) {
-    .gradient-custom-2 {
-        border-top-right-radius: .3rem;
-        border-bottom-right-radius: .3rem;
-    }
+  .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+  }
 }
 
 .bg-color {
-    background-color: rgb(231, 231, 231);
+  background-color: rgb(231, 231, 231);
 }
 
 .c1 {
 
-    background-image: url("../Media/LogIn.JPG");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 1rem 0 0 1rem;
+  background-image: url("../Media/LogIn.JPG");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 1rem 0 0 1rem;
 }
-.card-counter{
-    box-shadow: 2px 2px 10px #DADADA;
-    margin: 5px;
-    padding: 20px 10px;
-    background-color: #fff;
-    height: 100px;
-    border-radius: 5px;
-    transition: .3s linear all;
-  }
 
-  .card-counter:hover{
-    box-shadow: 4px 4px 20px #DADADA;
-    transition: .3s linear all;
-  }
+.card-counter {
+  box-shadow: 2px 2px 10px #DADADA;
+  margin: 5px;
+  padding: 20px 10px;
+  background-color: #fff;
+  height: 100px;
+  border-radius: 5px;
+  transition: .3s linear all;
+}
 
-  .card-counter.primary{
-    background-color: #007bff;
-    color: #FFF;
-  }
+.card-counter:hover {
+  box-shadow: 4px 4px 20px #DADADA;
+  transition: .3s linear all;
+}
 
-  .card-counter.danger{
-    background-color: #ef5350;
-    color: #FFF;
-  }  
+.card-counter.primary {
+  background-color: #007bff;
+  color: #FFF;
+}
 
-  .card-counter.success{
-    background-color: #66bb6a;
-    color: #FFF;
-  }  
+.card-counter.danger {
+  background-color: #ef5350;
+  color: #FFF;
+}
 
-  .card-counter.info{
-    background-color: #26c6da;
-    color: #FFF;
-  }  
+.card-counter.success {
+  background-color: #66bb6a;
+  color: #FFF;
+}
 
-  .card-counter .count-numbers{
-    position: absolute;
-    right: 35px;
-    top: 20px;
-    font-size: 32px;
-    display: block;
-  }
+.card-counter.info {
+  background-color: #26c6da;
+  color: #FFF;
+}
 
-  .card-counter .count-name{
-    position: absolute;
-    right: 35px;
-    top: 65px;
-    font-style: italic;
-    text-transform: capitalize;
-    opacity: 0.5;
-    display: block;
-    font-size: 18px;
-  }
+.card-counter .count-numbers {
+  position: absolute;
+  right: 35px;
+  top: 20px;
+  font-size: 32px;
+  display: block;
+}
+
+.card-counter .count-name {
+  position: absolute;
+  right: 35px;
+  top: 65px;
+  font-style: italic;
+  text-transform: capitalize;
+  opacity: 0.5;
+  display: block;
+  font-size: 18px;
+}
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+#footer {
+  background: url("../Media/footer.jpg") no-repeat;
+  color: #fff;
+  font-size: 14px;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+}
+
+#footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+}
+
+#footer .footer-top {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 80px 0;
+}
+
+#footer .footer-top .footer-logo img {
+  height: 80px;
+}
+
+#footer .footer-top h3 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  padding: 30px 0 0 0;
+  margin-bottom: 0;
+}
+
+#footer .footer-top p {
+  font-size: 15;
+  font-style: italic;
+  margin: 30px 0 0 0;
+  padding: 0;
+}
+
+#footer .footer-top .footer-newsletter {
+  text-align: center;
+  font-size: 15px;
+  margin-top: 30px;
+}
+
+#footer .footer-top .footer-newsletter form {
+  background: #fff;
+  padding: 6px 10px;
+  position: relative;
+  border-radius: 50px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+#footer .footer-top .footer-newsletter form input[type=email] {
+  border: 0;
+  padding: 4px 8px;
+  width: calc(100% - 100px);
+}
+
+#footer .footer-top .footer-newsletter form input[type=submit] {
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  padding: 0 20px;
+  background: rgb(140, 17, 72);
+  color: #fff;
+  transition: 0.3s;
+  border-radius: 50px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+#footer .footer-top .footer-newsletter form input[type=submit]:hover {
+  background: rgb(1, 40, 107);
+}
+
+#footer .footer-top .social-links {
+  margin-top: 30px;
+}
+
+#footer .footer-top .social-links a {
+  font-size: 18px;
+  display: inline-block;
+  background: rgb(140, 17, 72);
+  color: #fff;
+  line-height: 1;
+  padding: 8px 0;
+  margin-right: 4px;
+  border-radius: 50%;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  transition: 0.3s;
+}
+
+#footer .footer-top .social-links a:hover {
+  background: rgb(1, 40, 107);
+  color: #fff;
+  text-decoration: none;
+}
+
+#footer .footer-bottom {
+  border-top: 1px solid #222222;
+  z-index: 2;
+  position: relative;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+#footer .copyright {
+  text-align: center;
+}
+
+#footer .credits {
+  text-align: center;
+  font-size: 13px;
+  padding-top: 5px;
+}

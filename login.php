@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
   <link rel='stylesheet' href="css/style.css">
+  <link rel="shortcut icon" href="Media/Richmond Colleg LOGO.png" type="image/x-icon">
   <!-- <script src="js/sweetalert2.all.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- <script src="sweetalert2.min.js"></script> -->
@@ -31,9 +32,9 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="index.php">Home</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="about.php">About Us</a>
-          </li>
+          </li> -->
         </ul>
         <ul class="navbar-nav me-right mb-2 mb-lg-0">
           <li class="nav-item">
@@ -119,7 +120,8 @@
     </div>
   </div>
 
-  <?php include "inc/footer.php"; ?>
+  <?php //include "inc/footer.php"; 
+  ?>
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <script src="bootstrap/js/bootstrap.bundle.js"></script>
 </body>

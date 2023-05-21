@@ -29,7 +29,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
             <!-- content goes here. do not remove any code -->
             <div class="container-fluid">
-                <h1 class="mt-4">Assign Subjects to Classes</h1>
+                <h1 class="mt-4">Assign Subjects to Grades</h1>
                 <!-- <ol class="breadcrumb mb-4"></ol> -->
 
 
@@ -80,6 +80,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             </select>
                         </div>
 
+                        <div class="mb-3 yearDiv">
+                            <label class="form-label">Year / A/L Year</label>
+                            <select name="year" class="form-select yearSelect" required>
+                                <!-- <option value=""></option> -->
+                            </select>
+                        </div>
+
                         <div class="mb-3">
                             <label class="form-label">Stream</label>
                             <select name="stream" class="form-select sectionSelect" required>
@@ -112,6 +119,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             <tr>
                                 <!-- <th scope="col">#</th> -->
                                 <th scope="col">Grade</th>
+                                <th scope="col">Year</th>
                                 <th scope="col">Section</th>
                                 <th scope="col">Assigned Subjects</th>
                                 <th scope="col">Operations</th>
@@ -120,11 +128,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         <tbody id="tableData">
                             <?php
                             $sub_arr = array();
-                            $sql1 = "SELECT DISTINCT grade_id, stream_id FROM grade_subject_tbl";
+                            $sql1 = "SELECT DISTINCT grade_id, stream_id,year year FROM grade_subject_tbl";
                             $result1 = mysqli_query($con, $sql1);
                             while ($row = mysqli_fetch_assoc($result1)) {
                                 $grade_id = $row['grade_id'];
                                 $stream_id = $row['stream_id'];
+                                $year = $row['year'];
                                 $sql4 = "SELECT grade_name FROM grade_tbl WHERE grade_id='$grade_id'";
                                 $result4 = mysqli_query($con, $sql4);
                                 $row4 = mysqli_fetch_assoc($result4);
@@ -136,6 +145,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             ?>
                                 <tr>
                                     <td><?php echo $row4['grade_name']; ?></td>
+                                    <td><?php echo $year; ?></td>
                                     <td><?php echo $row5['stream_name']; ?></td>
 
                                     <?php
@@ -156,7 +166,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                         $sub_arr = array_diff($sub_arr, $sub_arr);
                                         ?>
                                     </td>
-                                    <td><a class='btn btn-warning' name='edit' href='change-subjects.php?grade_id=<?= $grade_id ?>&stream_id=<?= $stream_id ?>'>Change</a></td>
+                                    <td><a class='btn btn-warning' name='edit' href='change-subjects.php?grade_id=<?= $grade_id ?>&stream_id=<?= $stream_id ?>&year=<?= $year ?>'>Change</a></td>
                                 </tr>
                             <?php } ?>
 
@@ -170,6 +180,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
             <script>
                 $(document).ready(function() {
+                    $(".yearDiv").hide();
                     $("select.sectionSelect").change(function() {
                         $.ajax({
                             url: "filter-subjects.php",
@@ -200,6 +211,23 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 console.log("Error: " + textStatus + " - " + errorThrown);
                             }
                         });
+                    });
+
+                    $("select.gradeSelect").change(function() {
+                        $(".yearDiv").show();
+                        var grade = $("select.gradeSelect").children("option:selected").val();
+                        if (Number(grade) <= 11) {
+                            $(".yearSelect").html("<option value=''>" +
+                                <?php echo date("Y"); ?> + "</option>");
+                        } else {
+                            $(".yearSelect").html("<option value='" +
+                                <?php echo date("Y"); ?> + "'>" +
+                                <?php echo date("Y"); ?> + "</option><option value='" +
+                                <?php echo date("Y") + 1; ?> + "'>" +
+                                <?php echo date("Y") + 1; ?> + "</option><option value='" +
+                                <?php echo date("Y") + 2; ?> + "'>" +
+                                <?php echo date("Y") + 2; ?> + "</option>");
+                        }
                     });
                 });
             </script>
