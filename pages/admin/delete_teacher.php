@@ -3,7 +3,7 @@ session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
 
-    if ($_SESSION['role'] == 'Admin') {
+    if ($_SESSION['admin_role'] == 'Admin') {
         include '../../controls/connection.php';
         include '../../data/admin_operations.php';
 
