@@ -66,19 +66,134 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         </script>
                     <?php } ?>
 
+                    <form method="post" class="shadow p-3  mt-5 form-w" id="form">
+                        <h3>Apply Filters</h3>
+                        <hr>
+                        <div class="mb-3">
+                            <label class="form-label">Grade</label>
+                            <select name="grade" class="form-select gradeSelect" required>
+                                <!-- <option value="">-- Select Grade --</option> -->
+                                <?php
+                                include '../../controls/connection.php';
+                                $currentYear = date("Y");
+                                $currentYear1 = date("Y") + 1;
+                                $sql = "SELECT * FROM grade_tbl";
+                                $result = mysqli_query($con, $sql);
+                                while ($ri = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <option value="<?php echo $ri['grade_name']; ?>"><?php echo "Grade " . $ri['grade_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Class</label>
+                            <select name="grade" class="form-select classSelect" required>
+                                <!-- <option value="">-- Select Grade --</option> -->
+                                <?php
+                                include '../../controls/connection.php';
+                                $sql = "SELECT * FROM class_tbl";
+                                $result = mysqli_query($con, $sql);
+                                while ($ri = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <option value="<?php echo $ri['class_id']; ?>"><?php echo $ri['class_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Year / A/L Year</label>
+                            <select name="teacher" class="form-select yearSelect" required>
+                                <?php
+                                include '../../controls/connection.php';
+                                $sql = "SELECT DISTINCT year FROM grade_subject_tbl";
+                                $result = mysqli_query($con, $sql);
+                                while ($ri = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <option value="<?php echo $ri['year']; ?>"><?php echo $ri['year']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Term</label>
+                            <select name="teacher" class="form-select termSelect" required>
+                                <?php
+                                include '../../controls/connection.php';
+                                $sql = "SELECT DISTINCT term FROM al_marks_tbl";
+                                $result = mysqli_query($con, $sql);
+                                while ($ri = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <option value="<?php echo $ri['term']; ?>"><?php echo $ri['term']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-success show" name="show">Show</button>
+                    </form>
+
+                </div>
+
+                <div class="container mt-5">
+                    <h3>Filtered Results</h3>
+                    <hr>
+
+                    <table class="table table-bordered" id='tableData'>
+                        <!-- <thead> -->
+                        <!-- <th scope="col">Admission No.</th>
+                                <th scope="col">Name</th> -->
+                        <!-- Rest columns generates by php -->
+                        <!-- </thead> -->
+                        <!-- <tbody></tbody> -->
+                    </table>
                 </div>
 
             </div>
 
 
-            <script src="../bootstrap/js/bootstrap.bundle.js"></script>
+            <script src="../../bootstrap/js/bootstrap.bundle.js"></script>
+
+            <script>
+                $(document).ready(function() {
+                    $('#form').submit(function(event) {
+                        event.preventDefault();
+                        var g = $("select.gradeSelect").children("option:selected").val();
+                        var c = $("select.classSelect").children("option:selected").val();
+                        var y = $("select.yearSelect").children("option:selected").val();
+                        var t = $("select.termSelect").children("option:selected").val();
+                        // console.log(grade);
+                        // console.log(year);
+                        // console.log(term);
+                        $.ajax({
+                            url: "view-filtered-marks.php",
+                            type: "POST",
+                            data: {
+                                grade: g,
+                                class: c,
+                                year: y,
+                                term: t
+                            },
+                            success: function(data) {
+                                $("#tableData").html(data);
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.log("Error: " + textStatus + " - " + errorThrown);
+                            }
+                        });
+                    });
+                });
+            </script>
+
             <!-- footer -->
             <?php include '../footer.php'; ?>
         </div>
         </div>
 
         <!-- content goes here -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
         <script src="../js/scripts.js"></script>
     </body>
 

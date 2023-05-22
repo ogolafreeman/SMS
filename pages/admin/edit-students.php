@@ -73,7 +73,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                     <form action="../../data/update-student-data.php?id=<?= $student['std_id'] ?>" method="post" class="shadow p-3  mt-3 form-w">
                         <h3>Students's Info</h3>
                         <hr>
-                        <div class="mb-3">s
+                        <div class="mb-3">
                             <label class="form-label">Admission No.</label>
                             <input type="text" readonly name="admission_no" class="form-control" autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($student['admission_no'])) {
                                                                                                                                         echo $student['admission_no'];

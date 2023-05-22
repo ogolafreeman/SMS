@@ -56,6 +56,7 @@
                             <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="add-class.php">Add Classes</a>
+                                    <a class="nav-link" href="assign-students-to-class.php">Assign Students</a>
                                     <a class="nav-link" href="view-all-classes.php">View All</a>
                                 </nav>
                             </div>
