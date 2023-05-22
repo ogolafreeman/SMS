@@ -103,24 +103,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             </select>
                         </div>
 
-                        <!-- <div class="mb-3 stream">
-                            <label class="form-label">Stream</label>
-                            <select name="stream" class="form-select streamSelect" required>
-                                <?php
-                                include '../../controls/connection.php';
-                                $sql = "SELECT * FROM al_subject_stream_tbl";
-                                $result = mysqli_query($con, $sql);
-                                while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <option value="<?php echo $ri['stream_id']; ?>"><?php echo $ri['stream_name']; ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                        </div> -->
-
                         <div class="mb-3">
                             <label class="form-label">Class</label>
-                            <select name="grade" class="form-select classSelect" required>
+                            <select name="class" class="form-select classSelect" required>
                                 <!-- <option value="">-- Select Grade --</option> -->
                                 <?php
                                 include '../../controls/connection.php';
@@ -136,9 +121,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
                         <div class="mb-3">
                             <label class="form-label">Year / A/L Year</label>
-                            <select name="year" class="form-select yearSelect" required>
-                                
-                            </select>
+                            <select name="year" class="form-select yearSelect" required></select>
                         </div>
 
 
@@ -156,26 +139,29 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         <tbody>
                             <?php
                             include '../../controls/connection.php';
-                            $sql1 = "SELECT admission_no, full_name FROM student_tbl WHERE status='1' ORDER BY admission_no ASC";
+                            $sql1 = "SELECT admission_no, full_name, std_id FROM student_tbl WHERE status='1' ORDER BY admission_no ASC";
                             $result1 = mysqli_query($con, $sql1);
                             if(mysqli_num_rows($result1) > 0) {
                                 while($row = mysqli_fetch_assoc($result1)) {
                                     $admission_no = $row['admission_no'];
                                     $full_name = $row['full_name'];
+                                    $std_id = $row['std_id'];
 
-                                    echo "<tr>
-                                    <td>$admission_no</td>
-                                    <td>$full_name</td>
-                                    <td><input type='checkbox' value='$admission_no' name='std[]' /></td>
-                                    </tr>";
+                                    $sql2 = "SELECT * FROM student_class_tbl WHERE std_id='$std_id'";
+                                    $result2 = mysqli_query($con, $sql2);
+                                    if(mysqli_num_rows($result2) < 1) {
+                                        echo "<tr>
+                                                <td>$admission_no</td>
+                                                <td>$full_name</td>
+                                                <td><input type='checkbox' value='$std_id' name='std[]' /></td>
+                                            </tr>";
+                                        } else {
+                                            continue;
+                                        }
                                 }
                             } else { ?>
-                                <div class="alert alert-info" role="alert">
-                                    Empty!
-                                </div>
+                                <div class="alert alert-info" role="alert">Empty!</div>
                             <?php } ?>
-
-                            ?>
                         </tbody>
                     </table>
 
