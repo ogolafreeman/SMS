@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2023 at 08:40 AM
+-- Generation Time: May 23, 2023 at 09:54 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -45,9 +45,8 @@ CREATE TABLE `1-11_marks_tbl` (
 CREATE TABLE `al_marks_tbl` (
   `id` int(10) NOT NULL,
   `std_id` int(10) NOT NULL,
+  `grade_class_id` int(11) NOT NULL,
   `year` int(10) NOT NULL,
-  `grade_id` int(11) NOT NULL,
-  `class_id` int(11) NOT NULL,
   `term` varchar(255) NOT NULL,
   `sub_id` int(10) NOT NULL,
   `marks` int(10) NOT NULL
@@ -57,16 +56,15 @@ CREATE TABLE `al_marks_tbl` (
 -- Dumping data for table `al_marks_tbl`
 --
 
-INSERT INTO `al_marks_tbl` (`id`, `std_id`, `year`, `grade_id`, `class_id`, `term`, `sub_id`, `marks`) VALUES
-(1, 5, 2023, 2, 1, '1st Term', 7, 89),
-(2, 5, 2023, 2, 1, '1st Term', 6, 97),
-(3, 5, 2023, 2, 1, '1st Term', 5, 67),
-(4, 8, 2023, 2, 1, '1st Term', 7, 89),
-(5, 8, 2023, 2, 1, '1st Term', 6, 91),
-(6, 8, 2023, 2, 1, '1st Term', 5, 84),
-(7, 6, 2023, 1, 2, '1st Term', 7, 98),
-(8, 6, 2023, 1, 2, '1st Term', 6, 89),
-(9, 6, 2023, 1, 2, '1st Term', 5, 87);
+INSERT INTO `al_marks_tbl` (`id`, `std_id`, `grade_class_id`, `year`, `term`, `sub_id`, `marks`) VALUES
+(31, 9, 12, 2024, '1st Term', 5, 0),
+(32, 9, 12, 2024, '1st Term', 6, 53),
+(33, 9, 12, 2024, '1st Term', 7, 58),
+(34, 9, 12, 2024, '1st Term', 21, 48),
+(35, 10, 12, 2024, '1st Term', 5, 98),
+(36, 10, 12, 2024, '1st Term', 6, 94),
+(37, 10, 12, 2024, '1st Term', 7, 89),
+(38, 10, 12, 2024, '1st Term', 21, 0);
 
 -- --------------------------------------------------------
 
@@ -78,14 +76,14 @@ CREATE TABLE `al_subjects_tbl` (
   `al_sub_id` int(3) NOT NULL,
   `sub_id` int(11) NOT NULL,
   `stream_id` int(2) NOT NULL,
-  `sub_cat_id` int(2) NOT NULL
+  `order_id` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `al_subjects_tbl`
 --
 
-INSERT INTO `al_subjects_tbl` (`al_sub_id`, `sub_id`, `stream_id`, `sub_cat_id`) VALUES
+INSERT INTO `al_subjects_tbl` (`al_sub_id`, `sub_id`, `stream_id`, `order_id`) VALUES
 (1, 1, 1, 1),
 (2, 2, 1, 3),
 (3, 2, 2, 3),
@@ -137,7 +135,13 @@ INSERT INTO `al_subjects_tbl` (`al_sub_id`, `sub_id`, `stream_id`, `sub_cat_id`)
 (55, 21, 6, 2),
 (56, 17, 6, 2),
 (57, 13, 6, 3),
-(58, 8, 3, 3);
+(58, 8, 3, 3),
+(60, 29, 1, 4),
+(61, 29, 2, 4),
+(62, 29, 3, 4),
+(63, 29, 4, 4),
+(64, 29, 5, 4),
+(65, 29, 5, 4);
 
 -- --------------------------------------------------------
 
@@ -204,11 +208,8 @@ CREATE TABLE `grade_class_tbl` (
 --
 
 INSERT INTO `grade_class_tbl` (`grade_class_id`, `grade_id`, `class_id`, `year`, `teacher_id`) VALUES
-(1, 1, 1, '2023', 2),
-(2, 1, 2, '2023', 8),
-(3, 1, 3, '2023', 9),
-(4, 2, 4, '2023', 11),
-(5, 2, 5, '2023', 10);
+(11, 2, 1, '2023', 2),
+(12, 1, 1, '2024', 8);
 
 -- --------------------------------------------------------
 
@@ -251,10 +252,10 @@ INSERT INTO `grade_subject_tbl` (`id`, `grade_id`, `stream_id`, `year`, `sub_id`
 (187, 1, 5, '2024', 18),
 (188, 1, 5, '2024', 19),
 (189, 1, 5, '2024', 28),
-(190, 1, 3, '2024', 8),
 (191, 1, 5, '2024', 23),
 (192, 1, 5, '2024', 24),
-(193, 1, 5, '2024', 25);
+(193, 1, 5, '2024', 25),
+(194, 2, 3, '2023', 29);
 
 -- --------------------------------------------------------
 
@@ -332,9 +333,11 @@ CREATE TABLE `student_class_tbl` (
 --
 
 INSERT INTO `student_class_tbl` (`id`, `std_id`, `grade_class_id`, `sec_id`, `year`) VALUES
-(1, 5, 1, 4, '2023'),
-(2, 6, 2, 4, '2023'),
-(3, 8, 2, 4, '2023');
+(5, 5, 11, 4, '2023'),
+(6, 8, 11, 4, '2023'),
+(7, 6, 11, 4, '2023'),
+(8, 9, 12, 4, '2024'),
+(9, 10, 12, 4, '2024');
 
 -- --------------------------------------------------------
 
@@ -366,7 +369,9 @@ INSERT INTO `student_tbl` (`std_id`, `admission_no`, `full_name`, `name_with_ini
 (1, '13736', 'Anthony Edward Stark', 'A. E. Stark', '10880, Malibu Point, California, USA', '123123123', '123123123', '1990-12-27', 'tonystark@ironman.com', '2012-04-12', '2023-05-02', '2023-05-02', 0),
 (5, '13737', 'Steven Grant Rogers', 'S. G. Rogers', 'New Jersey, USA', '456456456', '456456456', '1920-04-27', 'captainamerica@avengers.com', '2012-04-27', '2023-05-02', '2023-05-02', 1),
 (6, '13738', 'Stephen Strange', 'S. Strange', 'Bleaker Street, New York, USA', '789789789', '789789789', '1989-11-28', 'drstrange@avengers.com', '2018-05-24', '2023-05-02', '2023-05-02', 1),
-(8, '13739', 'Anthony Edward Stark', 'A. E. Stark', '10880, Malibu Point, California', '123456789', '123456789', '1980-05-18', 'tony@starkindustries.com', '2012-04-27', '2023-05-21', '2023-05-21', 1);
+(8, '13739', 'Anthony Edward Stark', 'A. E. Stark', '10880, Malibu Point, California', '123456789', '123456789', '1980-05-18', 'tony@starkindustries.com', '2012-04-27', '2023-05-21', '2023-05-21', 1),
+(9, '13740', 'Clint Barton', 'C. Barton', 'Avengers Facilities, Up State, New York', '4545454545', '4545454545', '1983-06-13', 'hawkeye@avengers.com', '2012-04-27', '2023-05-23', '0000-00-00', 1),
+(10, '19741', 'Peter Benjamin Parker ', 'P. B. Parker', 'California, USA', '78787878', '78787878', '1993-10-11', 'spiderman@avengers.com', '2016-07-20', '2023-05-23', '0000-00-00', 1);
 
 -- --------------------------------------------------------
 
@@ -429,6 +434,14 @@ CREATE TABLE `teacher_class_tbl` (
   `grade_class_id` int(10) NOT NULL,
   `year` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `teacher_class_tbl`
+--
+
+INSERT INTO `teacher_class_tbl` (`id`, `teacher_id`, `grade_class_id`, `year`) VALUES
+(2, 2, 11, '2023'),
+(3, 8, 12, '2024');
 
 -- --------------------------------------------------------
 
@@ -523,8 +536,9 @@ INSERT INTO `user_tbl` (`user_id`, `username`, `password`, `role_id`, `admission
 (15, '13736', '$2y$10$XBTqxLNKLkcfL72yXcF6tOhIGT2A6y6L6Uf2OOGuLwKLNoPOl6ekS', 5, '13736', NULL),
 (16, '13737', '$2y$10$Os8hHXEJk6Ze1e0BU9bLp.rqyptQd.9/f.cXFuV505AG7.gqTYcdC', 5, '13737', NULL),
 (17, '13738', '$2y$10$cDs940Vbi.0JgcsftPmLCemWfamVFJboS.gysNBO1Kk.dVfma/XgO', 5, '13738', NULL),
-(18, '11111111', '$2y$10$Aet1JSYoxY7HESJo.ruea.O5mO1kyhEWedRTBXkZ0oGQ6LA8CIYsW', 4, '', '11111111'),
-(20, '13739', '$2y$10$MLJj/mP3zoRaKlu8bdh/xOwzfjE2oy7K9yEl116jZnrPbfRdTbZ5a', 5, '13739', NULL);
+(20, '13739', '$2y$10$MLJj/mP3zoRaKlu8bdh/xOwzfjE2oy7K9yEl116jZnrPbfRdTbZ5a', 5, '13739', NULL),
+(21, '13740', '$2y$10$89pAfmtI8b5xTf3yyHV9vefMJHbgm1BtDoKNV1d8J7jZcrQgpkluq', 5, '13740', NULL),
+(22, '19741', '$2y$10$t5dsU0RTWo3Fd4H/RmrZGuWvedqbdDktw9gbQZjwg7g6aDZbiqHUW', 5, '19741', NULL);
 
 --
 -- Indexes for dumped tables
@@ -545,9 +559,7 @@ ALTER TABLE `al_marks_tbl`
   ADD PRIMARY KEY (`id`),
   ADD KEY `std_id` (`std_id`),
   ADD KEY `sub_id` (`sub_id`),
-  ADD KEY `class_id` (`grade_id`),
-  ADD KEY `grade_id` (`grade_id`),
-  ADD KEY `class_id_2` (`class_id`);
+  ADD KEY `grade_class_id` (`grade_class_id`);
 
 --
 -- Indexes for table `al_subjects_tbl`
@@ -689,13 +701,13 @@ ALTER TABLE `1-11_marks_tbl`
 -- AUTO_INCREMENT for table `al_marks_tbl`
 --
 ALTER TABLE `al_marks_tbl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `al_subjects_tbl`
 --
 ALTER TABLE `al_subjects_tbl`
-  MODIFY `al_sub_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `al_sub_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `al_subject_stream_tbl`
@@ -713,13 +725,13 @@ ALTER TABLE `class_tbl`
 -- AUTO_INCREMENT for table `grade_class_tbl`
 --
 ALTER TABLE `grade_class_tbl`
-  MODIFY `grade_class_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `grade_class_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `grade_subject_tbl`
 --
 ALTER TABLE `grade_subject_tbl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
 
 --
 -- AUTO_INCREMENT for table `grade_tbl`
@@ -743,13 +755,13 @@ ALTER TABLE `section_tbl`
 -- AUTO_INCREMENT for table `student_class_tbl`
 --
 ALTER TABLE `student_class_tbl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `student_tbl`
 --
 ALTER TABLE `student_tbl`
-  MODIFY `std_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `std_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `subject_tbl`
@@ -761,7 +773,7 @@ ALTER TABLE `subject_tbl`
 -- AUTO_INCREMENT for table `teacher_class_tbl`
 --
 ALTER TABLE `teacher_class_tbl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `teacher_tbl`
@@ -779,7 +791,7 @@ ALTER TABLE `user_role_tbl`
 -- AUTO_INCREMENT for table `user_tbl`
 --
 ALTER TABLE `user_tbl`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables
@@ -798,8 +810,7 @@ ALTER TABLE `1-11_marks_tbl`
 ALTER TABLE `al_marks_tbl`
   ADD CONSTRAINT `al_marks_tbl_ibfk_1` FOREIGN KEY (`std_id`) REFERENCES `student_tbl` (`std_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `al_marks_tbl_ibfk_2` FOREIGN KEY (`sub_id`) REFERENCES `subject_tbl` (`sub_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `al_marks_tbl_ibfk_3` FOREIGN KEY (`grade_id`) REFERENCES `grade_tbl` (`grade_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `al_marks_tbl_ibfk_4` FOREIGN KEY (`class_id`) REFERENCES `class_tbl` (`class_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `al_marks_tbl_ibfk_3` FOREIGN KEY (`grade_class_id`) REFERENCES `grade_class_tbl` (`grade_class_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `al_subjects_tbl`

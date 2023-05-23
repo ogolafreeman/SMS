@@ -60,6 +60,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                   <td>$full_name</td>";
                             $count = 0;
                             $total = 0;
+                            $avg = 0;
                             foreach ($sub_array as $sub_id) {
                                 $sql7 = "SELECT marks FROM al_marks_tbl WHERE sub_id='$sub_id' AND std_id='$std_id' AND year='$year' AND term='$term'";
                                 $result7 = mysqli_query($con, $sql7);
@@ -67,15 +68,26 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                     $m = mysqli_fetch_assoc($result7);
                                     $marks = $m['marks'];
                                     // echo "<td>$marks</td>";
-                                    $total += $marks;
-                                    echo "<td><input type='text' value='$marks' class='form-control' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]'/></td>";
+                                    if ($marks == 0) {
+                                        echo "<td><input type='text' value='AB' class='form-control' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]'/></td>";
+                                    } else {
+                                        echo "<td><input type='text' value='$marks' class='form-control' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]'/></td>";
+                                        $total += $marks;
+                                    }
                                     $count += 1;
                                 } else {
-                                    echo "<td><input type='text' value='' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]' class='form-control'/></td>";
+                                    echo "<td><input type='text' value='AB' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]' class='form-control'/></td>";
+                                    // $sql8 = "SELECT * FROM al_marks";
                                 }
                             }
                             echo "<td><input type='text' value='" . $total . "' class='form-control' readonly/></td>";
-                            echo "<td><input type='text' value='" . round($total / $count, 2) . "' class='form-control' readonly/></td>";
+                            if ($count >= 1 && $total >= 1) {
+                                $avg = round($total / $count, 2);
+                                echo "<td><input type='text' value='" . $avg . "' class='form-control' readonly/></td>";
+                            } else {
+                                echo "<td><input type='text' value='0' class='form-control' readonly/></td>";
+                            }
+
 
                             echo "</tr>";
                         } else {
