@@ -8,30 +8,106 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
     $class_id = $_POST['class'];
     $year = $_POST['year'];
     $term = $_POST['term'];
+    $stream_id = $_POST['stream'];
 
-    // // to get the grade_id from grade_tbl
-    // $sql1 = "SELECT grade_id FROM grade_tbl WHERE grade_name='$grade'";
-    // $result1 = mysqli_query($con, $sql1);
-    // $g_data = mysqli_fetch_assoc($result1);
-    // $grade_id = $g_data['grade_id'];
+    // arrays
+    $sub_array = array();
 
-    // echo "<thead><tr><th scope='col'>Admission No.</th><th scope='col'>Full Name</th>"; // DONT FORGET TO CLOSE THE <THEAD> TAG
+    $sql1 = "SELECT grade_id FROM grade_tbl WHERE grade_name='$grade'";
+    $result1 = mysqli_query($con, $sql1);
+    if (mysqli_num_rows($result1) == 1) {
+        $g = mysqli_fetch_assoc($result1);
+        $grade_id = $g['grade_id'];
 
-    // if ($grade >= 12) {
-    //     // TO GET THE UNIQUE SUBJECTS IN THE AL_MARKS_TBL
-    //     $sql2 = "SELECT DISTINCT sub_id FROM al_marks_tbl";
-    //     $result2 = mysqli_query($con, $sql2);
-    //     if(mysqli_num_rows($result2) > 0) {
-    //         while ($row1 = mysqli_fetch_assoc($result2)) {
-    //             $sub_id = $row1['sub_id'];
+        $sql2 = "SELECT sub_id FROM grade_subject_tbl WHERE stream_id='$stream_id' AND grade_id='$grade_id' AND year='$year'";
+        $result2 = mysqli_query($con, $sql2);
+        if (mysqli_num_rows($result2) > 0) {
+            echo "<thead><tr><th>Admission No.</td><th>Name</td>";
+            while ($row1 = mysqli_fetch_assoc($result2)) {
+                $sub_id = $row1['sub_id'];
+                array_push($sub_array, $sub_id);
+                $sql3 = "SELECT sub_code FROM subject_tbl WHERE sub_id='$sub_id'";
+                $result3 = mysqli_query($con, $sql3);
+                $s_name = mysqli_fetch_assoc($result3);
+                $sub_name = $s_name['sub_code'];
 
-    //             $sql3 = "SELECT sub_name FROM subject_tbl WHERE sub_id='$sub_id'";
-    //             $result3 = mysqli_query($con, $sql3);
-    //             $row2 = mysqli_fetch_assoc($result3);
-    //             $sub_name = $row2['sub_name'];
-    //             echo "<th scope='col'>$sub_name</th>";
-    //         }
-    //     }
-    // }
-    // echo "<th scope='col'>Total</th></thead></tr>";
+                echo "<th>$sub_name</td>";
+            }
+            echo "<th>Total</th><th>Average</th></tr></thead>";
+            //     $sql = "SELECT * FROM user_tbl ut INNER JOIN user_role_tbl urt ON 
+            // (ut.role_id = urt.role_id) WHERE (ut.username = '$uname')";
+            $sql4 = "SELECT grade_class_id FROM grade_class_tbl WHERE grade_id='$grade_id' AND class_id='$class_id' AND year='$year'";
+            $result4 = mysqli_query($con, $sql4);
+            if (mysqli_num_rows($result4) == 1) {
+                $grd_cls = mysqli_fetch_assoc($result4);
+                $grade_class_id = $grd_cls['grade_class_id'];
+
+                echo "<tbody><tr>";
+
+                $sql5 = "SELECT std_id FROM student_class_tbl WHERE grade_class_id='$grade_class_id'";
+                $result5 = mysqli_query($con, $sql5);
+                if (mysqli_num_rows($result5) > 0) {
+                    while ($row2 = mysqli_fetch_assoc($result5)) {
+                        $std_id = $row2['std_id'];
+                        $sql6 = "SELECT std_id, admission_no, full_name FROM student_tbl WHERE status='1' AND std_id='$std_id'";
+                        $result6 = mysqli_query($con, $sql6);
+                        if (mysqli_num_rows($result6)  == 1) {
+                            $std = mysqli_fetch_assoc($result6);
+                            $admission_no = $std['admission_no'];
+                            $full_name = $std['full_name'];
+                            // $std_id = $std['std_id'];
+                            echo "<td>$admission_no</td>
+                                  <td>$full_name</td>";
+                            $count = 0;
+                            $total = 0;
+                            foreach ($sub_array as $sub_id) {
+                                $sql7 = "SELECT marks FROM al_marks_tbl WHERE sub_id='$sub_id' AND std_id='$std_id' AND year='$year' AND term='$term'";
+                                $result7 = mysqli_query($con, $sql7);
+                                if (mysqli_num_rows($result7) == 1) {
+                                    $m = mysqli_fetch_assoc($result7);
+                                    $marks = $m['marks'];
+                                    // echo "<td>$marks</td>";
+                                    $total += $marks;
+                                    echo "<td><input type='text' value='$marks' class='form-control' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]'/></td>";
+                                    $count += 1;
+                                } else {
+                                    echo "<td><input type='text' value='' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]' class='form-control'/></td>";
+                                }
+                            }
+                            echo "<td><input type='text' value='" . $total . "' class='form-control' readonly/></td>";
+                            echo "<td><input type='text' value='" . round($total / $count, 2) . "' class='form-control' readonly/></td>";
+
+                            echo "</tr>";
+                        } else {
+                            // raise an error -> no student record in student_tbl
+                            // $em = "no student record in student_tbl!";
+                            // header("Location: show-marks.php?error=$em");
+                            // exit;
+                        }
+                    }
+                    echo "</tbody>";
+                } else {
+                    // raise an error -> no records in student_class_tbl
+                    // $em = "no student record in student_class_tbl!";
+                    // header("Location: show-marks.php?error=$em");
+                    // exit;
+                }
+            } else {
+                // raise an error -> no records or multiple items deteced in grade_tbl
+                // $em = "no records or multiple items deteced in grade_tbl";
+                // header("Location: show-marks.php?error=$em");
+                // exit;
+            }
+        } else {
+            // no subjects assigned to grades!
+            // $em = "no subjects assigned to grades!";
+            // header("Location: show-marks.php?error=$em");
+            // exit;
+        }
+    } else {
+        // raise an error -> no record in grade_tbl
+        // $em = "no record in grade_tbl";
+        // header("Location: show-marks.php?error=$em");
+        // exit;
+    }
 }

@@ -16,8 +16,17 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         <title>Exam Marks - Admin</title>
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <script src="../../js/jquery-3.6.3.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="../../js/jquery-3.6.3.min.js"></script>
+        <!-- <script src="../../js/datatables.min.js"></script>
+        <script src="../../css/datatables.css"></script>
+        <style type="text/css">
+            .btnAdd {
+              text-align: right;
+              width: 83%;
+              margin-bottom: 20px;
+            }
+          </style> -->
     </head>
 
     <body class="sb-nav-fixed">
@@ -70,6 +79,22 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         <h3>Apply Filters</h3>
                         <hr>
                         <div class="mb-3">
+                            <label class="form-label">Stream</label>
+                            <select name="stream" class="form-select streamSelect" required>
+                                <!-- <option value="">-- Select Grade --</option> -->
+                                <?php
+                                include '../../controls/connection.php';
+                                $sql = "SELECT * FROM al_subject_stream_tbl";
+                                $result = mysqli_query($con, $sql);
+                                while ($ri = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <option value="<?php echo $ri['stream_id']; ?>"><?php echo $ri['stream_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
                             <label class="form-label">Grade</label>
                             <select name="grade" class="form-select gradeSelect" required>
                                 <!-- <option value="">-- Select Grade --</option> -->
@@ -88,7 +113,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Class</label>
-                            <select name="grade" class="form-select classSelect" required>
+                            <select name="class" class="form-select classSelect" required>
                                 <!-- <option value="">-- Select Grade --</option> -->
                                 <?php
                                 include '../../controls/connection.php';
@@ -104,10 +129,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
                         <div class="mb-3">
                             <label class="form-label">Year / A/L Year</label>
-                            <select name="teacher" class="form-select yearSelect" required>
+                            <select name="year" class="form-select yearSelect" required>
                                 <?php
                                 include '../../controls/connection.php';
-                                $sql = "SELECT DISTINCT year FROM grade_subject_tbl";
+                                $sql = "SELECT DISTINCT year FROM grade_subject_tbl ORDER BY year ASC";
                                 $result = mysqli_query($con, $sql);
                                 while ($ri = mysqli_fetch_assoc($result)) {
                                 ?>
@@ -119,36 +144,27 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
                         <div class="mb-3">
                             <label class="form-label">Term</label>
-                            <select name="teacher" class="form-select termSelect" required>
-                                <?php
-                                include '../../controls/connection.php';
-                                $sql = "SELECT DISTINCT term FROM al_marks_tbl";
-                                $result = mysqli_query($con, $sql);
-                                while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <option value="<?php echo $ri['term']; ?>"><?php echo $ri['term']; ?>
-                                    </option>
-                                <?php } ?>
+                            <select name="term" class="form-select termSelect" required>
+                                <option value="1st Term">1st Term</option>
+                                <option value="2nd Term">2nd Term</option>
+                                <option value="3rd Term">3rd Term</option>
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-success show" name="show">Show</button>
+                        <button type="submit" class="btn btn-info" name="show">Show</button>
                     </form>
 
                 </div>
 
-                <div class="container mt-5">
+                <div class="container mt-5 cnts">
                     <h3>Filtered Results</h3>
                     <hr>
 
-                    <table class="table table-bordered" id='tableData'>
-                        <!-- <thead> -->
-                        <!-- <th scope="col">Admission No.</th>
-                                <th scope="col">Name</th> -->
-                        <!-- Rest columns generates by php -->
-                        <!-- </thead> -->
-                        <!-- <tbody></tbody> -->
-                    </table>
+                    <form action="../../data/enter-marks.php" method='post'>
+                        <table class="table table-bordered" id='tableData'></table>
+                        <input type="submit" name="save" class="btn btn-success" value="Save">
+                    </form>
+
                 </div>
 
             </div>
@@ -158,9 +174,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
             <script>
                 $(document).ready(function() {
+                    $(".cnts").hide();
                     $('#form').submit(function(event) {
                         event.preventDefault();
                         var g = $("select.gradeSelect").children("option:selected").val();
+                        var s = $("select.streamSelect").children("option:selected").val();
                         var c = $("select.classSelect").children("option:selected").val();
                         var y = $("select.yearSelect").children("option:selected").val();
                         var t = $("select.termSelect").children("option:selected").val();
@@ -171,12 +189,14 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             url: "view-filtered-marks.php",
                             type: "POST",
                             data: {
+                                stream: s,
                                 grade: g,
                                 class: c,
                                 year: y,
                                 term: t
                             },
                             success: function(data) {
+                                $(".cnts").show();
                                 $("#tableData").html(data);
                             },
                             error: function(jqXHR, textStatus, errorThrown) {
