@@ -78,77 +78,87 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                     <form method="post" class="shadow p-3  mt-5 form-w" id="form">
                         <h3>Apply Filters</h3>
                         <hr>
-                        <div class="mb-3">
-                            <label class="form-label">Stream</label>
-                            <select name="stream" class="form-select streamSelect" required>
-                                <!-- <option value="">-- Select Grade --</option> -->
-                                <?php
-                                include '../../controls/connection.php';
-                                $sql = "SELECT * FROM al_subject_stream_tbl";
-                                $result = mysqli_query($con, $sql);
-                                while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <option value="<?php echo $ri['stream_id']; ?>"><?php echo $ri['stream_name']; ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="mb-3">
+                                    <label class="form-label">Stream</label>
+                                    <select name="stream" class="form-select streamSelect" required>
+                                        <!-- <option value="">-- Select Grade --</option> -->
+                                        <?php
+                                        include '../../controls/connection.php';
+                                        $sql = "SELECT * FROM al_subject_stream_tbl";
+                                        $result = mysqli_query($con, $sql);
+                                        while ($ri = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                            <option value="<?php echo $ri['stream_id']; ?>"><?php echo $ri['stream_name']; ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Grade</label>
-                            <select name="grade" class="form-select gradeSelect" required>
-                                <!-- <option value="">-- Select Grade --</option> -->
-                                <?php
-                                include '../../controls/connection.php';
-                                $currentYear = date("Y");
-                                $currentYear1 = date("Y") + 1;
-                                $sql = "SELECT * FROM grade_tbl";
-                                $result = mysqli_query($con, $sql);
-                                while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <option value="<?php echo $ri['grade_name']; ?>"><?php echo "Grade " . $ri['grade_name']; ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Class</label>
-                            <select name="class" class="form-select classSelect" required>
-                                <!-- <option value="">-- Select Grade --</option> -->
-                                <?php
-                                include '../../controls/connection.php';
-                                $sql = "SELECT * FROM class_tbl";
-                                $result = mysqli_query($con, $sql);
-                                while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <option value="<?php echo $ri['class_id']; ?>"><?php echo $ri['class_name']; ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Year / A/L Year</label>
-                            <select name="year" class="form-select yearSelect" required>
-                                <?php
-                                include '../../controls/connection.php';
-                                $sql = "SELECT DISTINCT year FROM grade_subject_tbl ORDER BY year ASC";
-                                $result = mysqli_query($con, $sql);
-                                while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <option value="<?php echo $ri['year']; ?>"><?php echo $ri['year']; ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Term</label>
-                            <select name="term" class="form-select termSelect" required>
-                                <option value="1st Term">1st Term</option>
-                                <option value="2nd Term">2nd Term</option>
-                                <option value="3rd Term">3rd Term</option>
-                            </select>
+                            <div class="col-md-2">
+                                <div class="mb-3">
+                                    <label class="form-label">Grade</label>
+                                    <select name="grade" class="form-select gradeSelect" required>
+                                        <!-- <option value="">-- Select Grade --</option> -->
+                                        <?php
+                                        include '../../controls/connection.php';
+                                        $currentYear = date("Y");
+                                        $currentYear1 = date("Y") + 1;
+                                        $sql = "SELECT * FROM grade_tbl";
+                                        $result = mysqli_query($con, $sql);
+                                        while ($ri = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                            <option value="<?php echo $ri['grade_name']; ?>"><?php echo "Grade " . $ri['grade_name']; ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-3">
+                                    <label class="form-label">Class</label>
+                                    <select name="class" class="form-select classSelect" required>
+                                        <!-- <option value="">-- Select Grade --</option> -->
+                                        <?php
+                                        include '../../controls/connection.php';
+                                        $sql = "SELECT * FROM class_tbl";
+                                        $result = mysqli_query($con, $sql);
+                                        while ($ri = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                            <option value="<?php echo $ri['class_id']; ?>"><?php echo $ri['class_name']; ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-3">
+                                    <label class="form-label">A/L Year</label>
+                                    <select name="year" class="form-select yearSelect" required>
+                                        <?php
+                                        include '../../controls/connection.php';
+                                        $sql = "SELECT DISTINCT year FROM grade_subject_tbl ORDER BY year ASC";
+                                        $result = mysqli_query($con, $sql);
+                                        while ($ri = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                            <option value="<?php echo $ri['year']; ?>"><?php echo $ri['year']; ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-3">
+                                    <label class="form-label">Term</label>
+                                    <select name="term" class="form-select termSelect" required>
+                                        <option value="1st Term">1st Term</option>
+                                        <option value="2nd Term">2nd Term</option>
+                                        <option value="3rd Term">3rd Term</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-info" name="show">Show</button>
@@ -159,7 +169,24 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                 <div class="container mt-5 cnts">
                     <h3>Filtered Results</h3>
                     <hr>
-
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h3>Grade: <span style="color: red" id="grade"></span></h3>
+                        </div>
+                        <div class="col-md-3">
+                            <h3>Class: <span style="color: red" id="class">ET - 2</span></h3>
+                        </div>
+                        <div class="col-md-3">
+                            <h3>Term: <span style="color: red" id="term"></span></h3>
+                        </div>
+                        <div class="col-md-3">
+                            <h3>A/L Year: <span style="color: red" id="year"></span></h3><br>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
                     <form action="../../data/enter-marks.php" method='post'>
                         <table class="table table-bordered" id='tableData'></table>
                         <input type="submit" name="save" class="btn btn-success" value="Save">
@@ -196,7 +223,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 term: t
                             },
                             success: function(data) {
+                                var class_ = $(".classSelect option:selected").text();
                                 $(".cnts").show();
+                                $("#grade").text("Grade " + g);
+                                $("#class").text(class_);
+                                $("#term").text(t);
+                                $("#year").text(y);
                                 $("#tableData").html(data);
                             },
                             error: function(jqXHR, textStatus, errorThrown) {

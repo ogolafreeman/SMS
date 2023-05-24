@@ -12,6 +12,14 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
     // arrays
     $sub_array = array();
+    $class_name = "";
+
+    $sql9 = "SELECT class_name FROM class_tbl WHERE class_id='$class_id'";
+    $result9 = mysqli_query($con, $sql9);
+    if(mysqli_num_rows($result9) == 1) {
+        $d = mysqli_fetch_assoc($result9);
+        $class_name = $d['class_name'];
+    }
 
     $sql1 = "SELECT grade_id FROM grade_tbl WHERE grade_name='$grade'";
     $result1 = mysqli_query($con, $sql1);
@@ -62,23 +70,30 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             $total = 0;
                             $avg = 0;
                             foreach ($sub_array as $sub_id) {
-                                $sql7 = "SELECT marks FROM al_marks_tbl WHERE sub_id='$sub_id' AND std_id='$std_id' AND year='$year' AND term='$term'";
-                                $result7 = mysqli_query($con, $sql7);
-                                if (mysqli_num_rows($result7) == 1) {
-                                    $m = mysqli_fetch_assoc($result7);
-                                    $marks = $m['marks'];
-                                    // echo "<td>$marks</td>";
-                                    if ($marks == 0) {
-                                        echo "<td><input type='text' value='AB' class='form-control' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]'/></td>";
+                                $sql10 = "SELECT * FROM al_marks_tbl WHERE year='$year' AND term='$term' AND grade_class_id='$grade_class_id'";
+                                $result10 = mysqli_query($con, $sql10);
+                                if(mysqli_num_rows($result10) > 0) {
+                                    $sql7 = "SELECT marks FROM al_marks_tbl WHERE sub_id='$sub_id' AND std_id='$std_id' AND year='$year' AND term='$term'";
+                                    $result7 = mysqli_query($con, $sql7);
+                                    if (mysqli_num_rows($result7) == 1) {
+                                        $m = mysqli_fetch_assoc($result7);
+                                        $marks = $m['marks'];
+                                        // echo "<td>$marks</td>";
+                                        if ($marks == 0) {
+                                            echo "<td><input type='text' value='' class='form-control' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]'/></td>";
+                                        } else {
+                                            echo "<td><input type='text' value='$marks' class='form-control' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]'/></td>";
+                                            $total += $marks;
+                                        }
+                                        $count += 1;
                                     } else {
-                                        echo "<td><input type='text' value='$marks' class='form-control' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]'/></td>";
-                                        $total += $marks;
+                                        echo "<td><input type='text' value='AB' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]' class='form-control'/></td>";
                                     }
-                                    $count += 1;
                                 } else {
-                                    echo "<td><input type='text' value='AB' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]' class='form-control'/></td>";
-                                    // $sql8 = "SELECT * FROM al_marks";
+                                    echo "<script>Swal.fire({icon: 'warning', title: 'Oops...', text: 'No marks found for this term test!'});</script>";
+                                    echo "<td><input type='text' value='' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]' class='form-control'/></td>";
                                 }
+                                
                             }
                             echo "<td><input type='text' value='" . $total . "' class='form-control' readonly/></td>";
                             if ($count >= 1 && $total >= 1) {
@@ -92,17 +107,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             echo "</tr>";
                         } else {
                             // raise an error -> no student record in student_tbl
-                            // $em = "no student record in student_tbl!";
-                            // header("Location: show-marks.php?error=$em");
-                            // exit;
+                            echo "<script>Swal.fire({icon: 'warning', title: 'Oops...', text: 'No Students!'});</script>";
                         }
                     }
                     echo "</tbody>";
                 } else {
                     // raise an error -> no records in student_class_tbl
-                    // $em = "no student record in student_class_tbl!";
-                    // header("Location: show-marks.php?error=$em");
-                    // exit;
+                    // echo "<script>Swal.fire({icon: 'warning', title: 'Oops...', text: 'No Records!'});</script>";
                 }
             } else {
                 // raise an error -> no records or multiple items deteced in grade_tbl
@@ -112,14 +123,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
             }
         } else {
             // no subjects assigned to grades!
-            // $em = "no subjects assigned to grades!";
-            // header("Location: show-marks.php?error=$em");
-            // exit;
+            echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No Students!'});</script>";
         }
     } else {
         // raise an error -> no record in grade_tbl
-        // $em = "no record in grade_tbl";
-        // header("Location: show-marks.php?error=$em");
-        // exit;
+        echo "<script>Swal.fire({icon: 'error', title: 'Oops...', text: 'No Grades'});</script>";
     }
 }
