@@ -13,7 +13,7 @@ Student Management System for Richmond College Technology Section
 
 > Project Details :
 - For : Richmond College Technology Section | YCS
-- Project Progress : 4%
+- Project Progress : 25%
 - Start Date : 12.03.2023
 - End Date : Pending...
 - Release Date : Pending...
