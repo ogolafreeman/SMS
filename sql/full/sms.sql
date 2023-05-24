@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2023 at 09:54 PM
+-- Generation Time: May 24, 2023 at 02:54 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -64,7 +64,22 @@ INSERT INTO `al_marks_tbl` (`id`, `std_id`, `grade_class_id`, `year`, `term`, `s
 (35, 10, 12, 2024, '1st Term', 5, 98),
 (36, 10, 12, 2024, '1st Term', 6, 94),
 (37, 10, 12, 2024, '1st Term', 7, 89),
-(38, 10, 12, 2024, '1st Term', 21, 0);
+(38, 10, 12, 2024, '1st Term', 21, 0),
+(48, 5, 11, 2023, '1st Term', 5, 47),
+(49, 5, 11, 2023, '1st Term', 6, 58),
+(50, 5, 11, 2023, '1st Term', 7, 67),
+(51, 5, 11, 2023, '1st Term', 29, 98),
+(52, 5, 11, 2023, '1st Term', 26, 0),
+(53, 8, 11, 2023, '1st Term', 5, 99),
+(54, 8, 11, 2023, '1st Term', 6, 97),
+(55, 8, 11, 2023, '1st Term', 7, 98),
+(56, 8, 11, 2023, '1st Term', 29, 95),
+(57, 8, 11, 2023, '1st Term', 26, 0),
+(58, 6, 11, 2023, '1st Term', 5, 0),
+(59, 6, 11, 2023, '1st Term', 6, 97),
+(60, 6, 11, 2023, '1st Term', 7, 67),
+(61, 6, 11, 2023, '1st Term', 29, 78),
+(62, 6, 11, 2023, '1st Term', 26, 58);
 
 -- --------------------------------------------------------
 
@@ -141,7 +156,9 @@ INSERT INTO `al_subjects_tbl` (`al_sub_id`, `sub_id`, `stream_id`, `order_id`) V
 (62, 29, 3, 4),
 (63, 29, 4, 4),
 (64, 29, 5, 4),
-(65, 29, 5, 4);
+(65, 29, 5, 4),
+(66, 26, 3, 3),
+(67, 26, 4, 3);
 
 -- --------------------------------------------------------
 
@@ -255,7 +272,8 @@ INSERT INTO `grade_subject_tbl` (`id`, `grade_id`, `stream_id`, `year`, `sub_id`
 (191, 1, 5, '2024', 23),
 (192, 1, 5, '2024', 24),
 (193, 1, 5, '2024', 25),
-(194, 2, 3, '2023', 29);
+(194, 2, 3, '2023', 29),
+(195, 2, 3, '2023', 26);
 
 -- --------------------------------------------------------
 
@@ -701,13 +719,13 @@ ALTER TABLE `1-11_marks_tbl`
 -- AUTO_INCREMENT for table `al_marks_tbl`
 --
 ALTER TABLE `al_marks_tbl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `al_subjects_tbl`
 --
 ALTER TABLE `al_subjects_tbl`
-  MODIFY `al_sub_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `al_sub_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `al_subject_stream_tbl`
@@ -731,7 +749,7 @@ ALTER TABLE `grade_class_tbl`
 -- AUTO_INCREMENT for table `grade_subject_tbl`
 --
 ALTER TABLE `grade_subject_tbl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
 
 --
 -- AUTO_INCREMENT for table `grade_tbl`
