@@ -38,7 +38,7 @@ while ($row = mysqli_fetch_assoc($result1)) {
     	<td>$year</td>
     	<td>";
 
-	$sql2 = "SELECT sub_id FROM grade_subject_tbl WHERE grade_id='" . $row['grade_id'] . "' AND stream_id='" . $row['stream_id'] . "'";
+	$sql2 = "SELECT sub_id FROM grade_subject_tbl WHERE grade_id='" . $row['grade_id'] . "' AND stream_id='" . $row['stream_id'] . "' ORDER BY order_id ASC";
 	$result2 = mysqli_query($con, $sql2);
 	while ($row2 = mysqli_fetch_assoc($result2)) {
 		array_push($sub_arr, $row2['sub_id']);

@@ -12,24 +12,93 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 				// echo "Key: ". $key. "<br/>". "<br/>";
 				$data = explode(", ", $key); // 0 -> std_id, 1-> sub_id, 2 -> grade_class_id, 3 -> term, 4 -> year
 
-				$sql1 = "SELECT * FROM al_marks_tbl WHERE std_id='" . $data[0] . "' AND grade_class_id='" . $data[2] . "' AND sub_id='" . $data[1] . "' AND term='" . $data[3] . "' AND year='" . $data[4] . "'";
-				$result1 = mysqli_query($con, $sql1);
-				if (mysqli_num_rows($result1) < 1) {
-					$sql2 = "INSERT INTO al_marks_tbl (std_id, grade_class_id, year, term, sub_id, marks) VALUES ('" . $data[0] . "', '" . $data[2] . "', '" . $data[4] . "', '" . $data[3] . "', '" . $data[1] . "', '$m')";
-					$result2 = mysqli_query($con, $sql2);
-					$state = 1;
-				} else {
+				$std_id = $data[0];
+				$sub_id = $data[1];
+				$grade_class_id = $data[2];
+				$term = $data[3];
+				$year = $data[4];
 
-					if (mysqli_num_rows($result1) == 1) {
-						$sql2 = "UPDATE al_marks_tbl SET marks='$m' WHERE std_id='" . $data[0] . "' AND grade_class_id='" . $data[2] . "' AND term='" . $data[3] . "' AND year='" . $data[4] . "' AND sub_id='" . $data[1] . "'";
-						$result2 = mysqli_query($con, $sql2);
-						$state = 2;
+				if ($m == "") {
+					$sql3 = "SELECT * FROM al_absent_tbl WHERE std_id='$std_id' AND grade_class_id='$grade_class_id' AND sub_id='$sub_id' AND term='$term' AND year='$year'";
+					$result3 = mysqli_query($con, $sql3);
+					if (mysqli_num_rows($result3) < 1) {
+						$sql1 = "SELECT * FROM al_marks_tbl WHERE std_id='$std_id' AND grade_class_id='$grade_class_id' AND sub_id='$sub_id' AND term='$term' AND year='$year'";
+						$result1 = mysqli_query($con, $sql1);
+						if (mysqli_num_rows($result1) < 1) {
+							$sql2 = "INSERT INTO al_marks_tbl (std_id, grade_class_id, year, term, sub_id, marks) VALUES ('$std_id', '$grade_class_id', '$year', '$term', '$sub_id', '')";
+							$result2 = mysqli_query($con, $sql2);
+							$state = 1;
+						} else {
+							if (mysqli_num_rows($result1) == 1) {
+								$sql2 = "UPDATE al_marks_tbl SET marks='' WHERE std_id='$std_id' AND grade_class_id='$grade_class_id' AND term='$term' AND year='$year' AND sub_id='$sub_id'";
+								$result2 = mysqli_query($con, $sql2);
+								$state = 2;
+							} else {
+								// $em = "Data Already Exist";
+								// header("Location: ../pages/admin/show-marks.php?error=$em");
+								// exit;
+							}
+						}
 					} else {
-						$em = "Data Already Exist";
-						header("Location: ../pages/admin/show-marks.php?error=$em");
-						exit;
+						if (mysqli_num_rows($result3) == 1) {
+							$sql4 = "DELETE FROM al_absent_tbl WHERE std_id='$std_id' AND grade_class_id='$grade_class_id' AND sub_id='$sub_id' AND term='$term' AND year='$year'";
+							if (mysqli_query($con, $sql4)) {
+								$sql2 = "UPDATE al_marks_tbl SET marks='' WHERE std_id='$std_id' AND grade_class_id='$grade_class_id' AND term='$term' AND year='$year' AND sub_id='$sub_id'";
+								$result2 = mysqli_query($con, $sql2);
+								$state = 2;
+							}
+						}
+					}
+				} elseif (strtolower($m) == "ab") {
+					$sql4 = "DELETE FROM al_marks_tbl WHERE std_id='$std_id' AND grade_class_id='$grade_class_id' AND sub_id='$sub_id' AND term='$term' AND year='$year'";
+					if (mysqli_query($con, $sql4)) {
+						$sql6 = "INSERT INTO al_marks_tbl (std_id, grade_class_id, year, term, sub_id, marks) VALUES ('$std_id', '$grade_class_id', '$year', '$term', '$sub_id', '0')";
+						if (mysqli_query($con, $sql6)) {
+							$sql3 = "SELECT * FROM al_absent_tbl WHERE std_id='$std_id' AND grade_class_id='$grade_class_id' AND sub_id='$sub_id' AND term='$term' AND year='$year'";
+							$result3 = mysqli_query($con, $sql3);
+							if (mysqli_num_rows($result3) < 1) {
+								$sql2 = "INSERT INTO al_absent_tbl (std_id, grade_class_id, year, term, sub_id) VALUES ('$std_id', '$grade_class_id', '$year', '$term', '$sub_id')";
+								$result2 = mysqli_query($con, $sql2);
+								$state = 2;
+							}
+						}
+					} else {
+						continue;
+					}
+				} else {
+					$sql3 = "SELECT * FROM al_absent_tbl WHERE std_id='$std_id' AND grade_class_id='$grade_class_id' AND sub_id='$sub_id' AND term='$term' AND year='$year'";
+					$result3 = mysqli_query($con, $sql3);
+					if (mysqli_num_rows($result3) < 1) {
+						$sql1 = "SELECT * FROM al_marks_tbl WHERE std_id='$std_id' AND grade_class_id='$grade_class_id' AND sub_id='$sub_id' AND term='$term' AND year='$year'";
+						$result1 = mysqli_query($con, $sql1);
+						if (mysqli_num_rows($result1) < 1) {
+							$sql2 = "INSERT INTO al_marks_tbl (std_id, grade_class_id, year, term, sub_id, marks) VALUES ('$std_id', '$grade_class_id', '$year', '$term', '$sub_id', '$m')";
+							$result2 = mysqli_query($con, $sql2);
+							$state = 1;
+						} else {
+							if (mysqli_num_rows($result1) == 1) {
+								$sql2 = "UPDATE al_marks_tbl SET marks='$m' WHERE std_id='$std_id' AND grade_class_id='$grade_class_id' AND term='$term' AND year='$year' AND sub_id='$sub_id'";
+								$result2 = mysqli_query($con, $sql2);
+								$state = 2;
+							} else {
+								// $em = "Data Already Exist";
+								// header("Location: ../pages/admin/show-marks.php?error=$em");
+								// exit;
+							}
+						}
+					} else {
+						if (mysqli_num_rows($result3) == 1) {
+							$sql4 = "DELETE FROM al_absent_tbl WHERE std_id='$std_id' AND grade_class_id='$grade_class_id' AND sub_id='$sub_id' AND term='$term' AND year='$year'";
+							if (mysqli_query($con, $sql4)) {
+								$sql2 = "UPDATE al_marks_tbl SET marks='$m' WHERE std_id='$std_id' AND grade_class_id='$grade_class_id' AND term='$term' AND year='$year' AND sub_id='$sub_id'";
+								$result2 = mysqli_query($con, $sql2);
+								$state = 2;
+							}
+						}
 					}
 				}
+
+				// echo "Student ID: $std_id" . " " . "Subject: $sub_id" . " " . "Marks: $m<br>";
 			}
 		}
 

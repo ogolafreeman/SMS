@@ -104,8 +104,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Subjects</label>
-                            <div class="subs"></div>
+                            <!-- <label class="form-label">Subjects</label> -->
+                            <div>
+                                <table class="table subs"></table>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary" name="add">Add</button>
 
@@ -149,7 +151,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                     <td><?php echo $row5['stream_name']; ?></td>
 
                                     <?php
-                                    $sql2 = "SELECT sub_id FROM grade_subject_tbl WHERE grade_id='" . $row['grade_id'] . "' AND stream_id='" . $row['stream_id'] . "'";
+                                    $sql2 = "SELECT sub_id FROM grade_subject_tbl WHERE grade_id='" . $row['grade_id'] . "' AND stream_id='" . $row['stream_id'] . "' ORDER BY order_id ASC";
                                     $result2 = mysqli_query($con, $sql2);
                                     while ($row2 = mysqli_fetch_assoc($result2)) {
                                         array_push($sub_arr, $row2['sub_id']);
