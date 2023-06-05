@@ -4,4 +4,4 @@ password - admin
 
 ----- OTHERS -----
 all usernames are in the user_tbl
-Please note: username and password are same (99.5%)
+Please note: username and password are same

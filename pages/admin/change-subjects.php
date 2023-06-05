@@ -118,7 +118,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 											$sub_data = mysqli_fetch_assoc($result2);
 											$sub_name = $sub_data['sub_name'];
 
-											echo '<input type="checkbox" name="subject[]" value="' . $sub_id . '" checked> ' . $sub_name . '<br>';
+											echo '<input type="checkbox" name="subject[]" value="' . $sub_id . '" checked class="form-check-input"> ' . $sub_name . '<br>';
 										}
 									} else {
 										$sql2 = "SELECT sub_name FROM subject_tbl WHERE sub_id='$sub_id'";
@@ -126,7 +126,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 										$sub_data = mysqli_fetch_assoc($result2);
 										$sub_name = $sub_data['sub_name'];
 
-										echo '<input type="checkbox" name="subject[]" value="' . $sub_id . '" > ' . $sub_name . '<br>';
+										echo '<input type="checkbox" name="subject[]" value="' . $sub_id . '" class="form-check-input"> ' . $sub_name . '<br>';
 									}
 								}
 							}

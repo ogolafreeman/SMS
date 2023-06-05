@@ -16,7 +16,7 @@ function getFullNumOfTeachers()
 {
 	//require_once '../controls/connection.php';
 	$con = mysqli_connect('localhost', 'root', '', 'sms');
-	$sql = "SELECT count(*) FROM teacher_tbl WHERE status='1'";
+	$sql = "SELECT count(*) FROM staff_tbl WHERE status='1'";
 	if ($result = mysqli_query($con, $sql)) {
 		$data = mysqli_fetch_assoc($result);
 		$count = $data['count(*)'];

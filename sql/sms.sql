@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2023 at 05:25 PM
+-- Generation Time: Jun 05, 2023 at 05:28 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -191,7 +191,7 @@ CREATE TABLE `grade_class_tbl` (
   `grade_id` int(10) NOT NULL,
   `class_id` int(10) NOT NULL,
   `year` varchar(4) NOT NULL,
-  `teacher_id` int(10) NOT NULL
+  `staff_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -218,7 +218,7 @@ CREATE TABLE `grade_subject_tbl` (
 CREATE TABLE `grade_tbl` (
   `grade_id` int(10) NOT NULL,
   `grade_name` varchar(255) NOT NULL,
-  `teacher_id` int(5) NOT NULL
+  `staff_id` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -257,6 +257,29 @@ INSERT INTO `section_tbl` (`sec_id`, `sec_name`) VALUES
 (2, '6 - 9'),
 (3, '10 - 11'),
 (4, '12 - 13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff_tbl`
+--
+
+CREATE TABLE `staff_tbl` (
+  `staff_id` int(10) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `nic` varchar(255) NOT NULL,
+  `dob` varchar(10) NOT NULL,
+  `staff_no` varchar(255) NOT NULL,
+  `app_date` date NOT NULL,
+  `rc_app_date` date NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `app_subject` varchar(100) NOT NULL,
+  `qualifications` varchar(255) NOT NULL,
+  `sec_id` int(5) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `profile_pic` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -351,7 +374,7 @@ INSERT INTO `subject_tbl` (`sub_id`, `sub_code`, `sub_name`) VALUES
 
 CREATE TABLE `teacher_class_tbl` (
   `id` int(10) NOT NULL,
-  `teacher_id` int(10) NOT NULL,
+  `staff_id` int(10) NOT NULL,
   `grade_class_id` int(10) NOT NULL,
   `year` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -363,29 +386,8 @@ CREATE TABLE `teacher_class_tbl` (
 --
 
 CREATE TABLE `teacher_subject_tbl` (
-  `teacher_id` int(10) NOT NULL,
+  `staff_id` int(10) NOT NULL,
   `sub_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `teacher_tbl`
---
-
-CREATE TABLE `teacher_tbl` (
-  `teacher_id` int(10) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `nic` varchar(255) NOT NULL,
-  `dob` varchar(10) NOT NULL,
-  `teacher_no` varchar(255) NOT NULL,
-  `app_date` date NOT NULL,
-  `rc_app_date` date NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `app_subject` varchar(100) NOT NULL,
-  `sec_id` varchar(5) NOT NULL,
-  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -484,7 +486,7 @@ ALTER TABLE `grade_class_tbl`
   ADD KEY `grade_class_id` (`grade_class_id`),
   ADD KEY `grade_id` (`grade_id`),
   ADD KEY `class_id` (`class_id`),
-  ADD KEY `teacher_id` (`teacher_id`);
+  ADD KEY `teacher_id` (`staff_id`);
 
 --
 -- Indexes for table `grade_subject_tbl`
@@ -501,7 +503,7 @@ ALTER TABLE `grade_subject_tbl`
 ALTER TABLE `grade_tbl`
   ADD PRIMARY KEY (`grade_id`),
   ADD KEY `grade_id` (`grade_id`),
-  ADD KEY `teacher_id` (`teacher_id`);
+  ADD KEY `staff_id` (`staff_id`);
 
 --
 -- Indexes for table `guardian_tbl`
@@ -515,6 +517,15 @@ ALTER TABLE `guardian_tbl`
 --
 ALTER TABLE `section_tbl`
   ADD PRIMARY KEY (`sec_id`),
+  ADD KEY `sec_id` (`sec_id`);
+
+--
+-- Indexes for table `staff_tbl`
+--
+ALTER TABLE `staff_tbl`
+  ADD PRIMARY KEY (`staff_id`),
+  ADD KEY `teacher_id` (`staff_id`),
+  ADD KEY `nic` (`nic`),
   ADD KEY `sec_id` (`sec_id`);
 
 --
@@ -546,24 +557,16 @@ ALTER TABLE `subject_tbl`
 --
 ALTER TABLE `teacher_class_tbl`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `teacher_id` (`teacher_id`),
-  ADD KEY `grade_class_id` (`grade_class_id`);
+  ADD KEY `teacher_id` (`staff_id`),
+  ADD KEY `grade_class_id` (`grade_class_id`),
+  ADD KEY `staff_id` (`staff_id`);
 
 --
 -- Indexes for table `teacher_subject_tbl`
 --
 ALTER TABLE `teacher_subject_tbl`
-  ADD KEY `teacher_id` (`teacher_id`),
-  ADD KEY `sub_id` (`sub_id`);
-
---
--- Indexes for table `teacher_tbl`
---
-ALTER TABLE `teacher_tbl`
-  ADD PRIMARY KEY (`teacher_id`),
-  ADD KEY `teacher_id` (`teacher_id`),
-  ADD KEY `sec_id` (`sec_id`),
-  ADD KEY `nic` (`nic`);
+  ADD KEY `sub_id` (`sub_id`),
+  ADD KEY `staff_id` (`staff_id`);
 
 --
 -- Indexes for table `user_role_tbl`
@@ -652,6 +655,12 @@ ALTER TABLE `section_tbl`
   MODIFY `sec_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `staff_tbl`
+--
+ALTER TABLE `staff_tbl`
+  MODIFY `staff_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `student_class_tbl`
 --
 ALTER TABLE `student_class_tbl`
@@ -674,12 +683,6 @@ ALTER TABLE `subject_tbl`
 --
 ALTER TABLE `teacher_class_tbl`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `teacher_tbl`
---
-ALTER TABLE `teacher_tbl`
-  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_role_tbl`
@@ -733,7 +736,7 @@ ALTER TABLE `al_subjects_tbl`
 ALTER TABLE `grade_class_tbl`
   ADD CONSTRAINT `grade_class_tbl_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `class_tbl` (`class_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `grade_class_tbl_ibfk_2` FOREIGN KEY (`grade_id`) REFERENCES `grade_tbl` (`grade_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `grade_class_tbl_ibfk_3` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_tbl` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `grade_class_tbl_ibfk_3` FOREIGN KEY (`staff_id`) REFERENCES `staff_tbl` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `grade_subject_tbl`
@@ -747,13 +750,19 @@ ALTER TABLE `grade_subject_tbl`
 -- Constraints for table `grade_tbl`
 --
 ALTER TABLE `grade_tbl`
-  ADD CONSTRAINT `grade_tbl_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_tbl` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `grade_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `staff_tbl` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `guardian_tbl`
 --
 ALTER TABLE `guardian_tbl`
   ADD CONSTRAINT `guardian_tbl_ibfk_1` FOREIGN KEY (`std_id`) REFERENCES `student_tbl` (`std_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `staff_tbl`
+--
+ALTER TABLE `staff_tbl`
+  ADD CONSTRAINT `sec_id_from_section_tbl` FOREIGN KEY (`sec_id`) REFERENCES `section_tbl` (`sec_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `student_class_tbl`
@@ -767,14 +776,14 @@ ALTER TABLE `student_class_tbl`
 -- Constraints for table `teacher_class_tbl`
 --
 ALTER TABLE `teacher_class_tbl`
-  ADD CONSTRAINT `teacher_class_tbl_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_tbl` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `teacher_class_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `staff_tbl` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `teacher_class_tbl_ibfk_2` FOREIGN KEY (`grade_class_id`) REFERENCES `grade_class_tbl` (`grade_class_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `teacher_subject_tbl`
 --
 ALTER TABLE `teacher_subject_tbl`
-  ADD CONSTRAINT `teacher_subject_tbl_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_tbl` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `teacher_subject_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `staff_tbl` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `teacher_subject_tbl_ibfk_2` FOREIGN KEY (`sub_id`) REFERENCES `subject_tbl` (`sub_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -782,7 +791,7 @@ ALTER TABLE `teacher_subject_tbl`
 --
 ALTER TABLE `user_tbl`
   ADD CONSTRAINT `user_tbl_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_role_tbl` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_tbl_ibfk_2` FOREIGN KEY (`nic`) REFERENCES `teacher_tbl` (`nic`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `user_tbl_ibfk_2` FOREIGN KEY (`nic`) REFERENCES `staff_tbl` (`nic`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

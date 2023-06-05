@@ -36,15 +36,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                 <div class="container mt-5">
                     <div class="shadow p-3  mt-5 form-w">
                         <div class="row">
-                            <!-- <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label class="form-label">Search By</label>
-                                    <select class="form-select opSelect" required>
-                                        <option value="1">Name</option>
-                                        <option value="2">Admission No.</option>
-                                    </select>
-                                </div>
-                            </div> -->
                             <div class="col-md-5">
                                 <div class="mb-3">
                                     <label class="form-label">Search by Admission No.</label>
@@ -61,16 +52,16 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                         $result = mysqli_query($con, $sql);
                                         while ($ri = mysqli_fetch_assoc($result)) {
                                         ?>
-                                            <option value="<?php echo $ri['term']; ?>"><?php echo $ri['term'];?>
+                                            <option value="<?php echo $ri['term']; ?>"><?php echo $ri['term']; ?>
                                             </option>
                                         <?php } ?>
                                     </select>
                                 </div>
                             </div>
                             <!-- <div class="col-md-5"> -->
-                                <div class="mb-3">
-                                    <button class="btn btn-secondary" id="search">Search</button>
-                                </div>
+                            <div class="mb-3">
+                                <button class="btn btn-success" id="search">Search</button>
+                            </div>
                             <!-- </div> -->
                         </div>
                     </div>
@@ -102,7 +93,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         },
                         success: function(data) {
                             $("#data").html(data);
-                            },
+                        },
                         error: function(jqXHR, textStatus, errorThrown) {
                             console.log("Error: " + textStatus + " - " + errorThrown);
                         }

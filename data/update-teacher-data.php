@@ -14,9 +14,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         $email = $_POST['email'];
         $app_subject = $_POST['app_subject'];
         $sec_id = $_POST['sec_id'];
+        $qualifications = $_POST['qualifications'];
 
-        $sql = "UPDATE teacher_tbl SET first_name='$fname', last_name='$lname', nic='$nic', dob='$dob', teacher_no='$t_no',
-                app_date='$app_date', rc_app_date='$rc_app_date', email='$email', app_subject='$app_subject', sec_id='$sec_id' WHERE teacher_id='$id'";
+        $sql = "UPDATE staff_tbl SET first_name='$fname', last_name='$lname', nic='$nic', dob='$dob', staff_no='$t_no',
+                app_date='$app_date', rc_app_date='$rc_app_date', email='$email', app_subject='$app_subject', sec_id='$sec_id', 
+                qualifications='$qualifications' WHERE staff_id='$id'";
         if (mysqli_query($con, $sql)) {
             $sm = "Successfully updated!";
             header("Location: ../pages/admin/view-all-teachers.php?success=$sm");

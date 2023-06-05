@@ -45,7 +45,7 @@ if (isset($_POST['login'])) {
                         exit;
                     } else if ($role == 'Principal') {
                         $_SESSION['principal_role'] = $role;
-                        header("Location: ../pages/principal-dashboard.php");
+                        header("Location: ../pages/principal/principal-dashboard.php");
                         exit;
                     } else if ($role == 'Section Head') {
                         $_SESSION['secHead_role'] = $role;

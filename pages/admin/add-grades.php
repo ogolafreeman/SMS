@@ -86,11 +86,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             <select name="teacher" class="form-select" required>
                                 <?php
                                 include '../../controls/connection.php';
-                                $sql = "SELECT * FROM teacher_tbl";
+                                $sql = "SELECT * FROM staff_tbl WHERE NOT first_name='Admin'";
                                 $result = mysqli_query($con, $sql);
                                 while ($ri = mysqli_fetch_assoc($result)) {
                                 ?>
-                                    <option value="<?php echo $ri['teacher_id']; ?>"><?php echo $ri['first_name'] . " " . $ri['last_name']; ?>
+                                    <option value="<?php echo $ri['staff_id']; ?>"><?php echo $ri['first_name'] . " " . $ri['last_name']; ?>
                                     </option>
                                 <?php } ?>
                             </select>

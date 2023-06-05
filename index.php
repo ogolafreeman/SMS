@@ -43,7 +43,6 @@
     <!-- Header section -->
     <section class="header">
         <div class="back-fill text-center">
-
             <h1 class="display-1" style="color: #fff;">Student Management System</h1>
         </div>
     </section>

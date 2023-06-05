@@ -18,7 +18,7 @@ if (mysqli_num_rows($result1) > 0) {
 		$sub_name = $sub_data['sub_name'];
 
 		echo '<tr>
-				<td><input type="checkbox" name="subject[]" value="' . $sub_id . '"> ' . $sub_name . '<br></td>
+				<td><input type="checkbox" name="subject[]" value="' . $sub_id . '" class="form-check-input"> ' . $sub_name . '<br></td>
 				<td><select name="oder_id[][]" class="form-select form-select-sm text-center"><option value="0">-- Select Order --</option>';
 		for ($i = 1; $i <= $n; $i++) {
 			echo "<option value='$i, $sub_id'>$i</option>";

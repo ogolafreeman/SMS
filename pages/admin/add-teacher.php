@@ -13,7 +13,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Add a New Teacher - Admin</title>
+        <title>Add New Staff Members - Admin</title>
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="../../js/jquery-3.6.3.min.js"></script>
@@ -29,7 +29,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
             <!-- content goes here. do not remove any code -->
             <div class="container-fluid">
-                <h1 class="mt-4">Add a New Teacher</h1>
+                <h1 class="mt-4">Add New Staff Members</h1>
                 <ol class="breadcrumb mb-4">
                     <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
                 </ol>
@@ -66,28 +66,28 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         </script>
                     <?php } ?>
 
-                    <form action="../../data/add-teacher-data.php" method="post" class="shadow p-3  mt-5 form-w">
+                    <form action="../../data/add-teacher-data.php" method="post" class="shadow p-3  mt-5 form-w" enctype='multipart/form-data'>
                         <h3>Fill all the Data</h3>
                         <hr>
                         <div class="mb-3">
                             <label class="form-label">First Name</label>
-                            <input type="text" name="fname" class="form-control" autocomplete="off" required>
+                            <input type="text" name="fname" class="form-control" autocomplete="off" required placeholder="David">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Last Name</label>
-                            <input type="text" name="lname" class="form-control" autocomplete="off" required>
+                            <input type="text" name="lname" class="form-control" autocomplete="off" required placeholder="Johns">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">NIC</label>
-                            <input type="text" name="nic" class="form-control" autocomplete="off" required>
+                            <input type="text" name="nic" class="form-control" autocomplete="off" required placeholder="123456789">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Date of Birth</label>
                             <input type="date" name="dob" class="form-control" autocomplete="off" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Teacher Number</label>
-                            <input type="text" name="t_no" class="form-control" autocomplete="off" required>
+                            <label class="form-label">Staff Number</label>
+                            <input type="text" name="t_no" class="form-control" autocomplete="off" required placeholder="T-001">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Appointment Date</label>
@@ -106,22 +106,69 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" autocomplete="off" required>
+                            <input type="email" name="email" class="form-control" autocomplete="off" required placeholder="example@host.com">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Appointed Subject</label>
-                            <!-- <input type="text" name="email" class="form-control" autocomplete="off"> -->
                             <select name="app_subject" class="form-select" required>
-                                <option>Subject 1</option>
-                                <option>Subject 2</option>
-                                <option>Subject 3</option>
-                                <option>Subject 4</option>
-                                <option>Subject 5</option>
+                                <!-- <option value="">-- Select Grade --</option> -->
+                                <?php
+                                include '../../controls/connection.php';
+                                $sql = "SELECT * FROM subject_tbl";
+                                $result = mysqli_query($con, $sql);
+                                while ($ri = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <option value="<?php echo $ri['sub_id']; ?>"><?php echo $ri['sub_name']; ?>
+                                    </option>
+                                <?php } ?>
                             </select>
                         </div>
+
                         <div class="mb-3">
-                            <label class="form-label">Section ID</label>
-                            <input type="text" name="sec_id" class="form-control" autocomplete="off" required>
+                            <label class="form-label">Professional Qualifications</label>
+                            <div class="form-floating">
+                                <textarea class="form-control" id="floatingTextarea2" style="height: 100px" required name='qualifications'></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Section</label>
+                            <select name="sec_id" class="form-select" required>
+                                <!-- <option value="">-- Select Grade --</option> -->
+                                <?php
+                                include '../../controls/connection.php';
+                                $sql = "SELECT * FROM section_tbl";
+                                $result = mysqli_query($con, $sql);
+                                while ($ri = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <option value="<?php echo $ri['sec_id']; ?>"><?php echo $ri['sec_name']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Staff Type</label>
+                            <select name="type" class="form-select" required>
+                                <!-- <option value="">-- Select Grade --</option> -->
+                                <?php
+                                include '../../controls/connection.php';
+                                $sql = "SELECT * FROM user_role_tbl WHERE NOT role_id='1' AND NOT role_id='5'";
+                                $result = mysqli_query($con, $sql);
+                                while ($ri = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <option value="<?php echo $ri['role_id']; ?>"><?php echo $ri['role']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Profle Picture</label>
+                            <input type="file" class="form-control" name="pic" accept="image/png, image/jpeg">
+                            <div id="passwordHelpBlock" class="form-text">
+                                Please select only a png or jpeg image for your profile picture.
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary" name="add">Add</button>

@@ -94,7 +94,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                             echo "<td><input type='text' value='$marks' class='form-control' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]'/></td>";
                                             $total += $marks;
                                         }
-                                        $count += 1;
+                                        // $count += 1;
+                                        if ($marks == "") {
+                                            continue;
+                                        } else {
+                                            $count += 1;
+                                        }
                                     } else {
                                         echo "<td><input type='text' value='' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]' class='form-control'/></td>";
                                     }

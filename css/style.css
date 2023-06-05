@@ -7,7 +7,7 @@
 }
 
 .back-fill {
-  background: rgba(0, 0, 0, .60);
+  background: rgba(0, 0, 0, 0.6);
   height: 70vh;
   position: relative;
 }
@@ -35,7 +35,6 @@
 }
 
 .gradient-1 {
-
   background: linear-gradient(to right, #30b9fd, #35adf3);
 }
 
@@ -47,8 +46,8 @@
 
 @media (min-width: 769px) {
   .gradient-custom-2 {
-    border-top-right-radius: .3rem;
-    border-bottom-right-radius: .3rem;
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
   }
 }
 
@@ -57,7 +56,6 @@
 }
 
 .c1 {
-
   background-image: url("../Media/LogIn.JPG");
   background-size: cover;
   background-repeat: no-repeat;
@@ -66,38 +64,38 @@
 }
 
 .card-counter {
-  box-shadow: 2px 2px 10px #DADADA;
+  box-shadow: 2px 2px 10px #dadada;
   margin: 5px;
   padding: 20px 10px;
   background-color: #fff;
   height: 100px;
   border-radius: 5px;
-  transition: .3s linear all;
+  transition: 0.3s linear all;
 }
 
 .card-counter:hover {
-  box-shadow: 4px 4px 20px #DADADA;
-  transition: .3s linear all;
+  box-shadow: 4px 4px 20px #dadada;
+  transition: 0.3s linear all;
 }
 
 .card-counter.primary {
   background-color: #007bff;
-  color: #FFF;
+  color: #fff;
 }
 
 .card-counter.danger {
   background-color: #ef5350;
-  color: #FFF;
+  color: #fff;
 }
 
 .card-counter.success {
   background-color: #66bb6a;
-  color: #FFF;
+  color: #fff;
 }
 
 .card-counter.info {
   background-color: #26c6da;
-  color: #FFF;
+  color: #fff;
 }
 
 .card-counter .count-numbers {
@@ -185,13 +183,13 @@
   text-align: left;
 }
 
-#footer .footer-top .footer-newsletter form input[type=email] {
+#footer .footer-top .footer-newsletter form input[type="email"] {
   border: 0;
   padding: 4px 8px;
   width: calc(100% - 100px);
 }
 
-#footer .footer-top .footer-newsletter form input[type=submit] {
+#footer .footer-top .footer-newsletter form input[type="submit"] {
   position: absolute;
   top: 0;
   right: -1px;
@@ -207,7 +205,7 @@
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
 }
 
-#footer .footer-top .footer-newsletter form input[type=submit]:hover {
+#footer .footer-top .footer-newsletter form input[type="submit"]:hover {
   background: rgb(1, 40, 107);
 }
 

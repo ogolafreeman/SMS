@@ -17,11 +17,55 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>All Teachers - Admin</title>
+        <title>All Staff Members - Admin</title>
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="../../js/jquery-3.6.3.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <style>
+            body {
+                /* background: #DCDCDC; */
+                margin-top: 20px;
+            }
+
+            .card-box {
+                padding: 20px;
+                border-radius: 3px;
+                margin-bottom: 30px;
+                background: rgb(245, 245, 245);
+            }
+
+            .thumb-lg {
+                height: 150px;
+                width: 150px;
+            }
+
+            .img-thumbnail {
+                padding: .25rem;
+                background-color: rgb(245, 245, 245);
+                /* border: 1px solid #dee2e6; */
+                border-radius: .25rem;
+                /* max-width: 100%; */
+                /* height: auto; */
+            }
+
+            .text-pink {
+                color: #ff679b !important;
+            }
+
+            .btn-rounded {
+                border-radius: 2em;
+            }
+
+            .text-muted {
+                color: #98a6ad !important;
+            }
+
+            h4 {
+                line-height: 22px;
+                font-size: 18px;
+            }
+        </style>
     </head>
 
     <body class="sb-nav-fixed">
@@ -33,7 +77,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
             <!-- content goes here. do not remove any code -->
             <div class="container-fluid">
-                <h1 class="mt-4">All Teachers</h1>
+                <h1 class="mt-4">All Staff Members</h1>
                 <ol class="breadcrumb mb-4">
                     <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
                 </ol>
@@ -72,46 +116,65 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
+                                <th scope="col">Name</th>
                                 <th scope="col">NIC</th>
-                                <th scope="col">DOB</th>
-                                <th scope="col">Teacher No.</th>
-                                <th scope="col">Appointment Date</th>
-                                <th scope="col">RC Appointment Date</th>
-                                <!-- <th scope="col">Email</th> -->
+                                <th scope="col">Staff No.</th>
+                                <th scope="col">Role</th>
                                 <th scope="col">Appointed Subject</th>
-                                <th scope="col">Section ID</th>
+                                <th scope="col">Section</th>
                                 <th scope="col">Operations</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($teachers as $teacher) { ?>
+                            include '../../controls/connection.php';
+                            $count = 1;
+                            foreach ($teachers as $teacher) {
+                                $sql = "SELECT sub_name FROM subject_tbl WHERE sub_id='" . $teacher[9] . "'";
+                                $result = mysqli_query($con, $sql);
+                                if (mysqli_num_rows($result) == 1) {
+                                    $d = mysqli_fetch_assoc($result);
+                                    $sub_name = $d['sub_name'];
+                                } else {
+                                    $sub_name = "";
+                                }
+
+                                $nic = $teacher[3];
+                                $sql1 = "SELECT role FROM user_role_tbl urt INNER JOIN user_tbl ut ON (ut.role_id = urt.role_id) WHERE (ut.nic='$nic')";
+                                $result1 = mysqli_query($con, $sql1);
+                                $d = mysqli_fetch_assoc($result1);
+                                $role =  $d['role'];
+
+                                $sec_id = $teacher[11];
+                                $sql2 = "SELECT sec_name FROM section_tbl WHERE sec_id='$sec_id'";
+                                $result2 = mysqli_query($con, $sql2);
+                                $d = mysqli_fetch_assoc($result2);
+                                $sec_name = $d['sec_name'];
+
+                            ?>
+
                                 <tr>
-                                    <th scope="row"><?php echo $teacher[0]; ?></th>
-                                    <td><?php echo $teacher[1]; ?></td>
-                                    <td><?php echo $teacher[2]; ?></td>
+                                    <td><?php echo $count; ?></td>
+                                    <td><?php echo $teacher[1] . " " . $teacher[2]; ?></td>
                                     <td><?php echo $teacher[3]; ?></td>
-                                    <td><?php echo $teacher[4]; ?></td>
                                     <td><?php echo $teacher[5]; ?></td>
-                                    <td><?php echo $teacher[6]; ?></td>
-                                    <td><?php echo $teacher[7]; ?></td>
-                                    <!-- <td><?php echo $teacher[8]; ?></td> -->
-                                    <td><?php echo $teacher[9]; ?></td>
-                                    <td><?php echo $teacher[10]; ?></td>
+                                    <td><?php echo $role; ?></td>
+                                    <td><?php echo $sub_name; ?></td>
+                                    <td><?php echo $sec_name; ?></td>
                                     <td>
+                                        <a class="btn btn-info" name="profile" href="view-teacher-info.php?id=<?= $teacher[0] ?>">Profile</a>
                                         <a class="btn btn-warning" name="edit" href="edit_teacher.php?id=<?= $teacher[0] ?>">Edit</a>
                                         <a class="btn btn-danger" name="delete" href="delete_teacher.php?id=<?= $teacher[0] ?>">Delete</a>
                                     </td>
                                 </tr>
 
-                            <?php } ?>
-
+                            <?php $count += 1;
+                            } ?>
                         </tbody>
                     </table>
 
                 <?php } else { ?>
+
                     <div class="alert alert-info" role="alert">
                         Empty!
                     </div>
