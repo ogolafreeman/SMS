@@ -54,7 +54,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
               <!-- <i class="fa fa-ticket fs-1"></i> -->
               <i style="opacity: 0.4;" class="fa-solid fa-chalkboard-user fa-4x"></i>
               <span class="count-numbers"><?= getFullNumOfTeachers() ?></span>
-              <span class="count-name">Teachers</span>
+              <span class="count-name">Staff Members</span>
             </div>
           </div>
 

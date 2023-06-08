@@ -68,34 +68,36 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         </script>
                     <?php } ?>
 
-                <?php if($grades) { ?>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Grade</th>
-                                <th scope="col">Grade Head</th>
-                            </tr>
-                        </thead>
-                        <?php
-                        include '../../controls/connection.php';
-                        foreach ($grades as $grade) {
-                            $sql = "SELECT first_name, last_name FROM teacher_tbl WHERE teacher_id='$grade[2]'";
-                            $result = mysqli_query($con, $sql);
-                            $teacher = mysqli_fetch_assoc($result);
-                        ?>
-                            <tbody>
-                                <th scope="row"><?php echo $grade[0]; ?></th>
-                                <td><?php echo $grade[1]; ?></td>
-                                <td><?php echo $teacher['first_name'] . " " . $teacher['last_name']; ?></td>
-                            </tbody>
-                        <?php } ?>
-                    </table>
-                <?php } else { ?>
-                    <div class="alert alert-info" role="alert">
-                        Empty!
-                    </div>
-                <?php } ?>
+                    <?php if ($grades) { ?>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Grade</th>
+                                    <th scope="col">Grade Head</th>
+                                </tr>
+                            </thead>
+                            <?php
+                            include '../../controls/connection.php';
+                            $count = 1;
+                            foreach ($grades as $grade) {
+                                $sql = "SELECT first_name, last_name FROM staff_tbl WHERE staff_id='$grade[2]' AND status='1'";
+                                $result = mysqli_query($con, $sql);
+                                $teacher = mysqli_fetch_assoc($result);
+                            ?>
+                                <tbody>
+                                    <th scope="row"><?php echo $count; ?></th>
+                                    <td><?php echo $grade[1]; ?></td>
+                                    <td><?php echo $teacher['first_name'] . " " . $teacher['last_name']; ?></td>
+                                </tbody>
+                            <?php $count += 1;
+                            } ?>
+                        </table>
+                    <?php } else { ?>
+                        <div class="alert alert-info" role="alert">
+                            Empty!
+                        </div>
+                    <?php } ?>
 
                 </div>
 

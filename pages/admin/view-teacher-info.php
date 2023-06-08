@@ -33,7 +33,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
             <!-- content goes here. do not remove any code -->
             <div class="container-fluid">
-                <h1 class="mt-4">Edit Teacher's Data</h1>
+                <h1 class="mt-4">Staff Profile</h1>
                 <ol class="breadcrumb mb-4">
                     <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
                 </ol>
@@ -72,8 +72,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                     <?php } ?>
 
                     <form action="../../data/update-teacher-data.php?id=<?= $teacher['staff_id'] ?>" method="post" class="shadow p-3  mt-3 form-w">
-                        <h3>Your Profile</h3>
-                        <hr>
+                        <!-- <h3>Your Profile</h3>
+                        <hr> -->
 
                         <div class="container rounded bg-white mt-5 mb-5">
                             <div class="row">

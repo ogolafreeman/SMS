@@ -19,6 +19,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         <!-- <script src="../../js/jquery-3.6.3.min.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
 
     <body class="sb-nav-fixed">
@@ -36,13 +37,29 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                 <div class="container mt-5">
                     <div class="shadow p-3  mt-5 form-w">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <div class="mb-3">
                                     <label class="form-label">Search by Admission No.</label>
                                     <input type="text" id="admission_no" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Year</label>
+                                    <select name="year" class="form-select yearSelect" required>
+                                        <?php
+                                        include '../../controls/connection.php';
+                                        $sql = "SELECT DISTINCT year FROM al_marks_tbl";
+                                        $result = mysqli_query($con, $sql);
+                                        while ($ri = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                            <option value="<?php echo $ri['year']; ?>"><?php echo $ri['year']; ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="mb-3">
                                     <label class="form-label">Term</label>
                                     <select name="term" class="form-select termSelect" required>
@@ -73,6 +90,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                     <div id="data" class=""></div>
                 </div>
 
+
             </div>
 
             <!-- footer -->
@@ -88,6 +106,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         url: "filtered-marks-details.php",
                         type: "POST",
                         data: {
+                            res_year: $(".yearSelect option:selected").val(),
                             term: $(".termSelect option:selected").val(),
                             query: $("#admission_no").val()
                         },

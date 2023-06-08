@@ -86,13 +86,31 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             <select name="teacher" class="form-select" required>
                                 <?php
                                 include '../../controls/connection.php';
-                                $sql = "SELECT * FROM staff_tbl WHERE NOT first_name='Admin'";
-                                $result = mysqli_query($con, $sql);
-                                while ($ri = mysqli_fetch_assoc($result)) {
+                                // $sql1 = "SELECT role FROM user_role_tbl urt INNER JOIN user_tbl ut ON (ut.role_id = urt.role_id) WHERE (ut.nic='$nic')";
+                                $sql1 = "SELECT * FROM staff_tbl WHERE status='1'";
+                                $result1 = mysqli_query($con, $sql1);
+                                if (mysqli_num_rows($result1) > 0) {
+                                    while ($row1 = mysqli_fetch_assoc($result1)) {
+                                        $staff_id = $row1['staff_id'];
+                                        $nic = $row1['nic'];
+                                        $name = $row1['first_name'] . " " . $row1['last_name'];
+                                        $sql2 = "SELECT role FROM user_role_tbl urt INNER JOIN user_tbl ut ON (ut.role_id = urt.role_id) WHERE (ut.nic='$nic')";
+                                        $result2 = mysqli_query($con, $sql2);
+                                        if (mysqli_num_rows($result2) == 1) {
+                                            $row2 = mysqli_fetch_assoc($result2);
+                                            if ($row2['role'] != 'Admin' && $row2['role'] != 'Principal') {
+                                                echo "<option value='$staff_id'>$name</option>";
+                                            } else {
+                                                continue;
+                                            }
+                                        } else {
+                                            echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No Teachers!'});</script>";
+                                        }
+                                    }
+                                } else {
+                                    echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No Teachers!'});</script>";
+                                }
                                 ?>
-                                    <option value="<?php echo $ri['staff_id']; ?>"><?php echo $ri['first_name'] . " " . $ri['last_name']; ?>
-                                    </option>
-                                <?php } ?>
                             </select>
                         </div>
 

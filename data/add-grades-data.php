@@ -6,12 +6,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 	if (isset($_POST['add'])) {
 		$grade = $_POST['grade'];
 		// $year = $_POST['year'];
-		$teacher_id = $_POST['teacher'];
+		$staff_id = $_POST['teacher'];
 
-		$sql1 = "SELECT * from grade_tbl WHERE grade_name='$grade' OR teacher_id='$teacher_id'";
+		$sql1 = "SELECT * from grade_tbl WHERE grade_name='$grade' OR staff_id='$staff_id'";
 		$result1 = mysqli_query($con, $sql1);
 		if (mysqli_num_rows($result1) == 0) {
-			$sql2 = "INSERT INTO grade_tbl (grade_name, teacher_id) VALUES ('$grade', '$teacher_id')";
+			$sql2 = "INSERT INTO grade_tbl (grade_name, staff_id) VALUES ('$grade', '$staff_id')";
 			if (mysqli_query($con, $sql2)) {
 				$em = "New Grade $grade Added successfully!";
 				header("Location: ../pages/admin/add-grades.php?success=$em");

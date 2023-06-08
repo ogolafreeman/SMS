@@ -135,17 +135,21 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             </div>
                             <div class="col-md-2">
                                 <div class="mb-3">
-                                    <label class="form-label">A/L Year</label>
+                                    <label class="form-label">Year</label>
                                     <select name="year" class="form-select yearSelect" required>
                                         <?php
                                         include '../../controls/connection.php';
-                                        $sql = "SELECT DISTINCT year FROM grade_subject_tbl ORDER BY year ASC";
+                                        $y = "";
+                                        $sql = "SELECT DISTINCT year FROM al_marks_tbl ORDER BY year ASC";
                                         $result = mysqli_query($con, $sql);
                                         while ($ri = mysqli_fetch_assoc($result)) {
+                                            $y = $ri['year'];
                                         ?>
-                                            <option value="<?php echo $ri['year']; ?>"><?php echo $ri['year']; ?>
+                                            <option value="<?php echo $y; ?>"><?php echo $y; ?>
                                             </option>
                                         <?php } ?>
+                                        <option value="<?= $y + 1 ?>"><?= $y + 1 ?></option>
+
                                     </select>
                                 </div>
                             </div>
@@ -183,10 +187,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             <h3>A/L Year: <span style="color: red" id="year"></span></h3><br>
                         </div>
                     </div>
-                    
-                    
-                    
-                    
+
+
+
+
                     <form action="../../data/enter-marks.php" method='post'>
                         <table class="table table-bordered" id='tableData'></table>
                         <input type="submit" name="save" class="btn btn-success" value="Save">

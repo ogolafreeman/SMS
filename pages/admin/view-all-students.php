@@ -74,38 +74,30 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 <th scope="col">#</th>
                                 <th scope="col">Admission No.</th>
                                 <th scope="col">Full Name</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Phone 1</th>
-                                <th scope="col">Phone 2</th>
-                                <th scope="col">DOB</th>
-                                <th scope="col">Email</th>
+                                <th scope="col">Phone - Home</th>
                                 <th scope="col">Date of Admission</th>
-                                <th scope="col">Date Added</th>
                                 <th scope="col">Operations</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
+                            $count = 1;
                             foreach ($students as $student) { ?>
                                 <tr>
-                                    <th scope="row"><?php echo $student[0]; ?></th>
+                                    <th scope="row"><?php echo $count; ?></th>
                                     <td><?php echo $student[1]; ?></td>
                                     <td><?php echo $student[2]; ?></td>
-                                    <td><?php echo $student[4]; ?></td>
                                     <td><?php echo $student[5]; ?></td>
-                                    <td><?php echo $student[6]; ?></td>
-                                    <td><?php echo $student[7]; ?></td>
-                                    <td><?php echo $student[8]; ?></td>
                                     <td><?php echo $student[9]; ?></td>
-                                    <td><?php echo $student[10]; ?></td>
-                                    <!-- <td><?php echo $student[10]; ?></td> -->
                                     <td>
+                                        <a class="btn btn-info" name="profile" href="view-student-info.php?id=<?= $student[0] ?>">Profile</a>
                                         <a class="btn btn-warning" name="edit" href="edit-students.php?id=<?= $student[0] ?>">Edit</a>
                                         <a class="btn btn-danger" name="delete" href="delete-student.php?id=<?= $student[0] ?>">Delete</a>
                                     </td>
                                 </tr>
 
-                            <?php } ?>
+                            <?php $count += 1;
+                            } ?>
 
                         </tbody>
                     </table>

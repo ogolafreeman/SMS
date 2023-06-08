@@ -81,6 +81,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                 <ol class="breadcrumb mb-4">
                     <!-- <li class="breadcrumb-item active">Welcome back, <b> <?= $_SESSION['role'] ?> </b> !</li> -->
                 </ol>
+                <a class='btn btn-primary' href='add-teacher.php'>Add Staff Members</a>
 
                 <?php if (isset($_GET['success'])) { ?>
                     <!-- <div class='alert alert-success' role='alert'>
@@ -112,7 +113,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
                 <!-- Your further code goes here. keep coding in this div -->
                 <?php if ($teachers) { ?>
-                    <table class="table">
+                    <table class="table mt-3">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
