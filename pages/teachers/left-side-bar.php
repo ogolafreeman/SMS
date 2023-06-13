@@ -4,21 +4,21 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <!-- <div class="sb-sidenav-menu-heading">Core</div> -->
-                    <a class="nav-link" href="principal-dashboard.php">
+                    <a class="nav-link" href="teacher-dashboard.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard
                     </a>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
+                    <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
                         Teachers
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <!-- <a class="nav-link disabled" href="add-teacher.php">Add a Teacher</a> -->
+
                             <a class="nav-link" href="view-all-teachers.php">View All</a>
                         </nav>
-                    </div>
+                    </div> -->
 
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
@@ -32,7 +32,7 @@
                         </nav>
                     </div>
 
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                    <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Grades and Classes
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -45,7 +45,6 @@
                             </a>
                             <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <!-- <a class="nav-link disabled" href="add-grades.php">Add Grades</a> -->
                                     <a class="nav-link" href="view-all-grades.php">View All</a>
                                 </nav>
                             </div>
@@ -55,13 +54,11 @@
                             </a>
                             <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <!-- <a class="nav-link disabled" href="add-class.php">Add Classes</a> -->
-                                    <!-- <a class="nav-link disabled" href="assign-students-to-class.php">Assign Students</a> -->
                                     <a class="nav-link" href="view-all-classes.php">View All</a>
                                 </nav>
                             </div>
                         </nav>
-                    </div>
+                    </div> -->
 
                     <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts6" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-book"></i></div>
@@ -102,7 +99,7 @@
             </div>
             <div class="sb-sidenav-footer">
                 <div class="small">Logged in as:</div>
-                <b title='Your Role'><?= $_SESSION['principal_role'] ?></b>
+                <b title='Your Role'><?= $_SESSION['teacher_role'] ?></b>
             </div>
         </nav>
     </div>

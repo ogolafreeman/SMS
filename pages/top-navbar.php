@@ -32,12 +32,8 @@
 
                         if ($role == "Admin") {
                             echo "Admin";
-                        } elseif ($role == "Principal") {
-                            echo "Principal";
-                        } elseif ($role == "Section Head") {
-                            echo "Section Head";
-                        } elseif ($role == "Teacher") {
-                            $sql3 = "SELECT first_name, last_name FROM teacher_tbl WHERE nic='" . $_SESSION['username'] . "'";
+                        } elseif ($role == "Principal" || $role == "Section Head" || $role == "Teacher") {
+                            $sql3 = "SELECT first_name, last_name FROM staff_tbl WHERE nic='" . $_SESSION['username'] . "'";
                             $result3 = mysqli_query($con, $sql3);
                             $d = mysqli_fetch_assoc($result3);
                             echo $d['first_name'] . " " . $d['last_name'];
@@ -55,6 +51,7 @@
                 <li>
                     <hr class="dropdown-divider" />
                 </li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#!">Settings</a></li>
                 <li><a class="dropdown-item" href="../../inc/logout.php">Logout</a></li>
             </ul>

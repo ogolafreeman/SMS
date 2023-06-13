@@ -152,11 +152,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                 header("Location: ../pages/admin/add-teacher.php?error=$em");
                 exit;
             }
-
-            // $temp2 = explode(".", $name);
-            // $filename = "../uploads/$nic." . $temp2[1];
-            // move_uploaded_file($temp, $filename);
-
         }
     }
 } else {

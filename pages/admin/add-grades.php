@@ -73,11 +73,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         <div class="mb-3">
                             <label class="form-label">Grade</label>
                             <select name="grade" class="form-select gradeSelect" required>
-                                <?php
-                                for ($i = 1; $i <= 13; $i++) {
-                                    echo "<option value='$i'>Grade $i</option>";
-                                }
-                                ?>
+                                <!-- <?php
+                                        for ($i = 1; $i <= 13; $i++) {
+                                            echo "<option value='$i'>Grade $i</option>";
+                                        }
+                                        ?> -->
+                                <option value='12'>Grade 12</option>
+                                <option value='13'>Grade 13</option>
                             </select>
                         </div>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2023 at 05:28 AM
+-- Generation Time: Jun 14, 2023 at 01:41 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -140,10 +140,7 @@ INSERT INTO `al_subjects_tbl` (`al_sub_id`, `sub_id`, `stream_id`) VALUES
 (61, 29, 2),
 (62, 29, 3),
 (63, 29, 4),
-(64, 29, 5),
-(65, 29, 5),
-(66, 26, 3),
-(67, 26, 4);
+(64, 29, 5);
 
 -- --------------------------------------------------------
 
@@ -240,6 +237,21 @@ CREATE TABLE `guardian_tbl` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `message_tbl`
+--
+
+CREATE TABLE `message_tbl` (
+  `id` int(11) NOT NULL,
+  `sender` varchar(255) NOT NULL,
+  `receiver` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `section_tbl`
 --
 
@@ -281,6 +293,18 @@ CREATE TABLE `staff_tbl` (
   `profile_pic` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `staff_tbl`
+--
+
+INSERT INTO `staff_tbl` (`staff_id`, `first_name`, `last_name`, `nic`, `dob`, `staff_no`, `app_date`, `rc_app_date`, `email`, `app_subject`, `qualifications`, `sec_id`, `status`, `profile_pic`) VALUES
+(1, 'Admin', '', '123456789', '2004-08-19', 'T-001', '2009-06-17', '2020-06-07', 'admin@richmondcollege.lk', '5', 'MSc. in Linux Server Administration', 4, 1, ''),
+(12, 'Avatar', 'Roku', '789456123', '2004-08-19', 'T-002', '2014-08-04', '2020-08-24', 'jdchdcb@host.com', '1', 'BSc. in Mathematics', 4, 0, '../uploads/789456123.jpg'),
+(13, 'Avatar', 'Roku', '987654321', '2004-02-09', 'T-002', '2020-05-19', '2022-06-21', 'testmail@host.com', '1', 'BSc. in Mathematics', 4, 1, '../uploads/987654321.jpg'),
+(14, 'Dasun', 'Nethsara', '123789456', '2004-05-19', 'T-003', '2019-11-11', '2023-06-04', 't@host.com', '5', 'BSc. in Web Engineering', 4, 1, '../uploads/123789456.com_wallpaper'),
+(15, 'Tony', 'Stark', '789123456', '1988-05-21', 'T-004', '2013-07-10', '2022-11-23', 'tony@starkindustries.com', '2', 'Phd in Physics, MSc. in Ethical Hacking, Msc. in Elecrical Engineering', 4, 1, '../uploads/789123456.com_wallpaper (1)'),
+(16, 'Bruce', 'Wayne', '741852963', '1989-08-06', 'T-005', '2020-01-06', '2023-05-17', 'wayne@host.com', '18', 'MSc. in Engineering', 4, 1, '../uploads/741852963.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -316,6 +340,18 @@ CREATE TABLE `student_tbl` (
   `date_updated` date NOT NULL,
   `status` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_tbl`
+--
+
+INSERT INTO `student_tbl` (`std_id`, `admission_no`, `full_name`, `name_with_initials`, `address`, `phone_no_1`, `phone_no_2`, `dob`, `email`, `d_o_admission`, `date_added`, `date_updated`, `status`) VALUES
+(11, 13736, 'Anthony Edward Stark', 'A. E. Stark', '10880, Malibu Point, California, USA', '1111111111', '1111111111', '1989-05-20', 'ironman@avengersfacilities.com', '2012-04-27', '2023-06-05', '0000-00-00', 1),
+(12, 13737, 'Steve Rogers', 'S. Rogers', '569, Leaman Place, USA', '2222222222', '2222222222', '1920-04-07', 'captainamerica@avengersfacilities.com', '2012-04-27', '2023-06-05', '0000-00-00', 1),
+(13, 13738, 'Stephen Vincent Strange', 'S. V. Strange', '177A, Bleecker Street, New York, USA', '3333333333', '3333333333', '1930-11-18', 'doctorstrange@avengersfacilities.com', '2016-08-21', '2023-06-05', '0000-00-00', 1),
+(14, 13739, 'Peter Benjamin Parker', 'P. B. Parker', '20, Ingram Street, New York, USA', '4444444444', '4444444444', '2001-08-10', 'spiderman@avengersfacilities.com', '2016-11-06', '2023-06-05', '0000-00-00', 1),
+(15, 13740, 'Clinton Francis Barton', 'C. F. Barton', 'Bedford-Stuyvesant, Brooklyn, New York, USA', '5555555555', '5555555555', '1975-10-01', 'Hawkeye@avengersfacilities.com', '2012-04-27', '2023-06-05', '0000-00-00', 1),
+(16, 13741, 'Robert Bruce Banner', 'R. B. Banner', 'Stark Gamma Laborotories, California, USA', '6666666666', '6666666666', '1969-12-18', 'hulk@avengersfacilities.com', '2012-04-27', '2023-06-05', '0000-00-00', 1);
 
 -- --------------------------------------------------------
 
@@ -428,6 +464,24 @@ CREATE TABLE `user_tbl` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `user_tbl`
+--
+
+INSERT INTO `user_tbl` (`user_id`, `username`, `password`, `role_id`, `admission_no`, `nic`) VALUES
+(1, 'admin', '$2y$10$fpviFK0rrFRmWFioB93ZwuiiRTUH2BaTQCzTiht7pz9RTkQA0iwY6', 1, 'NULL', '123456789'),
+(25, '789456123', '$2y$10$VXwp.OIvlS3VN9DaKGs0M.bDmPNQjQcLJXR61jdFwoHXKU/U0MfxO', 2, '', '789456123'),
+(26, '987654321', '$2y$10$GwAX.u7Lw2QxlXRMj5lXo.ddsao8blaYXHPqS6GNiqCGRfR7202iS', 2, '', '987654321'),
+(27, '123789456', '$2y$10$JiuAR1zh861J8J4bR6GWAuUakg0yRIfs3Vt7gLmknsxOI7pi6OSmK', 4, '', '123789456'),
+(28, '789123456', '$2y$10$U2rWADVxQ.vgJXLgJhtRresEqrV.DmT4sTwAC1oIJ4GoyBulEVcgu', 4, '', '789123456'),
+(29, '13736', '$2y$10$LKKxP3yV0b7J.QxB1SMtquZGMiGm.o09KRya3uBdyGK4cCfXkr8aC', 5, '13736', NULL),
+(30, '13737', '$2y$10$7GwSVhJBql/.gHvUGOegN.vLDSno8ZPYstQd1tgTQzjgBEuSnyQ5y', 5, '13737', NULL),
+(31, '13738', '$2y$10$5kkTIPf60rHomxGwrCPOtu.jf/ZEcYk/J0.Fs63G07w134KHtREx6', 5, '13738', NULL),
+(32, '13739', '$2y$10$Ag.6.BV2aOWCzuQjld1jiOnPQ2ZdOElX/CNFKoDS1SCHb4NhUOe1W', 5, '13739', NULL),
+(33, '13740', '$2y$10$ONUMQgTj1F9I6KZzEFH3O.cl8eOTi3cUsNcnDUH/nfBLYdLXXPrJO', 5, '13740', NULL),
+(34, '13741', '$2y$10$RiEeXeUt6OglXR7O/tWHA.qNRgdSeegl3f8iR5BB9dlfaHYB0jnka', 5, '13741', NULL),
+(35, '741852963', '$2y$10$s1pAcTSlXu15Ctoczdj2MuCat2Ftgz0vJCniUriwmk//i5h0Z4jhS', 4, '', '741852963');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -511,6 +565,12 @@ ALTER TABLE `grade_tbl`
 ALTER TABLE `guardian_tbl`
   ADD PRIMARY KEY (`guardian_id`),
   ADD KEY `std_id` (`std_id`);
+
+--
+-- Indexes for table `message_tbl`
+--
+ALTER TABLE `message_tbl`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `section_tbl`
@@ -649,6 +709,12 @@ ALTER TABLE `guardian_tbl`
   MODIFY `guardian_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `message_tbl`
+--
+ALTER TABLE `message_tbl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `section_tbl`
 --
 ALTER TABLE `section_tbl`
@@ -658,7 +724,7 @@ ALTER TABLE `section_tbl`
 -- AUTO_INCREMENT for table `staff_tbl`
 --
 ALTER TABLE `staff_tbl`
-  MODIFY `staff_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `staff_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `student_class_tbl`
@@ -670,7 +736,7 @@ ALTER TABLE `student_class_tbl`
 -- AUTO_INCREMENT for table `student_tbl`
 --
 ALTER TABLE `student_tbl`
-  MODIFY `std_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `std_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `subject_tbl`
@@ -694,7 +760,7 @@ ALTER TABLE `user_role_tbl`
 -- AUTO_INCREMENT for table `user_tbl`
 --
 ALTER TABLE `user_tbl`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Constraints for dumped tables

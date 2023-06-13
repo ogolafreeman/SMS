@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2023 at 05:23 PM
+-- Generation Time: Jun 14, 2023 at 01:39 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -72,21 +72,42 @@ CREATE TABLE `al_marks_tbl` (
 --
 
 INSERT INTO `al_marks_tbl` (`id`, `std_id`, `grade_class_id`, `year`, `term`, `sub_id`, `marks`) VALUES
-(64, 5, 11, 2023, '1st Term', 6, '58'),
-(65, 5, 11, 2023, '1st Term', 5, '24'),
-(66, 5, 11, 2023, '1st Term', 26, '75'),
-(67, 5, 11, 2023, '1st Term', 29, '98'),
-(68, 8, 11, 2023, '1st Term', 7, '88'),
-(69, 8, 11, 2023, '1st Term', 6, '97'),
-(70, 8, 11, 2023, '1st Term', 5, '99'),
-(71, 8, 11, 2023, '1st Term', 26, ''),
-(72, 8, 11, 2023, '1st Term', 29, '95'),
-(73, 6, 11, 2023, '1st Term', 7, ''),
-(74, 6, 11, 2023, '1st Term', 6, '97'),
-(75, 6, 11, 2023, '1st Term', 5, '46'),
-(76, 6, 11, 2023, '1st Term', 26, '58'),
-(77, 6, 11, 2023, '1st Term', 29, '78'),
-(79, 5, 11, 2023, '1st Term', 7, '');
+(104, 11, 13, 2023, '1st Term', 7, '97'),
+(105, 11, 13, 2023, '1st Term', 6, '86'),
+(106, 11, 13, 2023, '1st Term', 5, '99'),
+(107, 11, 13, 2023, '1st Term', 29, '97'),
+(108, 12, 13, 2023, '1st Term', 7, '67'),
+(109, 12, 13, 2023, '1st Term', 6, '56'),
+(110, 12, 13, 2023, '1st Term', 5, '62'),
+(111, 12, 13, 2023, '1st Term', 29, '91'),
+(112, 15, 15, 2023, '1st Term', 11, '49'),
+(113, 15, 15, 2023, '1st Term', 16, ''),
+(114, 15, 15, 2023, '1st Term', 17, '67'),
+(115, 15, 15, 2023, '1st Term', 18, ''),
+(116, 15, 15, 2023, '1st Term', 19, ''),
+(117, 15, 15, 2023, '1st Term', 5, '67'),
+(118, 15, 15, 2023, '1st Term', 25, ''),
+(119, 15, 15, 2023, '1st Term', 28, ''),
+(120, 15, 15, 2023, '1st Term', 29, '87'),
+(121, 16, 15, 2023, '1st Term', 11, ''),
+(122, 16, 15, 2023, '1st Term', 16, '76'),
+(123, 16, 15, 2023, '1st Term', 17, '81'),
+(124, 16, 15, 2023, '1st Term', 18, '84'),
+(125, 16, 15, 2023, '1st Term', 19, ''),
+(126, 16, 15, 2023, '1st Term', 5, ''),
+(127, 16, 15, 2023, '1st Term', 25, ''),
+(128, 16, 15, 2023, '1st Term', 28, ''),
+(129, 16, 15, 2023, '1st Term', 29, '98'),
+(130, 13, 14, 2024, '1st Term', 7, '57'),
+(131, 13, 14, 2024, '1st Term', 6, '89'),
+(132, 13, 14, 2024, '1st Term', 5, ''),
+(133, 13, 14, 2024, '1st Term', 21, '91'),
+(134, 13, 14, 2024, '1st Term', 29, '98'),
+(135, 14, 14, 2024, '1st Term', 7, '98'),
+(136, 14, 14, 2024, '1st Term', 6, '91'),
+(137, 14, 14, 2024, '1st Term', 5, '99'),
+(138, 14, 14, 2024, '1st Term', 21, ''),
+(139, 14, 14, 2024, '1st Term', 29, '89');
 
 -- --------------------------------------------------------
 
@@ -161,10 +182,7 @@ INSERT INTO `al_subjects_tbl` (`al_sub_id`, `sub_id`, `stream_id`) VALUES
 (61, 29, 2),
 (62, 29, 3),
 (63, 29, 4),
-(64, 29, 5),
-(65, 29, 5),
-(66, 26, 3),
-(67, 26, 4);
+(64, 29, 5);
 
 -- --------------------------------------------------------
 
@@ -206,11 +224,8 @@ CREATE TABLE `class_tbl` (
 --
 
 INSERT INTO `class_tbl` (`class_id`, `class_name`) VALUES
-(1, 'ET 1'),
-(2, 'ET 2'),
-(3, 'Maths - 1'),
-(4, 'Maths - 2'),
-(5, 'Bio - 1');
+(6, 'ET 1'),
+(7, 'Art - 1');
 
 -- --------------------------------------------------------
 
@@ -223,16 +238,17 @@ CREATE TABLE `grade_class_tbl` (
   `grade_id` int(10) NOT NULL,
   `class_id` int(10) NOT NULL,
   `year` varchar(4) NOT NULL,
-  `teacher_id` int(10) NOT NULL
+  `staff_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `grade_class_tbl`
 --
 
-INSERT INTO `grade_class_tbl` (`grade_class_id`, `grade_id`, `class_id`, `year`, `teacher_id`) VALUES
-(11, 2, 1, '2023', 2),
-(12, 1, 1, '2024', 8);
+INSERT INTO `grade_class_tbl` (`grade_class_id`, `grade_id`, `class_id`, `year`, `staff_id`) VALUES
+(13, 4, 6, '2023', 14),
+(14, 3, 6, '2024', 15),
+(15, 4, 7, '2023', 16);
 
 -- --------------------------------------------------------
 
@@ -254,15 +270,24 @@ CREATE TABLE `grade_subject_tbl` (
 --
 
 INSERT INTO `grade_subject_tbl` (`id`, `grade_id`, `stream_id`, `year`, `sub_id`, `order_id`) VALUES
-(196, 2, 3, '2023', 5, 3),
-(197, 2, 3, '2023', 6, 2),
-(198, 2, 3, '2023', 7, 1),
-(199, 2, 3, '2023', 29, 5),
-(200, 2, 3, '2023', 26, 4),
-(201, 1, 3, '2024', 5, 3),
-(202, 1, 3, '2024', 6, 2),
-(203, 1, 3, '2024', 7, 1),
-(204, 1, 3, '2024', 29, 4);
+(205, 4, 3, '2023', 5, 3),
+(206, 4, 3, '2023', 6, 2),
+(207, 4, 3, '2023', 7, 1),
+(208, 4, 3, '2023', 29, 4),
+(209, 3, 3, '2024', 5, 3),
+(210, 3, 3, '2024', 6, 2),
+(211, 3, 3, '2024', 7, 1),
+(212, 3, 3, '2024', 21, 4),
+(213, 3, 3, '2024', 29, 5),
+(214, 4, 5, '2023', 5, 6),
+(215, 4, 5, '2023', 11, 1),
+(216, 4, 5, '2023', 16, 2),
+(217, 4, 5, '2023', 17, 3),
+(218, 4, 5, '2023', 18, 4),
+(219, 4, 5, '2023', 19, 5),
+(220, 4, 5, '2023', 25, 7),
+(221, 4, 5, '2023', 28, 8),
+(222, 4, 5, '2023', 29, 9);
 
 -- --------------------------------------------------------
 
@@ -273,16 +298,16 @@ INSERT INTO `grade_subject_tbl` (`id`, `grade_id`, `stream_id`, `year`, `sub_id`
 CREATE TABLE `grade_tbl` (
   `grade_id` int(10) NOT NULL,
   `grade_name` varchar(255) NOT NULL,
-  `teacher_id` int(5) NOT NULL
+  `staff_id` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `grade_tbl`
 --
 
-INSERT INTO `grade_tbl` (`grade_id`, `grade_name`, `teacher_id`) VALUES
-(1, '12', 2),
-(2, '13', 8);
+INSERT INTO `grade_tbl` (`grade_id`, `grade_name`, `staff_id`) VALUES
+(3, '12', 14),
+(4, '13', 15);
 
 -- --------------------------------------------------------
 
@@ -298,6 +323,21 @@ CREATE TABLE `guardian_tbl` (
   `g_address` varchar(255) NOT NULL,
   `g_dob` varchar(255) NOT NULL,
   `g_job` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `message_tbl`
+--
+
+CREATE TABLE `message_tbl` (
+  `id` int(11) NOT NULL,
+  `sender` varchar(255) NOT NULL,
+  `receiver` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -324,6 +364,41 @@ INSERT INTO `section_tbl` (`sec_id`, `sec_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `staff_tbl`
+--
+
+CREATE TABLE `staff_tbl` (
+  `staff_id` int(10) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `nic` varchar(255) NOT NULL,
+  `dob` varchar(10) NOT NULL,
+  `staff_no` varchar(255) NOT NULL,
+  `app_date` date NOT NULL,
+  `rc_app_date` date NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `app_subject` varchar(100) NOT NULL,
+  `qualifications` varchar(255) NOT NULL,
+  `sec_id` int(5) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `profile_pic` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `staff_tbl`
+--
+
+INSERT INTO `staff_tbl` (`staff_id`, `first_name`, `last_name`, `nic`, `dob`, `staff_no`, `app_date`, `rc_app_date`, `email`, `app_subject`, `qualifications`, `sec_id`, `status`, `profile_pic`) VALUES
+(1, 'Admin', '', '123456789', '2004-08-19', 'T-001', '2009-06-17', '2020-06-07', 'admin@richmondcollege.lk', '5', 'MSc. in Linux Server Administration', 4, 1, ''),
+(12, 'Avatar', 'Roku', '789456123', '2004-08-19', 'T-002', '2014-08-04', '2020-08-24', 'jdchdcb@host.com', '1', 'BSc. in Mathematics', 4, 0, '../uploads/789456123.jpg'),
+(13, 'Avatar', 'Roku', '987654321', '2004-02-09', 'T-002', '2020-05-19', '2022-06-21', 'testmail@host.com', '1', 'BSc. in Mathematics', 4, 1, '../uploads/987654321.jpg'),
+(14, 'Dasun', 'Nethsara', '123789456', '2004-05-19', 'T-003', '2019-11-11', '2023-06-04', 't@host.com', '5', 'BSc. in Web Engineering', 4, 1, '../uploads/123789456.com_wallpaper'),
+(15, 'Tony', 'Stark', '789123456', '1988-05-21', 'T-004', '2013-07-10', '2022-11-23', 'tony@starkindustries.com', '2', 'Phd in Physics, MSc. in Ethical Hacking, Msc. in Elecrical Engineering', 4, 1, '../uploads/789123456.com_wallpaper (1)'),
+(16, 'Bruce', 'Wayne', '741852963', '1989-08-06', 'T-005', '2020-01-06', '2023-05-17', 'wayne@host.com', '18', 'MSc. in Engineering', 4, 1, '../uploads/741852963.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `student_class_tbl`
 --
 
@@ -340,11 +415,12 @@ CREATE TABLE `student_class_tbl` (
 --
 
 INSERT INTO `student_class_tbl` (`id`, `std_id`, `grade_class_id`, `sec_id`, `year`) VALUES
-(5, 5, 11, 4, '2023'),
-(6, 8, 11, 4, '2023'),
-(7, 6, 11, 4, '2023'),
-(8, 9, 12, 4, '2024'),
-(9, 10, 12, 4, '2024');
+(16, 11, 13, 4, '2023'),
+(17, 12, 13, 4, '2023'),
+(18, 13, 14, 4, '2024'),
+(19, 14, 14, 4, '2024'),
+(20, 15, 15, 4, '2023'),
+(21, 16, 15, 4, '2023');
 
 -- --------------------------------------------------------
 
@@ -373,12 +449,12 @@ CREATE TABLE `student_tbl` (
 --
 
 INSERT INTO `student_tbl` (`std_id`, `admission_no`, `full_name`, `name_with_initials`, `address`, `phone_no_1`, `phone_no_2`, `dob`, `email`, `d_o_admission`, `date_added`, `date_updated`, `status`) VALUES
-(1, 13736, 'Anthony Edward Stark', 'A. E. Stark', '10880, Malibu Point, California, USA', '123123123', '123123123', '1990-12-27', 'tonystark@ironman.com', '2012-04-12', '2023-05-02', '2023-05-02', 0),
-(5, 13737, 'Steven Grant Rogers', 'S. G. Rogers', 'New Jersey, USA', '456456456', '456456456', '1920-04-27', 'captainamerica@avengers.com', '2012-04-27', '2023-05-02', '2023-05-02', 1),
-(6, 13738, 'Stephen Strange', 'S. Strange', 'Bleaker Street, New York, USA', '789789789', '789789789', '1989-11-28', 'drstrange@avengers.com', '2018-05-24', '2023-05-02', '2023-05-02', 1),
-(8, 13739, 'Anthony Edward Stark', 'A. E. Stark', '10880, Malibu Point, California', '123456789', '123456789', '1980-05-18', 'tony@starkindustries.com', '2012-04-27', '2023-05-21', '2023-05-21', 1),
-(9, 13740, 'Clint Barton', 'C. Barton', 'Avengers Facilities, Up State, New York', '4545454545', '4545454545', '1983-06-13', 'hawkeye@avengers.com', '2012-04-27', '2023-05-23', '0000-00-00', 1),
-(10, 19741, 'Peter Benjamin Parker ', 'P. B. Parker', 'California, USA', '78787878', '78787878', '1993-10-11', 'spiderman@avengers.com', '2016-07-20', '2023-05-23', '0000-00-00', 1);
+(11, 13736, 'Anthony Edward Stark', 'A. E. Stark', '10880, Malibu Point, California, USA', '1111111111', '1111111111', '1989-05-20', 'ironman@avengersfacilities.com', '2012-04-27', '2023-06-05', '0000-00-00', 1),
+(12, 13737, 'Steve Rogers', 'S. Rogers', '569, Leaman Place, USA', '2222222222', '2222222222', '1920-04-07', 'captainamerica@avengersfacilities.com', '2012-04-27', '2023-06-05', '0000-00-00', 1),
+(13, 13738, 'Stephen Vincent Strange', 'S. V. Strange', '177A, Bleecker Street, New York, USA', '3333333333', '3333333333', '1930-11-18', 'doctorstrange@avengersfacilities.com', '2016-08-21', '2023-06-05', '0000-00-00', 1),
+(14, 13739, 'Peter Benjamin Parker', 'P. B. Parker', '20, Ingram Street, New York, USA', '4444444444', '4444444444', '2001-08-10', 'spiderman@avengersfacilities.com', '2016-11-06', '2023-06-05', '0000-00-00', 1),
+(15, 13740, 'Clinton Francis Barton', 'C. F. Barton', 'Bedford-Stuyvesant, Brooklyn, New York, USA', '5555555555', '5555555555', '1975-10-01', 'Hawkeye@avengersfacilities.com', '2012-04-27', '2023-06-05', '0000-00-00', 1),
+(16, 13741, 'Robert Bruce Banner', 'R. B. Banner', 'Stark Gamma Laborotories, California, USA', '6666666666', '6666666666', '1969-12-18', 'hulk@avengersfacilities.com', '2012-04-27', '2023-06-05', '0000-00-00', 1);
 
 -- --------------------------------------------------------
 
@@ -437,7 +513,7 @@ INSERT INTO `subject_tbl` (`sub_id`, `sub_code`, `sub_name`) VALUES
 
 CREATE TABLE `teacher_class_tbl` (
   `id` int(10) NOT NULL,
-  `teacher_id` int(10) NOT NULL,
+  `staff_id` int(10) NOT NULL,
   `grade_class_id` int(10) NOT NULL,
   `year` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -446,9 +522,10 @@ CREATE TABLE `teacher_class_tbl` (
 -- Dumping data for table `teacher_class_tbl`
 --
 
-INSERT INTO `teacher_class_tbl` (`id`, `teacher_id`, `grade_class_id`, `year`) VALUES
-(2, 2, 11, '2023'),
-(3, 8, 12, '2024');
+INSERT INTO `teacher_class_tbl` (`id`, `staff_id`, `grade_class_id`, `year`) VALUES
+(4, 14, 13, '2023'),
+(5, 15, 14, '2024'),
+(6, 16, 15, '2023');
 
 -- --------------------------------------------------------
 
@@ -457,41 +534,9 @@ INSERT INTO `teacher_class_tbl` (`id`, `teacher_id`, `grade_class_id`, `year`) V
 --
 
 CREATE TABLE `teacher_subject_tbl` (
-  `teacher_id` int(10) NOT NULL,
+  `staff_id` int(10) NOT NULL,
   `sub_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `teacher_tbl`
---
-
-CREATE TABLE `teacher_tbl` (
-  `teacher_id` int(10) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `nic` varchar(255) NOT NULL,
-  `dob` varchar(10) NOT NULL,
-  `teacher_no` varchar(255) NOT NULL,
-  `app_date` date NOT NULL,
-  `rc_app_date` date NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `app_subject` varchar(100) NOT NULL,
-  `sec_id` varchar(5) NOT NULL,
-  `status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `teacher_tbl`
---
-
-INSERT INTO `teacher_tbl` (`teacher_id`, `first_name`, `last_name`, `nic`, `dob`, `teacher_no`, `app_date`, `rc_app_date`, `email`, `app_subject`, `sec_id`, `status`) VALUES
-(2, 'Dasun', 'Nethsara', '123456789', '2004-08-19', 'T-02', '2022-01-01', '2023-05-26', 'hehe@host.lk', 'Subject 2', 'TECH', 1),
-(8, 'Naveen', 'Balasooriya', '789456123', '2004-04-08', 'T-03', '2015-12-02', '2019-02-10', 'gg@gmail.com', 'Subject 4', 'TECH', 1),
-(9, 'Lasith', 'Randil', '456789124', '2004-11-15', 'T-04', '2023-05-09', '2023-05-25', 't@host.com', 'Subject 5', 'TECH', 1),
-(10, 'kiiiiiii', 'isvluvhnujil', '456123788', '2023-05-09', 'T-05', '2023-05-14', '2023-05-17', 'hg@host.com', 'Subject 1', 'TECH', 1),
-(11, 'Dhananjya', 'Lakshan', '11111111', '1990-05-04', 'T-06', '2014-07-05', '2020-11-21', 'djcgh@host.com', 'Subject 1', 'Maths', 1);
 
 -- --------------------------------------------------------
 
@@ -535,17 +580,18 @@ CREATE TABLE `user_tbl` (
 --
 
 INSERT INTO `user_tbl` (`user_id`, `username`, `password`, `role_id`, `admission_no`, `nic`) VALUES
-(1, 'admin', '$2y$10$vp.zGwQNHDpjfewb3B1eHOBClW2ZshRnZOSQouQhky52vAO6uzglO', 1, 'NULL', '123456789'),
-(3, '123456788', '$2y$10$qSN1EAOrm7nK.aihSSVzEuYfFm3Fofg39Yfw7hQWUrRDF9Iq.9r7m', 4, 'NULL', '123456789'),
-(9, '789456123', '$2y$10$7g9rAWQVVg1ZfnJqrB3KPeXtCRQKIWkouUrh8/WAN6ofsZjNs0giK', 4, 'NULL', '789456123'),
-(10, '456789124', '$2y$10$lz9QJOOja4ZAhew8t.AjDu/oF1ptd8tT63eVMzkavIhhJmmzcurAK', 4, 'NULL', '456789124'),
-(11, '456123789', '$2y$10$p0EVNlQmuyL1zWIq5muIQe7ZE6bLHKExSUxjx4rSOb4jhjMU0EG56', 4, 'NULL', '456123788'),
-(15, '13736', '$2y$10$XBTqxLNKLkcfL72yXcF6tOhIGT2A6y6L6Uf2OOGuLwKLNoPOl6ekS', 5, '13736', NULL),
-(16, '13737', '$2y$10$Os8hHXEJk6Ze1e0BU9bLp.rqyptQd.9/f.cXFuV505AG7.gqTYcdC', 5, '13737', NULL),
-(17, '13738', '$2y$10$cDs940Vbi.0JgcsftPmLCemWfamVFJboS.gysNBO1Kk.dVfma/XgO', 5, '13738', NULL),
-(20, '13739', '$2y$10$MLJj/mP3zoRaKlu8bdh/xOwzfjE2oy7K9yEl116jZnrPbfRdTbZ5a', 5, '13739', NULL),
-(21, '13740', '$2y$10$89pAfmtI8b5xTf3yyHV9vefMJHbgm1BtDoKNV1d8J7jZcrQgpkluq', 5, '13740', NULL),
-(22, '19741', '$2y$10$t5dsU0RTWo3Fd4H/RmrZGuWvedqbdDktw9gbQZjwg7g6aDZbiqHUW', 5, '19741', NULL);
+(1, 'admin', '$2y$10$fpviFK0rrFRmWFioB93ZwuiiRTUH2BaTQCzTiht7pz9RTkQA0iwY6', 1, 'NULL', '123456789'),
+(25, '789456123', '$2y$10$VXwp.OIvlS3VN9DaKGs0M.bDmPNQjQcLJXR61jdFwoHXKU/U0MfxO', 2, '', '789456123'),
+(26, '987654321', '$2y$10$GwAX.u7Lw2QxlXRMj5lXo.ddsao8blaYXHPqS6GNiqCGRfR7202iS', 2, '', '987654321'),
+(27, '123789456', '$2y$10$JiuAR1zh861J8J4bR6GWAuUakg0yRIfs3Vt7gLmknsxOI7pi6OSmK', 4, '', '123789456'),
+(28, '789123456', '$2y$10$U2rWADVxQ.vgJXLgJhtRresEqrV.DmT4sTwAC1oIJ4GoyBulEVcgu', 4, '', '789123456'),
+(29, '13736', '$2y$10$LKKxP3yV0b7J.QxB1SMtquZGMiGm.o09KRya3uBdyGK4cCfXkr8aC', 5, '13736', NULL),
+(30, '13737', '$2y$10$7GwSVhJBql/.gHvUGOegN.vLDSno8ZPYstQd1tgTQzjgBEuSnyQ5y', 5, '13737', NULL),
+(31, '13738', '$2y$10$5kkTIPf60rHomxGwrCPOtu.jf/ZEcYk/J0.Fs63G07w134KHtREx6', 5, '13738', NULL),
+(32, '13739', '$2y$10$Ag.6.BV2aOWCzuQjld1jiOnPQ2ZdOElX/CNFKoDS1SCHb4NhUOe1W', 5, '13739', NULL),
+(33, '13740', '$2y$10$ONUMQgTj1F9I6KZzEFH3O.cl8eOTi3cUsNcnDUH/nfBLYdLXXPrJO', 5, '13740', NULL),
+(34, '13741', '$2y$10$RiEeXeUt6OglXR7O/tWHA.qNRgdSeegl3f8iR5BB9dlfaHYB0jnka', 5, '13741', NULL),
+(35, '741852963', '$2y$10$s1pAcTSlXu15Ctoczdj2MuCat2Ftgz0vJCniUriwmk//i5h0Z4jhS', 4, '', '741852963');
 
 --
 -- Indexes for dumped tables
@@ -606,7 +652,7 @@ ALTER TABLE `grade_class_tbl`
   ADD KEY `grade_class_id` (`grade_class_id`),
   ADD KEY `grade_id` (`grade_id`),
   ADD KEY `class_id` (`class_id`),
-  ADD KEY `teacher_id` (`teacher_id`);
+  ADD KEY `teacher_id` (`staff_id`);
 
 --
 -- Indexes for table `grade_subject_tbl`
@@ -623,7 +669,7 @@ ALTER TABLE `grade_subject_tbl`
 ALTER TABLE `grade_tbl`
   ADD PRIMARY KEY (`grade_id`),
   ADD KEY `grade_id` (`grade_id`),
-  ADD KEY `teacher_id` (`teacher_id`);
+  ADD KEY `staff_id` (`staff_id`);
 
 --
 -- Indexes for table `guardian_tbl`
@@ -633,10 +679,25 @@ ALTER TABLE `guardian_tbl`
   ADD KEY `std_id` (`std_id`);
 
 --
+-- Indexes for table `message_tbl`
+--
+ALTER TABLE `message_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `section_tbl`
 --
 ALTER TABLE `section_tbl`
   ADD PRIMARY KEY (`sec_id`),
+  ADD KEY `sec_id` (`sec_id`);
+
+--
+-- Indexes for table `staff_tbl`
+--
+ALTER TABLE `staff_tbl`
+  ADD PRIMARY KEY (`staff_id`),
+  ADD KEY `teacher_id` (`staff_id`),
+  ADD KEY `nic` (`nic`),
   ADD KEY `sec_id` (`sec_id`);
 
 --
@@ -668,24 +729,16 @@ ALTER TABLE `subject_tbl`
 --
 ALTER TABLE `teacher_class_tbl`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `teacher_id` (`teacher_id`),
-  ADD KEY `grade_class_id` (`grade_class_id`);
+  ADD KEY `teacher_id` (`staff_id`),
+  ADD KEY `grade_class_id` (`grade_class_id`),
+  ADD KEY `staff_id` (`staff_id`);
 
 --
 -- Indexes for table `teacher_subject_tbl`
 --
 ALTER TABLE `teacher_subject_tbl`
-  ADD KEY `teacher_id` (`teacher_id`),
-  ADD KEY `sub_id` (`sub_id`);
-
---
--- Indexes for table `teacher_tbl`
---
-ALTER TABLE `teacher_tbl`
-  ADD PRIMARY KEY (`teacher_id`),
-  ADD KEY `teacher_id` (`teacher_id`),
-  ADD KEY `sec_id` (`sec_id`),
-  ADD KEY `nic` (`nic`);
+  ADD KEY `sub_id` (`sub_id`),
+  ADD KEY `staff_id` (`staff_id`);
 
 --
 -- Indexes for table `user_role_tbl`
@@ -717,13 +770,13 @@ ALTER TABLE `1-11_marks_tbl`
 -- AUTO_INCREMENT for table `al_absent_tbl`
 --
 ALTER TABLE `al_absent_tbl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `al_marks_tbl`
 --
 ALTER TABLE `al_marks_tbl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
 -- AUTO_INCREMENT for table `al_subjects_tbl`
@@ -741,25 +794,25 @@ ALTER TABLE `al_subject_stream_tbl`
 -- AUTO_INCREMENT for table `class_tbl`
 --
 ALTER TABLE `class_tbl`
-  MODIFY `class_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `class_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `grade_class_tbl`
 --
 ALTER TABLE `grade_class_tbl`
-  MODIFY `grade_class_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `grade_class_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `grade_subject_tbl`
 --
 ALTER TABLE `grade_subject_tbl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
 
 --
 -- AUTO_INCREMENT for table `grade_tbl`
 --
 ALTER TABLE `grade_tbl`
-  MODIFY `grade_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `grade_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `guardian_tbl`
@@ -768,22 +821,34 @@ ALTER TABLE `guardian_tbl`
   MODIFY `guardian_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `message_tbl`
+--
+ALTER TABLE `message_tbl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `section_tbl`
 --
 ALTER TABLE `section_tbl`
   MODIFY `sec_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `staff_tbl`
+--
+ALTER TABLE `staff_tbl`
+  MODIFY `staff_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT for table `student_class_tbl`
 --
 ALTER TABLE `student_class_tbl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `student_tbl`
 --
 ALTER TABLE `student_tbl`
-  MODIFY `std_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `std_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `subject_tbl`
@@ -795,13 +860,7 @@ ALTER TABLE `subject_tbl`
 -- AUTO_INCREMENT for table `teacher_class_tbl`
 --
 ALTER TABLE `teacher_class_tbl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `teacher_tbl`
---
-ALTER TABLE `teacher_tbl`
-  MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_role_tbl`
@@ -813,7 +872,7 @@ ALTER TABLE `user_role_tbl`
 -- AUTO_INCREMENT for table `user_tbl`
 --
 ALTER TABLE `user_tbl`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Constraints for dumped tables
@@ -855,7 +914,7 @@ ALTER TABLE `al_subjects_tbl`
 ALTER TABLE `grade_class_tbl`
   ADD CONSTRAINT `grade_class_tbl_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `class_tbl` (`class_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `grade_class_tbl_ibfk_2` FOREIGN KEY (`grade_id`) REFERENCES `grade_tbl` (`grade_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `grade_class_tbl_ibfk_3` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_tbl` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `grade_class_tbl_ibfk_3` FOREIGN KEY (`staff_id`) REFERENCES `staff_tbl` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `grade_subject_tbl`
@@ -869,13 +928,19 @@ ALTER TABLE `grade_subject_tbl`
 -- Constraints for table `grade_tbl`
 --
 ALTER TABLE `grade_tbl`
-  ADD CONSTRAINT `grade_tbl_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_tbl` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `grade_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `staff_tbl` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `guardian_tbl`
 --
 ALTER TABLE `guardian_tbl`
   ADD CONSTRAINT `guardian_tbl_ibfk_1` FOREIGN KEY (`std_id`) REFERENCES `student_tbl` (`std_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `staff_tbl`
+--
+ALTER TABLE `staff_tbl`
+  ADD CONSTRAINT `sec_id_from_section_tbl` FOREIGN KEY (`sec_id`) REFERENCES `section_tbl` (`sec_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `student_class_tbl`
@@ -889,14 +954,14 @@ ALTER TABLE `student_class_tbl`
 -- Constraints for table `teacher_class_tbl`
 --
 ALTER TABLE `teacher_class_tbl`
-  ADD CONSTRAINT `teacher_class_tbl_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_tbl` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `teacher_class_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `staff_tbl` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `teacher_class_tbl_ibfk_2` FOREIGN KEY (`grade_class_id`) REFERENCES `grade_class_tbl` (`grade_class_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `teacher_subject_tbl`
 --
 ALTER TABLE `teacher_subject_tbl`
-  ADD CONSTRAINT `teacher_subject_tbl_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_tbl` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `teacher_subject_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `staff_tbl` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `teacher_subject_tbl_ibfk_2` FOREIGN KEY (`sub_id`) REFERENCES `subject_tbl` (`sub_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -904,7 +969,7 @@ ALTER TABLE `teacher_subject_tbl`
 --
 ALTER TABLE `user_tbl`
   ADD CONSTRAINT `user_tbl_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_role_tbl` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_tbl_ibfk_2` FOREIGN KEY (`nic`) REFERENCES `teacher_tbl` (`nic`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `user_tbl_ibfk_2` FOREIGN KEY (`nic`) REFERENCES `staff_tbl` (`nic`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

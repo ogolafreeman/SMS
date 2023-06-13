@@ -19,6 +19,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
         <link rel="stylesheet" type="text/css" href="../../css/style.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
     </head>
 
     <body class="sb-nav-fixed">
@@ -44,6 +45,15 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
                         </b> !
                     </li>
                 </ol>
+
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-9"></div>
+                        <div class="col-sm-12 col-lg-3">
+                            <?php include 'calendar.php'; ?>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Your further code goes here. keep coding in this div -->
 
