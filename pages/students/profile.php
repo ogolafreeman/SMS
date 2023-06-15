@@ -1,10 +1,13 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
     include '../../data/admin_operations.php';
     include '../../controls/connection.php';
-    $id = $_GET['id'];
-    $student = getStudentById($id, $con);
+    $admission_no = $_SESSION['username'];
+    $sql = "SELECT * FROM student_tbl WHERE admission_no='$admission_no'";
+    $result = mysqli_query($con, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $student = getStudentById($row['std_id'], $con);
 ?>
 
     <!DOCTYPE html>
@@ -17,7 +20,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title><?php echo $student['name_with_initials']; ?>'s Profile - Admin</title>
+        <title>Your Profile - Student Portal</title>
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="../../js/jquery-3.6.3.min.js"></script>
@@ -40,9 +43,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
                 <!-- Your further code goes here. keep coding in this div -->
                 <div class="container mt-3">
-                    <a class='btn btn-primary' href='view-all-students.php'>Go Back</a>
-                    <a class='btn btn-warning' href='edit-students.php?id=<?= $student['std_id'] ?>'>Edit Profile</a>
-
                     <?php if (isset($_GET['success'])) { ?>
                         <!-- <div class='alert alert-success' role='alert'>
                             <?= $_GET['success'] ?>

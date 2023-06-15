@@ -89,19 +89,19 @@
                     </div>
 
                     <div class="sb-sidenav-menu-heading">Addons</div>
-                    <a class="nav-link" href="#">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-envelope"></i></div>
-                        Messages
+                    <a class="nav-link" href="">
+                        <div class="sb-nav-link-icon"><i class="fa fa-comments" aria-hidden="true"></i></div>
+                        Chat
                     </a>
-                    <!-- <a class="nav-link" href="tables.html">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Tables
-                    </a> -->
+                    <a class="nav-link" href="profile.php">
+                        <div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                        Profile
+                    </a>
                 </div>
             </div>
             <div class="sb-sidenav-footer">
                 <div class="small">Logged in as:</div>
-                <b title='Your Role'><?= $_SESSION['admin_role'] ?></b>
+                <b title='Your Role'><?= $_SESSION['secHead_role'] ?></b>
             </div>
         </nav>
     </div>

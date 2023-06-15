@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
 ?>
 
     <!DOCTYPE html>
@@ -13,7 +13,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Exam Reports - Admin</title>
+        <title>Exam Report - Student Portal</title>
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- <script src="../../js/jquery-3.6.3.min.js"></script> -->
@@ -31,28 +31,56 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
             <!-- content goes here. do not remove any code -->
             <div class="container-fluid">
-                <h1 class="mt-4">Exam Reports</h1>
+                <h1 class="mt-4">Exam Report</h1>
                 <ol class="breadcrumb mb-4"></ol>
 
                 <div class="container mt-5">
-                    <div class="shadow p-3  mt-5 form-w">
+
+                    <?php if (isset($_GET['success'])) { ?>
+                        <!-- <div class='alert alert-success' role='alert'>
+                            <?= $_GET['success'] ?>
+                        </div> -->
+
+                        <script>
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Done',
+                                text: "<?= $_GET['success'] ?>"
+                            })
+                        </script>
+                    <?php } ?>
+
+                    <?php if (isset($_GET['error'])) { ?>
+                        <!-- <div class='alert alert-danger' role='alert'>
+                            <?= $_GET['error'] ?>
+                        </div> -->
+
+                        <script>
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Oops...',
+                                text: "<?= $_GET['error'] ?>"
+                            })
+                        </script>
+                    <?php } ?>
+
+                    <div action="show-marks.php" class="shadow p-3  mt-5 form-w">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label">Search by Admission No.</label>
-                                    <input type="text" id="admission_no" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label class="form-label">Year</label>
-                                    <select name="year" class="form-select yearSelect" required></select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3">
                                     <label class="form-label">Term</label>
-                                    <select name="term" class="form-select termSelect" required></select>
+                                    <select name="term" class="form-select termSelect" required>
+                                        <?php
+                                        // include '../../controls/connection.php';
+                                        // $sql1 = "SELECT * FROM student_tbl WHERE admission_no='" . $_SESSION['username'] . "'";
+                                        // $result1 = mysqli_query($con, $sql1);
+                                        // $row1 = mysqli_fetch_assoc($result1);
+                                        // $std_id = $row1['']
+                                        ?>
+                                        <option value="1st Term">1st Term</option>
+                                        <option value="2nd Term">2nd Term</option>
+                                        <option value="3rd Term">3rd Term</option>
+                                    </select>
                                 </div>
                             </div>
                             <!-- <div class="col-md-5"> -->
@@ -62,15 +90,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             <!-- </div> -->
                         </div>
                     </div>
+
+                    <table class="table table-bordered mt-5" id='data'>
+                    </table>
+                    <form action='../../data/change-status.php?admission_no=<?= $_SESSION['username'] ?>' method='post' class='form'>
+                        <input type='submit' value='Mark as Seen' class='btn btn-info mt-3' name='change'>
+                    </form>
                 </div>
-
-                <div class="container mt-5">
-                    <h3>Filtered Results</h3>
-                    <hr>
-                    <div id="data" class=""></div>
-                </div>
-
-
             </div>
 
             <!-- footer -->
@@ -80,49 +106,19 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
         <script>
             $(document).ready(function() {
-                // get-years.php
-                $('#admission_no').keyup(function() {
-                    var query = $(this).val();
-                    if (query != '') {
-                        $.ajax({
-                            url: 'get-years.php',
-                            method: 'POST',
-                            data: {
-                                query: query
-                            },
-                            success: function(data) {
-                                $('.yearSelect').html(data);
-                            }
-                        });
-                    }
-                });
-                $('#admission_no').keyup(function() {
-                    var query = $(this).val();
-                    if (query != '') {
-                        $.ajax({
-                            url: 'get-terms.php',
-                            method: 'POST',
-                            data: {
-                                query: query
-                            },
-                            success: function(data) {
-                                $('.termSelect').html(data);
-                            }
-                        });
-                    }
-                });
+                $(".form").hide();
                 $("#search").click(function(event) {
                     event.preventDefault();
                     $.ajax({
-                        url: "filtered-marks-details.php",
+                        url: "get-marks-data.php",
                         type: "POST",
                         data: {
-                            res_year: $(".yearSelect option:selected").val(),
                             term: $(".termSelect option:selected").val(),
-                            query: $("#admission_no").val()
+                            admission_no: <?= $_SESSION['username'] ?>
                         },
                         success: function(data) {
                             $("#data").html(data);
+                            $(".form").show();
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             console.log("Error: " + textStatus + " - " + errorThrown);
@@ -131,7 +127,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                 });
             });
         </script>
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../js/scripts.js"></script>
 

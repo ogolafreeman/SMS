@@ -193,7 +193,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
                     <form action="../../data/enter-marks.php" method='post'>
                         <table class="table table-bordered" id='tableData'></table>
-                        <!-- <input type="submit" name="save" class="btn btn-success" value="Save"> -->
+                        <input type="submit" name="save" class="btn btn-success" value="Save">
                     </form>
 
                 </div>

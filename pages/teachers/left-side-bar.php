@@ -32,46 +32,6 @@
                         </nav>
                     </div>
 
-                    <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                        Grades and Classes
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                Grades
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="view-all-grades.php">View All</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                Classes
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="view-all-classes.php">View All</a>
-                                </nav>
-                            </div>
-                        </nav>
-                    </div> -->
-
-                    <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts6" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-book"></i></div>
-                        Subjects
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseLayouts6" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="add-subject.php">Add New Subject</a>
-                            <a class="nav-link" href="assign-to-class.php">Assign to Grades</a>
-                        </nav>
-                    </div> -->
-
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts7" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-award"></i></div>
                         Marks
@@ -86,15 +46,19 @@
                         </nav>
                     </div>
 
-                    <!-- <div class="sb-sidenav-menu-heading">Addons</div>
-                    <a class="nav-link" href="#">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-envelope"></i></div>
-                        Messages
-                    </a> -->
-                    <!-- <a class="nav-link" href="tables.html">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Tables
-                    </a> -->
+                    <div class="sb-sidenav-menu-heading">Addons</div>
+                    <a class="nav-link" href="">
+                        <div class="sb-nav-link-icon"><i class="fa fa-comments" aria-hidden="true"></i></div>
+                        Chat
+                    </a>
+                    <a class="nav-link" href="profile.php">
+                        <div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                        Profile
+                    </a>
+                    <a class="nav-link" href="settings.php">
+                        <div class="sb-nav-link-icon"><i class="fa fa-cogs" aria-hidden="true"></i></div>
+                        Settings
+                    </a>
                 </div>
             </div>
             <div class="sb-sidenav-footer">

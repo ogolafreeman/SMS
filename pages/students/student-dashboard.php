@@ -16,9 +16,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
         <title>Dashboard - Student Portal</title>
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="../../css/style.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="../../js/jquery-3.6.3.min.js"></script>
 
     </head>
 
@@ -47,12 +50,42 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
                 </ol>
 
                 <div class="container mt-5">
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-sm-12 col-lg-9"></div>
                         <div class="col-sm-12 col-lg-3">
                             <?php include 'calendar.php'; ?>
                         </div>
-                    </div>
+                    </div> -->
+
+                    <?php
+                    include '../../controls/connection.php';
+                    $sql1 = "SELECT std_id FROM student_tbl WHERE admission_no='" . $_SESSION['username'] . "'";
+                    $result1 = mysqli_query($con, $sql1);
+                    if (mysqli_num_rows($result1) == 1) {
+                        $row1 = mysqli_fetch_assoc($result1);
+                        $sql2 = "SELECT * FROM student_marks_watched_tbl WHERE is_watched='0' AND std_id='" . $row1['std_id'] . "'";
+                        $result2 = mysqli_query($con, $sql2);
+                        if (mysqli_num_rows($result2) == 1) {
+                            $row2 = mysqli_fetch_assoc($result2);
+                            $term = $row2['term'];
+                            echo "<script>
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'info',
+                                        title: '$term Test Marks Released! Do you want to check it now?',
+                                        showCancelButton: true,
+                                        confirmButtonText: 'Yes',
+                                        denyButtonText: `No`,
+                                        }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = 'show-marks.php';
+                                        }
+                                        })
+                              </script>";
+                        }
+                    }
+                    ?>
+
                 </div>
 
                 <!-- Your further code goes here. keep coding in this div -->

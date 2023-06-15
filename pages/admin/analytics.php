@@ -13,7 +13,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Exam Reports - Admin</title>
+        <title>Marks Analytics - Admin</title>
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- <script src="../../js/jquery-3.6.3.min.js"></script> -->
@@ -31,7 +31,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
             <!-- content goes here. do not remove any code -->
             <div class="container-fluid">
-                <h1 class="mt-4">Exam Reports</h1>
+                <h1 class="mt-4">Marks Analytics</h1>
                 <ol class="breadcrumb mb-4"></ol>
 
                 <div class="container mt-5">
@@ -49,12 +49,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                     <select name="year" class="form-select yearSelect" required></select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <div class="mb-3">
                                     <label class="form-label">Term</label>
                                     <select name="term" class="form-select termSelect" required></select>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div class="col-md-5"> -->
                             <div class="mb-3">
                                 <button class="btn btn-success" id="search">Search</button>
@@ -96,29 +96,29 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         });
                     }
                 });
-                $('#admission_no').keyup(function() {
-                    var query = $(this).val();
-                    if (query != '') {
-                        $.ajax({
-                            url: 'get-terms.php',
-                            method: 'POST',
-                            data: {
-                                query: query
-                            },
-                            success: function(data) {
-                                $('.termSelect').html(data);
-                            }
-                        });
-                    }
-                });
+                // $('#admission_no').keyup(function() {
+                //     var query = $(this).val();
+                //     if (query != '') {
+                //         $.ajax({
+                //             url: 'get-terms.php',
+                //             method: 'POST',
+                //             data: {
+                //                 query: query
+                //             },
+                //             success: function(data) {
+                //                 $('.termSelect').html(data);
+                //             }
+                //         });
+                //     }
+                // });
                 $("#search").click(function(event) {
                     event.preventDefault();
                     $.ajax({
-                        url: "filtered-marks-details.php",
+                        url: "load-charts.php",
                         type: "POST",
                         data: {
                             res_year: $(".yearSelect option:selected").val(),
-                            term: $(".termSelect option:selected").val(),
+                            // term: $(".termSelect option:selected").val(),
                             query: $("#admission_no").val()
                         },
                         success: function(data) {

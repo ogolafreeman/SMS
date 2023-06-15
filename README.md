@@ -4,7 +4,7 @@ Student Management System for Richmond College Technology Section
 > Coding :
 - Version : 1.0
 - Base Language : PHP (v8.1)
-- Used Language/s : HTML, CSS, JavaScript (Also known as JS), SQL (MySQL)
+- Used Language/s : HTML, CSS, JavaScript, SQL (MySQL)
 - Framework : Bootstrap (CSS Framework)
 - Used Pre Trained models/ APIs : -
 - Platform : Any (Windows, MacOS, Linux, iOS, Android etc.)

@@ -4,6 +4,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
 	require_once '../controls/connection.php';
 	if (isset($_POST['save'])) {
+		$std_id = "";
+		$term = "";
+		$year = "";
+		$std_array = array();
 		$marks = $_POST['marks'];
 		foreach ($marks as $mark) {
 			foreach ($mark as $m) {
@@ -17,6 +21,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 				$grade_class_id = $data[2];
 				$term = $data[3];
 				$year = $data[4];
+
+				array_push($std_array, $std_id);
 
 				if ($m == "") {
 					$sql3 = "SELECT * FROM al_absent_tbl WHERE std_id='$std_id' AND grade_class_id='$grade_class_id' AND sub_id='$sub_id' AND term='$term' AND year='$year'";
@@ -100,6 +106,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
 				// echo "Student ID: $std_id" . " " . "Subject: $sub_id" . " " . "Marks: $m<br>";
 			}
+		}
+
+		foreach (array_unique($std_array) as $std_id) {
+			$sql3 = "INSERT INTO student_marks_watched_tbl (std_id, term, year, is_watched) VALUES ('$std_id', '$term', '$year', '0')";
+			$result3 = mysqli_query($con, $sql3);
 		}
 
 		if ($state == 1) {

@@ -95,8 +95,6 @@ function getAllGrades()
 function getAllClasses()
 {
     require '../../controls/connection.php';
-    $currentYear = date("Y");
-    $currentYear1 = date("Y") + 1;
     $sql = "SELECT * FROM grade_class_tbl";
     $result = mysqli_query($con, $sql);
     if (mysqli_num_rows($result) >= 1) {
@@ -117,5 +115,24 @@ function getAllSubjects()
         return $subjects;
     } else {
         return 0;
+    }
+}
+
+function getSelectedStudents($id)
+{
+    require '../../controls/connection.php';
+    $sql1 = "SELECT grade_class_id FROM grade_class_tbl WHERE staff_id='$id'";
+    $result1 = mysqli_query($con, $sql1);
+    if (mysqli_num_rows($result1) == 1) {
+        $row1 = mysqli_fetch_assoc($result1);
+        $grade_class_id = $row1['grade_class_id'];
+        $sql2 = "SELECT std_id FROM student_class_tbl WHERE grade_class_id='$grade_class_id'";
+        $result2 = mysqli_query($con, $sql2);
+        if (mysqli_num_rows($result2) > 0) {
+            $students = mysqli_fetch_all($result2);
+            return $students;
+        } else {
+            return 0;
+        }
     }
 }

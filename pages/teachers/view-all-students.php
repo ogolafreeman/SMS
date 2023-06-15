@@ -3,8 +3,17 @@ session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
 
     include '../../data/admin_operations.php';
-    $students = getAllStudents();
-    // print_r($students);
+    $username = $_SESSION['username'];
+    $sql = "SELECT nic FROM user_tbl WHERE username='$username'";
+    $result = mysqli_query($con, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $sql2 = "SELECT staff_id FROM staff_tbl WHERE nic='" . $row['nic'] . "'";
+    $result2 = mysqli_query($con, $sql2);
+    $row2 = mysqli_fetch_assoc($result2);
+    // $teacher = getTeacherById($row2['staff_id'], $con);
+    $staff_id = $row2['staff_id'];
+    $students = getSelectedStudents($staff_id);
+
 ?>
 
     <!DOCTYPE html>
@@ -75,6 +84,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                                 <th scope="col">Admission No.</th>
                                 <th scope="col">Full Name</th>
                                 <th scope="col">Phone - Home</th>
+                                <th scope="col">Phone - Mobile</th>
                                 <th scope="col">Date of Admission</th>
                                 <th scope="col">Operations</th>
                             </tr>
@@ -82,21 +92,31 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                         <tbody>
                             <?php
                             $count = 1;
-                            foreach ($students as $student) { ?>
-                                <tr>
-                                    <th scope="row"><?php echo $count; ?></th>
-                                    <td><?php echo $student[1]; ?></td>
-                                    <td><?php echo $student[2]; ?></td>
-                                    <td><?php echo $student[5]; ?></td>
-                                    <td><?php echo $student[9]; ?></td>
-                                    <td>
-                                        <a class="btn btn-info" name="profile" href="view-student-info.php?id=<?= $student[0] ?>">Profile</a>
-                                        <a class="btn btn-warning" name="edit" href="edit-students.php?id=<?= $student[0] ?>">Edit</a>
-                                        <a class="btn btn-danger" name="delete" href="delete-student.php?id=<?= $student[0] ?>">Delete</a>
-                                    </td>
-                                </tr>
+
+                            foreach ($students as $s) {
+                                foreach ($s as $student) {
+                                    // print($student);
+                                    $sql2 = "SELECT * FROM student_tbl WHERE std_id='$student'";
+                                    $result2 = mysqli_query($con, $sql2);
+                                    while ($row = mysqli_fetch_assoc($result2)) {
+                            ?>
+                                        <tr>
+                                            <th scope="row"><?php echo $count; ?></th>
+                                            <td><?php echo $row['admission_no']; ?></td>
+                                            <td><?php echo $row['full_name']; ?></td>
+                                            <td><?php echo $row['phone_no_1']; ?></td>
+                                            <td><?php echo $row['phone_no_2']; ?></td>
+                                            <td><?php echo $row['d_o_admission']; ?></td>
+                                            <td>
+                                                <a class="btn btn-info" name="profile" href="view-student-info.php?id=<?= $row['std_id'] ?>">Profile</a>
+                                                <a class="btn btn-warning" name="edit" href="edit-students.php?id=<?= $row['std_id'] ?>">Edit</a>
+                                                <a class="btn btn-danger" name="delete" href="delete-student.php?id=<?= $row['std_id'] ?>">Delete</a>
+                                            </td>
+                                        </tr>
 
                             <?php $count += 1;
+                                    }
+                                }
                             } ?>
 
                         </tbody>

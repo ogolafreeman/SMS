@@ -1,7 +1,0 @@
------ ADMIN ACCOUNT -----
-username - admin
-password - admin
-
------ OTHERS -----
-all usernames are in the user_tbl
-Please note: username and password are same
