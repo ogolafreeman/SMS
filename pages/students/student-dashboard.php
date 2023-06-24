@@ -50,42 +50,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
                 </ol>
 
                 <div class="container mt-5">
-                    <!-- <div class="row">
+                    <div class="row">
                         <div class="col-sm-12 col-lg-9"></div>
                         <div class="col-sm-12 col-lg-3">
                             <?php include 'calendar.php'; ?>
                         </div>
-                    </div> -->
-
-                    <?php
-                    include '../../controls/connection.php';
-                    $sql1 = "SELECT std_id FROM student_tbl WHERE admission_no='" . $_SESSION['username'] . "'";
-                    $result1 = mysqli_query($con, $sql1);
-                    if (mysqli_num_rows($result1) == 1) {
-                        $row1 = mysqli_fetch_assoc($result1);
-                        $sql2 = "SELECT * FROM student_marks_watched_tbl WHERE is_watched='0' AND std_id='" . $row1['std_id'] . "'";
-                        $result2 = mysqli_query($con, $sql2);
-                        if (mysqli_num_rows($result2) == 1) {
-                            $row2 = mysqli_fetch_assoc($result2);
-                            $term = $row2['term'];
-                            echo "<script>
-                                    Swal.fire({
-                                        position: 'top-end',
-                                        icon: 'info',
-                                        title: '$term Test Marks Released! Do you want to check it now?',
-                                        showCancelButton: true,
-                                        confirmButtonText: 'Yes',
-                                        denyButtonText: `No`,
-                                        }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            window.location.href = 'show-marks.php';
-                                        }
-                                        })
-                              </script>";
-                        }
-                    }
-                    ?>
-
+                    </div>
                 </div>
 
                 <!-- Your further code goes here. keep coding in this div -->

@@ -17,12 +17,12 @@
                     <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="show-marks.php">View</a>
-                            <a class="nav-link" href="#">Analytics</a>
+                            <a class="nav-link" href="analytics.php">Analytics</a>
                         </nav>
                     </div>
 
                     <div class="sb-sidenav-menu-heading">Addons</div>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link getPopup" href="#">
                         <div class="sb-nav-link-icon"><i class="fa fa-comments" aria-hidden="true"></i></div>
                         Chat
                     </a>
@@ -42,3 +42,15 @@
             </div>
         </nav>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $(".getPopup").click(function() {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Sorry',
+                    text: "This feature is currently unavailable!"
+                });
+            })
+        });
+    </script>

@@ -92,7 +92,7 @@
                         </nav>
                     </div>
                     <div class="sb-sidenav-menu-heading">Addons</div>
-                    <a class="nav-link" href="">
+                    <a class="nav-link getPopup" href="">
                         <div class="sb-nav-link-icon"><i class="fa fa-comments" aria-hidden="true"></i></div>
                         Chat
                     </a>
@@ -108,3 +108,15 @@
             </div>
         </nav>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $(".getPopup").click(function() {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Sorry',
+                    text: "This feature is currently unavailable!"
+                });
+            })
+        });
+    </script>

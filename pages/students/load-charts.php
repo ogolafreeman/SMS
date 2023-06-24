@@ -2,8 +2,8 @@
 
 include '../../controls/connection.php';
 $year = $_POST['res_year'];
-$query = $_POST['query'];
 $sub_id = $_POST['subject'];
+$admission = $_POST['admission'];
 
 // array
 // $sub_array = array();
@@ -12,7 +12,7 @@ $sub_id = $_POST['subject'];
 
 $sub_name = "";
 
-$sql1 = "SELECT * FROM student_class_tbl sct INNER JOIN student_tbl st ON (sct.std_id = st.std_id) WHERE st.admission_no='$query'";
+$sql1 = "SELECT * FROM student_class_tbl sct INNER JOIN student_tbl st ON (sct.std_id = st.std_id) WHERE st.admission_no='$admission'";
 $result1 = mysqli_query($con, $sql1);
 if (mysqli_num_rows($result1) == 1) {
     $row1 = mysqli_fetch_assoc($result1);
@@ -48,8 +48,7 @@ if (mysqli_num_rows($result1) == 1) {
                     datasets: [{
                         data: <?php echo $marks2; ?>,
                         label: "Marks",
-                        fill: false,
-                        borderColor: '#36A2EB',
+                        fill: false
                     }]
                 },
                 options: {
@@ -58,6 +57,14 @@ if (mysqli_num_rows($result1) == 1) {
                         y: {
                             beginAtZero: true,
                             max: 100
+                        }
+                    },
+                    x: {
+                        grid: {
+                            tickColor: 'red'
+                        },
+                        ticks: {
+                            color: 'blue',
                         }
                     }
                 }

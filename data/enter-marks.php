@@ -107,11 +107,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 			}
 		}
 
-		foreach (array_unique($std_array) as $std_id) {
-			$sql3 = "INSERT INTO student_marks_watched_tbl (std_id, term, year, is_watched) VALUES ('$std_id', '$term', '$year', '0')";
-			$result3 = mysqli_query($con, $sql3);
-		}
-
 		if ($state == 1) {
 			if ($result2) {
 				$sm = "Marks added successfully!";

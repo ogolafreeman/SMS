@@ -3,7 +3,7 @@
 include '../../controls/connection.php';
 $res_year = $_POST['res_year'];
 $term = $_POST['term'];
-$admission_no = $_POST['query'];
+$admission_no = $_POST['admission_no'];
 
 $sub_array = array();
 $marks_array = array();
@@ -46,17 +46,17 @@ if (mysqli_num_rows($result1) == 1) {
         $class_id = $row2['class_id'];
         $year = $row2['year'];
 
-        echo "<div class='row'>
-						<div class='col-md-5'>
-                            <h5>Name: <span style='color: red'>$full_name</span></h5>
-                        </div>
-						<div class='col-md-3'>
-                            <h5>Year: <span style='color: red'>$res_year</span></h5>
-                        </div>
-						<div class='col-md-3'>
-                            <h5>Term: <span style='color: red'>$term</span></h5>
-                        </div>
-				</div>";
+        // echo "<div class='row'>
+        // 				<div class='col-md-5'>
+        //                     <h5>Name: <span style='color: red'>$full_name</span></h5>
+        //                 </div>
+        // 				<div class='col-md-3'>
+        //                     <h5>Year: <span style='color: red'>$res_year</span></h5>
+        //                 </div>
+        // 				<div class='col-md-3'>
+        //                     <h5>Term: <span style='color: red'>$term</span></h5>
+        //                 </div>
+        // 		</div>";
 
         echo "<table class='table mt-5 table-bordered'>
 						<thead>
@@ -175,6 +175,7 @@ if (mysqli_num_rows($result1) == 1) {
                 // 	}
             }
             echo "</tbody></table>";
+            echo "<a href='analytics.php' class='mt-4 btn btn-info'>Go to Analytics Page</a>";
         } else {
             // raise an error -> no subjects assigned for this grade
         }
