@@ -1,10 +1,14 @@
 <?php
 require '../../controls/connection.php';
 // Get all the teacherss
+/**
+ * Summary of getAllTeachers
+ * @return array|int
+ */
 function getAllTeachers()
 {
     require '../../controls/connection.php';
-    $sql = "SELECT * FROM staff_tbl WHERE status='1'";
+    $sql = "SELECT * FROM staff_tbl st INNER JOIN user_tbl ut ON (st.nic = ut.nic) WHERE ( st.status='1' AND NOT ut.role_id='1' )";
     $result = mysqli_query($con, $sql);
     if (mysqli_num_rows($result) >= 1) {
         $teachers = mysqli_fetch_all($result);
@@ -14,7 +18,15 @@ function getAllTeachers()
     }
 }
 
+
+
 // Delete selected teacher
+/**
+ * Summary of removeTeacher
+ * @param mixed $id
+ * @param mixed $con
+ * @return int
+ */
 function removeTeacher($id, $con)
 {
     $sql = "UPDATE staff_tbl SET status='0' WHERE staff_id='$id'";
@@ -27,6 +39,12 @@ function removeTeacher($id, $con)
 
 
 // get the selected teachers data for updating
+/**
+ * Summary of getTeacherById
+ * @param mixed $id
+ * @param mixed $con
+ * @return array|bool|int|null
+ */
 function getTeacherById($id, $con)
 {
     $sql = "SELECT * FROM staff_tbl WHERE staff_id='$id'";
@@ -39,6 +57,10 @@ function getTeacherById($id, $con)
     }
 }
 
+/**
+ * Summary of getAllStudents
+ * @return array|int
+ */
 function getAllStudents()
 {
     require '../../controls/connection.php';
@@ -53,6 +75,12 @@ function getAllStudents()
 }
 
 // Delete selected student
+/**
+ * Summary of removeStudent
+ * @param mixed $id
+ * @param mixed $con
+ * @return int
+ */
 function removeStudent($id, $con)
 {
     $sql = "UPDATE student_tbl SET status='0' WHERE std_id='$id'";
@@ -65,6 +93,12 @@ function removeStudent($id, $con)
 
 
 // get the selected student data for updating
+/**
+ * Summary of getStudentById
+ * @param mixed $id
+ * @param mixed $con
+ * @return array|bool|int|null
+ */
 function getStudentById($id, $con)
 {
     $sql = "SELECT * FROM student_tbl WHERE std_id='$id'";
@@ -78,6 +112,10 @@ function getStudentById($id, $con)
 }
 
 // get all the grades
+/**
+ * Summary of getAllGrades
+ * @return array|int
+ */
 function getAllGrades()
 {
     require '../../controls/connection.php';
@@ -92,6 +130,10 @@ function getAllGrades()
 }
 
 // get all the grades
+/**
+ * Summary of getAllClasses
+ * @return array|int
+ */
 function getAllClasses()
 {
     require '../../controls/connection.php';
@@ -105,6 +147,10 @@ function getAllClasses()
     }
 }
 
+/**
+ * Summary of getAllSubjects
+ * @return array|int
+ */
 function getAllSubjects()
 {
     require '../../controls/connection.php';

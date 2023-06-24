@@ -32,23 +32,13 @@
                         </nav>
                     </div>
 
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                    <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                        Grades and Classes
+                        Classes
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                Grades
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="add-grades.php">Add Grades</a>
-                                    <a class="nav-link" href="view-all-grades.php">View All</a>
-                                </nav>
-                            </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
                                 Classes
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -60,6 +50,19 @@
                                     <a class="nav-link" href="view-all-classes.php">View All</a>
                                 </nav>
                             </div>
+                        </nav>
+                    </div> -->
+
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Classes
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="add-class.php">Add Classes</a>
+                            <a class="nav-link" href="assign-students-to-class.php">Assign Students</a>
+                            <a class="nav-link" href="view-all-classes.php">View All</a>
                         </nav>
                     </div>
 
@@ -85,7 +88,7 @@
                             <!-- <a class="nav-link" href="show-marks.php">View</a> -->
                             <a class="nav-link" href="class-reports.php">Class Reports</a>
                             <a class="nav-link" href="individual-reports.php">Individual Reports</a>
-                            <!-- <a class="nav-link" href="analytics.php">Analytics</a> -->
+                            <a class="nav-link" href="analytics.php">Analytics</a>
                         </nav>
                     </div>
                     <div class="sb-sidenav-menu-heading">Addons</div>

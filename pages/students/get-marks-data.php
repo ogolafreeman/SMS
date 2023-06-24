@@ -1,26 +1,18 @@
 <?php
+
+include '../../controls/connection.php';
+$res_year = $_POST['res_year'];
 $term = $_POST['term'];
+$admission_no = $_POST['query'];
 
-$count = 0;
-$total = 0;
-
-$sub_array = array();
 $sub_array = array();
 $marks_array = array();
-include '../../controls/connection.php';
-
-function getResult($con, $query)
-{
-    $result = mysqli_query($con, $query);
-    return $result;
-}
+// $pre_sub_array = array();
 
 function getGrade($marks)
 {
     // $grade = "";
-    if (
-        $marks >= 0 && $marks <= 100
-    ) {
+    if ($marks >= 0 && $marks <= 100) {
         if ($marks >= 75) {
             return "A";
         } elseif ($marks >= 65) {
@@ -37,97 +29,109 @@ function getGrade($marks)
     }
 }
 
-echo "<table class='table mt-5 table-bordered'>
+
+$sql1 = "SELECT * FROM student_tbl st INNER JOIN student_class_tbl sct ON (st.std_id = sct.std_id) WHERE st.admission_no='$admission_no'";
+$result1 = mysqli_query($con, $sql1);
+if (mysqli_num_rows($result1) == 1) {
+    $row1 = mysqli_fetch_assoc($result1);
+    $std_id = $row1['std_id'];
+    $admission_no = $row1['admission_no'];
+    $full_name = $row1['full_name'];
+
+    $sql2 = "SELECT * FROM grade_class_tbl gct INNER JOIN student_class_tbl sct ON (gct.grade_class_id = sct.grade_class_id) WHERE sct.std_id='$std_id'";
+    $result2 = mysqli_query($con, $sql2);
+    if (mysqli_num_rows($result2) == 1) {
+        $row2 = mysqli_fetch_assoc($result2);
+        $grade_id = $row2['grade_id'];
+        $class_id = $row2['class_id'];
+        $year = $row2['year'];
+
+        echo "<div class='row'>
+						<div class='col-md-5'>
+                            <h5>Name: <span style='color: red'>$full_name</span></h5>
+                        </div>
+						<div class='col-md-3'>
+                            <h5>Year: <span style='color: red'>$res_year</span></h5>
+                        </div>
+						<div class='col-md-3'>
+                            <h5>Term: <span style='color: red'>$term</span></h5>
+                        </div>
+				</div>";
+
+        echo "<table class='table mt-5 table-bordered'>
 						<thead>
 							<tr>
-								<th rowspan='2'>Subjects</th>";
+								<th rowspan='2'>Subjects</th>
+								<th colspan='2'>$term</th>";
 
-echo "			</tr>";
-echo "			<tr>
+        echo "			</tr>";
+        echo "			<tr>
 								<td>Marks</td>
 								<td>Grade</td>
 							</tr>
 						</thead>";
 
-echo "		<tbody>";
+        echo "		<tbody>";
 
-$admission_no = $_POST['admission_no'];
-$sql1 = "SELECT std_id FROM student_tbl WHERE admission_no='$admission_no'";
-$row1 = mysqli_fetch_assoc(getResult($con, $sql1));
-$std_id = $row1['std_id'];
-
-$sql2 = "SELECT * FROM student_class_tbl WHERE std_id='$std_id'";
-if (mysqli_num_rows(getResult($con, $sql2))) {
-    $row2 = mysqli_fetch_assoc(getResult($con, $sql2));
-    $grade_class_id = $row2['grade_class_id'];
-    $year = $row2['year'];
-
-    $sql3 = "SELECT grade_id FROM grade_class_tbl WHERE grade_class_id='$grade_class_id'";
-    if (mysqli_num_rows(getResult($con, $sql3)) == 1) {
-        $row3 = mysqli_fetch_assoc(getResult($con, $sql3));
-        $grade_id = $row3['grade_id'];
-
-        $sql4 = "SELECT DISTINCT sub_id FROM grade_subject_tbl WHERE year='$year' AND grade_id='$grade_id' ORDER BY order_id ASC";
-        $result4 = mysqli_query($con, $sql4);
-        if (mysqli_num_rows($result4) > 0) {
-            while ($data = mysqli_fetch_assoc($result4)) {
-                $sub_id = $data['sub_id'];
+        $count = 0;
+        $total = 0;
+        $sql3 = "SELECT DISTINCT sub_id FROM grade_subject_tbl WHERE year='$year' AND grade_id='$grade_id' ORDER BY order_id ASC";
+        $result3 = mysqli_query($con, $sql3);
+        if (mysqli_num_rows($result3) > 0) {
+            while ($row3 = mysqli_fetch_assoc($result3)) {
+                $sub_id = $row3['sub_id'];
                 // array_push($pre_sub_array, $sub_id);
-                $sql5 = "SELECT DISTINCT * FROM al_marks_tbl WHERE term='$term' AND sub_id='$sub_id' AND std_id='$std_id' AND grade_class_id='$grade_class_id' AND year='$year' AND NOT marks='' ORDER BY term ASC";
-                $result5 = mysqli_query($con, $sql5);
-                if (mysqli_num_rows($result5) > 0) {
-                    while ($row4 = mysqli_fetch_assoc($result5)) {
+                $sql4 = "SELECT * FROM al_marks_tbl WHERE term='$term' AND sub_id='$sub_id' AND std_id='$std_id' AND year='$res_year' AND NOT marks=''";
+                $result4 = mysqli_query($con, $sql4);
+                if (mysqli_num_rows($result4) > 0) {
+                    while ($row4 = mysqli_fetch_assoc($result4)) {
                         $sid = $row4['sub_id'];
-                        $sql6 = "SELECT sub_name, sub_code FROM subject_tbl WHERE sub_id='$sid'";
-                        $result6 = mysqli_query($con, $sql6);
-                        if (mysqli_num_rows($result6) == 1) {
-                            $sname = mysqli_fetch_assoc($result6);
+                        $sql4 = "SELECT sub_name, sub_code FROM subject_tbl WHERE sub_id='$sid'";
+                        $result4 = mysqli_query($con, $sql4);
+                        if (mysqli_num_rows($result4) == 1) {
+                            $sname = mysqli_fetch_assoc($result4);
                             $sub_name = $sname['sub_name'];
                             array_push($sub_array, $sname['sub_code']);
                             echo "<tr><td>$sub_name</td>";
 
-                            $sql8 = "SELECT * FROM al_marks_tbl WHERE term='$term' AND year='$year' AND grade_class_id='$grade_class_id'";
-                            $result8 = mysqli_query($con, $sql8);
-                            if (mysqli_num_rows($result8) > 0) {
-                                $sql9 = "SELECT marks FROM al_marks_tbl WHERE term='$term' AND sub_id='$sid' AND std_id='$std_id' AND year='$year'";
-                                $result9 = mysqli_query($con, $sql9);
-                                if (mysqli_num_rows($result9) == 1) {
-                                    $m = mysqli_fetch_assoc($result9);
-                                    $marks = $m['marks'];
+                            $sql5 = "SELECT marks FROM al_marks_tbl WHERE sub_id='$sid' AND term='$term' AND std_id='$std_id' AND year='$res_year'";
+                            $result5 = mysqli_query($con, $sql5);
+                            if (mysqli_num_rows($result5) == 1) {
+                                $m = mysqli_fetch_assoc($result5);
+                                $marks = $m['marks'];
 
-                                    if ($marks == 0) {
-                                        $sql10 = "SELECT * FROM al_absent_tbl WHERE term='$term' AND sub_id='$sid' AND std_id='$std_id' AND year='$year'";
-                                        $result8 = mysqli_query($con, $sql10);
-                                        if (mysqli_num_rows($result10) == 1) {
-                                            echo "<td class='text-center'><b>ab</b></td>
+                                if ($marks == 0) {
+                                    $sql6 = "SELECT * FROM al_absent_tbl WHERE sub_id='$sid' AND term='$term' AND std_id='$std_id' AND year='$res_year'";
+                                    $result6 = mysqli_query($con, $sql6);
+                                    if (mysqli_num_rows($result6) == 1) {
+                                        echo "<td class='text-center'><b>ab</b></td>
 												  <td class='text-center'>-</td></tr>";
-                                            array_push($marks_array, 0);
-                                        } else {
-                                            $grade = getGrade($marks);
-                                            echo "<td class='text-center'><b>0</b></td>
-												  <td class='text-center'><b>$grade</b></td></tr>";
-                                        }
-                                    } elseif ($marks == "") {
-                                        echo "<td></td>
-											  <td></td></tr>";
+                                        array_push($marks_array, 0);
                                     } else {
                                         $grade = getGrade($marks);
-                                        array_push($marks_array, $marks);
-                                        echo "<td class='text-center'><b>$marks</b></td>
-											  <td class='text-center'><b>$grade</b></td></tr>";
-                                        $total += $marks;
+                                        echo "<td class='text-center'><b>0</b></td>
+												  <td class='text-center'><b>$grade</b></td></tr>";
                                     }
-                                    $count += 1;
+                                } elseif ($marks == "") {
+                                    echo "<td></td>
+											  <td></td></tr>";
                                 } else {
-                                    // raise an error -> no marks for selected year
-                                    echo "<script>Swal.fire({icon: 'warning', title: 'Oops...', text: 'No marks for selected year!'});</script>";
+                                    $grade = getGrade($marks);
+                                    array_push($marks_array, $marks);
+                                    echo "<td class='text-center'><b>$marks</b></td>
+											  <td class='text-center'><b>$grade</b></td></tr>";
+                                    $total += $marks;
                                 }
+                                $count += 1;
                             } else {
-                                // raise an error -> no marks for selected year
-                                echo "<script>Swal.fire({icon: 'warning', title: 'Oops...', text: 'No marks for selected year!'});</script>";
+                                // raise an error -> no marks for this term
                             }
+                        } else {
+                            // raise an error -> no subjects
                         }
                     }
+                } else {
+                    // raise an error -> no marks for this term
                 }
             }
             $avg = 0;
@@ -143,40 +147,40 @@ if (mysqli_num_rows(getResult($con, $sql2))) {
 						<td>Average Marks</td>
 						<td colspan='2' class='text-center'><b>$avg</b></td>
 					  </tr>";
-                echo "<tr>
-						<td>Rank</td>";
+                // echo "<tr>
+                // 		<td>Rank</td>";
 
-                // Execute the SQL query to get the rank of the selected student
-                $sql11 = "SELECT std_id, SUM(marks) AS total_marks, (SELECT COUNT(*) FROM (SELECT std_id, SUM(marks) AS total_marks FROM al_marks_tbl
-				 	    WHERE grade_class_id = '$grade_class_id' AND term='$term' AND year='$year' GROUP BY std_id) AS ranks WHERE total_marks > (SELECT SUM(marks) FROM 
-						al_marks_tbl WHERE grade_class_id = '$grade_class_id' AND term='$term' AND year='$year' AND std_id = '$std_id')) + 1 AS rank FROM al_marks_tbl 
-						WHERE grade_class_id = '$grade_class_id' AND std_id = '$std_id' AND term='$term' AND year='$year'";
-                $result11 = mysqli_query($con, $sql11);
+                // RANK
+                // 	// Execute the SQL query to get the rank of the selected student
+                // 	$sql7 = "SELECT std_id, SUM(marks) AS total_marks, (SELECT COUNT(*) FROM (SELECT std_id, SUM(marks) AS total_marks FROM al_marks_tbl
+                // 	 	    WHERE term='$term' AND year='$year' GROUP BY std_id) AS ranks WHERE total_marks > (SELECT SUM(marks) FROM 
+                // 			al_marks_tbl WHERE term='$term' AND year='$year' AND std_id = '$std_id')) + 1 AS rank FROM al_marks_tbl 
+                // 			WHERE std_id = '$std_id' AND term='$term' AND year='$year'";
+                // 	$result7 = mysqli_query($con, $sql7);
 
-                // Check if the query was successful
-                if (!$result11) {
-                    die("Query failed: " . mysqli_error($con));
-                }
+                // 	// Check if the query was successful
+                // 	if (!$result7) {
+                // 		die("Query failed: " . mysqli_error($con));
+                // 	}
 
-                // Get the rank of the selected student from the result set
-                if (
-                    mysqli_num_rows($result11) > 0
-                ) {
-                    $row = mysqli_fetch_assoc($result11);
-                    $rank = $row['rank'];
-                    // echo "The rank of student $std_id in grade class $grade_class_id is $rank";
-                    echo "<td colspan='2' class='text-center'><b>$rank</b></td>
-					  </tr>";
-                } else {
-                    // echo "No results found";
-                }
+                // 	// Get the rank of the selected student from the result set
+                // 	if (mysqli_num_rows($result7) > 0) {
+                // 		$row = mysqli_fetch_assoc($result7);
+                // 		$rank = $row['rank'];
+                // 		// echo "The rank of student $std_id in grade class $grade_class_id is $rank";
+                // 		echo "<td colspan='2' class='text-center'><b>$rank</b></td>
+                // 		  </tr>";
+                // 	} else {
+                // 		// echo "No results found";
+                // 	}
             }
-
-            echo "";
-
-            echo "</tbody>";
+            echo "</tbody></table>";
+        } else {
+            // raise an error -> no subjects assigned for this grade
         }
+    } else {
+        // raise an error -> no class
     }
 } else {
-    // no record
+    // raise an error -> no students
 }

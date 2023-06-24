@@ -49,12 +49,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                     <select name="year" class="form-select yearSelect" required></select>
                                 </div>
                             </div>
-                            <!-- <div class="col-md-4">
+                            <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label">Term</label>
-                                    <select name="term" class="form-select termSelect" required></select>
+                                    <label class="form-label">Subject</label>
+                                    <select name="term" class="form-select subSelect" required></select>
                                 </div>
-                            </div> -->
+                            </div>
                             <!-- <div class="col-md-5"> -->
                             <div class="mb-3">
                                 <button class="btn btn-success" id="search">Search</button>
@@ -96,21 +96,22 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         });
                     }
                 });
-                // $('#admission_no').keyup(function() {
-                //     var query = $(this).val();
-                //     if (query != '') {
-                //         $.ajax({
-                //             url: 'get-terms.php',
-                //             method: 'POST',
-                //             data: {
-                //                 query: query
-                //             },
-                //             success: function(data) {
-                //                 $('.termSelect').html(data);
-                //             }
-                //         });
-                //     }
-                // });
+                //get-subjects.php
+                $('#admission_no').keyup(function() {
+                    var query = $(this).val();
+                    if (query != '') {
+                        $.ajax({
+                            url: 'get-subjects.php',
+                            method: 'POST',
+                            data: {
+                                query: query
+                            },
+                            success: function(data) {
+                                $('.subSelect').html(data);
+                            }
+                        });
+                    }
+                });
                 $("#search").click(function(event) {
                     event.preventDefault();
                     $.ajax({
@@ -118,7 +119,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         type: "POST",
                         data: {
                             res_year: $(".yearSelect option:selected").val(),
-                            // term: $(".termSelect option:selected").val(),
+                            subject: $(".subSelect option:selected").val(),
                             query: $("#admission_no").val()
                         },
                         success: function(data) {

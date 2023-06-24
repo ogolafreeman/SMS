@@ -76,8 +76,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 <!-- <option value="">-- Select Grade --</option> -->
                                 <?php
                                 include '../../controls/connection.php';
-                                $currentYear = date("Y");
-                                $currentYear1 = date("Y") + 1;
                                 $sql = "SELECT * FROM grade_tbl";
                                 $result = mysqli_query($con, $sql);
                                 while ($ri = mysqli_fetch_assoc($result)) {
@@ -99,7 +97,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             <label class="form-label">Class Name</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text txt" id="basic-addon1" name="class1"></span>
-                                <input type="text" class="form-control" placeholder="Class name" aria-label="Username" aria-describedby="basic-addon1" name="class_name" required>
+                                <!-- <input type="text" class="form-control" placeholder="Class name" aria-label="Username" aria-describedby="basic-addon1" name="class_name" required> -->
+                                <select name="class_id" class="form-select" id="data" required>
+                                </select>
                             </div>
                         </div>
 
@@ -156,9 +156,27 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         } else {
                             var year1 = <?php echo date("Y"); ?>;
                             var year2 = <?php echo date("Y") + 1; ?>;
-                            $("select.year").html("<option value='" + year1 + "'>" + year1 + "</option> <option value='" + year2 + "'>" + year2 + "</option>");
+                            var year3 = <?php echo date("Y") + 2; ?>;
+                            $("select.year").html("<option value='" + year1 + "'>" + year1 + "</option> <option value='" + year2 + "'>" + year2 + "</option> <option value='" + year3 + "'>" + year3 + "</option>");
                         }
+
+                        $.ajax({
+                            url: "get-class-name.php",
+                            type: "POST",
+                            data: {
+                                grade: selected
+                            },
+                            success: function(data) {
+                                $("#data").html(data);
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.log("Error: " + textStatus + " - " + errorThrown);
+                            }
+                        });
+
                     });
+                    // get-class-name.php
+
                 });
             </script>
 

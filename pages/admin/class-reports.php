@@ -83,7 +83,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 <div class="mb-3">
                                     <label class="form-label">Stream</label>
                                     <select name="stream" class="form-select streamSelect" required>
-                                        <!-- <option value="">-- Select Grade --</option> -->
+                                        <option value="">-- Select Stream --</option>
                                         <?php
                                         include '../../controls/connection.php';
                                         $sql = "SELECT * FROM al_subject_stream_tbl";
@@ -100,8 +100,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             <div class="col-md-2">
                                 <div class="mb-3">
                                     <label class="form-label">Grade</label>
-                                    <select name="grade" class="form-select gradeSelect" required>
-                                        <!-- <option value="">-- Select Grade --</option> -->
+                                    <select name="grade" class="form-select gradeSelect" id="grade" required>
+                                        <option value="">-- Select Grade --</option>
                                         <?php
                                         include '../../controls/connection.php';
                                         $currentYear = date("Y");
@@ -110,7 +110,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                         $result = mysqli_query($con, $sql);
                                         while ($ri = mysqli_fetch_assoc($result)) {
                                         ?>
-                                            <option value="<?php echo $ri['grade_name']; ?>"><?php echo "Grade " . $ri['grade_name']; ?>
+                                            <option value="<?php echo $ri['grade_id']; ?>"><?php echo "Grade " . $ri['grade_name']; ?>
                                             </option>
                                         <?php } ?>
                                     </select>
@@ -119,17 +119,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             <div class="col-md-2">
                                 <div class="mb-3">
                                     <label class="form-label">Class</label>
-                                    <select name="class" class="form-select classSelect" required>
-                                        <!-- <option value="">-- Select Grade --</option> -->
-                                        <?php
-                                        include '../../controls/connection.php';
-                                        $sql = "SELECT * FROM class_tbl";
-                                        $result = mysqli_query($con, $sql);
-                                        while ($ri = mysqli_fetch_assoc($result)) {
-                                        ?>
-                                            <option value="<?php echo $ri['class_id']; ?>"><?php echo $ri['class_name']; ?>
-                                            </option>
-                                        <?php } ?>
+                                    <select name="class" class="form-select classSelect" id="classes" required>
+                                        <option value="">-- Select Class --</option>
                                     </select>
                                 </div>
                             </div>
@@ -137,9 +128,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 <div class="mb-3">
                                     <label class="form-label">Year</label>
                                     <select name="year" class="form-select yearSelect" required>
+                                        <option value="">-- Select Year --</option>
                                         <?php
                                         include '../../controls/connection.php';
-                                        $y = "";
+                                        // $y = "";
                                         $sql = "SELECT DISTINCT year FROM al_marks_tbl ORDER BY year ASC";
                                         $result = mysqli_query($con, $sql);
                                         while ($ri = mysqli_fetch_assoc($result)) {
@@ -148,7 +140,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                             <option value="<?php echo $y; ?>"><?php echo $y; ?>
                                             </option>
                                         <?php } ?>
-                                        <option value="<?= $y + 1 ?>"><?= $y + 1 ?></option>
+                                        <!-- <option value="<?= date("Y") ?>"><?= date("Y") ?></option> -->
+                                        <option value="<?= date("Y") + 1 ?>"><?= date("Y") + 1 ?></option>
 
                                     </select>
                                 </div>
@@ -157,6 +150,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 <div class="mb-3">
                                     <label class="form-label">Term</label>
                                     <select name="term" class="form-select termSelect" required>
+                                        <option value="">-- Select Grade --</option>
                                         <option value="1st Term">1st Term</option>
                                         <option value="2nd Term">2nd Term</option>
                                         <option value="3rd Term">3rd Term</option>
@@ -175,7 +169,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                     <hr>
                     <div class="row">
                         <div class="col-md-3">
-                            <h3>Grade: <span style="color: red" id="grade"></span></h3>
+                            <h3>Grade: <span style="color: red" id="grade2"></span></h3>
                         </div>
                         <div class="col-md-3">
                             <h3>Class: <span style="color: red" id="class">ET - 2</span></h3>
@@ -184,7 +178,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             <h3>Term: <span style="color: red" id="term"></span></h3>
                         </div>
                         <div class="col-md-3">
-                            <h3>A/L Year: <span style="color: red" id="year"></span></h3><br>
+                            <h3>Year: <span style="color: red" id="year"></span></h3><br>
                         </div>
                     </div>
 
@@ -206,6 +200,23 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
             <script>
                 $(document).ready(function() {
                     $(".cnts").hide();
+
+                    $("#grade").change(function() {
+                        $.ajax({
+                            url: "get-class2.php",
+                            type: "POST",
+                            data: {
+                                grade: $(this).children("option:selected").val()
+                            },
+                            success: function(data) {
+                                $("#classes").html(data);
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.log("Error: " + textStatus + " - " + errorThrown);
+                            }
+                        });
+                    });
+
                     $('#form').submit(function(event) {
                         event.preventDefault();
                         var g = $("select.gradeSelect").children("option:selected").val();
@@ -229,7 +240,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             success: function(data) {
                                 var class_ = $(".classSelect option:selected").text();
                                 $(".cnts").show();
-                                $("#grade").text("Grade " + g);
+                                $("#grade2").text("Grade " + g);
                                 $("#class").text(class_);
                                 $("#term").text(t);
                                 $("#year").text(y);

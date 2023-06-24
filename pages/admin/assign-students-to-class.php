@@ -67,134 +67,193 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         </script>
                     <?php } ?>
 
-                    <form action="../../data/student-assign-to-class.php" method="post" class="shadow p-3  mt-5 form-w">
+                    <form class="shadow p-3 mt-5 form-w" action="../../data/student-assign-to-class.php" method="POST" enctype="multipart/form-data">
                         <!-- <h3>Fill all the Data</h3> -->
                         <!-- <hr> -->
 
-                        <div class="mb-3">
-                            <label class="form-label">Section</label>
-                            <select name="section" class="form-select" required>
-                                <!-- <option value="">-- Select Grade --</option> -->
-                                <?php
-                                include '../../controls/connection.php';
-                                $sql = "SELECT * FROM section_tbl";
-                                $result = mysqli_query($con, $sql);
-                                while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <option value="<?php echo $ri['sec_id']; ?>"><?php echo "Grade " . $ri['sec_name']; ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Section</label>
+                                    <select name="section" class="form-select sectionSelect" required>
+                                        <option>-- Select Section --</option>
+                                        <?php
+                                        include '../../controls/connection.php';
+                                        $sql = "SELECT * FROM section_tbl";
+                                        $result = mysqli_query($con, $sql);
+                                        while ($ri = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                            <option value="<?php echo $ri['sec_id']; ?>"><?php echo "Grade " . $ri['sec_name']; ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Grade</label>
-                            <select name="grade" class="form-select gradeSelect" required>
-                                <!-- <option value="">-- Select Grade --</option> -->
-                                <?php
-                                include '../../controls/connection.php';
-                                $sql = "SELECT * FROM grade_tbl";
-                                $result = mysqli_query($con, $sql);
-                                while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <option value="<?php echo $ri['grade_name']; ?>"><?php echo "Grade " . $ri['grade_name']; ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                        </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Grade</label>
+                                    <select name="grade" class="form-select gradeSelect" id="grade" required>
+                                        <option>-- Select Grade --</option>
+                                    </select>
+                                </div>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Class</label>
-                            <select name="class" class="form-select classSelect" required>
-                                <!-- <option value="">-- Select Grade --</option> -->
-                                <?php
-                                include '../../controls/connection.php';
-                                $sql = "SELECT * FROM class_tbl";
-                                $result = mysqli_query($con, $sql);
-                                while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <option value="<?php echo $ri['class_id']; ?>"><?php echo $ri['class_name']; ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                        </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Class</label>
+                                    <select name="class" class="form-select classSelect" id="class" required>
+                                        <option>-- Select CLass --</option>
+                                    </select>
+                                </div>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Year / A/L Year</label>
-                            <select name="year" class="form-select yearSelect" required></select>
-                        </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Year / A/L Year</label>
+                                    <select name="year" class="form-select yearSelect" required>
+                                        <option>-- Select Year --</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div><br>
 
+                        <button type="button" class="btn-info btn" id="toggleForm">Continue using this page</button>
 
-                        <br/><hr>
-                        <h4>Students</h4><br>
+                        <div class="shadow p-3 f mt-5">
+                            <h4>Students</h4>
 
-                        <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Admission No.</th>
-                                <th scope="col">Full Name</th>
-                                <th scope="col">Assign</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            include '../../controls/connection.php';
-                            $sql1 = "SELECT admission_no, full_name, std_id FROM student_tbl WHERE status='1' ORDER BY admission_no ASC";
-                            $result1 = mysqli_query($con, $sql1);
-                            if(mysqli_num_rows($result1) > 0) {
-                                while($row = mysqli_fetch_assoc($result1)) {
-                                    $admission_no = $row['admission_no'];
-                                    $full_name = $row['full_name'];
-                                    $std_id = $row['std_id'];
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Admission No.</th>
+                                        <th scope="col">Full Name</th>
+                                        <th scope="col">Assign</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    include '../../controls/connection.php';
+                                    $sql1 = "SELECT admission_no, full_name, std_id FROM student_tbl WHERE status='1' ORDER BY admission_no ASC";
+                                    $result1 = mysqli_query($con, $sql1);
+                                    if (mysqli_num_rows($result1) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result1)) {
+                                            $admission_no = $row['admission_no'];
+                                            $full_name = $row['full_name'];
+                                            $std_id = $row['std_id'];
 
-                                    $sql2 = "SELECT * FROM student_class_tbl WHERE std_id='$std_id'";
-                                    $result2 = mysqli_query($con, $sql2);
-                                    if(mysqli_num_rows($result2) < 1) {
-                                        echo "<tr>
+                                            $sql2 = "SELECT * FROM student_class_tbl WHERE std_id='$std_id'";
+                                            $result2 = mysqli_query($con, $sql2);
+                                            if (mysqli_num_rows($result2) < 1) {
+                                                echo "<tr>
                                                 <td>$admission_no</td>
                                                 <td>$full_name</td>
                                                 <td><input type='checkbox' value='$std_id' name='std[]' /></td>
                                             </tr>";
-                                        } else {
-                                            continue;
+                                            } else {
+                                                continue;
+                                            }
                                         }
-                                }
-                            } else { ?>
-                                <div class="alert alert-info" role="alert">Empty!</div>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                                    } else { ?>
+                                        <div class="alert alert-info" role="alert">Empty!</div>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
 
 
 
-                        <br/><button type="submit" class="btn btn-primary" name="add">Add</button>
+                            <br />
+                            <input type="submit" value="Add" name="add1" class="btn btn-primary">
+                        </div>
+
+                        <div class="shadow p-3 mt-5 f2">
+                            <h4>Upload Text File</h4>
+                            <div class="input-group mb-3">
+                                <input type="file" name="txtFile" id="txtFile" class="form-control" accept=".txt">
+                                <!-- <button type="button" class="btn btn-primary" id="show">Show Data</button> -->
+                            </div>
+                            <input type="submit" value="Upload to Database" name="add2" class="btn btn-primary">
+                        </div>
                     </form>
                 </div>
-            </div><br />
+            </div>
 
-            <!-- footer -->
-            <?php include '../footer.php'; ?>
+
+            <br />
+        </div>
+        </div><br />
+
+        <!-- footer -->
+        <?php include '../footer.php'; ?>
         </div>
         </div>
 
         <script type="text/javascript">
-                $(document).ready(function() {
-                    var year = <?php echo date("Y"); ?>;
-                    $("select.yearSelect").html("<option value='" + year + "'>" + year + "</option>");
-                    $("select.gradeSelect").change(function() {
-                        var selected = $(this).children("option:selected").val();
-                        // $("span.txt").text("Grade " + selected + " -");
-                        if (Number(selected) <= 11) {
-                            
-                            $("select.yearSelect").html("<option value='" + year + "'>" + year + "</option>");
-                        } else {
-                            var year = <?php echo date("Y"); ?>;
-                            var year1 = <?php echo date("Y") + 1; ?>;
-                            var year2 = <?php echo date("Y") + 2; ?>;
-                            $("select.yearSelect").html("<option value='" + year + "'>" + year + "</option> <option value='" + year1 + "'>" + year1 + "</option>  <option value='" + year2 + "'>" + year2 + "</option>");
+            $(document).ready(function() {
+                var year = <?php echo date("Y"); ?>;
+                // $("select.yearSelect").html("<option value='" + year + "'>" + year + "</option>");
+                $("select.gradeSelect").change(function() {
+                    var selected = $(this).children("option:selected").val();
+                    // $("span.txt").text("Grade " + selected + " -");
+                    if (Number(selected) <= 11) {
+                        var year = <?php echo date("Y"); ?>;
+                        $("select.yearSelect").html("<option value='" + year + "'>" + year + "</option>");
+                    } else {
+                        var year = <?php echo date("Y"); ?>;
+                        var year1 = <?php echo date("Y") + 1; ?>;
+                        var year2 = <?php echo date("Y") + 2; ?>;
+                        $("select.yearSelect").html("<option value='" + year + "'>" + year + "</option> <option value='" + year1 + "'>" + year1 + "</option>  <option value='" + year2 + "'>" + year2 + "</option>");
+                    }
+                });
+                // get-grade-and-class.php sectionSelect
+                $("select.sectionSelect").change(function() {
+                    var selected = $("select.sectionSelect").children("option:selected").val();
+                    $.ajax({
+                        url: "get-grade.php",
+                        type: "POST",
+                        data: {
+                            sec_id: selected
+                        },
+                        success: function(data) {
+                            $("#grade").html(data);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log("Error: " + textStatus + " - " + errorThrown);
                         }
                     });
                 });
+                $("select.sectionSelect").change(function() {
+                    var selected = $("select.sectionSelect").children("option:selected").val();
+                    $.ajax({
+                        url: "get-class.php",
+                        type: "POST",
+                        data: {
+                            sec_id: selected
+                        },
+                        success: function(data) {
+                            $("#class").html(data);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log("Error: " + textStatus + " - " + errorThrown);
+                        }
+                    });
+                });
+
+                $(".f").hide();
+                $(".f2").show();
+                // var state = false;
+                $("#toggleForm").click(function() {
+                    if ($('.f').is(":visible") == false) {
+                        $(".f2").hide();
+                        $(".f").show();
+                        $("#toggleForm").html("Add Students using Spreadsheet")
+                    } else {
+                        $(".f").hide();
+                        $(".f2").show();
+                        $("#toggleForm").html("Continue using this page")
+                    }
+                });
+            });
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../js/scripts.js"></script>
