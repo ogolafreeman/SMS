@@ -1,6 +1,6 @@
 # SMS
 
-Student Management System for Richmond College Technology Section
+Student Management System for Richmond College A/L Section.
 
 > Coding :
 
