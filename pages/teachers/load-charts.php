@@ -2,17 +2,12 @@
 
 include '../../controls/connection.php';
 $grade = $_POST['grade'];
+$query = $_POST['query'];
 $sub_id = $_POST['subject'];
-$admission = $_POST['admission'];
-
-// array
-// $sub_array = array();
-
-// $pre_sub_array = array();
 
 $sub_name = "";
 
-$sql1 = "SELECT * FROM student_class_tbl sct INNER JOIN student_tbl st ON (sct.std_id = st.std_id) WHERE st.admission_no='$admission'";
+$sql1 = "SELECT * FROM student_class_tbl sct INNER JOIN student_tbl st ON (sct.std_id = st.std_id) WHERE st.admission_no='$query'";
 $result1 = mysqli_query($con, $sql1);
 if (mysqli_num_rows($result1) == 1) {
     $row1 = mysqli_fetch_assoc($result1);
@@ -38,9 +33,7 @@ if (mysqli_num_rows($result1) == 1) {
 
 ?>
 
-        <canvas id="line-chart"></canvas><br />
-        <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script> -->
-        <script>
+        <canvas id="line-chart"></canvas><br />/<script>
             new Chart(document.getElementById("line-chart"), {
                 type: 'line',
                 data: {
@@ -48,7 +41,8 @@ if (mysqli_num_rows($result1) == 1) {
                     datasets: [{
                         data: <?php echo $marks2; ?>,
                         label: "Marks",
-                        fill: false
+                        fill: false,
+                        borderColor: '#36A2EB',
                     }]
                 },
                 options: {
@@ -56,15 +50,8 @@ if (mysqli_num_rows($result1) == 1) {
                     scales: {
                         y: {
                             beginAtZero: true,
-                            max: 100
-                        }
-                    },
-                    x: {
-                        grid: {
-                            tickColor: 'red'
-                        },
-                        ticks: {
-                            color: 'blue',
+                            max: 100,
+                            min: 0
                         }
                     }
                 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2023 at 12:41 PM
+-- Generation Time: Jul 04, 2023 at 10:50 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `1-11_marks_tbl` (
   `id` int(10) NOT NULL,
-  `std_id` int(10) NOT NULL,
-  `year` varchar(255) NOT NULL,
-  `term` varchar(255) NOT NULL,
-  `sub_id` int(10) NOT NULL,
-  `marks` int(10) NOT NULL
+  `std_id` int(6) NOT NULL,
+  `year` varchar(5) NOT NULL,
+  `term` varchar(9) NOT NULL,
+  `sub_id` int(3) NOT NULL,
+  `marks` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -44,10 +44,11 @@ CREATE TABLE `1-11_marks_tbl` (
 
 CREATE TABLE `al_absent_tbl` (
   `id` int(10) NOT NULL,
-  `std_id` int(10) NOT NULL,
+  `std_id` int(6) NOT NULL,
+  `grade_id` int(2) NOT NULL,
   `year` int(5) NOT NULL,
-  `term` varchar(50) NOT NULL,
-  `sub_id` int(10) NOT NULL
+  `term` varchar(9) NOT NULL,
+  `sub_id` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -58,10 +59,11 @@ CREATE TABLE `al_absent_tbl` (
 
 CREATE TABLE `al_marks_tbl` (
   `id` int(10) NOT NULL,
-  `std_id` int(10) NOT NULL,
-  `year` int(10) NOT NULL,
-  `term` varchar(255) NOT NULL,
-  `sub_id` int(10) NOT NULL,
+  `std_id` int(6) NOT NULL,
+  `grade_id` int(2) NOT NULL,
+  `year` int(5) NOT NULL,
+  `term` varchar(9) NOT NULL,
+  `sub_id` int(3) NOT NULL,
   `marks` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -73,7 +75,7 @@ CREATE TABLE `al_marks_tbl` (
 
 CREATE TABLE `al_subjects_tbl` (
   `al_sub_id` int(3) NOT NULL,
-  `sub_id` int(11) NOT NULL,
+  `sub_id` int(3) NOT NULL,
   `stream_id` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -138,7 +140,8 @@ INSERT INTO `al_subjects_tbl` (`al_sub_id`, `sub_id`, `stream_id`) VALUES
 (61, 29, 2),
 (62, 29, 3),
 (63, 29, 4),
-(64, 29, 5);
+(64, 29, 5),
+(65, 29, 6);
 
 -- --------------------------------------------------------
 
@@ -167,14 +170,66 @@ INSERT INTO `al_subject_stream_tbl` (`stream_id`, `stream_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `class_stream_tbl`
+--
+
+CREATE TABLE `class_stream_tbl` (
+  `id` int(11) NOT NULL,
+  `class_id` int(2) NOT NULL,
+  `stream_id` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `class_stream_tbl`
+--
+
+INSERT INTO `class_stream_tbl` (`id`, `class_id`, `stream_id`) VALUES
+(1, 9, 1),
+(2, 10, 1),
+(3, 11, 2),
+(4, 12, 2),
+(5, 13, 3),
+(6, 14, 3),
+(7, 15, 6),
+(8, 16, 6),
+(9, 17, 5),
+(10, 18, 5);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `class_tbl`
 --
 
 CREATE TABLE `class_tbl` (
   `class_id` int(10) NOT NULL,
-  `class_name` varchar(255) NOT NULL,
+  `class_name` varchar(60) NOT NULL,
   `type` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `class_tbl`
+--
+
+INSERT INTO `class_tbl` (`class_id`, `class_name`, `type`) VALUES
+(1, 'A', 0),
+(2, 'B', 0),
+(3, 'C', 0),
+(4, 'D', 0),
+(5, 'E', 0),
+(6, 'F', 0),
+(7, 'G', 0),
+(8, 'H', 0),
+(9, 'Maths - 1', 1),
+(10, 'Maths - 2', 1),
+(11, 'Bio - 1', 1),
+(12, 'Bio - 2', 1),
+(13, 'ET - 1', 1),
+(14, 'ET - 2', 1),
+(15, 'Com - 1', 1),
+(16, 'Com - 2', 1),
+(17, 'Art - 1', 1),
+(18, 'Art - 2', 1);
 
 -- --------------------------------------------------------
 
@@ -184,10 +239,10 @@ CREATE TABLE `class_tbl` (
 
 CREATE TABLE `grade_class_tbl` (
   `grade_class_id` int(10) NOT NULL,
-  `grade_id` int(10) NOT NULL,
-  `class_id` int(10) NOT NULL,
-  `year` varchar(4) NOT NULL,
-  `staff_id` int(10) NOT NULL
+  `grade_id` int(2) NOT NULL,
+  `class_id` int(2) NOT NULL,
+  `year` varchar(5) NOT NULL,
+  `staff_id` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -198,10 +253,10 @@ CREATE TABLE `grade_class_tbl` (
 
 CREATE TABLE `grade_subject_tbl` (
   `id` int(10) NOT NULL,
-  `grade_id` int(11) NOT NULL,
-  `stream_id` int(5) NOT NULL,
-  `year` varchar(4) NOT NULL,
-  `sub_id` int(10) NOT NULL,
+  `grade_id` int(2) NOT NULL,
+  `stream_id` int(1) NOT NULL,
+  `year` varchar(5) NOT NULL,
+  `sub_id` int(3) NOT NULL,
   `order_id` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -213,8 +268,27 @@ CREATE TABLE `grade_subject_tbl` (
 
 CREATE TABLE `grade_tbl` (
   `grade_id` int(10) NOT NULL,
-  `grade_name` varchar(255) NOT NULL
+  `grade_name` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `grade_tbl`
+--
+
+INSERT INTO `grade_tbl` (`grade_id`, `grade_name`) VALUES
+(1, '1'),
+(2, '2'),
+(3, '3'),
+(4, '4'),
+(5, '5'),
+(6, '6'),
+(7, '7'),
+(8, '8'),
+(9, '9'),
+(10, '10'),
+(11, '11'),
+(12, '12'),
+(13, '13');
 
 -- --------------------------------------------------------
 
@@ -225,11 +299,11 @@ CREATE TABLE `grade_tbl` (
 CREATE TABLE `guardian_tbl` (
   `guardian_id` int(10) NOT NULL,
   `std_id` int(10) NOT NULL,
-  `g_name` varchar(255) NOT NULL,
-  `g_phone` varchar(255) NOT NULL,
+  `g_name` varchar(100) NOT NULL,
+  `g_phone` varchar(12) NOT NULL,
   `g_address` varchar(255) NOT NULL,
-  `g_dob` varchar(255) NOT NULL,
-  `g_job` varchar(255) NOT NULL
+  `g_dob` varchar(12) NOT NULL,
+  `g_job` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -255,7 +329,7 @@ CREATE TABLE `message_tbl` (
 
 CREATE TABLE `section_tbl` (
   `sec_id` int(5) NOT NULL,
-  `sec_name` varchar(255) NOT NULL
+  `sec_name` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -276,19 +350,19 @@ INSERT INTO `section_tbl` (`sec_id`, `sec_name`) VALUES
 
 CREATE TABLE `staff_tbl` (
   `staff_id` int(10) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
   `nic` varchar(255) NOT NULL,
   `dob` varchar(10) NOT NULL,
-  `staff_no` varchar(255) NOT NULL,
+  `staff_no` varchar(10) NOT NULL,
   `app_date` date NOT NULL,
   `rc_app_date` date NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `app_subject` varchar(100) NOT NULL,
-  `qualifications` varchar(255) NOT NULL,
-  `sec_id` int(5) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `app_subject` varchar(3) NOT NULL,
+  `qualifications` varchar(150) NOT NULL,
+  `sec_id` int(3) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `profile_pic` varchar(255) NOT NULL
+  `profile_pic` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -306,9 +380,9 @@ INSERT INTO `staff_tbl` (`staff_id`, `first_name`, `last_name`, `nic`, `dob`, `s
 
 CREATE TABLE `student_class_tbl` (
   `id` int(10) NOT NULL,
-  `std_id` int(10) NOT NULL,
-  `grade_class_id` int(10) NOT NULL,
-  `sec_id` int(10) NOT NULL,
+  `std_id` int(6) NOT NULL,
+  `grade_class_id` int(5) NOT NULL,
+  `sec_id` int(1) NOT NULL,
   `year` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -335,17 +409,17 @@ CREATE TABLE `student_marks_watched_tbl` (
 CREATE TABLE `student_tbl` (
   `std_id` int(10) NOT NULL,
   `admission_no` int(6) NOT NULL,
-  `full_name` varchar(255) NOT NULL,
-  `name_with_initials` varchar(255) NOT NULL,
+  `full_name` varchar(150) NOT NULL,
+  `name_with_initials` varchar(70) NOT NULL,
   `address` varchar(255) NOT NULL,
-  `phone_no_1` varchar(255) NOT NULL,
-  `phone_no_2` varchar(255) NOT NULL,
+  `phone_no_1` varchar(12) NOT NULL,
+  `phone_no_2` varchar(12) NOT NULL,
   `dob` date NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `d_o_admission` date NOT NULL,
   `date_added` date NOT NULL,
   `date_updated` date NOT NULL,
-  `status` tinyint(4) NOT NULL
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -356,46 +430,9 @@ CREATE TABLE `student_tbl` (
 
 CREATE TABLE `subject_tbl` (
   `sub_id` int(10) NOT NULL,
-  `sub_code` varchar(255) NOT NULL,
-  `sub_name` varchar(255) NOT NULL
+  `sub_code` varchar(10) NOT NULL,
+  `sub_name` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `subject_tbl`
---
-
-INSERT INTO `subject_tbl` (`sub_id`, `sub_code`, `sub_name`) VALUES
-(1, '', 'Combined Mathematics'),
-(2, '', 'Physics '),
-(3, '', 'Chemistry'),
-(4, '', 'Biology'),
-(5, 'ICT', 'Information and Communication Technology'),
-(6, 'SFT', 'Science For Technology'),
-(7, 'ET', 'Engineering Technology '),
-(8, 'Econ', 'Economics'),
-(9, 'BS', 'Business Studies'),
-(10, 'Acc', 'Accounting'),
-(11, 'SIN', 'Sinhala'),
-(12, 'EN', 'English'),
-(13, 'FRf', 'French'),
-(14, 'JP', 'Japanese'),
-(15, 'CH', 'Chinese'),
-(16, 'GEO', 'Geography'),
-(17, 'POL', 'Political Science'),
-(18, 'MEDIA', 'Communication & Media Studies'),
-(19, 'LOGIC', 'Logic & Scientific Method'),
-(20, 'HS', 'Home Science'),
-(21, 'AGR', 'Agriculture'),
-(22, 'ART', 'Art'),
-(23, 'EM', 'Eastern Music'),
-(24, 'WM', 'Western Music'),
-(25, 'DR', 'Drama'),
-(26, 'BST', 'Bio System Technology'),
-(27, 'DN', 'Dancing'),
-(28, 'BC', 'Buddhist Culture'),
-(29, 'GEN', 'General English'),
-(30, 'CHR', 'Christianity'),
-(31, 'HIS', 'History');
 
 -- --------------------------------------------------------
 
@@ -451,8 +488,8 @@ INSERT INTO `user_role_tbl` (`role_id`, `role`) VALUES
 
 CREATE TABLE `user_tbl` (
   `user_id` int(10) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `username` varchar(15) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `role_id` int(1) NOT NULL,
   `admission_no` varchar(6) DEFAULT NULL,
   `nic` varchar(255) DEFAULT NULL
@@ -506,6 +543,14 @@ ALTER TABLE `al_subjects_tbl`
 --
 ALTER TABLE `al_subject_stream_tbl`
   ADD PRIMARY KEY (`stream_id`);
+
+--
+-- Indexes for table `class_stream_tbl`
+--
+ALTER TABLE `class_stream_tbl`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `class_id` (`class_id`,`stream_id`),
+  ADD KEY `stream_id` (`stream_id`);
 
 --
 -- Indexes for table `class_tbl`
@@ -667,10 +712,16 @@ ALTER TABLE `al_subject_stream_tbl`
   MODIFY `stream_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `class_stream_tbl`
+--
+ALTER TABLE `class_stream_tbl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `class_tbl`
 --
 ALTER TABLE `class_tbl`
-  MODIFY `class_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `class_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `grade_class_tbl`
@@ -688,7 +739,7 @@ ALTER TABLE `grade_subject_tbl`
 -- AUTO_INCREMENT for table `grade_tbl`
 --
 ALTER TABLE `grade_tbl`
-  MODIFY `grade_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `grade_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `guardian_tbl`
@@ -712,7 +763,7 @@ ALTER TABLE `section_tbl`
 -- AUTO_INCREMENT for table `staff_tbl`
 --
 ALTER TABLE `staff_tbl`
-  MODIFY `staff_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `staff_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `student_class_tbl`
@@ -736,7 +787,7 @@ ALTER TABLE `student_tbl`
 -- AUTO_INCREMENT for table `subject_tbl`
 --
 ALTER TABLE `subject_tbl`
-  MODIFY `sub_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `sub_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `teacher_class_tbl`
@@ -754,7 +805,7 @@ ALTER TABLE `user_role_tbl`
 -- AUTO_INCREMENT for table `user_tbl`
 --
 ALTER TABLE `user_tbl`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- Constraints for dumped tables
@@ -787,6 +838,13 @@ ALTER TABLE `al_marks_tbl`
 ALTER TABLE `al_subjects_tbl`
   ADD CONSTRAINT `al_subjects_tbl_ibfk_1` FOREIGN KEY (`sub_id`) REFERENCES `subject_tbl` (`sub_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `al_subjects_tbl_ibfk_2` FOREIGN KEY (`stream_id`) REFERENCES `al_subject_stream_tbl` (`stream_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `class_stream_tbl`
+--
+ALTER TABLE `class_stream_tbl`
+  ADD CONSTRAINT `class_stream_tbl_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `class_tbl` (`class_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `class_stream_tbl_ibfk_2` FOREIGN KEY (`stream_id`) REFERENCES `al_subject_stream_tbl` (`stream_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `grade_class_tbl`

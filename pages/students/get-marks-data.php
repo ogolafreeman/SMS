@@ -1,7 +1,7 @@
 <?php
 
 include '../../controls/connection.php';
-$res_year = $_POST['res_year'];
+$algrade = $_POST['grade'];
 $term = $_POST['term'];
 $admission_no = $_POST['admission_no'];
 
@@ -81,7 +81,7 @@ if (mysqli_num_rows($result1) == 1) {
             while ($row3 = mysqli_fetch_assoc($result3)) {
                 $sub_id = $row3['sub_id'];
                 // array_push($pre_sub_array, $sub_id);
-                $sql4 = "SELECT * FROM al_marks_tbl WHERE term='$term' AND sub_id='$sub_id' AND std_id='$std_id' AND year='$res_year' AND NOT marks=''";
+                $sql4 = "SELECT * FROM al_marks_tbl WHERE term='$term' AND sub_id='$sub_id' AND std_id='$std_id' AND year='$year' AND grade_id='$algrade' AND NOT marks=''";
                 $result4 = mysqli_query($con, $sql4);
                 if (mysqli_num_rows($result4) > 0) {
                     while ($row4 = mysqli_fetch_assoc($result4)) {
@@ -94,14 +94,14 @@ if (mysqli_num_rows($result1) == 1) {
                             array_push($sub_array, $sname['sub_code']);
                             echo "<tr><td>$sub_name</td>";
 
-                            $sql5 = "SELECT marks FROM al_marks_tbl WHERE sub_id='$sid' AND term='$term' AND std_id='$std_id' AND year='$res_year'";
+                            $sql5 = "SELECT marks FROM al_marks_tbl WHERE sub_id='$sid' AND term='$term' AND std_id='$std_id' AND year='$year' AND grade_id='$algrade'";
                             $result5 = mysqli_query($con, $sql5);
                             if (mysqli_num_rows($result5) == 1) {
                                 $m = mysqli_fetch_assoc($result5);
                                 $marks = $m['marks'];
 
                                 if ($marks == 0) {
-                                    $sql6 = "SELECT * FROM al_absent_tbl WHERE sub_id='$sid' AND term='$term' AND std_id='$std_id' AND year='$res_year'";
+                                    $sql6 = "SELECT * FROM al_absent_tbl WHERE sub_id='$sid' AND term='$term' AND std_id='$std_id' AND year='$year' AND grade_id='$algrade'";
                                     $result6 = mysqli_query($con, $sql6);
                                     if (mysqli_num_rows($result6) == 1) {
                                         echo "<td class='text-center'><b>ab</b></td>

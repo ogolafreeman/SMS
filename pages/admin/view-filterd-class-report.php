@@ -16,17 +16,21 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
     $sql1 = "SELECT sub_id FROM grade_subject_tbl WHERE stream_id='$stream_id' AND grade_id='$grade_id' ORDER BY order_id ASC";
     $result1 = mysqli_query($con, $sql1);
     if (mysqli_num_rows($result1) > 0) {
-        echo "<thead><tr><th>Admission No.</td><th>Name</td>";
+        echo "<thead><tr><th>Admission No.</th><th>Name</th>";
         while ($row1 = mysqli_fetch_assoc($result1)) {
             $sub_id = $row1['sub_id'];
             array_push($sub_array, $sub_id);
             $sql2 = "SELECT * FROM subject_tbl WHERE sub_id='$sub_id'";
             $result2 = mysqli_query($con, $sql2);
             $s_name = mysqli_fetch_assoc($result2);
-            $sub_code = $s_name['sub_code'];
-            $sub_name = $s_name['sub_name'];
-
-            echo "<th title='$sub_name'>$sub_code</td>";
+            if ($s_name['sub_code'] == "") {
+                $sub_code = $s_name['sub_name'];
+                $sub_name = $s_name['sub_name'];
+            } else {
+                $sub_name = $s_name['sub_name'];
+                $sub_code = $s_name['sub_code'];
+            }
+            echo "<th title='$sub_name'>$sub_code</th>";
         }
         echo "<th>Total</th><th>Average</th></tr></thead>";
         echo "<tbody><tr>";
@@ -52,24 +56,24 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                     $total = 0;
                     $avg = 0;
                     foreach ($sub_array as $sub_id) {
-                        $sql5 = "SELECT marks FROM al_marks_tbl WHERE sub_id='$sub_id' AND std_id='$std_id' AND year='$year' AND term='$term'";
+                        $sql5 = "SELECT marks FROM al_marks_tbl WHERE sub_id='$sub_id' AND std_id='$std_id'  AND term='$term' AND grade_id='$grade_id'";
                         $result5 = mysqli_query($con, $sql5);
                         if (mysqli_num_rows($result5) == 1) {
                             $m = mysqli_fetch_assoc($result5);
                             $marks = $m['marks'];
                             if ($marks == 0) {
-                                $sql6 = "SELECT * FROM al_absent_tbl WHERE sub_id='$sub_id' AND std_id='$std_id' AND year='$year' AND term='$term'";
+                                $sql6 = "SELECT * FROM al_absent_tbl WHERE sub_id='$sub_id' AND std_id='$std_id'  AND term='$term' AND grade_id='$grade_id'";
                                 $result6 = mysqli_query($con, $sql6);
                                 if (mysqli_num_rows($result6) == 1) {
-                                    echo "<td><input type='text' value='ab' class='form-control' name='marks[][$std_id, $sub_id, $term, $year]'/></td>";
+                                    echo "<td><input type='text' value='ab' class='form-control' name='marks[][$std_id, $sub_id, $term, $year, $grade_id]'/></td>";
                                 } else {
-                                    echo "<td><input type='text' value='0' class='form-control' name='marks[][$std_id, $sub_id, $term, $year]'/></td>";
+                                    echo "<td><input type='text' value='0' class='form-control' name='marks[][$std_id, $sub_id, $term, $year, $grade_id]'/></td>";
                                 }
                                 // echo "<td><input type='text' value='' class='form-control' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]'/></td>";
                             } elseif ($marks == '') {
-                                echo "<td><input type='text' value='' class='form-control' name='marks[][$std_id, $sub_id, $term, $year]'/></td>";
+                                echo "<td><input type='text' value='' class='form-control' name='marks[][$std_id, $sub_id, $term, $year, $grade_id]'/></td>";
                             } else {
-                                echo "<td><input type='text' value='$marks' class='form-control' name='marks[][$std_id, $sub_id, $term, $year]'/></td>";
+                                echo "<td><input type='text' value='$marks' class='form-control' name='marks[][$std_id, $sub_id, $term, $year, $grade_id]'/></td>";
                                 $total += $marks;
                             }
                             // $count += 1;
@@ -79,7 +83,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 $count += 1;
                             }
                         } else {
-                            echo "<td><input type='text' value='' name='marks[][$std_id, $sub_id, $term, $year]' class='form-control'/></td>";
+                            echo "<td><input type='text' value='' name='marks[][$std_id, $sub_id, $term, $year, $grade_id]' class='form-control'/></td>";
                         }
                     }
                     echo "<td><input type='text' value='" . $total . "' class='form-control' readonly/></td>";

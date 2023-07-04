@@ -242,7 +242,7 @@
                 &copy; Copyright <strong><span>Richmond College</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
-                Designed by <b><a href="http://www.tech.richmondcollege.lk">RCTS</a></b>
+                Designed and Developed by <b><a href="https://github.com/DasunNethsara-04" target="_blank">Dasun Nethsara</a></b>
             </div>
         </div>
     </footer><!-- End Footer -->

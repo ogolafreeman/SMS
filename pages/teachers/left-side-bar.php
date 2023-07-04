@@ -39,10 +39,10 @@
                     </a>
                     <div class="collapse" id="collapseLayouts7" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="show-marks.php">View</a>
-                            <a class="nav-link" href="class-reports.php">Class Reports</a>
+                            <!-- <a class="nav-link" href="show-marks.php">View</a> -->
+                            <a class="nav-link" href="class-marksheet.php">Class Marksheet</a>
                             <a class="nav-link" href="individual-reports.php">Individual Reports</a>
-                            <a class="nav-link" href="#">Analytics</a>
+                            <a class="nav-link" href="analytics.php">Analytics</a>
                         </nav>
                     </div>
 

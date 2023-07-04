@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
+if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
 ?>
 
     <!DOCTYPE html>
@@ -13,7 +13,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
         <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Marks Analytics - Student Portal</title>
+        <title>Marks Analytics - Admin</title>
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- <script src="../../js/jquery-3.6.3.min.js"></script> -->
@@ -39,43 +39,20 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="mb-3">
+                                    <label class="form-label">Search by Admission No.</label>
+                                    <input type="text" id="admission_no" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
                                     <label class="form-label">Grade</label>
-                                    <select name="grade" class="form-select gradeSelect" required>
-                                        <?php
-                                        include '../../controls/connection.php';
-                                        $sql1 = "SELECT DISTINCT grade_id FROM al_marks_tbl almt INNER JOIN student_tbl st ON (almt.std_id = st.std_id) WHERE st.admission_no='" . $_SESSION['username'] . "'";
-                                        $result1 = mysqli_query($con, $sql1);
-                                        if (mysqli_num_rows($result1) > 0) {
-                                            while ($row1 = mysqli_fetch_assoc($result1)) {
-                                                echo "<option value='" . $row1['grade_id'] . "'>" . $row1['grade_id'] . "</option>";
-                                            }
-                                        }
-                                        ?>
-                                    </select>
+                                    <select name="grade" class="form-select gradeSelect" required></select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label class="form-label">Subject</label>
-                                    <select name="term" class="form-select subSelect" required>
-                                        <?php
-                                        include '../../controls/connection.php';
-                                        $sql1 = "SELECT * FROM student_class_tbl sct INNER JOIN student_tbl st ON (sct.std_id = st.std_id) WHERE st.admission_no='" . $_SESSION['username'] . "'";
-                                        $result1 = mysqli_query($con, $sql1);
-                                        if (mysqli_num_rows($result1) == 1) {
-                                            $row1 = mysqli_fetch_assoc($result1);
-                                            $std_id = $row1['std_id'];
-
-                                            $sql2 = "SELECT DISTINCT st.sub_id, st.sub_name FROM subject_tbl st INNER JOIN al_marks_tbl almt ON (st.sub_id = almt.sub_id) WHERE almt.std_id='$std_id' AND NOT almt.marks=''";
-                                            $result2 = mysqli_query($con, $sql2);
-                                            if (mysqli_num_rows($result2) > 0) {
-                                                while ($row2 = mysqli_fetch_assoc($result2)) {
-                                                    echo "<option value='" . $row2['sub_id'] . "'>" . $row2['sub_name'] . "</option>";
-                                                }
-                                            }
-                                        }
-                                        ?>
-                                    </select>
+                                    <select name="term" class="form-select subSelect" required></select>
                                 </div>
                             </div>
                             <!-- <div class="col-md-5"> -->
@@ -103,6 +80,37 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
 
         <script>
             $(document).ready(function() {
+                $('#admission_no').keyup(function() {
+                    var query = $(this).val();
+                    if (query != '') {
+                        $.ajax({
+                            url: 'get-grades.php',
+                            method: 'POST',
+                            data: {
+                                query: query
+                            },
+                            success: function(data) {
+                                $('.gradeSelect').html(data);
+                            }
+                        });
+                    }
+                });
+                //get-subjects.php
+                $('#admission_no').keyup(function() {
+                    var query = $(this).val();
+                    if (query != '') {
+                        $.ajax({
+                            url: 'get-subjects.php',
+                            method: 'POST',
+                            data: {
+                                query: query
+                            },
+                            success: function(data) {
+                                $('.subSelect').html(data);
+                            }
+                        });
+                    }
+                });
                 $("#search").click(function(event) {
                     event.preventDefault();
                     $.ajax({
@@ -110,8 +118,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
                         type: "POST",
                         data: {
                             grade: $(".gradeSelect option:selected").val(),
-                            admission: <?= $_SESSION['username'] ?>,
                             subject: $(".subSelect option:selected").val(),
+                            query: $("#admission_no").val()
                         },
                         success: function(data) {
                             $("#data").html(data);

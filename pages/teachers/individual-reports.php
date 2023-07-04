@@ -45,15 +45,16 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label">Year</label>
-                                    <select name="year" class="form-select yearSelect" required>
+                                    <label class="form-label">Grade</label>
+                                    <select name="grade" class="form-select gradeSelect" required>
+                                        <option value="">-- Select Grade --</option>
                                         <?php
                                         include '../../controls/connection.php';
-                                        $sql = "SELECT DISTINCT year FROM al_marks_tbl";
+                                        $sql = "SELECT DISTINCT grade_id FROM al_marks_tbl";
                                         $result = mysqli_query($con, $sql);
                                         while ($ri = mysqli_fetch_assoc($result)) {
                                         ?>
-                                            <option value="<?php echo $ri['year']; ?>"><?php echo $ri['year']; ?>
+                                            <option value="<?php echo $ri['grade_id']; ?>"><?php echo $ri['grade_id']; ?>
                                             </option>
                                         <?php } ?>
                                     </select>
@@ -63,6 +64,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                                 <div class="mb-3">
                                     <label class="form-label">Term</label>
                                     <select name="term" class="form-select termSelect" required>
+                                        <option value="">-- Select Term --</option>
                                         <?php
                                         include '../../controls/connection.php';
                                         $sql = "SELECT DISTINCT term FROM al_marks_tbl";
@@ -106,7 +108,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                         url: "filtered-marks-details.php",
                         type: "POST",
                         data: {
-                            res_year: $(".yearSelect option:selected").val(),
+                            grade: $(".gradeSelect option:selected").val(),
                             term: $(".termSelect option:selected").val(),
                             query: $("#admission_no").val()
                         },

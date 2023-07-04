@@ -68,6 +68,21 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="mb-3">
+                                    <label class="form-label">Grade</label>
+                                    <select name="grade" class="form-select gradeSelect" required>
+                                        <?php
+                                        include '../../controls/connection.php';
+                                        $sql1 = "SELECT DISTINCT grade_id FROM al_marks_tbl almt INNER JOIN student_tbl st ON (almt.std_id = st.std_id) WHERE st.admission_no='" . $_SESSION['username'] . "'";
+                                        $result1 = mysqli_query($con, $sql1);
+                                        while ($row1 = mysqli_fetch_assoc($result1)) {
+                                        ?>
+                                            <option value="<?= $row1['grade_id'] ?>"><?= $row1['grade_id'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
                                     <label class="form-label">Term</label>
                                     <select name="term" class="form-select termSelect" required>
                                         <?php
@@ -77,21 +92,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
                                         while ($row1 = mysqli_fetch_assoc($result1)) {
                                         ?>
                                             <option value="<?= $row1['term'] ?>"><?= $row1['term'] ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label class="form-label">Year</label>
-                                    <select name="res_year" class="form-select yearSelect" required>
-                                        <?php
-                                        include '../../controls/connection.php';
-                                        $sql1 = "SELECT DISTINCT year FROM al_marks_tbl almt INNER JOIN student_tbl st ON (almt.std_id = st.std_id) WHERE st.admission_no='" . $_SESSION['username'] . "'";
-                                        $result1 = mysqli_query($con, $sql1);
-                                        while ($row1 = mysqli_fetch_assoc($result1)) {
-                                        ?>
-                                            <option value="<?= $row1['year'] ?>"><?= $row1['year'] ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -124,7 +124,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
                         type: "POST",
                         data: {
                             term: $(".termSelect option:selected").val(),
-                            res_year: $(".yearSelect option:selected").val(),
+                            grade: $(".gradeSelect option:selected").val(),
                             admission_no: <?= $_SESSION['username'] ?>
                         },
                         success: function(data) {

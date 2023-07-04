@@ -1,7 +1,9 @@
 # SMS
+
 Student Management System for Richmond College Technology Section
 
 > Coding :
+
 - Version : 1.0
 - Base Language : PHP (v8.1)
 - Used Language/s : HTML, CSS, JavaScript, SQL (MySQL)
@@ -12,8 +14,9 @@ Student Management System for Richmond College Technology Section
 - Servers : [XAMPP](https://www.apachefriends.org/download.html) (Also compatible with WAMP, MAMP, LAMP)
 
 > Project Details :
-- For : Richmond College Technology Section | YCS
-- Project Progress : 25%
+
+- For : Richmond College A/L Section | YCS
+- Project Progress : 47%
 - Start Date : 12.03.2023
 - End Date : Pending...
 - Release Date : Pending...

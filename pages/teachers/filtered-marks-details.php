@@ -52,7 +52,7 @@ if (mysqli_num_rows($result1) == 1) {
                             <h5>Name: <span style='color: red'>$full_name</span></h5>
                         </div>
 						<div class='col-md-3'>
-                            <h5>Year: <span style='color: red'>$algrade</span></h5>
+                            <h5>Grade: <span style='color: red'>$algrade</span></h5>
                         </div>
 						<div class='col-md-3'>
                             <h5>Term: <span style='color: red'>$term</span></h5>
@@ -62,7 +62,7 @@ if (mysqli_num_rows($result1) == 1) {
 		echo "<table class='table mt-5 table-bordered'>
 						<thead>
 							<tr>
-								<th rowspan='2'>Subjects</th>
+								<th rowspan='2' class='text-center'>Subjects</th>
 								<th colspan='2'>$term</th>";
 
 		echo "			</tr>";

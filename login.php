@@ -84,22 +84,12 @@
 
                         <div class="form-outline mb-4">
                           <label class="form-label" for="form2Example17">Username</label>
-                          <input type="text" id="form2Example17" class="form-control form-control-lg" placeholder="JohnWick" required name="username" autocomplete="off" />
+                          <input type="text" id="form2Example17" class="form-control form-control-lg" placeholder="11111" required name="username" autocomplete="off" />
                         </div>
 
                         <div class="form-outline mb-4">
                           <label class="form-label" for="form2Example27">Password</label>
                           <input type="password" id="form2Example27" class="form-control form-control-lg" placeholder="##########" required name="password" autocomplete="off" />
-                        </div>
-
-                        <div class="col-6">
-
-                          <!-- <div class="form-check">
-                            <input class="form-check-input" type="checkbox" />
-                            <label class="form-check-label" for="flexCheckDefault">
-                              Remember Me
-                            </label>
-                          </div> -->
                         </div>
 
                         <br />

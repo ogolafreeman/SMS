@@ -45,8 +45,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label">Year</label>
-                                    <select name="year" class="form-select yearSelect" required></select>
+                                    <label class="form-label">Grade</label>
+                                    <select name="grade" class="form-select gradeSelect" required></select>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -85,13 +85,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                     var query = $(this).val();
                     if (query != '') {
                         $.ajax({
-                            url: 'get-years.php',
+                            url: 'get-grades.php',
                             method: 'POST',
                             data: {
                                 query: query
                             },
                             success: function(data) {
-                                $('.yearSelect').html(data);
+                                $('.gradeSelect').html(data);
                             }
                         });
                     }
@@ -117,7 +117,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         url: "filtered-marks-details.php",
                         type: "POST",
                         data: {
-                            res_year: $(".yearSelect option:selected").val(),
+                            grade: $(".gradeSelect option:selected").val(),
                             term: $(".termSelect option:selected").val(),
                             query: $("#admission_no").val()
                         },

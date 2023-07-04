@@ -118,7 +118,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             </div>
                         </div><br>
 
-                        <button type="button" class="btn-info btn" id="toggleForm">Continue using this page</button>
+                        <button type="button" class="btn-info btn" id="toggleForm">Add Students Manually</button>
 
                         <div class="shadow p-3 f mt-5">
                             <h4>Students</h4>
@@ -172,7 +172,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 <input type="file" name="txtFile" id="txtFile" class="form-control" accept=".txt">
                                 <!-- <button type="button" class="btn btn-primary" id="show">Show Data</button> -->
                             </div>
-                            <input type="submit" value="Upload to Database" name="add2" class="btn btn-primary">
+                            <input type="submit" value="Upload" name="add2" class="btn btn-primary">
                         </div>
                     </form>
                 </div>
@@ -246,11 +246,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                     if ($('.f').is(":visible") == false) {
                         $(".f2").hide();
                         $(".f").show();
-                        $("#toggleForm").html("Add Students using Spreadsheet")
+                        $("#toggleForm").html("Add Students using Text File")
                     } else {
                         $(".f").hide();
                         $(".f2").show();
-                        $("#toggleForm").html("Continue using this page")
+                        $("#toggleForm").html("Add Students Manually")
                     }
                 });
             });

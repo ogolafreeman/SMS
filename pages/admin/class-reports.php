@@ -126,22 +126,27 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             </div>
                             <div class="col-md-2">
                                 <div class="mb-3">
-                                    <label class="form-label">Year</label>
+                                    <label class="form-label">A/L Year</label>
                                     <select name="year" class="form-select yearSelect" required>
                                         <option value="">-- Select Year --</option>
                                         <?php
                                         include '../../controls/connection.php';
                                         // $y = "";
-                                        $sql = "SELECT DISTINCT year FROM al_marks_tbl ORDER BY year ASC";
+                                        $sql = "SELECT DISTINCT year FROM student_class_tbl ORDER BY year ASC";
                                         $result = mysqli_query($con, $sql);
-                                        while ($ri = mysqli_fetch_assoc($result)) {
-                                            $y = $ri['year'];
+                                        if (mysqli_num_rows($result) > 0) {
+                                            while ($ri = mysqli_fetch_assoc($result)) {
+                                                $y = $ri['year'];
                                         ?>
-                                            <option value="<?php echo $y; ?>"><?php echo $y; ?>
-                                            </option>
-                                        <?php } ?>
-                                        <!-- <option value="<?= date("Y") ?>"><?= date("Y") ?></option> -->
-                                        <option value="<?= date("Y") + 1 ?>"><?= date("Y") + 1 ?></option>
+                                                <option value="<?php echo $y; ?>"><?php echo $y; ?>
+                                                </option>
+                                        <?php }
+                                        } else {
+                                            echo "<option value=" . date("Y") . ">" . date("Y") . "</option>";
+                                            echo "<option value=" . date("Y") + 1 . ">" . date("Y") + 1 . "</option>";
+                                        }
+                                        ?>
+
 
                                     </select>
                                 </div>
@@ -178,7 +183,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             <h3>Term: <span style="color: red" id="term"></span></h3>
                         </div>
                         <div class="col-md-3">
-                            <h3>Year: <span style="color: red" id="year"></span></h3><br>
+                            <h3>A/L Year: <span style="color: red" id="year"></span></h3><br>
                         </div>
                     </div>
 
