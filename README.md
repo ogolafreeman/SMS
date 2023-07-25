@@ -1,12 +1,12 @@
 # SMS
 
-Student Management System for Richmond College A/L Section.
+Student Management System
 
 > Coding :
 
-- Version : 1.0
+- Version : 1.2
 - Base Language : PHP (v8.1)
-- Used Language/s : HTML, CSS, JavaScript, SQL (MySQL)
+- Used Language/s : HTML, CSS, JavaScript, SQL(MySQL)
 - Framework : Bootstrap (CSS Framework)
 - Used Pre Trained models/ APIs : -
 - Platform : Any (Windows, MacOS, Linux, iOS, Android etc.)
@@ -15,8 +15,8 @@ Student Management System for Richmond College A/L Section.
 
 > Project Details :
 
-- For : Richmond College A/L Section | YCS
-- Project Progress : 47%
+- For : YCS Competition
+- Project Progress : 74%
 - Start Date : 12.03.2023
 - End Date : Pending...
 - Release Date : Pending...
