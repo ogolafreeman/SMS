@@ -8,7 +8,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_assoc($result);
     $student = getStudentById($row['std_id'], $con);
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -66,9 +66,16 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
                 <?php } ?>
                 <!-- Your further code goes here. keep coding in this div -->
                 <div class="container mt-3">
-                    <form action="../../data/change-std-password.php?id=<?= $student['std_id'] ?>&admission=<?= $student['admission_no'] ?>" method="post" class="shadow p-3  mt-5 form-w">
+                    <form
+                        action="../../data/change-std-password.php?id=<?= $student['std_id'] ?>&admission=<?= $student['admission_no'] ?>"
+                        method="post" class="shadow p-3  mt-5 form-w">
                         <h3>Change Password</h3>
                         <hr>
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" readonly value="<?= $_SESSION['username'] ?>"
+                                autocomplete="off">
+                        </div>
                         <div class="mb-3">
                             <label class="form-label">Old Password</label>
                             <input type="password" name="old_pwd" class="form-control" autocomplete="off" required>
@@ -102,7 +109,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
         <script src="../js/scripts.js"></script>
         <script>
             var gBTN = document.getElementById('gBTN');
-            gBTN.addEventListener('click', function(e) {
+            gBTN.addEventListener('click', function (e) {
                 e.preventDefault();
                 makePass(5)
             });

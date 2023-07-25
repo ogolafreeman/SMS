@@ -1,7 +1,10 @@
 <?php
+require '../vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
 session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
-
 	require_once '../controls/connection.php';
 	if (isset($_POST['save'])) {
 		$std_id = "";
@@ -25,17 +28,18 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 						$term = $data[2];
 						$year = $data[3];
 						$grade = $data[4];
+						$class_id = $data[5];
 
 						array_push($std_array, $std_id);
 
 						if ($m == "") {
-							$sql3 = "SELECT * FROM al_absent_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year'";
+							$sql3 = "SELECT * FROM al_absent_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year' AND class_id='$class_id'";
 							$result3 = mysqli_query($con, $sql3);
 							if (mysqli_num_rows($result3) < 1) {
 								$sql1 = "SELECT * FROM al_marks_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year'";
 								$result1 = mysqli_query($con, $sql1);
 								if (mysqli_num_rows($result1) < 1) {
-									$sql2 = "INSERT INTO al_marks_tbl (std_id, year, term, sub_id, marks, grade_id) VALUES ('$std_id', '$year', '$term', '$sub_id', '', '$grade')";
+									$sql2 = "INSERT INTO al_marks_tbl (std_id, year, term, sub_id, marks, grade_id, class_id) VALUES ('$std_id', '$year', '$term', '$sub_id', '', '$grade', '$class_id')";
 									if (mysqli_query($con, $sql2)) {
 										$state = 1;
 									} else {
@@ -43,7 +47,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 									}
 								} else {
 									if (mysqli_num_rows($result1) == 1) {
-										$sql2 = "UPDATE al_marks_tbl SET marks='' WHERE std_id='$std_id' AND term='$term' AND year='$year' AND sub_id='$sub_id' AND grade_id='$grade'";
+										$sql2 = "UPDATE al_marks_tbl SET marks='' WHERE std_id='$std_id' AND term='$term' AND year='$year' AND sub_id='$sub_id' AND grade_id='$grade' AND class_id='$class_id'";
 										$result2 = mysqli_query($con, $sql2);
 										$state = 2;
 									} else {
@@ -54,7 +58,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 								}
 							} else {
 								if (mysqli_num_rows($result3) == 1) {
-									$sql4 = "DELETE FROM al_absent_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year' AND grade_id='$grade'";
+									$sql4 = "DELETE FROM al_absent_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year' AND grade_id='$grade' AND class_id='$class_id'";
 									if (mysqli_query($con, $sql4)) {
 										$sql2 = "UPDATE al_marks_tbl SET marks='' WHERE std_id='$std_id' AND term='$term' AND year='$year' AND sub_id='$sub_id'";
 										$result2 = mysqli_query($con, $sql2);
@@ -63,14 +67,14 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 								}
 							}
 						} elseif (strtolower($m) == "ab") {
-							$sql4 = "DELETE FROM al_marks_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year' AND grade_id='$grade'";
+							$sql4 = "DELETE FROM al_marks_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year' AND grade_id='$grade' AND class_id='$class_id'";
 							if (mysqli_query($con, $sql4)) {
-								$sql6 = "INSERT INTO al_marks_tbl (std_id, year, term, sub_id, marks, grade_id) VALUES ('$std_id', '$year', '$term', '$sub_id', '0', '$grade')";
+								$sql6 = "INSERT INTO al_marks_tbl (std_id, year, term, sub_id, marks, grade_id, class_id) VALUES ('$std_id', '$year', '$term', '$sub_id', '0', '$grade', '$class_id')";
 								if (mysqli_query($con, $sql6)) {
-									$sql3 = "SELECT * FROM al_absent_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year' AND grade_id='$grade'";
+									$sql3 = "SELECT * FROM al_absent_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year' AND grade_id='$grade' AND class_id='$class_id'";
 									$result3 = mysqli_query($con, $sql3);
 									if (mysqli_num_rows($result3) < 1) {
-										$sql2 = "INSERT INTO al_absent_tbl (std_id, year, term, sub_id, grade_id) VALUES ('$std_id', '$year', '$term', '$sub_id', '$grade')";
+										$sql2 = "INSERT INTO al_absent_tbl (std_id, year, term, sub_id, grade_id, class_id) VALUES ('$std_id', '$year', '$term', '$sub_id', '$grade', '$class_id')";
 										$result2 = mysqli_query($con, $sql2);
 										$state = 2;
 									}
@@ -79,18 +83,18 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 								continue;
 							}
 						} else {
-							$sql3 = "SELECT * FROM al_absent_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year' AND grade_id='$grade'";
+							$sql3 = "SELECT * FROM al_absent_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year' AND grade_id='$grade' AND class_id='$class_id'";
 							$result3 = mysqli_query($con, $sql3);
 							if (mysqli_num_rows($result3) < 1) {
-								$sql1 = "SELECT * FROM al_marks_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year' AND grade_id='$grade'";
+								$sql1 = "SELECT * FROM al_marks_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year' AND grade_id='$grade' AND class_id='$class_id'";
 								$result1 = mysqli_query($con, $sql1);
 								if (mysqli_num_rows($result1) < 1) {
-									$sql2 = "INSERT INTO al_marks_tbl (std_id, year, term, sub_id, marks, grade_id) VALUES ('$std_id', '$year', '$term', '$sub_id', '$m', '$grade')";
+									$sql2 = "INSERT INTO al_marks_tbl (std_id, year, term, sub_id, marks, grade_id, class_id) VALUES ('$std_id', '$year', '$term', '$sub_id', '$m', '$grade', '$class_id')";
 									$result2 = mysqli_query($con, $sql2);
 									$state = 1;
 								} else {
 									if (mysqli_num_rows($result1) == 1) {
-										$sql2 = "UPDATE al_marks_tbl SET marks='$m' WHERE std_id='$std_id' AND term='$term' AND year='$year' AND sub_id='$sub_id' AND grade_id='$grade'";
+										$sql2 = "UPDATE al_marks_tbl SET marks='$m' WHERE std_id='$std_id' AND term='$term' AND year='$year' AND sub_id='$sub_id' AND grade_id='$grade' AND class_id='$class_id'";
 										$result2 = mysqli_query($con, $sql2);
 										$state = 2;
 									} else {
@@ -101,9 +105,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 								}
 							} else {
 								if (mysqli_num_rows($result3) == 1) {
-									$sql4 = "DELETE FROM al_absent_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year' AND grade_id='$grade'";
+									$sql4 = "DELETE FROM al_absent_tbl WHERE std_id='$std_id' AND sub_id='$sub_id' AND term='$term' AND year='$year' AND grade_id='$grade' AND class_id='$class_id'";
 									if (mysqli_query($con, $sql4)) {
-										$sql2 = "UPDATE al_marks_tbl SET marks='$m' WHERE std_id='$std_id' AND term='$term' AND year='$year' AND sub_id='$sub_id' AND grade_id='$grade'";
+										$sql2 = "UPDATE al_marks_tbl SET marks='$m' WHERE std_id='$std_id' AND term='$term' AND year='$year' AND sub_id='$sub_id' AND grade_id='$grade' AND class_id='$class_id'";
 										$result2 = mysqli_query($con, $sql2);
 										$state = 2;
 									}
@@ -141,6 +145,18 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 			}
 		}
 	}
+
+	if (isset($_POST['export'])) {
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+
+		echo $term . "<br>" . $year . "<br>" . $grade;
+
+		// $sheet->setCellValue('A1', "Hello");
+		// $writer = new Xlsx($spreadsheet);
+		// $writer->save("hello.xlsx");
+	}
+
 } else {
 	header("Location:../../index.php");
 	exit;

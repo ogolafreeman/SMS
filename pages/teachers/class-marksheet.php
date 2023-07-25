@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -109,25 +109,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                 <div class="container mt-5 cnts">
                     <h3>Filtered Results</h3>
                     <hr>
-                    <!-- <div class="row">
-                        <div class="col-md-3">
-                            <h3>Grade: <span style="color: red" id="grade"></span></h3>
-                        </div>
-                        <div class="col-md-3">
-                            <h3>Class: <span style="color: red" id="class">ET - 2</span></h3>
-                        </div>
-                        <div class="col-md-3">
-                            <h3>Term: <span style="color: red" id="term"></span></h3>
-                        </div>
-                        <div class="col-md-3">
-                            <h3>A/L Year: <span style="color: red" id="year"></span></h3><br>
-                        </div>
-                    </div> -->
-
-
-
-
-                    <form action="enter-marks.php" method='post'>
+                    <form action="enter-marks.php?term=&grade=" method='post'>
                         <table class="table table-bordered" id='tableData'></table>
                         <input type="submit" name="save" class="btn btn-success" value="Save">
                     </form>
@@ -140,9 +122,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
             <script src="../../bootstrap/js/bootstrap.bundle.js"></script>
 
             <script>
-                $(document).ready(function() {
+                $(document).ready(function () {
                     $(".cnts").hide();
-                    $('#form').submit(function(event) {
+                    $('#form').submit(function (event) {
                         event.preventDefault();
                         var g = $("select.gradeSelect").children("option:selected").val();
                         var t = $("select.termSelect").children("option:selected").val();
@@ -153,11 +135,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                                 grade: g,
                                 term: t,
                             },
-                            success: function(data) {
+                            success: function (data) {
                                 $(".cnts").show();
                                 $("#tableData").html(data);
                             },
-                            error: function(jqXHR, textStatus, errorThrown) {
+                            error: function (jqXHR, textStatus, errorThrown) {
                                 console.log("Error: " + textStatus + " - " + errorThrown);
                             }
                         });

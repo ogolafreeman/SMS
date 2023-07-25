@@ -1,11 +1,13 @@
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; RCTS <?php echo date("Y"); ?></div>
+            <div class="text-muted">Copyright &copy; RCTS
+                <?php echo date("Y"); ?>
+            </div>
             <div>
-                <a href="http://www.tech.richmondcollege.lk/" title="Official website of Richmond College Technology Society">RCTS</a>
+                <a href="https://www.techsaralk.epizy.com/" title="Official website of Techසර LK">Techසර LK</a>
                 &middot;
-                <a href="http://www.richmondcollege.lk/" title="Official website of Richmond College">Richmond College</a>
+                <a href="https://www.youtube.com/@techsaralk/" title="Techසර LK YouTube Channel">Dasun Nethsara</a>
             </div>
         </div>
     </div>

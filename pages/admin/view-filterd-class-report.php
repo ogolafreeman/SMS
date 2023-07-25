@@ -66,15 +66,15 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 $sql6 = "SELECT * FROM al_absent_tbl WHERE sub_id='$sub_id' AND std_id='$std_id'  AND term='$term' AND grade_id='$grade_id'";
                                 $result6 = mysqli_query($con, $sql6);
                                 if (mysqli_num_rows($result6) == 1) {
-                                    echo "<td><input type='text' value='ab' class='form-control' name='marks[][$std_id, $sub_id, $term, $year, $grade_id]'/></td>";
+                                    echo "<td><input type='text' value='ab' class='form-control' name='marks[][$std_id, $sub_id, $term, $year, $grade_id, $class_id]'/></td>";
                                 } else {
-                                    echo "<td><input type='text' value='0' class='form-control' name='marks[][$std_id, $sub_id, $term, $year, $grade_id]'/></td>";
+                                    echo "<td><input type='text' value='0' class='form-control' name='marks[][$std_id, $sub_id, $term, $year, $grade_id, $class_id]'/></td>";
                                 }
                                 // echo "<td><input type='text' value='' class='form-control' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]'/></td>";
                             } elseif ($marks == '') {
-                                echo "<td><input type='text' value='' class='form-control' name='marks[][$std_id, $sub_id, $term, $year, $grade_id]'/></td>";
+                                echo "<td><input type='text' value='' class='form-control' name='marks[][$std_id, $sub_id, $term, $year, $grade_id, $class_id]'/></td>";
                             } else {
-                                echo "<td><input type='text' value='$marks' class='form-control' name='marks[][$std_id, $sub_id, $term, $year, $grade_id]'/></td>";
+                                echo "<td><input type='text' value='$marks' class='form-control' name='marks[][$std_id, $sub_id, $term, $year, $grade_id, $class_id]'/></td>";
                                 $total += $marks;
                             }
                             // $count += 1;
@@ -84,7 +84,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 $count += 1;
                             }
                         } else {
-                            echo "<td><input type='text' value='' name='marks[][$std_id, $sub_id, $term, $year, $grade_id]' class='form-control'/></td>";
+                            echo "<td><input type='text' value='' name='marks[][$std_id, $sub_id, $term, $year, $grade_id, $class_id]' class='form-control'/></td>";
                         }
                     }
                     echo "<td><input type='text' value='" . $total . "' class='form-control' readonly/></td>";
@@ -121,7 +121,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
             // echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No Students Assigned for this grade!'});</script>";
             $sub_array2 = array();
             $std_array2 = array();
-            $sql4 = "SELECT DISTINCT std_id FROM al_marks_tbl almt INNER JOIN al_subjects_tbl alst ON (almt.sub_id = alst.sub_id) WHERE almt.term='$term' AND almt.grade_id='$grade_id' AND alst.stream_id='$stream_id' AND almt.year='$year'";
+            $sql4 = "SELECT DISTINCT std_id FROM al_marks_tbl almt INNER JOIN al_subjects_tbl alst ON (almt.sub_id = alst.sub_id) WHERE almt.term='$term' AND almt.grade_id='$grade_id' AND alst.stream_id='$stream_id' AND almt.year='$year' AND almt.class_id='$class_id'";
             $result4 = mysqli_query($con, $sql4);
             if (mysqli_num_rows($result4) > 0) {
                 while ($row2 = mysqli_fetch_assoc($result4)) {
@@ -143,7 +143,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         $total = 0;
                         $avg = 0;
                         foreach ($sub_array as $subID) {
-                            $sql5 = "SELECT marks FROM al_marks_tbl WHERE sub_id='$subID' AND std_id='$sid'  AND term='$term' AND grade_id='$grade_id'";
+                            $sql5 = "SELECT marks FROM al_marks_tbl WHERE sub_id='$subID' AND std_id='$sid'  AND term='$term' AND grade_id='$grade_id' AND class_id='$class_id'";
                             $result5 = mysqli_query($con, $sql5);
                             if (mysqli_num_rows($result5) == 1) {
                                 $m = mysqli_fetch_assoc($result5);
@@ -152,15 +152,15 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                     $sql6 = "SELECT * FROM al_absent_tbl WHERE sub_id='$subID' AND std_id='$sid'  AND term='$term' AND grade_id='$grade_id'";
                                     $result6 = mysqli_query($con, $sql6);
                                     if (mysqli_num_rows($result6) == 1) {
-                                        echo "<td><input type='text' value='ab' class='form-control' name='marks[][$sid, $subID, $term, $year, $grade_id]'/></td>";
+                                        echo "<td><input type='text' value='ab' class='form-control' name='marks[][$sid, $subID, $term, $year, $grade_id, $class_id]'/></td>";
                                     } else {
-                                        echo "<td><input type='text' value='0' class='form-control' name='marks[][$sid, $subID, $term, $year, $grade_id]'/></td>";
+                                        echo "<td><input type='text' value='0' class='form-control' name='marks[][$sid, $subID, $term, $year, $grade_id, $class_id]'/></td>";
                                     }
                                     // echo "<td><input type='text' value='' class='form-control' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]'/></td>";
                                 } elseif ($marks == '') {
-                                    echo "<td><input type='text' value='' class='form-control number-input' name='marks[][$sid, $sid, $subID, $year, $grade_id]'/></td>";
+                                    echo "<td><input type='text' value='' class='form-control number-input' name='marks[][$sid, $sid, $subID, $year, $grade_id, $class_id]'/></td>";
                                 } else {
-                                    echo "<td><input type='text' value='$marks' class='form-control number-input' name='marks[][$sid, $subID, $term, $year, $grade_id]'/></td>";
+                                    echo "<td><input type='text' value='$marks' class='form-control number-input' name='marks[][$sid, $subID, $term, $year, $grade_id, $class_id]'/></td>";
                                     $total += $marks;
                                 }
                                 // $count += 1;
@@ -170,7 +170,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                     $count += 1;
                                 }
                             } else {
-                                echo "<td><input type='text' value='' name='marks[][$sid, $subID, $term, $year, $grade_id]' class='form-control number-input'/></td>";
+                                echo "<td><input type='text' value='' name='marks[][$sid, $subID, $term, $year, $grade_id, $class_id]' class='form-control number-input'/></td>";
                             }
                         }
                     } else {
@@ -200,33 +200,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         // no subjects assigned to grades!
         echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No Subjects Assigned!'});</script>";
     }
-
-?>
-
-    <script>
-        $(document).ready(function() {
-            // Add event listener to all number input fields
-            $('.number-input').on('input', function() {
-                var total = 0;
-
-                // Loop through all number input fields
-                $('.number-input').each(function() {
-                    var value = parseFloat($(this).val());
-
-                    // Check if the value is a valid number
-                    if (!isNaN(value)) {
-                        total += value;
-                    }
-                });
-
-                // Update the total
-                $('.tot-out').text(total);
-            });
-        });
-    </script>
-
-<?php
-
 } else {
     header("Location:../../index.php");
     exit;

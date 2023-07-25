@@ -1,10 +1,11 @@
 <?php
 session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
+
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -71,7 +72,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                         $sql = "SELECT * FROM al_subject_stream_tbl";
                                         $result = mysqli_query($con, $sql);
                                         while ($ri = mysqli_fetch_assoc($result)) {
-                                        ?>
+                                            ?>
                                             <option value="<?php echo $ri['stream_id']; ?>"><?php echo $ri['stream_name']; ?>
                                             </option>
                                         <?php } ?>
@@ -91,7 +92,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                         $sql = "SELECT * FROM grade_tbl";
                                         $result = mysqli_query($con, $sql);
                                         while ($ri = mysqli_fetch_assoc($result)) {
-                                        ?>
+                                            ?>
                                             <option value="<?php echo $ri['grade_id']; ?>"><?php echo "Grade " . $ri['grade_name']; ?>
                                             </option>
                                         <?php } ?>
@@ -119,10 +120,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                         if (mysqli_num_rows($result) > 0) {
                                             while ($ri = mysqli_fetch_assoc($result)) {
                                                 $y = $ri['year'];
-                                        ?>
+                                                ?>
                                                 <option value="<?php echo $y; ?>"><?php echo $y; ?>
                                                 </option>
-                                        <?php }
+                                            <?php }
                                         } else {
                                             echo "<option value=" . date("Y") . ">" . date("Y") . "</option>";
                                             echo "<option value=" . date("Y") + 1 . ">" . date("Y") + 1 . "</option>";
@@ -170,6 +171,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                     <form action="../../data/enter-marks.php" method='post' id="marksForm">
                         <div id='tableData'></div>
                         <input type="submit" name="save" class="btn btn-success" value="Save">
+                        <button type="submit" name="export" class="btn btn-primary" id="export">Export to
+                            Spreadsheet</button>
                     </form>
 
                 </div>
@@ -178,31 +181,31 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
             <script src="../../bootstrap/js/bootstrap.bundle.js"></script>
             <script>
-                $(document).ready(function() {
+                $(document).ready(function () {
                     $(".cnts").hide();
-                    $("#grade").change(function() {
+                    $("#grade").change(function () {
                         $.ajax({
                             url: "get-class2.php",
                             type: "POST",
                             data: {
                                 grade: $(this).children("option:selected").val()
                             },
-                            success: function(data) {
+                            success: function (data) {
                                 $("#classes").html(data);
                             },
-                            error: function(jqXHR, textStatus, errorThrown) {
+                            error: function (jqXHR, textStatus, errorThrown) {
                                 console.log("Error: " + textStatus + " - " + errorThrown);
                             }
                         });
                     });
 
-                    $(document).ready(function() {
+                    $(document).ready(function () {
                         // Add event listener to all number input fields
-                        $('.number-input').on('input', function() {
+                        $('.number-input').on('input', function () {
                             var total = 0;
 
                             // Loop through all number input fields
-                            $('.number-input').each(function() {
+                            $('.number-input').each(function () {
                                 var value = parseFloat($(this).val());
 
                                 // Check if the value is a valid number
@@ -216,7 +219,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         });
                     });
 
-                    $('#form').submit(function(event) {
+                    $('#form').submit(function (event) {
                         event.preventDefault();
                         var g = $("select.gradeSelect").children("option:selected").val();
                         var s = $("select.streamSelect").children("option:selected").val();
@@ -233,7 +236,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 year: y,
                                 term: t
                             },
-                            success: function(data) {
+                            success: function (data) {
                                 var class_ = $(".classSelect option:selected").text();
                                 $(".cnts").show();
                                 $("#grade2").text("Grade " + g);
@@ -242,7 +245,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 $("#year").text(y);
                                 $("#tableData").html(data);
                             },
-                            error: function(jqXHR, textStatus, errorThrown) {
+                            error: function (jqXHR, textStatus, errorThrown) {
                                 console.log("Error: " + textStatus + " - " + errorThrown);
                             }
                         });
@@ -256,6 +259,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         </div>
         <script src="../js/scripts.js"></script>
     </body>
+
     </html>
 <?php } else {
     header("Location:../../login.php");

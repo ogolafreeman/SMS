@@ -47,7 +47,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                         }
                     } else {
                         // echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No subjects assigned'});</script>";
-                        $sql5 = "SELECT sub_id FROM al_marks_tbl WHERE  grade_id='$grade' AND std_id='$std_id' AND term='$term' AND year='$alyear'";
+                        $sql5 = "SELECT sub_id FROM al_marks_tbl WHERE  grade_id='$grade' AND std_id='$std_id' AND term='$term' AND year='$alyear' AND class_id='$class_id'";
                         $result5 = mysqli_query($con, $sql5);
                         if (mysqli_num_rows($result5) > 0) {
                             while ($row5 = mysqli_fetch_assoc($result5)) {
@@ -93,24 +93,24 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                     $total = 0;
                     $avg = 0;
                     foreach (array_unique($sub_array) as $sub_id) {
-                        $sql7 = "SELECT marks FROM al_marks_tbl WHERE sub_id='$sub_id' AND std_id='$std_id'  AND term='$term' AND grade_id='$grade'";
+                        $sql7 = "SELECT marks FROM al_marks_tbl WHERE sub_id='$sub_id' AND std_id='$std_id'  AND term='$term' AND grade_id='$grade' AND class_id='$class_id'";
                         $result7 = mysqli_query($con, $sql7);
                         if (mysqli_num_rows($result7) == 1) {
                             $m = mysqli_fetch_assoc($result7);
                             $marks = $m['marks'];
                             if ($marks == 0) {
-                                $sql8 = "SELECT * FROM al_absent_tbl WHERE sub_id='$sub_id' AND std_id='$std_id'  AND term='$term' AND grade_id='$grade'";
+                                $sql8 = "SELECT * FROM al_absent_tbl WHERE sub_id='$sub_id' AND std_id='$std_id'  AND term='$term' AND grade_id='$grade' AND class_id='$class_id'";
                                 $result8 = mysqli_query($con, $sql8);
                                 if (mysqli_num_rows($result6) == 1) {
-                                    echo "<td><input type='text' value='ab' class='form-control' name='marks[][$std_id, $sub_id, $term, $alyear, $grade]'/></td>";
+                                    echo "<td><input type='text' value='ab' class='form-control' name='marks[][$std_id, $sub_id, $term, $alyear, $grade, $class_id]'/></td>";
                                 } else {
-                                    echo "<td><input type='text' value='0' class='form-control' name='marks[][$std_id, $sub_id, $term, $alyear, $grade]'/></td>";
+                                    echo "<td><input type='text' value='0' class='form-control' name='marks[][$std_id, $sub_id, $term, $alyear, $grade, $class_id]'/></td>";
                                 }
                                 // echo "<td><input type='text' value='' class='form-control' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]'/></td>";
                             } elseif ($marks == '') {
-                                echo "<td><input type='text' value='' class='form-control' name='marks[][$std_id, $sub_id, $term, $alyear, $grade]'/></td>";
+                                echo "<td><input type='text' value='' class='form-control' name='marks[][$std_id, $sub_id, $term, $alyear, $grade, $class_id]'/></td>";
                             } else {
-                                echo "<td><input type='text' value='$marks' class='form-control' name='marks[][$std_id, $sub_id, $term, $alyear, $grade]'/></td>";
+                                echo "<td><input type='text' value='$marks' class='form-control' name='marks[][$std_id, $sub_id, $term, $alyear, $grade, $class_id]'/></td>";
                                 $total += $marks;
                             }
                             // $count += 1;
@@ -120,7 +120,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                                 $count += 1;
                             }
                         } else {
-                            echo "<td><input type='text' value='' name='marks[][$std_id, $sub_id, $term, $alyear, $grade]' class='form-control'/></td>";
+                            echo "<td><input type='text' value='' name='marks[][$std_id, $sub_id, $term, $alyear, $grade, $class_id]' class='form-control'/></td>";
                         }
                     }
                     echo "<td><input type='text' value='" . $total . "' class='form-control' readonly/></td>";

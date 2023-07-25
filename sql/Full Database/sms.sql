@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2023 at 10:49 AM
+-- Generation Time: Jul 25, 2023 at 01:09 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -46,18 +46,11 @@ CREATE TABLE `al_absent_tbl` (
   `id` int(10) NOT NULL,
   `std_id` int(6) NOT NULL,
   `grade_id` int(2) NOT NULL,
+  `class_id` int(2) NOT NULL,
   `year` int(5) NOT NULL,
   `term` varchar(9) NOT NULL,
   `sub_id` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `al_absent_tbl`
---
-
-INSERT INTO `al_absent_tbl` (`id`, `std_id`, `grade_id`, `year`, `term`, `sub_id`) VALUES
-(6, 15, 13, 2024, '2nd Term', 6),
-(7, 16, 13, 2024, '1st Term', 29);
 
 -- --------------------------------------------------------
 
@@ -69,6 +62,7 @@ CREATE TABLE `al_marks_tbl` (
   `id` int(10) NOT NULL,
   `std_id` int(6) NOT NULL,
   `grade_id` int(2) NOT NULL,
+  `class_id` int(2) NOT NULL,
   `year` int(5) NOT NULL,
   `term` varchar(9) NOT NULL,
   `sub_id` int(3) NOT NULL,
@@ -79,76 +73,60 @@ CREATE TABLE `al_marks_tbl` (
 -- Dumping data for table `al_marks_tbl`
 --
 
-INSERT INTO `al_marks_tbl` (`id`, `std_id`, `grade_id`, `year`, `term`, `sub_id`, `marks`) VALUES
-(264, 14, 12, 2024, '1st Term', 7, '89'),
-(265, 14, 12, 2024, '1st Term', 6, '74'),
-(266, 14, 12, 2024, '1st Term', 5, '99'),
-(267, 14, 12, 2024, '1st Term', 21, ''),
-(268, 14, 12, 2024, '1st Term', 29, '87'),
-(269, 15, 12, 2024, '1st Term', 7, '67'),
-(270, 15, 12, 2024, '1st Term', 6, '54'),
-(271, 15, 12, 2024, '1st Term', 5, '71'),
-(272, 15, 12, 2024, '1st Term', 21, ''),
-(273, 15, 12, 2024, '1st Term', 29, '69'),
-(274, 16, 12, 2024, '1st Term', 7, '51'),
-(275, 16, 12, 2024, '1st Term', 6, '89'),
-(276, 16, 12, 2024, '1st Term', 5, ''),
-(277, 16, 12, 2024, '1st Term', 21, '82'),
-(278, 16, 12, 2024, '1st Term', 29, '67'),
-(279, 14, 12, 2024, '2nd Term', 7, '91'),
-(280, 14, 12, 2024, '2nd Term', 6, '87'),
-(281, 14, 12, 2024, '2nd Term', 5, '99'),
-(282, 14, 12, 2024, '2nd Term', 21, ''),
-(283, 14, 12, 2024, '2nd Term', 29, '67'),
-(284, 15, 12, 2024, '2nd Term', 7, '45'),
-(285, 15, 12, 2024, '2nd Term', 6, '65'),
-(286, 15, 12, 2024, '2nd Term', 5, '78'),
-(287, 15, 12, 2024, '2nd Term', 21, ''),
-(288, 15, 12, 2024, '2nd Term', 29, '54'),
-(289, 16, 12, 2024, '2nd Term', 7, '61'),
-(290, 16, 12, 2024, '2nd Term', 6, '89'),
-(291, 16, 12, 2024, '2nd Term', 5, ''),
-(292, 16, 12, 2024, '2nd Term', 21, '54'),
-(293, 16, 12, 2024, '2nd Term', 29, '43'),
-(294, 14, 12, 2024, '3rd Term', 7, '97'),
-(295, 14, 12, 2024, '3rd Term', 6, '67'),
-(296, 14, 12, 2024, '3rd Term', 5, '97'),
-(297, 14, 12, 2024, '3rd Term', 21, ''),
-(298, 14, 12, 2024, '3rd Term', 29, '87'),
-(299, 15, 12, 2024, '3rd Term', 7, '78'),
-(300, 15, 12, 2024, '3rd Term', 6, '65'),
-(301, 15, 12, 2024, '3rd Term', 5, '71'),
-(302, 15, 12, 2024, '3rd Term', 21, ''),
-(303, 15, 12, 2024, '3rd Term', 29, '68'),
-(304, 16, 12, 2024, '3rd Term', 7, '71'),
-(305, 16, 12, 2024, '3rd Term', 6, '86'),
-(306, 16, 12, 2024, '3rd Term', 5, ''),
-(307, 16, 12, 2024, '3rd Term', 21, '78'),
-(308, 16, 12, 2024, '3rd Term', 29, '84'),
-(309, 14, 13, 2024, '1st Term', 7, '76'),
-(310, 14, 13, 2024, '1st Term', 6, '87'),
-(311, 14, 13, 2024, '1st Term', 5, '91'),
-(312, 14, 13, 2024, '1st Term', 29, '64'),
-(313, 15, 13, 2024, '1st Term', 7, '75'),
-(314, 15, 13, 2024, '1st Term', 6, '65'),
-(315, 15, 13, 2024, '1st Term', 5, '67'),
-(316, 15, 13, 2024, '1st Term', 29, '78'),
-(317, 16, 13, 2024, '1st Term', 7, '45'),
-(318, 16, 13, 2024, '1st Term', 6, '68'),
-(319, 16, 13, 2024, '1st Term', 21, '71'),
-(332, 14, 13, 2024, '2nd Term', 7, '89'),
-(333, 14, 13, 2024, '2nd Term', 6, '74'),
-(334, 14, 13, 2024, '2nd Term', 5, '98'),
-(335, 14, 13, 2024, '2nd Term', 29, '76'),
-(336, 15, 13, 2024, '2nd Term', 7, '57'),
-(337, 15, 13, 2024, '2nd Term', 6, '0'),
-(338, 15, 13, 2024, '2nd Term', 5, '71'),
-(339, 15, 13, 2024, '2nd Term', 29, '67'),
-(340, 16, 13, 2024, '2nd Term', 7, '67'),
-(341, 16, 13, 2024, '2nd Term', 6, '78'),
-(342, 16, 13, 2024, '2nd Term', 21, '81'),
-(343, 16, 13, 2024, '2nd Term', 29, '71'),
-(344, 16, 13, 2024, '1st Term', 29, '0');
+INSERT INTO `al_marks_tbl` (`id`, `std_id`, `grade_id`, `class_id`, `year`, `term`, `sub_id`, `marks`) VALUES
+(477, 11, 12, 9, 2023, '1st Term', 1, '87'),
+(478, 11, 12, 9, 2023, '1st Term', 2, '81'),
+(479, 11, 12, 9, 2023, '1st Term', 3, '79'),
+(480, 11, 12, 9, 2023, '1st Term', 29, '67'),
+(481, 12, 12, 9, 2023, '1st Term', 1, '45'),
+(482, 12, 12, 9, 2023, '1st Term', 2, '76'),
+(483, 12, 12, 9, 2023, '1st Term', 3, '76'),
+(484, 12, 12, 9, 2023, '1st Term', 29, '47'),
+(485, 13, 12, 9, 2023, '1st Term', 1, '45'),
+(486, 13, 12, 9, 2023, '1st Term', 2, '78'),
+(487, 13, 12, 9, 2023, '1st Term', 3, '65'),
+(488, 13, 12, 9, 2023, '1st Term', 29, '75'),
+(489, 11, 12, 9, 2023, '2nd Term', 1, '84'),
+(490, 11, 12, 9, 2023, '2nd Term', 2, '98'),
+(491, 11, 12, 9, 2023, '2nd Term', 3, '87'),
+(492, 11, 12, 9, 2023, '2nd Term', 29, '67'),
+(493, 12, 12, 9, 2023, '2nd Term', 1, '45'),
+(494, 12, 12, 9, 2023, '2nd Term', 2, '78'),
+(495, 12, 12, 9, 2023, '2nd Term', 3, '65'),
+(496, 12, 12, 9, 2023, '2nd Term', 29, '47'),
+(497, 13, 12, 9, 2023, '2nd Term', 1, '75'),
+(498, 13, 12, 9, 2023, '2nd Term', 2, '78'),
+(499, 13, 12, 9, 2023, '2nd Term', 3, '98'),
+(500, 13, 12, 9, 2023, '2nd Term', 29, '87'),
+(501, 11, 12, 9, 2023, '3rd Term', 1, '82'),
+(502, 11, 12, 9, 2023, '3rd Term', 2, '94'),
+(503, 11, 12, 9, 2023, '3rd Term', 3, '78'),
+(504, 11, 12, 9, 2023, '3rd Term', 29, '61'),
+(505, 12, 12, 9, 2023, '3rd Term', 1, '45'),
+(506, 12, 12, 9, 2023, '3rd Term', 2, '78'),
+(507, 12, 12, 9, 2023, '3rd Term', 3, '67'),
+(508, 12, 12, 9, 2023, '3rd Term', 29, '71'),
+(509, 13, 12, 9, 2023, '3rd Term', 1, '67'),
+(510, 13, 12, 9, 2023, '3rd Term', 2, '87'),
+(511, 13, 12, 9, 2023, '3rd Term', 3, '78'),
+(512, 13, 12, 9, 2023, '3rd Term', 29, '88');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `al_marks_update_tbl`
+--
+
+CREATE TABLE `al_marks_update_tbl` (
+  `id` int(10) NOT NULL,
+  `grade_id` int(2) NOT NULL,
+  `term` varchar(9) NOT NULL,
+  `year` year(4) NOT NULL,
+  `entered_by` int(10) NOT NULL,
+  `released_date` varchar(20) NOT NULL,
+  `updated_by` int(10) NOT NULL,
+  `last_updated` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -333,11 +311,11 @@ CREATE TABLE `grade_class_tbl` (
 --
 
 INSERT INTO `grade_class_tbl` (`grade_class_id`, `grade_id`, `class_id`, `year`, `staff_id`) VALUES
-(18, 13, 13, '2024', 15),
-(19, 12, 9, '2025', 14),
-(20, 12, 11, '2025', 16),
-(21, 12, 15, '2025', 17),
-(22, 12, 17, '2025', 18);
+(23, 13, 9, '2023', 14),
+(24, 13, 11, '2023', 15),
+(25, 13, 13, '2023', 16),
+(26, 13, 15, '2023', 17),
+(27, 13, 17, '2023', 18);
 
 -- --------------------------------------------------------
 
@@ -359,30 +337,31 @@ CREATE TABLE `grade_subject_tbl` (
 --
 
 INSERT INTO `grade_subject_tbl` (`id`, `grade_id`, `stream_id`, `year`, `sub_id`, `order_id`) VALUES
-(231, 13, 3, '2024', 5, 3),
-(232, 13, 3, '2024', 6, 2),
-(233, 13, 3, '2024', 7, 1),
-(234, 13, 3, '2024', 21, 4),
-(235, 13, 3, '2024', 29, 5),
-(236, 12, 1, '2025', 1, 1),
-(237, 12, 1, '2025', 2, 2),
-(238, 12, 1, '2025', 3, 3),
-(239, 12, 1, '2025', 29, 4),
-(240, 12, 2, '2025', 2, 2),
-(241, 12, 2, '2025', 3, 3),
-(242, 12, 2, '2025', 4, 1),
-(243, 12, 2, '2025', 29, 4),
-(244, 12, 5, '2025', 5, 5),
-(245, 12, 5, '2025', 11, 2),
-(246, 12, 5, '2025', 16, 3),
-(247, 12, 5, '2025', 17, 1),
-(248, 12, 5, '2025', 18, 4),
-(249, 12, 5, '2025', 29, 6),
-(250, 12, 6, '2025', 5, 4),
-(251, 12, 6, '2025', 8, 2),
-(252, 12, 6, '2025', 9, 3),
-(253, 12, 6, '2025', 10, 1),
-(254, 12, 6, '2025', 29, 5);
+(255, 13, 1, '2023', 1, 1),
+(256, 13, 1, '2023', 2, 2),
+(257, 13, 1, '2023', 3, 3),
+(258, 13, 1, '2023', 29, 4),
+(259, 13, 2, '2023', 2, 2),
+(260, 13, 2, '2023', 3, 3),
+(261, 13, 2, '2023', 4, 1),
+(262, 13, 2, '2023', 29, 4),
+(263, 13, 3, '2023', 5, 3),
+(264, 13, 3, '2023', 6, 2),
+(265, 13, 3, '2023', 7, 1),
+(266, 13, 3, '2023', 29, 4),
+(267, 13, 5, '2023', 5, 6),
+(268, 13, 5, '2023', 11, 1),
+(269, 13, 5, '2023', 16, 4),
+(270, 13, 5, '2023', 17, 2),
+(271, 13, 5, '2023', 18, 3),
+(272, 13, 5, '2023', 19, 5),
+(273, 13, 5, '2023', 28, 7),
+(274, 13, 5, '2023', 29, 8),
+(275, 13, 6, '2023', 5, 4),
+(276, 13, 6, '2023', 8, 3),
+(277, 13, 6, '2023', 9, 2),
+(278, 13, 6, '2023', 10, 1),
+(279, 13, 6, '2023', 29, 5);
 
 -- --------------------------------------------------------
 
@@ -522,21 +501,21 @@ CREATE TABLE `student_class_tbl` (
 --
 
 INSERT INTO `student_class_tbl` (`id`, `std_id`, `grade_class_id`, `sec_id`, `year`) VALUES
-(32, 14, 18, 4, '2024'),
-(33, 15, 18, 4, '2024'),
-(34, 16, 18, 4, '2024'),
-(35, 11, 19, 4, '2025'),
-(36, 12, 19, 4, '2025'),
-(37, 13, 19, 4, '2025'),
-(38, 17, 20, 4, '2025'),
-(39, 19, 20, 4, '2025'),
-(40, 20, 21, 4, '2025'),
-(41, 21, 21, 4, '2025'),
-(42, 22, 21, 4, '2025'),
-(43, 23, 22, 4, '2025'),
-(44, 24, 22, 4, '2025'),
-(45, 25, 22, 4, '2025'),
-(46, 18, 20, 4, '2025');
+(47, 11, 23, 4, '2023'),
+(48, 12, 23, 4, '2023'),
+(49, 13, 23, 4, '2023'),
+(50, 18, 24, 4, '2023'),
+(51, 20, 26, 4, '2023'),
+(52, 21, 26, 4, '2023'),
+(53, 22, 26, 4, '2023'),
+(54, 23, 27, 4, '2023'),
+(55, 24, 27, 4, '2023'),
+(56, 25, 27, 4, '2023'),
+(57, 14, 25, 4, '2023'),
+(58, 15, 25, 4, '2023'),
+(59, 16, 25, 4, '2023'),
+(62, 17, 24, 4, '2023'),
+(63, 19, 24, 4, '2023');
 
 -- --------------------------------------------------------
 
@@ -551,24 +530,6 @@ CREATE TABLE `student_marks_watched_tbl` (
   `term` varchar(20) NOT NULL,
   `is_watched` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `student_marks_watched_tbl`
---
-
-INSERT INTO `student_marks_watched_tbl` (`id`, `std_id`, `year`, `term`, `is_watched`) VALUES
-(25, 14, '2023', '1st Term', 0),
-(26, 15, '2023', '1st Term', 0),
-(27, 16, '2023', '1st Term', 0),
-(28, 11, '2023', '1st Term', 0),
-(29, 12, '2023', '1st Term', 0),
-(30, 13, '2023', '1st Term', 0),
-(31, 14, '2023', '2nd Term', 0),
-(32, 15, '2023', '2nd Term', 0),
-(33, 16, '2023', '2nd Term', 0),
-(34, 14, '2023', '3rd Term', 0),
-(35, 15, '2023', '3rd Term', 0),
-(36, 16, '2023', '3rd Term', 0);
 
 -- --------------------------------------------------------
 
@@ -781,6 +742,12 @@ ALTER TABLE `al_marks_tbl`
   ADD KEY `sub_id` (`sub_id`);
 
 --
+-- Indexes for table `al_marks_update_tbl`
+--
+ALTER TABLE `al_marks_update_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `al_subjects_tbl`
 --
 ALTER TABLE `al_subjects_tbl`
@@ -947,7 +914,13 @@ ALTER TABLE `al_absent_tbl`
 -- AUTO_INCREMENT for table `al_marks_tbl`
 --
 ALTER TABLE `al_marks_tbl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=345;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=513;
+
+--
+-- AUTO_INCREMENT for table `al_marks_update_tbl`
+--
+ALTER TABLE `al_marks_update_tbl`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `al_subjects_tbl`
@@ -977,13 +950,13 @@ ALTER TABLE `class_tbl`
 -- AUTO_INCREMENT for table `grade_class_tbl`
 --
 ALTER TABLE `grade_class_tbl`
-  MODIFY `grade_class_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `grade_class_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `grade_subject_tbl`
 --
 ALTER TABLE `grade_subject_tbl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=255;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=280;
 
 --
 -- AUTO_INCREMENT for table `grade_tbl`
@@ -1019,7 +992,7 @@ ALTER TABLE `staff_tbl`
 -- AUTO_INCREMENT for table `student_class_tbl`
 --
 ALTER TABLE `student_class_tbl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `student_marks_watched_tbl`
