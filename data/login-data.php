@@ -62,22 +62,22 @@ if (isset($_POST['login'])) {
                     }
                 } else {
                     $em = "Incorrect Password";
-                    header("Location: ../login.php?error=$em");
+                    header("Location: ../index.php?error=$em");
                     exit;
                 }
             } else {
                 $em = "Incorrect Username!";
-                header("Location: ../login.php?error=$em");
+                header("Location: ../index.php?error=$em");
                 exit;
             }
         } else {
             $em = "Incorrect Username / Password or Role!";
-            header("Location: ../login.php?error=$em");
+            header("Location: ../index.php?error=$em");
             exit;
         }
     } else {
         $em = "All fields are required!";
-        header("Location: ../login.php?error=$em");
+        header("Location: ../index.php?error=$em");
         exit;
     }
 }

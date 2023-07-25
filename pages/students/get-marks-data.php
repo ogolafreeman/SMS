@@ -136,7 +136,7 @@ if (mysqli_num_rows($result1) == 1) {
             }
             $avg = 0;
             if ($total > 0 && $count > 1) {
-                $avg = $total / $count;
+                $avg = round($total / $count, 2);
 
                 echo "<tr><td> </td>  <td> </td>  <td> </td></tr>";
                 echo "<tr>

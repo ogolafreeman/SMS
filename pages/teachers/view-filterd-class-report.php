@@ -46,7 +46,17 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                             array_push($sub_array, $sub_id);
                         }
                     } else {
-                        echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No subjects assigned'});</script>";
+                        // echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No subjects assigned'});</script>";
+                        $sql5 = "SELECT sub_id FROM al_marks_tbl WHERE  grade_id='$grade' AND std_id='$std_id' AND term='$term' AND year='$alyear'";
+                        $result5 = mysqli_query($con, $sql5);
+                        if (mysqli_num_rows($result5) > 0) {
+                            while ($row5 = mysqli_fetch_assoc($result5)) {
+                                $sub_id = $row5['sub_id'];
+                                array_push($sub_array, $sub_id);
+                            }
+                        } else {
+                            echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No subjects assigned'});</script>";
+                        }
                     }
                 } else {
                     echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No streams Assigned!'});</script>";
@@ -67,7 +77,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                 echo "<th title='$sub_name'>$sub_code</th>";
             }
             echo "<th>Total</th><th>Average</th></tr></thead>";
-            echo "<tbody><>";
+            echo "<tbody><tr>";
 
             foreach ($std_array as $std_id) {
                 $sql6 = "SELECT * FROM student_tbl WHERE std_id='$std_id'";

@@ -12,8 +12,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
     // arrays
     $sub_array = array();
-
-    $sql1 = "SELECT sub_id FROM grade_subject_tbl WHERE stream_id='$stream_id' AND grade_id='$grade_id' ORDER BY order_id ASC";
+    echo "<table class='table table-bordered'>";
+    $sql1 = "SELECT sub_id FROM grade_subject_tbl WHERE stream_id='$stream_id' AND year='$year' ORDER BY order_id ASC";
     $result1 = mysqli_query($con, $sql1);
     if (mysqli_num_rows($result1) > 0) {
         echo "<thead><tr><th>Admission No.</th><th>Name</th>";
@@ -41,6 +41,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
             $grade_class_id = $grd_cls['grade_class_id'];
             $al_year = $grd_cls['year'];
 
+            $user = $_SESSION['username'];
             $sql4 = "SELECT * FROM student_tbl st INNER JOIN student_class_tbl sct ON (sct.std_id = st.std_id) WHERE sct.grade_class_id='$grade_class_id'";
             $result4 = mysqli_query($con, $sql4);
             if (mysqli_num_rows($result4) > 0) {
@@ -116,9 +117,117 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                 // no students assigned to class!
                 echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No Students Assigned!'});</script>";
             }
+        } else {
+            // echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No Students Assigned for this grade!'});</script>";
+            $sub_array2 = array();
+            $std_array2 = array();
+            $sql4 = "SELECT DISTINCT std_id FROM al_marks_tbl almt INNER JOIN al_subjects_tbl alst ON (almt.sub_id = alst.sub_id) WHERE almt.term='$term' AND almt.grade_id='$grade_id' AND alst.stream_id='$stream_id' AND almt.year='$year'";
+            $result4 = mysqli_query($con, $sql4);
+            if (mysqli_num_rows($result4) > 0) {
+                while ($row2 = mysqli_fetch_assoc($result4)) {
+                    // array_push($std_array2, $row2['std_id']);
+                    $sid = $row2['std_id'];
+                    // $subID = $row2['sub_id'];
+
+                    $sql5 = "SELECT admission_no, full_name, name_with_initials FROM student_tbl WHERE std_id='$sid'";
+                    $result5 = mysqli_query($con, $sql5);
+                    if (mysqli_num_rows($result5) == 1) {
+                        $row3 = mysqli_fetch_assoc($result5);
+                        $full_name = $row3['full_name'];
+                        $name_init = $row3['name_with_initials'];
+                        $admissionNO = $row3['admission_no'];
+                        echo "<td>$admissionNO</td>
+                          <td title='$full_name'>$name_init</td>";
+
+                        $count = 0;
+                        $total = 0;
+                        $avg = 0;
+                        foreach ($sub_array as $subID) {
+                            $sql5 = "SELECT marks FROM al_marks_tbl WHERE sub_id='$subID' AND std_id='$sid'  AND term='$term' AND grade_id='$grade_id'";
+                            $result5 = mysqli_query($con, $sql5);
+                            if (mysqli_num_rows($result5) == 1) {
+                                $m = mysqli_fetch_assoc($result5);
+                                $marks = $m['marks'];
+                                if ($marks == 0) {
+                                    $sql6 = "SELECT * FROM al_absent_tbl WHERE sub_id='$subID' AND std_id='$sid'  AND term='$term' AND grade_id='$grade_id'";
+                                    $result6 = mysqli_query($con, $sql6);
+                                    if (mysqli_num_rows($result6) == 1) {
+                                        echo "<td><input type='text' value='ab' class='form-control' name='marks[][$sid, $subID, $term, $year, $grade_id]'/></td>";
+                                    } else {
+                                        echo "<td><input type='text' value='0' class='form-control' name='marks[][$sid, $subID, $term, $year, $grade_id]'/></td>";
+                                    }
+                                    // echo "<td><input type='text' value='' class='form-control' name='marks[][$std_id, $sub_id, $grade_class_id, $term, $year]'/></td>";
+                                } elseif ($marks == '') {
+                                    echo "<td><input type='text' value='' class='form-control number-input' name='marks[][$sid, $sid, $subID, $year, $grade_id]'/></td>";
+                                } else {
+                                    echo "<td><input type='text' value='$marks' class='form-control number-input' name='marks[][$sid, $subID, $term, $year, $grade_id]'/></td>";
+                                    $total += $marks;
+                                }
+                                // $count += 1;
+                                if ($marks == "") {
+                                    continue;
+                                } else {
+                                    $count += 1;
+                                }
+                            } else {
+                                echo "<td><input type='text' value='' name='marks[][$sid, $subID, $term, $year, $grade_id]' class='form-control number-input'/></td>";
+                            }
+                        }
+                    } else {
+                        echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No Students!'});</script>";
+                    }
+                    echo "<td><input type='text' value='" . $total . "' class='form-control tot-out' readonly/></td>";
+                    if ($count >= 1 && $total >= 1) {
+                        $avg = round($total / $count, 2);
+                        echo "<td><input type='text' value='" . $avg . "' class='form-control' readonly/></td>";
+                    } else {
+                        echo "<td><input type='text' value='0' class='form-control' readonly/></td>";
+                    }
+                    echo "</tr>";
+                }
+                // // echo "<td>" . $row2['std_id'] . "</td>";
+                // array_push($sub_array2, $row2['sub_id']);
+                echo "</table>";
+            } else {
+                echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No Records!'});</script>";
+            }
+            // $sub_array2 = array_unique($sub_array2);
+            // $std_array2 = array_unique($std_array2);
+            // foreach ($std_array2 as $sid) {
+            // }
         }
     } else {
         // no subjects assigned to grades!
         echo "<script>Swal.fire({icon: 'error', title: 'Oh no...', text: 'No Subjects Assigned!'});</script>";
     }
+
+?>
+
+    <script>
+        $(document).ready(function() {
+            // Add event listener to all number input fields
+            $('.number-input').on('input', function() {
+                var total = 0;
+
+                // Loop through all number input fields
+                $('.number-input').each(function() {
+                    var value = parseFloat($(this).val());
+
+                    // Check if the value is a valid number
+                    if (!isNaN(value)) {
+                        total += value;
+                    }
+                });
+
+                // Update the total
+                $('.tot-out').text(total);
+            });
+        });
+    </script>
+
+<?php
+
+} else {
+    header("Location:../../index.php");
+    exit;
 }

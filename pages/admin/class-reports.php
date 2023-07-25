@@ -5,7 +5,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
     <!DOCTYPE html>
     <html lang="en">
-
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -18,15 +17,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="../../js/jquery-3.6.3.min.js"></script>
-        <!-- <script src="../../js/datatables.min.js"></script>
-        <script src="../../css/datatables.css"></script>
-        <style type="text/css">
-            .btnAdd {
-              text-align: right;
-              width: 83%;
-              margin-bottom: 20px;
-            }
-          </style> -->
     </head>
 
     <body class="sb-nav-fixed">
@@ -48,10 +38,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                     <!-- <a href="teacher.php" class="btn btn-dark">Go Back</a><br><br> -->
 
                     <?php if (isset($_GET['success'])) { ?>
-                        <!-- <div class='alert alert-success' role='alert'>
-                            <?= $_GET['success'] ?>
-                        </div> -->
-
                         <script>
                             Swal.fire({
                                 icon: 'success',
@@ -62,10 +48,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                     <?php } ?>
 
                     <?php if (isset($_GET['error'])) { ?>
-                        <!-- <div class='alert alert-danger' role='alert'>
-                            </ /?=$_GET['error'] ?>
-                        </div> -->
-
                         <script>
                             Swal.fire({
                                 icon: 'warning',
@@ -82,7 +64,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             <div class="col-md-2">
                                 <div class="mb-3">
                                     <label class="form-label">Stream</label>
-                                    <select name="stream" class="form-select streamSelect" required>
+                                    <select name="stream" class="form-select streamSelect" id='stream' required>
                                         <option value="">-- Select Stream --</option>
                                         <?php
                                         include '../../controls/connection.php';
@@ -146,8 +128,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                             echo "<option value=" . date("Y") + 1 . ">" . date("Y") + 1 . "</option>";
                                         }
                                         ?>
-
-
                                     </select>
                                 </div>
                             </div>
@@ -187,11 +167,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         </div>
                     </div>
 
-
-
-
-                    <form action="../../data/enter-marks.php" method='post'>
-                        <table class="table table-bordered" id='tableData'></table>
+                    <form action="../../data/enter-marks.php" method='post' id="marksForm">
+                        <div id='tableData'></div>
                         <input type="submit" name="save" class="btn btn-success" value="Save">
                     </form>
 
@@ -199,13 +176,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
 
             </div>
 
-
             <script src="../../bootstrap/js/bootstrap.bundle.js"></script>
-
             <script>
                 $(document).ready(function() {
                     $(".cnts").hide();
-
                     $("#grade").change(function() {
                         $.ajax({
                             url: "get-class2.php",
@@ -222,6 +196,26 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         });
                     });
 
+                    $(document).ready(function() {
+                        // Add event listener to all number input fields
+                        $('.number-input').on('input', function() {
+                            var total = 0;
+
+                            // Loop through all number input fields
+                            $('.number-input').each(function() {
+                                var value = parseFloat($(this).val());
+
+                                // Check if the value is a valid number
+                                if (!isNaN(value)) {
+                                    total += value;
+                                }
+                            });
+
+                            // Update the total
+                            $('.tot-out').text(total);
+                        });
+                    });
+
                     $('#form').submit(function(event) {
                         event.preventDefault();
                         var g = $("select.gradeSelect").children("option:selected").val();
@@ -229,9 +223,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         var c = $("select.classSelect").children("option:selected").val();
                         var y = $("select.yearSelect").children("option:selected").val();
                         var t = $("select.termSelect").children("option:selected").val();
-                        // console.log(grade);
-                        // console.log(year);
-                        // console.log(term);
                         $.ajax({
                             url: "view-filterd-class-report.php",
                             type: "POST",
@@ -263,14 +254,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
             <?php include '../footer.php'; ?>
         </div>
         </div>
-
-        <!-- content goes here -->
-        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
         <script src="../js/scripts.js"></script>
     </body>
-
     </html>
-
 <?php } else {
     header("Location:../../login.php");
     exit;
