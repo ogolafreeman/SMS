@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -10,7 +10,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
+        <link rel="shortcut icon"
+            href="https://img.freepik.com/free-vector/hand-drawn-high-school-logo-template_23-2149689290.jpg?w=900&t=st=1694450465~exp=1694451065~hmac=7a936b09b3a1b26e48c21cff671f711ffc7577f0e79a5b62864237f7f0f81168"
+            type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Assign Subjects to Classes - Admin</title>
@@ -73,7 +75,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 $sql = "SELECT * FROM grade_tbl";
                                 $result = mysqli_query($con, $sql);
                                 while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
+                                    ?>
                                     <option value="<?php echo $ri['grade_name']; ?>"><?php echo "Grade " . $ri['grade_name']; ?>
                                     </option>
                                 <?php } ?>
@@ -96,7 +98,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 $sql = "SELECT * FROM al_subject_stream_tbl";
                                 $result = mysqli_query($con, $sql);
                                 while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
+                                    ?>
                                     <option value="<?php echo $ri['stream_id']; ?>"><?php echo $ri['stream_name']; ?>
                                     </option>
                                 <?php } ?>
@@ -144,11 +146,17 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                 $result5 = mysqli_query($con, $sql5);
                                 $row5 = mysqli_fetch_assoc($result5);
 
-                            ?>
+                                ?>
                                 <tr>
-                                    <td><?php echo $row4['grade_name']; ?></td>
-                                    <td><?php echo $year; ?></td>
-                                    <td><?php echo $row5['stream_name']; ?></td>
+                                    <td>
+                                        <?php echo $row4['grade_name']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $year; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row5['stream_name']; ?>
+                                    </td>
 
                                     <?php
                                     $sql2 = "SELECT sub_id FROM grade_subject_tbl WHERE grade_id='" . $row['grade_id'] . "' AND stream_id='" . $row['stream_id'] . "' ORDER BY order_id ASC";
@@ -168,7 +176,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                                         $sub_arr = array_diff($sub_arr, $sub_arr);
                                         ?>
                                     </td>
-                                    <td><a class='btn btn-warning' name='edit' href='change-subjects.php?grade_id=<?= $grade_id ?>&stream_id=<?= $stream_id ?>&year=<?= $year ?>'>Change</a></td>
+                                    <td><a class='btn btn-warning' name='edit'
+                                            href='change-subjects.php?grade_id=<?= $grade_id ?>&stream_id=<?= $stream_id ?>&year=<?= $year ?>'>Change</a>
+                                    </td>
                                 </tr>
                             <?php } ?>
 
@@ -181,57 +191,57 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
             </div>
 
             <script>
-                $(document).ready(function() {
+                $(document).ready(function () {
                     $(".yearDiv").hide();
-                    $("select.sectionSelect").change(function() {
+                    $("select.sectionSelect").change(function () {
                         $.ajax({
                             url: "filter-subjects.php",
                             type: "POST",
                             data: {
                                 choice: $("select.sectionSelect").children("option:selected").val(),
                             },
-                            success: function(data) {
+                            success: function (data) {
                                 $(".subs").html(data);
                             },
-                            error: function(jqXHR, textStatus, errorThrown) {
+                            error: function (jqXHR, textStatus, errorThrown) {
                                 console.log("Error: " + textStatus + " - " + errorThrown);
                             }
                         });
                     });
 
-                    $("select.gradeSelect").change(function() {
+                    $("select.gradeSelect").change(function () {
                         $.ajax({
                             url: "filter-assigned-subjects.php",
                             type: "POST",
                             data: {
                                 grade: $("select.gradeSelect").children("option:selected").val(),
                             },
-                            success: function(data) {
+                            success: function (data) {
                                 $("#tableData").html(data);
                             },
-                            error: function(jqXHR, textStatus, errorThrown) {
+                            error: function (jqXHR, textStatus, errorThrown) {
                                 console.log("Error: " + textStatus + " - " + errorThrown);
                             }
                         });
                     });
 
-                    $("select.gradeSelect").change(function() {
+                    $("select.gradeSelect").change(function () {
                         $(".yearDiv").show();
                         var grade = $("select.gradeSelect").children("option:selected").val();
                         if (Number(grade) <= 11) {
                             $(".yearSelect").html("<option value=''>" +
-                                <?php echo date("Y"); ?> + "</option>");
-                        } else {
-                            $(".yearSelect").html("<option value='" +
-                                <?php echo date("Y"); ?> + "'>" +
-                                <?php echo date("Y"); ?> + "</option><option value='" +
-                                <?php echo date("Y") + 1; ?> + "'>" +
-                                <?php echo date("Y") + 1; ?> + "</option><option value='" +
-                                <?php echo date("Y") + 2; ?> + "'>" +
-                                <?php echo date("Y") + 2; ?> + "</option>");
-                        }
+                                    <?php echo date("Y"); ?> + "</option>");
+                } else {
+                    $(".yearSelect").html("<option value='" +
+                                    <?php echo date("Y"); ?> + "'>" +
+                                    <?php echo date("Y"); ?> + "</option><option value='" +
+                                    <?php echo date("Y") + 1; ?> + "'>" +
+                                    <?php echo date("Y") + 1; ?> + "</option><option value='" +
+                                    <?php echo date("Y") + 2; ?> + "'>" +
+                                    <?php echo date("Y") + 2; ?> + "</option>");
+                            }
+                        });
                     });
-                });
             </script>
 
             <!-- footer -->

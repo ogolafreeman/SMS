@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -10,7 +10,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
+        <link rel="shortcut icon"
+            href="https://img.freepik.com/free-vector/hand-drawn-high-school-logo-template_23-2149689290.jpg?w=900&t=st=1694450465~exp=1694451065~hmac=7a936b09b3a1b26e48c21cff671f711ffc7577f0e79a5b62864237f7f0f81168"
+            type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Add New Staff Members - Admin</title>
@@ -66,20 +68,24 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         </script>
                     <?php } ?>
 
-                    <form action="../../data/add-teacher-data.php" method="post" class="shadow p-3  mt-5 form-w" enctype='multipart/form-data'>
+                    <form action="../../data/add-teacher-data.php" method="post" class="shadow p-3  mt-5 form-w"
+                        enctype='multipart/form-data'>
                         <h3>Fill all the Data</h3>
                         <hr>
                         <div class="mb-3">
                             <label class="form-label">First Name</label>
-                            <input type="text" name="fname" class="form-control" autocomplete="off" required placeholder="David">
+                            <input type="text" name="fname" class="form-control" autocomplete="off" required
+                                placeholder="David">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Last Name</label>
-                            <input type="text" name="lname" class="form-control" autocomplete="off" required placeholder="Johns">
+                            <input type="text" name="lname" class="form-control" autocomplete="off" required
+                                placeholder="Johns">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">NIC</label>
-                            <input type="text" name="nic" class="form-control" autocomplete="off" required placeholder="123456789">
+                            <input type="text" name="nic" class="form-control" autocomplete="off" required
+                                placeholder="123456789">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Date of Birth</label>
@@ -87,37 +93,31 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Staff Number</label>
-                            <input type="text" name="t_no" class="form-control" autocomplete="off" required placeholder="T-001">
+                            <input type="text" name="t_no" class="form-control" autocomplete="off" required
+                                placeholder="T-001">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Appointment Date</label>
                             <input type="date" name="app_date" class="form-control" autocomplete="off" required>
                         </div>
-                        <!-- <div class="mb-3">
-                            <label class="form-label">Passowrd</label>
-                            <div class="input-group mb-3">
-                                <input type="text" name="pswd" class="form-control" id="passInput">
-                                <button class="btn btn-secondary" id="gBTN">Random</button>
-                            </div>
-                        </div> -->
                         <div class="mb-3">
                             <label class="form-label">RC Appointment Date</label>
                             <input type="date" name="rc_app_date" class="form-control" autocomplete="off" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" autocomplete="off" required placeholder="example@host.com">
+                            <input type="email" name="email" class="form-control" autocomplete="off" required
+                                placeholder="example@host.com">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Appointed Subject</label>
                             <select name="app_subject" class="form-select" required>
-                                <!-- <option value="">-- Select Grade --</option> -->
                                 <?php
                                 include '../../controls/connection.php';
                                 $sql = "SELECT * FROM subject_tbl";
                                 $result = mysqli_query($con, $sql);
                                 while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
+                                    ?>
                                     <option value="<?php echo $ri['sub_id']; ?>"><?php echo $ri['sub_name']; ?>
                                     </option>
                                 <?php } ?>
@@ -127,20 +127,20 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         <div class="mb-3">
                             <label class="form-label">Professional Qualifications</label>
                             <div class="form-floating">
-                                <textarea class="form-control" id="floatingTextarea2" style="height: 100px" required name='qualifications'></textarea>
+                                <textarea class="form-control" id="floatingTextarea2" style="height: 100px" required
+                                    name='qualifications'></textarea>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Section</label>
                             <select name="sec_id" class="form-select" required>
-                                <!-- <option value="">-- Select Grade --</option> -->
                                 <?php
                                 include '../../controls/connection.php';
                                 $sql = "SELECT * FROM section_tbl";
                                 $result = mysqli_query($con, $sql);
                                 while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
+                                    ?>
                                     <option value="<?php echo $ri['sec_id']; ?>"><?php echo $ri['sec_name']; ?>
                                     </option>
                                 <?php } ?>
@@ -150,13 +150,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                         <div class="mb-3">
                             <label class="form-label">Staff Type</label>
                             <select name="type" class="form-select" required>
-                                <!-- <option value="">-- Select Grade --</option> -->
                                 <?php
                                 include '../../controls/connection.php';
                                 $sql = "SELECT * FROM user_role_tbl WHERE NOT role_id='1' AND NOT role_id='5'";
                                 $result = mysqli_query($con, $sql);
                                 while ($ri = mysqli_fetch_assoc($result)) {
-                                ?>
+                                    ?>
                                     <option value="<?php echo $ri['role_id']; ?>"><?php echo $ri['role']; ?>
                                     </option>
                                 <?php } ?>
@@ -184,7 +183,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         </div>
 
         <!-- content goes here -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script>
     </body>
 

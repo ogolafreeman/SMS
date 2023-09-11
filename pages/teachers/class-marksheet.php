@@ -10,7 +10,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
+        <link rel="shortcut icon"
+            href="https://img.freepik.com/free-vector/hand-drawn-high-school-logo-template_23-2149689290.jpg?w=900&t=st=1694450465~exp=1694451065~hmac=7a936b09b3a1b26e48c21cff671f711ffc7577f0e79a5b62864237f7f0f81168"
+            type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Class Reports - Teacher's Portal</title>
@@ -109,10 +111,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                 <div class="container mt-5 cnts">
                     <h3>Filtered Results</h3>
                     <hr>
-                    <form action="enter-marks.php?term=&grade=" method='post'>
+                    <form action="enter-marks.php" method='post'>
                         <table class="table table-bordered" id='tableData'></table>
                         <input type="submit" name="save" class="btn btn-success" value="Save">
                     </form>
+                    <div id="out"></div>
 
                 </div>
 
@@ -145,15 +148,56 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                         });
                     });
                 });
+                $("#export").submit(function getData(event) {
+                    event.preventDefault();
+                    // var g = $("select.gradeSelect").children("option:selected").val();
+                    // var t = $("select.termSelect").children("option:selected").val();
+                    // Access the table element
+                    // Create an empty array to store the table data
+                    var formId = $(this).closest('form').attr('id');
+                    var formData = $('#' + formId).serialize();
+                    var tableData = [];
+                    // Access the table element
+                    var $table = $("#tableData");
+                    // Traverse the table rows
+                    $table.find("tr").each(function () {
+                        var $row = $(this);
+                        // Access the table cells
+                        $row.find("td").each(function () {
+                            var $cell = $(this);
+                            // Retrieve the cell data
+                            var cellData = $cell.text(); // or $cell.html()
+                            // Add the cell data to the array
+                            tableData.push(cellData);
+                        });
+                    });
+                    $.ajax({
+                        url: "get-report.php",
+                        type: "POST",
+                        data: {
+                            arr: tableData,
+                            formData: formData
+                            // term: t,
+                            // grade: g
+                        },
+                        success: function (data) {
+                            // $(".cnts").show();
+                            console.log(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("Error: " + textStatus + " - " + errorThrown);
+                        }
+                    });
+
+                    // Output the array
+                    // console.log(tableData);
+                })
             </script>
 
             <!-- footer -->
             <?php include '../footer.php'; ?>
         </div>
         </div>
-
-        <!-- content goes here -->
-        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
         <script src="../js/scripts.js"></script>
     </body>
 

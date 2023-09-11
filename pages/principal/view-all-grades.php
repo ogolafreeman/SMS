@@ -3,7 +3,7 @@ session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['principal_role'])) {
     include '../../data/admin_operations.php';
     $grades = getAllGrades();
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -12,7 +12,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['principal_role'])) {
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
+        <link rel="shortcut icon"
+            href="https://img.freepik.com/free-vector/hand-drawn-high-school-logo-template_23-2149689290.jpg?w=900&t=st=1694450465~exp=1694451065~hmac=7a936b09b3a1b26e48c21cff671f711ffc7577f0e79a5b62864237f7f0f81168"
+            type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>All Grades - Principal's Portal</title>
@@ -84,13 +86,19 @@ if (isset($_SESSION['username']) && isset($_SESSION['principal_role'])) {
                                 $sql = "SELECT first_name, last_name FROM staff_tbl WHERE staff_id='$grade[2]' AND status='1'";
                                 $result = mysqli_query($con, $sql);
                                 $teacher = mysqli_fetch_assoc($result);
-                            ?>
+                                ?>
                                 <tbody>
-                                    <th scope="row"><?php echo $count; ?></th>
-                                    <td><?php echo $grade[1]; ?></td>
-                                    <td><?php echo $teacher['first_name'] . " " . $teacher['last_name']; ?></td>
+                                    <th scope="row">
+                                        <?php echo $count; ?>
+                                    </th>
+                                    <td>
+                                        <?php echo $grade[1]; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $teacher['first_name'] . " " . $teacher['last_name']; ?>
+                                    </td>
                                 </tbody>
-                            <?php $count += 1;
+                                <?php $count += 1;
                             } ?>
                         </table>
                     <?php } else { ?>
@@ -102,29 +110,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['principal_role'])) {
                 </div>
 
             </div>
-
-            <!-- <script>
-                $(document).ready(function() {
-                    $("select.sec").change(function() {
-                        //var selected = $(this).children("option:selected").val();
-                        $.ajax({
-                            url: "get-table-data.php",
-                            type: "POST",
-                            data: {
-                                choice: $("select.sec").children("option:selected").val(),
-                            },
-                            success: function(data) {
-                                $("#t").html(data);
-                            },
-                            error: function(jqXHR, textStatus, errorThrown) {
-                                console.log("Error: " + textStatus + " - " + errorThrown);
-                            }
-                        });
-                    });
-                });
-            </script> -->
-
-
             <script src="../bootstrap/js/bootstrap.bundle.js"></script>
             <!-- footer -->
             <?php include '../footer.php'; ?>

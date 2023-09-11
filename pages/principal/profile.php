@@ -11,7 +11,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['principal_role'])) {
     $result2 = mysqli_query($con, $sql2);
     $row2 = mysqli_fetch_assoc($result2);
     $teacher = getTeacherById($row2['staff_id'], $con);
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -20,7 +20,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['principal_role'])) {
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
+        <link rel="shortcut icon"
+            href="https://img.freepik.com/free-vector/hand-drawn-high-school-logo-template_23-2149689290.jpg?w=900&t=st=1694450465~exp=1694451065~hmac=7a936b09b3a1b26e48c21cff671f711ffc7577f0e79a5b62864237f7f0f81168"
+            type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Admin's Profile - Admin</title>
@@ -77,7 +79,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['principal_role'])) {
                         </script>
                     <?php } ?>
 
-                    <form action="../../data/update-teacher-data.php?id=<?= $teacher['staff_id'] ?>" method="post" class="shadow p-3  mt-3 form-w">
+                    <form action="../../data/update-teacher-data.php?id=<?= $teacher['staff_id'] ?>" method="post"
+                        class="shadow p-3  mt-3 form-w">
                         <!-- <h3>Your Profile</h3>
                         <hr> -->
 
@@ -86,26 +89,31 @@ if (isset($_SESSION['username']) && isset($_SESSION['principal_role'])) {
                                 <div class="col-md-3 border-right">
                                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                                         <img src="../<?php if (!isset($_GET['error']) && !empty($teacher['profile_pic'])) {
-                                                            echo $teacher['profile_pic'];
-                                                        } else {
-                                                            echo "../Media/dummy.jpg";
-                                                        } ?>" class="rounded-circle mt-5" width="250px" alt="profile picture" height="250px">
-                                        <h4 class="font-weight-bold mt-3"><?php if (!isset($_GET['error']) && !empty($teacher['first_name'] && !empty($teacher['last_name']))) {
-                                                                                echo $teacher['first_name'] . " " . $teacher['last_name'];
-                                                                            } else {
-                                                                                echo "";
-                                                                            } ?></h4>
-                                        <h6 class="text-black-50"><?php if (!isset($_GET['error']) && !empty($teacher['nic'])) {
-                                                                        // echo $teacher['email'];
-                                                                        // $sql = "SELECT * FROM user_tbl ut INNER JOIN user_role_tbl urt ON (ut.role_id = urt.role_id) WHERE (ut.username = '$uname')";
-                                                                        $nic = $teacher['nic'];
-                                                                        $sql1 = "SELECT role FROM user_role_tbl urt INNER JOIN user_tbl ut ON (ut.role_id = urt.role_id) WHERE (ut.nic='$nic')";
-                                                                        $result1 = mysqli_query($con, $sql1);
-                                                                        $d = mysqli_fetch_assoc($result1);
-                                                                        echo $d['role'];
-                                                                    } else {
-                                                                        echo "";
-                                                                    } ?></h6>
+                                            echo $teacher['profile_pic'];
+                                        } else {
+                                            echo "../Media/dummy.jpg";
+                                        } ?>" class="rounded-circle mt-5" width="250px"
+                                            alt="profile picture" height="250px">
+                                        <h4 class="font-weight-bold mt-3">
+                                            <?php if (!isset($_GET['error']) && !empty($teacher['first_name'] && !empty($teacher['last_name']))) {
+                                                echo $teacher['first_name'] . " " . $teacher['last_name'];
+                                            } else {
+                                                echo "";
+                                            } ?>
+                                        </h4>
+                                        <h6 class="text-black-50">
+                                            <?php if (!isset($_GET['error']) && !empty($teacher['nic'])) {
+                                                // echo $teacher['email'];
+                                                // $sql = "SELECT * FROM user_tbl ut INNER JOIN user_role_tbl urt ON (ut.role_id = urt.role_id) WHERE (ut.username = '$uname')";
+                                                $nic = $teacher['nic'];
+                                                $sql1 = "SELECT role FROM user_role_tbl urt INNER JOIN user_tbl ut ON (ut.role_id = urt.role_id) WHERE (ut.nic='$nic')";
+                                                $result1 = mysqli_query($con, $sql1);
+                                                $d = mysqli_fetch_assoc($result1);
+                                                echo $d['role'];
+                                            } else {
+                                                echo "";
+                                            } ?>
+                                        </h6>
                                         <span> </span>
                                     </div>
                                 </div>
@@ -117,53 +125,65 @@ if (isset($_SESSION['username']) && isset($_SESSION['principal_role'])) {
                                         <div class="row mt-2">
                                             <div class="col-md-6">
                                                 <label class="labels">First Name</label>
-                                                <input type="text" name="fname" class="form-control" autocomplete="off" readonly required value="<?php if (!isset($_GET['error']) && !empty($teacher['first_name'])) {
-                                                                                                                                                        echo $teacher['first_name'];
-                                                                                                                                                    } else {
-                                                                                                                                                        echo "";
-                                                                                                                                                    } ?>">
+                                                <input type="text" name="fname" class="form-control" autocomplete="off"
+                                                    readonly required
+                                                    value="<?php if (!isset($_GET['error']) && !empty($teacher['first_name'])) {
+                                                        echo $teacher['first_name'];
+                                                    } else {
+                                                        echo "";
+                                                    } ?>">
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="labels">Last Name</label>
-                                                <input type="text" name="lname" class="form-control" autocomplete="off" readonly value="<?php if (!isset($_GET['error']) && !empty($teacher['last_name'])) {
-                                                                                                                                            echo $teacher['last_name'];
-                                                                                                                                        } else {
-                                                                                                                                            echo "";
-                                                                                                                                        } ?>">
+                                                <input type="text" name="lname" class="form-control" autocomplete="off"
+                                                    readonly
+                                                    value="<?php if (!isset($_GET['error']) && !empty($teacher['last_name'])) {
+                                                        echo $teacher['last_name'];
+                                                    } else {
+                                                        echo "";
+                                                    } ?>">
                                             </div>
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <label class="labels">NIC</label>
-                                                <input type="text" name="nic" class="form-control" autocomplete="off" readonly required value="<?php if (!isset($_GET['error']) && !empty($teacher['nic'])) {
-                                                                                                                                                    echo $teacher['nic'];
-                                                                                                                                                } else {
-                                                                                                                                                    echo "";
-                                                                                                                                                } ?>">
+                                                <input type="text" name="nic" class="form-control" autocomplete="off"
+                                                    readonly required
+                                                    value="<?php if (!isset($_GET['error']) && !empty($teacher['nic'])) {
+                                                        echo $teacher['nic'];
+                                                    } else {
+                                                        echo "";
+                                                    } ?>">
                                             </div>
                                             <div class="col-md-12 mt-3">
                                                 <label class="labels">Date of Birth</label>
-                                                <input type="date" name="dob" class="form-control" autocomplete="off" readonly required value="<?php if (!isset($_GET['error']) && !empty($teacher['dob'])) {
-                                                                                                                                                    echo $teacher['dob'];
-                                                                                                                                                } else {
-                                                                                                                                                    echo "";
-                                                                                                                                                } ?>">
+                                                <input type="date" name="dob" class="form-control" autocomplete="off"
+                                                    readonly required
+                                                    value="<?php if (!isset($_GET['error']) && !empty($teacher['dob'])) {
+                                                        echo $teacher['dob'];
+                                                    } else {
+                                                        echo "";
+                                                    } ?>">
                                             </div>
                                             <div class="col-md-12 mt-3">
                                                 <label class="labels">Email</label>
-                                                <input type="email" name="email" class="form-control" autocomplete="off" readonly required value="<?php if (!isset($_GET['error']) && !empty($teacher['email'])) {
-                                                                                                                                                        echo $teacher['email'];
-                                                                                                                                                    } else {
-                                                                                                                                                        echo "";
-                                                                                                                                                    } ?>">
+                                                <input type="email" name="email" class="form-control" autocomplete="off"
+                                                    readonly required
+                                                    value="<?php if (!isset($_GET['error']) && !empty($teacher['email'])) {
+                                                        echo $teacher['email'];
+                                                    } else {
+                                                        echo "";
+                                                    } ?>">
                                             </div>
                                             <div class="col-md-12 mt-3">
                                                 <label class="form-label">Professional Qualifications</label>
-                                                <textarea class="form-control" id="floatingTextarea2" readonly style="height: 100px" name='qualifications'><?php if (!isset($_GET['error']) && !empty($teacher['qualifications'])) {
-                                                                                                                                                                echo $teacher['qualifications'];
-                                                                                                                                                            } else {
-                                                                                                                                                                echo "";
-                                                                                                                                                            } ?></textarea>
+                                                <textarea class="form-control" id="floatingTextarea2" readonly
+                                                    style="height: 100px"
+                                                    name='qualifications'><?php if (!isset($_GET['error']) && !empty($teacher['qualifications'])) {
+                                                        echo $teacher['qualifications'];
+                                                    } else {
+                                                        echo "";
+                                                    } ?></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -175,27 +195,33 @@ if (isset($_SESSION['username']) && isset($_SESSION['principal_role'])) {
                                         </div><br>
                                         <div class="col-md-12">
                                             <label class="form-label">Staff Number</label>
-                                            <input type="text" name="t_no" class="form-control" readonly autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($teacher['staff_no'])) {
-                                                                                                                                                echo $teacher['staff_no'];
-                                                                                                                                            } else {
-                                                                                                                                                echo "";
-                                                                                                                                            } ?>">
+                                            <input type="text" name="t_no" class="form-control" readonly autocomplete="off"
+                                                required
+                                                value="<?php if (!isset($_GET['error']) && !empty($teacher['staff_no'])) {
+                                                    echo $teacher['staff_no'];
+                                                } else {
+                                                    echo "";
+                                                } ?>">
                                         </div> <br>
                                         <div class="col-md-12">
                                             <label class="form-label">Appointment Date</label>
-                                            <input type="date" name="app_date" class="form-control" readonly autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($teacher['app_date'])) {
-                                                                                                                                                    echo $teacher['app_date'];
-                                                                                                                                                } else {
-                                                                                                                                                    echo "";
-                                                                                                                                                } ?>">
+                                            <input type="date" name="app_date" class="form-control" readonly
+                                                autocomplete="off" required
+                                                value="<?php if (!isset($_GET['error']) && !empty($teacher['app_date'])) {
+                                                    echo $teacher['app_date'];
+                                                } else {
+                                                    echo "";
+                                                } ?>">
                                         </div><br>
                                         <div class="col-md-12">
                                             <label class="form-label">RC Appointment Date</label>
-                                            <input type="date" name="rc_app_date" class="form-control" readonly autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($teacher['rc_app_date'])) {
-                                                                                                                                                        echo $teacher['rc_app_date'];
-                                                                                                                                                    } else {
-                                                                                                                                                        echo "";
-                                                                                                                                                    } ?>">
+                                            <input type="date" name="rc_app_date" class="form-control" readonly
+                                                autocomplete="off" required
+                                                value="<?php if (!isset($_GET['error']) && !empty($teacher['rc_app_date'])) {
+                                                    echo $teacher['rc_app_date'];
+                                                } else {
+                                                    echo "";
+                                                } ?>">
                                         </div><br>
                                         <div class="col-md-12">
                                             <label class="form-label">Appointed Subject</label>
@@ -207,9 +233,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['principal_role'])) {
                                                 $result = mysqli_query($con, $sql);
                                                 if (mysqli_num_rows($result)) {
                                                     $d = mysqli_fetch_assoc($result);
-                                            ?>
-                                                    <input type="text" class="form-control" readonly autocomplete="off" required value="<?= $d['sub_name']; ?>">
-                                            <?php
+                                                    ?>
+                                                    <input type="text" class="form-control" readonly autocomplete="off" required
+                                                        value="<?= $d['sub_name']; ?>">
+                                                    <?php
                                                 }
                                             } else {
                                                 echo "";
@@ -228,9 +255,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['principal_role'])) {
                                                 if (mysqli_num_rows($result)) {
                                                     $d = mysqli_fetch_assoc($result);
                                                     // echo $d['sec_name'];
-                                            ?>
-                                                    <input type="text" class="form-control" readonly autocomplete="off" required value="<?= $d['sec_name']; ?>">
-                                            <?php
+                                                    ?>
+                                                    <input type="text" class="form-control" readonly autocomplete="off" required
+                                                        value="<?= $d['sec_name']; ?>">
+                                                    <?php
                                                 }
                                             } else {
                                                 echo "";

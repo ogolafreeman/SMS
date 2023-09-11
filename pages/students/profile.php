@@ -8,7 +8,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_assoc($result);
     $student = getStudentById($row['std_id'], $con);
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -17,7 +17,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
+        <link rel="shortcut icon"
+            href="https://img.freepik.com/free-vector/hand-drawn-high-school-logo-template_23-2149689290.jpg?w=900&t=st=1694450465~exp=1694451065~hmac=7a936b09b3a1b26e48c21cff671f711ffc7577f0e79a5b62864237f7f0f81168"
+            type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Your Profile - Student Portal</title>
@@ -79,12 +81,15 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
                             <div class="row">
                                 <div class="col-md-3 border-right">
                                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                        <img src="../../Media/graduate.png" class="rounded-circle mt-5" width="250px" alt="profile picture" height="250px">
-                                        <h4 class="font-weight-bold mt-3"><?php if (!isset($_GET['error']) && !empty($student['name_with_initials'])) {
-                                                                                echo $student['name_with_initials'];
-                                                                            } else {
-                                                                                echo "";
-                                                                            } ?></h4>
+                                        <img src="../../Media/graduate.png" class="rounded-circle mt-5" width="250px"
+                                            alt="profile picture" height="250px">
+                                        <h4 class="font-weight-bold mt-3">
+                                            <?php if (!isset($_GET['error']) && !empty($student['name_with_initials'])) {
+                                                echo $student['name_with_initials'];
+                                            } else {
+                                                echo "";
+                                            } ?>
+                                        </h4>
                                         <h6 class="text-black-50">Student</h6>
                                         <span> </span>
                                     </div>
@@ -97,53 +102,60 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <label class="labels">Full Name</label>
-                                                <input type="text" class="form-control" autocomplete="off" readonly required value="<?php if (!isset($_GET['error']) && !empty($student['full_name'])) {
-                                                                                                                                        echo $student['full_name'];
-                                                                                                                                    } else {
-                                                                                                                                        echo "";
-                                                                                                                                    } ?>">
+                                                <input type="text" class="form-control" autocomplete="off" readonly required
+                                                    value="<?php if (!isset($_GET['error']) && !empty($student['full_name'])) {
+                                                        echo $student['full_name'];
+                                                    } else {
+                                                        echo "";
+                                                    } ?>">
                                             </div>
                                             <div class="col-md-12 mt-3">
                                                 <label class="labels">Name with Initials</label>
-                                                <input type="text" class="form-control" autocomplete="off" readonly value="<?php if (!isset($_GET['error']) && !empty($student['name_with_initials'])) {
-                                                                                                                                echo $student['name_with_initials'];
-                                                                                                                            } else {
-                                                                                                                                echo "";
-                                                                                                                            } ?>">
+                                                <input type="text" class="form-control" autocomplete="off" readonly
+                                                    value="<?php if (!isset($_GET['error']) && !empty($student['name_with_initials'])) {
+                                                        echo $student['name_with_initials'];
+                                                    } else {
+                                                        echo "";
+                                                    } ?>">
                                             </div>
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <label class="labels">Address</label>
-                                                <textarea class="form-control" id="floatingTextarea2" readonly style="height: 100px"><?php if (!isset($_GET['error']) && !empty($student['address'])) {
-                                                                                                                                            echo $student['address'];
-                                                                                                                                        } else {
-                                                                                                                                            echo "";
-                                                                                                                                        } ?></textarea>
+                                                <textarea class="form-control" id="floatingTextarea2" readonly
+                                                    style="height: 100px"><?php if (!isset($_GET['error']) && !empty($student['address'])) {
+                                                        echo $student['address'];
+                                                    } else {
+                                                        echo "";
+                                                    } ?></textarea>
                                             </div>
                                             <div class="col-md-12 mt-3">
                                                 <label class="labels">Phone - Home</label>
-                                                <input type="text" class="form-control" autocomplete="off" readonly required value="<?php if (!isset($_GET['error']) && !empty($student['phone_no_1'])) {
-                                                                                                                                        echo $student['phone_no_1'];
-                                                                                                                                    } else {
-                                                                                                                                        echo "";
-                                                                                                                                    } ?>">
+                                                <input type="text" class="form-control" autocomplete="off" readonly required
+                                                    value="<?php if (!isset($_GET['error']) && !empty($student['phone_no_1'])) {
+                                                        echo $student['phone_no_1'];
+                                                    } else {
+                                                        echo "";
+                                                    } ?>">
                                             </div>
                                             <div class="col-md-12 mt-3">
                                                 <label class="labels">Phone - Mobile</label>
-                                                <input type="text" class="form-control" autocomplete="off" readonly required value="<?php if (!isset($_GET['error']) && !empty($student['phone_no_2'])) {
-                                                                                                                                        echo $student['phone_no_2'];
-                                                                                                                                    } else {
-                                                                                                                                        echo "";
-                                                                                                                                    } ?>">
+                                                <input type="text" class="form-control" autocomplete="off" readonly required
+                                                    value="<?php if (!isset($_GET['error']) && !empty($student['phone_no_2'])) {
+                                                        echo $student['phone_no_2'];
+                                                    } else {
+                                                        echo "";
+                                                    } ?>">
                                             </div>
                                             <div class="col-md-12 mt-3">
                                                 <label class="labels">Email</label>
-                                                <input type="email" class="form-control" autocomplete="off" readonly required value="<?php if (!isset($_GET['error']) && !empty($student['email'])) {
-                                                                                                                                            echo $student['email'];
-                                                                                                                                        } else {
-                                                                                                                                            echo "";
-                                                                                                                                        } ?>">
+                                                <input type="email" class="form-control" autocomplete="off" readonly
+                                                    required
+                                                    value="<?php if (!isset($_GET['error']) && !empty($student['email'])) {
+                                                        echo $student['email'];
+                                                    } else {
+                                                        echo "";
+                                                    } ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -155,27 +167,30 @@ if (isset($_SESSION['username']) && isset($_SESSION['student_role'])) {
                                         </div>
                                         <div class="col-md-12">
                                             <label class="form-label">Admission Number</label>
-                                            <input type="text" class="form-control" readonly autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($student['admission_no'])) {
-                                                                                                                                    echo $student['admission_no'];
-                                                                                                                                } else {
-                                                                                                                                    echo "";
-                                                                                                                                } ?>">
+                                            <input type="text" class="form-control" readonly autocomplete="off" required
+                                                value="<?php if (!isset($_GET['error']) && !empty($student['admission_no'])) {
+                                                    echo $student['admission_no'];
+                                                } else {
+                                                    echo "";
+                                                } ?>">
                                         </div> <br>
                                         <div class="col-md-12">
                                             <label class="form-label">Date of Admission</label>
-                                            <input type="date" class="form-control" readonly autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($student['d_o_admission'])) {
-                                                                                                                                    echo $student['d_o_admission'];
-                                                                                                                                } else {
-                                                                                                                                    echo "";
-                                                                                                                                } ?>">
+                                            <input type="date" class="form-control" readonly autocomplete="off" required
+                                                value="<?php if (!isset($_GET['error']) && !empty($student['d_o_admission'])) {
+                                                    echo $student['d_o_admission'];
+                                                } else {
+                                                    echo "";
+                                                } ?>">
                                         </div><br>
                                         <div class="col-md-12">
                                             <label class="form-label">Date Added</label>
-                                            <input type="date" class="form-control" readonly autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($student['date_added'])) {
-                                                                                                                                    echo $student['date_added'];
-                                                                                                                                } else {
-                                                                                                                                    echo "";
-                                                                                                                                } ?>">
+                                            <input type="date" class="form-control" readonly autocomplete="off" required
+                                                value="<?php if (!isset($_GET['error']) && !empty($student['date_added'])) {
+                                                    echo $student['date_added'];
+                                                } else {
+                                                    echo "";
+                                                } ?>">
                                         </div><br>
                                     </div>
 

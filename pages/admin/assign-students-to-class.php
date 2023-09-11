@@ -10,7 +10,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
+        <link rel="shortcut icon"
+            href="https://img.freepik.com/free-vector/hand-drawn-high-school-logo-template_23-2149689290.jpg?w=900&t=st=1694450465~exp=1694451065~hmac=7a936b09b3a1b26e48c21cff671f711ffc7577f0e79a5b62864237f7f0f81168"
+            type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Assign Students to Class - Admin</title>
@@ -118,8 +120,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             </div>
                         </div><br>
 
-                        <button type="button" class="btn-info btn" id="toggleForm">Add Students Manually</button>
-
                         <div class="shadow p-3 f mt-5">
                             <h4>Students</h4>
 
@@ -166,19 +166,16 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             <input type="submit" value="Add" name="add1" class="btn btn-primary">
                         </div>
 
-                        <div class="shadow p-3 mt-5 f2">
+                        <!-- <div class="shadow p-3 mt-5 f2">
                             <h4>Upload Text File</h4>
                             <div class="input-group mb-3">
                                 <input type="file" name="txtFile" id="txtFile" class="form-control" accept=".txt">
-                                <!-- <button type="button" class="btn btn-primary" id="show">Show Data</button> -->
                             </div>
                             <input type="submit" value="Upload" name="add2" class="btn btn-primary">
-                        </div>
+                        </div> -->
                     </form>
                 </div>
             </div>
-
-
             <br />
         </div>
         </div><br />
@@ -237,21 +234,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
                             console.log("Error: " + textStatus + " - " + errorThrown);
                         }
                     });
-                });
-
-                $(".f").hide();
-                $(".f2").show();
-                // var state = false;
-                $("#toggleForm").click(function() {
-                    if ($('.f').is(":visible") == false) {
-                        $(".f2").hide();
-                        $(".f").show();
-                        $("#toggleForm").html("Add Students using Text File")
-                    } else {
-                        $(".f").hide();
-                        $(".f2").show();
-                        $("#toggleForm").html("Add Students Manually")
-                    }
                 });
             });
         </script>

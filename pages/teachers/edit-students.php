@@ -5,7 +5,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
     include '../../controls/connection.php';
     $id = $_GET['id'];
     $student = getStudentById($id, $con);
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -14,7 +14,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
+        <link rel="shortcut icon"
+            href="https://img.freepik.com/free-vector/hand-drawn-high-school-logo-template_23-2149689290.jpg?w=900&t=st=1694450465~exp=1694451065~hmac=7a936b09b3a1b26e48c21cff671f711ffc7577f0e79a5b62864237f7f0f81168"
+            type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Edit Students's Data - Teacher's Portal</title>
@@ -70,82 +72,91 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                         </script>
                     <?php } ?>
 
-                    <form action="../../data/update-student-data.php?id=<?= $student['std_id'] ?>" method="post" class="shadow p-3  mt-3 form-w">
+                    <form action="../../data/update-student-data.php?id=<?= $student['std_id'] ?>" method="post"
+                        class="shadow p-3  mt-3 form-w">
                         <h3>Students's Info</h3>
                         <hr>
                         <div class="mb-3">
                             <label class="form-label">Admission No.</label>
-                            <input type="text" readonly name="admission_no" class="form-control" autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($student['admission_no'])) {
-                                                                                                                                        echo $student['admission_no'];
-                                                                                                                                    } else {
-                                                                                                                                        echo "";
-                                                                                                                                    } ?>">
+                            <input type="text" readonly name="admission_no" class="form-control" autocomplete="off" required
+                                value="<?php if (!isset($_GET['error']) && !empty($student['admission_no'])) {
+                                    echo $student['admission_no'];
+                                } else {
+                                    echo "";
+                                } ?>">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Full Name</label>
-                            <input type="text" name="full_name" class="form-control" autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($student['full_name'])) {
-                                                                                                                            echo $student['full_name'];
-                                                                                                                        } else {
-                                                                                                                            echo "";
-                                                                                                                        } ?>">
+                            <input type="text" name="full_name" class="form-control" autocomplete="off" required
+                                value="<?php if (!isset($_GET['error']) && !empty($student['full_name'])) {
+                                    echo $student['full_name'];
+                                } else {
+                                    echo "";
+                                } ?>">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Name with Initials</label>
-                            <input type="text" name="name_with_init" class="form-control" autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($student['name_with_initials'])) {
-                                                                                                                                    echo $student['name_with_initials'];
-                                                                                                                                } else {
-                                                                                                                                    echo "";
-                                                                                                                                } ?>">
+                            <input type="text" name="name_with_init" class="form-control" autocomplete="off" required
+                                value="<?php if (!isset($_GET['error']) && !empty($student['name_with_initials'])) {
+                                    echo $student['name_with_initials'];
+                                } else {
+                                    echo "";
+                                } ?>">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Address</label>
                             <div class="form-floating">
-                                <textarea class="form-control" id="floatingTextarea2" style="height: 100px" required name='address'><?php if (!isset($_GET['error']) && !empty($student['address'])) {
-                                                                                                                                        echo $student['address'];
-                                                                                                                                    } else {
-                                                                                                                                        echo "";
-                                                                                                                                    } ?></textarea>
+                                <textarea class="form-control" id="floatingTextarea2" style="height: 100px" required
+                                    name='address'><?php if (!isset($_GET['error']) && !empty($student['address'])) {
+                                        echo $student['address'];
+                                    } else {
+                                        echo "";
+                                    } ?></textarea>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Phone - Home</label>
-                            <input type="text" name="phone1" class="form-control" autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($student['phone_no_1'])) {
-                                                                                                                            echo $student['phone_no_1'];
-                                                                                                                        } else {
-                                                                                                                            echo "";
-                                                                                                                        } ?>">
+                            <input type="text" name="phone1" class="form-control" autocomplete="off" required
+                                value="<?php if (!isset($_GET['error']) && !empty($student['phone_no_1'])) {
+                                    echo $student['phone_no_1'];
+                                } else {
+                                    echo "";
+                                } ?>">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Phone - Mobile</label>
-                            <input type="text" name="phone2" class="form-control" autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($student['phone_no_2'])) {
-                                                                                                                            echo $student['phone_no_2'];
-                                                                                                                        } else {
-                                                                                                                            echo "";
-                                                                                                                        } ?>">
+                            <input type="text" name="phone2" class="form-control" autocomplete="off" required
+                                value="<?php if (!isset($_GET['error']) && !empty($student['phone_no_2'])) {
+                                    echo $student['phone_no_2'];
+                                } else {
+                                    echo "";
+                                } ?>">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Date of Birth</label>
-                            <input type="date" name="dob" class="form-control" autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($student['dob'])) {
-                                                                                                                        echo $student['dob'];
-                                                                                                                    } else {
-                                                                                                                        echo "";
-                                                                                                                    } ?>">
+                            <input type="date" name="dob" class="form-control" autocomplete="off" required
+                                value="<?php if (!isset($_GET['error']) && !empty($student['dob'])) {
+                                    echo $student['dob'];
+                                } else {
+                                    echo "";
+                                } ?>">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Email</label>
                             <input type="email" name="email" class="form-control" autocomplete="off" value="<?php if (!isset($_GET['error']) && !empty($student['email'])) {
-                                                                                                                echo $student['email'];
-                                                                                                            } else {
-                                                                                                                echo "";
-                                                                                                            } ?>">
+                                echo $student['email'];
+                            } else {
+                                echo "";
+                            } ?>">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Date of Admission</label>
-                            <input type="date" name="d_o_admission" class="form-control" autocomplete="off" required value="<?php if (!isset($_GET['error']) && !empty($student['d_o_admission'])) {
-                                                                                                                                echo $student['d_o_admission'];
-                                                                                                                            } else {
-                                                                                                                                echo "";
-                                                                                                                            } ?>">
+                            <input type="date" name="d_o_admission" class="form-control" autocomplete="off" required
+                                value="<?php if (!isset($_GET['error']) && !empty($student['d_o_admission'])) {
+                                    echo $student['d_o_admission'];
+                                } else {
+                                    echo "";
+                                } ?>">
                         </div>
 
                         <button type="submit" class="btn btn-warning" name="update">Update</button>
@@ -162,7 +173,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
         </div>
 
         <!-- content goes here -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script>
     </body>
 

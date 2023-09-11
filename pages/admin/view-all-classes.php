@@ -4,7 +4,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
     include '../../controls/connection.php';
     include '../../data/admin_operations.php';
     $classes = getAllClasses();
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -13,7 +13,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
+        <link rel="shortcut icon"
+            href="https://img.freepik.com/free-vector/hand-drawn-high-school-logo-template_23-2149689290.jpg?w=900&t=st=1694450465~exp=1694451065~hmac=7a936b09b3a1b26e48c21cff671f711ffc7577f0e79a5b62864237f7f0f81168"
+            type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>All Classes - Admin</title>
@@ -126,18 +128,18 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
             </div>
 
             <script>
-                $(document).ready(function() {
-                    $("select.sec").change(function() {
+                $(document).ready(function () {
+                    $("select.sec").change(function () {
                         $.ajax({
                             url: "get-table-data.php",
                             type: "POST",
                             data: {
                                 choice: $("select.sec").children("option:selected").val(),
                             },
-                            success: function(data) {
+                            success: function (data) {
                                 $("#t").html(data);
                             },
-                            error: function(jqXHR, textStatus, errorThrown) {
+                            error: function (jqXHR, textStatus, errorThrown) {
                                 console.log("Error: " + textStatus + " - " + errorThrown);
                             }
                         });

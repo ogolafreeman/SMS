@@ -20,24 +20,28 @@
                         </nav>
                     </div> -->
 
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts">
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4"
+                        aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                         Students
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
-                    <div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <!-- <a class="nav-link disabled" href="add-students.php">Add a Student</a> -->
                             <a class="nav-link" href="view-all-students.php">View All</a>
                         </nav>
                     </div>
 
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts7" aria-expanded="false" aria-controls="collapseLayouts">
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts7"
+                        aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-award"></i></div>
                         Marks
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
-                    <div class="collapse" id="collapseLayouts7" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <div class="collapse" id="collapseLayouts7" aria-labelledby="headingOne"
+                        data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <!-- <a class="nav-link" href="show-marks.php">View</a> -->
                             <a class="nav-link" href="class-marksheet.php">Class Marksheet</a>
@@ -47,7 +51,7 @@
                     </div>
 
                     <div class="sb-sidenav-menu-heading">Addons</div>
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="#">
                         <div class="sb-nav-link-icon"><i class="fa fa-comments" aria-hidden="true"></i></div>
                         Chat
                     </a>
@@ -63,7 +67,9 @@
             </div>
             <div class="sb-sidenav-footer">
                 <div class="small">Logged in as:</div>
-                <b title='Your Role'><?= $_SESSION['teacher_role'] ?></b>
+                <b title='Your Role'>
+                    <?= $_SESSION['teacher_role'] ?>
+                </b>
             </div>
         </nav>
     </div>

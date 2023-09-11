@@ -14,7 +14,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
     $staff_id = $row2['staff_id'];
     $students = getSelectedStudents($staff_id);
 
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -23,7 +23,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
+        <link rel="shortcut icon"
+            href="https://img.freepik.com/free-vector/hand-drawn-high-school-logo-template_23-2149689290.jpg?w=900&t=st=1694450465~exp=1694451065~hmac=7a936b09b3a1b26e48c21cff671f711ffc7577f0e79a5b62864237f7f0f81168"
+            type="image/x-icon">
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>All students - Teacher's Portal</title>
@@ -99,22 +101,37 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
                                     $sql2 = "SELECT * FROM student_tbl WHERE std_id='$student'";
                                     $result2 = mysqli_query($con, $sql2);
                                     while ($row = mysqli_fetch_assoc($result2)) {
-                            ?>
+                                        ?>
                                         <tr>
-                                            <th scope="row"><?php echo $count; ?></th>
-                                            <td><?php echo $row['admission_no']; ?></td>
-                                            <td><?php echo $row['full_name']; ?></td>
-                                            <td><?php echo $row['phone_no_1']; ?></td>
-                                            <td><?php echo $row['phone_no_2']; ?></td>
-                                            <td><?php echo $row['d_o_admission']; ?></td>
+                                            <th scope="row">
+                                                <?php echo $count; ?>
+                                            </th>
                                             <td>
-                                                <a class="btn btn-info" name="profile" href="view-student-info.php?id=<?= $row['std_id'] ?>">Profile</a>
-                                                <a class="btn btn-warning" name="edit" href="edit-students.php?id=<?= $row['std_id'] ?>">Edit</a>
-                                                <a class="btn btn-danger" name="delete" href="delete-student.php?id=<?= $row['std_id'] ?>">Delete</a>
+                                                <?php echo $row['admission_no']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['full_name']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['phone_no_1']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['phone_no_2']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['d_o_admission']; ?>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-info" name="profile"
+                                                    href="view-student-info.php?id=<?= $row['std_id'] ?>">Profile</a>
+                                                <a class="btn btn-warning" name="edit"
+                                                    href="edit-students.php?id=<?= $row['std_id'] ?>">Edit</a>
+                                                <a class="btn btn-danger" name="delete"
+                                                    href="delete-student.php?id=<?= $row['std_id'] ?>">Delete</a>
                                             </td>
                                         </tr>
 
-                            <?php $count += 1;
+                                        <?php $count += 1;
                                     }
                                 }
                             } ?>
@@ -137,7 +154,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['teacher_role'])) {
         </div>
 
         <!-- content goes here -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script>
     </body>
 

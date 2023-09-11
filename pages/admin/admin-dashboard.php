@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
-?>
+  ?>
 
   <!DOCTYPE html>
   <html lang="en">
@@ -10,7 +10,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="shortcut icon" href="../../Media/Richmond Colleg LOGO.png" type="image/x-icon">
+    <link rel="shortcut icon"
+      href="https://img.freepik.com/free-vector/hand-drawn-high-school-logo-template_23-2149689290.jpg?w=900&t=st=1694450465~exp=1694451065~hmac=7a936b09b3a1b26e48c21cff671f711ffc7577f0e79a5b62864237f7f0f81168"
+      type="image/x-icon">
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Dashboard - Admin</title>
@@ -35,7 +37,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
       <div class="container-fluid">
         <h1 class="mt-4">Dashboard</h1>
         <ol class="breadcrumb mb-4">
-          <li class="breadcrumb-item">Welcome back, <b> <?= $_SESSION['admin_role'] ?> </b> !</li>
+          <li class="breadcrumb-item">Welcome back, <b>
+              <?= $_SESSION['admin_role'] ?>
+            </b> !</li>
         </ol>
 
         <!-- Your further code goes here. keep coding in this div -->
@@ -45,7 +49,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
             <div class="card-counter primary">
               <!-- <i class="fa fa-code-fork"></i> -->
               <i style="opacity: 0.4;" class="fa-solid fa-school fa-4x"></i>
-              <span class="count-numbers"><?= getFullNumOfClasses() ?></span>
+              <span class="count-numbers">
+                <?= getFullNumOfClasses() ?>
+              </span>
               <span class="count-name">Classes</span>
             </div>
           </div>
@@ -53,7 +59,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
             <div class="card-counter danger">
               <!-- <i class="fa fa-ticket fs-1"></i> -->
               <i style="opacity: 0.4;" class="fa-solid fa-chalkboard-user fa-4x"></i>
-              <span class="count-numbers"><?= getFullNumOfTeachers() ?></span>
+              <span class="count-numbers">
+                <?= getFullNumOfTeachers() ?>
+              </span>
               <span class="count-name">Staff Members</span>
             </div>
           </div>
@@ -62,7 +70,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
             <div class="card-counter success">
               <!-- <i class="fa fa-database  fs-1"></i> -->
               <i style="opacity: 0.4;" class="fa-solid fa-graduation-cap fa-4x"></i>
-              <span class="count-numbers"><?= getFullNumOfStudents() ?></span>
+              <span class="count-numbers">
+                <?= getFullNumOfStudents() ?>
+              </span>
               <span class="count-name">Students</span>
             </div>
           </div>
@@ -70,12 +80,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
           <div class="col-md-3">
             <div class="card-counter info">
               <i style="opacity: 0.4;" class="fa fa-users  fa-4x"></i>
-              <span class="count-numbers"><?= getFullNumOfUsers() ?></span>
+              <span class="count-numbers">
+                <?= getFullNumOfUsers() ?>
+              </span>
               <span class="count-name">Users</span>
             </div>
           </div>
         </div>
-
 
       </div>
 
@@ -85,27 +96,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['admin_role'])) {
     </div>
 
     <!-- content goes here -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"></script>
     <script src="../js/scripts.js"></script>
-
-    <!-- <script>
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-
-      Toast.fire({
-        icon: 'success',
-        title: 'You Logged in successfully'
-      })
-    </script> -->
 
   </body>
 
