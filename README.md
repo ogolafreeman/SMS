@@ -4,7 +4,7 @@ Student Management System
 
 > Coding :
 
-- Version : 1.2
+- Version : 1.3
 - Base Language : PHP (v8.1)
 - Used Language/s : HTML, CSS, JavaScript, SQL(MySQL)
 - Framework : Bootstrap (CSS Framework)
