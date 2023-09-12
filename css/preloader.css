@@ -1,0 +1,50 @@
+.preloader {
+  position: absolute;
+  z-index: 9999;
+  height: 100vh;
+  width: 100vw;
+  background: url("../Media/preloadBack.jpg");
+  background-size: cover;
+  transition: opacity 2s, visibility 2s;
+}
+
+.preloader--hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loading {
+  height: 1em;
+  width: 100%;
+  margin: auto;
+  background: linear-gradient(to right, #993CFE, #558DFC);
+  animation-name: load;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+}
+
+@keyframes load {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.loading-content {
+  margin: auto;
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  text-align: center;
+}
+
+#logo {
+  width: 6em;
+  background: transparent;
+}
